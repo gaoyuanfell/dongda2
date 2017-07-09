@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="moka.company.dao.CompanyDao">
+    <insert id="insert" parameterType="moka.company.bo.Company" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO company (
+        createDate, updateDate, state, companyCode, companyName, companyTel, companyAddress, companyEmail, regCapital, corporateName, operatingPeriod, companyType, registrationAuthority, companyDate
+      ) VALUES (
+        #{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{regCapital},#{corporateName},#{operatingPeriod},#{companyType},#{registrationAuthority},#{companyDate}
+      )
+    </insert>
+
+    <select id="findCount" resultType="Integer">
+        SELECT COUNT(id) FROM company;
+    </select>
+
+    <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.company.to.CompanyTo">
+        SELECT * FROM company LIMIT #{pageStart} , #{pageSize};
+    </select>
+
+</mapper>

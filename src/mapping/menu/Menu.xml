@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="moka.menu.dao.MenuDao">
+    <select id="findAllMenu" resultMap="menu_map">
+        SELECT * FROM menu m WHERE m.id = #{id} AND m.state != 1;
+    </select>
+
+    <!-- 返回结果集 -->
+    <resultMap type="moka.menu.to.MenuTo" id="menu_map">
+        <id column="id" property="id"/>
+        <collection property="childList" column="id" ofType="moka.menu.to.MenuTo" select="findMenuByParentId"></collection>
+    </resultMap>
+
+    <!-- 根据父键查询 -->
+    <select id="findMenuByParentId" parameterType="Integer" resultMap="menu_map">
+        select * from menu m where m.parentId=#{id} AND m.state != 1;
+    </select>
+</mapper>

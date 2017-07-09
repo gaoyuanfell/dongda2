@@ -1,0 +1,73 @@
+package moka.basic.aspect;
+
+import com.alibaba.fastjson.JSONObject;
+import moka.basic.annotation.IgnoreSecurity;
+import moka.basic.bo.Token;
+import moka.basic.service.RedisService;
+import moka.user.bo.User;
+import moka.user.to.UserTo;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Method;
+
+/**
+ * Created by moka on 2017/3/29 0029.
+ */
+public class SecurityAspect {
+
+    @Value("#{propertyConfigurer['data_token_name']}")
+    private String DEFAULT_TOKEN_NAME;
+
+    private String tokenName;
+
+    public void setTokenName(String tokenName) {
+        if (StringUtils.isEmpty(tokenName)) {
+            tokenName = DEFAULT_TOKEN_NAME;
+        }
+        this.tokenName = tokenName;
+    }
+
+    @Resource
+    private RedisService redisService;
+
+    public Object execute(ProceedingJoinPoint pjp) throws Throwable {
+        // 从切点上获取目标方法
+        MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
+        Method method = methodSignature.getMethod();
+        //获取方法上面的注解
+        boolean IgnoreSecurity_b = method.isAnnotationPresent(IgnoreSecurity.class);
+        if (IgnoreSecurity_b) return pjp.proceed();
+
+        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpServletRequest request = servletRequestAttributes.getRequest();
+        HttpServletResponse response = servletRequestAttributes.getResponse();
+
+        String token = request.getHeader(tokenName);
+        if(!StringUtils.isEmpty(token)){
+            Token t = new Token(token);
+            UserTo user = redisService.getUserSession(t);
+            if (user == null || user.getId() == 0) return result();
+            redisService.flashLoginSession(t);
+            response.setHeader(tokenName,token);
+        }else{
+            return result();
+//            throw new NoLoginException("用户没有登录");
+        }
+        return pjp.proceed();
+    }
+
+    public Object result(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code", 201);
+        jsonObject.put("msg", "用户没有登录");
+        return jsonObject;
+    }
+}

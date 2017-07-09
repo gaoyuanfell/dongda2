@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task.xsd">
+
+<!--<bean id="redisHttpSessionConfiguration" class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>-->
+
+    <!--<bean id="lettuceConnectionFactory" class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory"/>-->
+
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <!--<property name="maxIdle" value="#{propertyConfigurer['redis.maxIdle']}"/>-->
+        <property name="maxTotal" value="${redis.maxActive}"/>
+        <!--<property name="maxTotal" value="#{propertyConfigurer['redis.maxActive']}"/>-->
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <!--<property name="maxWaitMillis" value="#{propertyConfigurer['redis.maxWait']}"/>-->
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+        <!--<property name="testOnBorrow" value="#{propertyConfigurer['redis.testOnBorrow']}"/>-->
+    </bean>
+
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool"  scope="singleton">
+        <constructor-arg index="0" ref="poolConfig" />
+        <constructor-arg index="1">
+            <list>
+                <bean class="redis.clients.jedis.JedisShardInfo">
+                    <constructor-arg name="host" value="${redis.url}" />
+                    <!--<constructor-arg name="host" value="#{propertyConfigurer['redis.url']}" />-->
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <!--<property name="hostName" value="${redis.hostName}"/>-->
+        <!--<property name="port" value="${redis.port}"/>-->
+        <!--<property name="password" value="${redis.password}"/>-->
+        <property name="poolConfig" ref="poolConfig"/>
+        <property name="usePool" value="true"/>
+    </bean>
+
+    <bean id="stringSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+
+    <!-- 开启事务，可以通过transcational注解控制 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="keySerializer" ref="stringSerializer" />
+        <property name="enableTransactionSupport" value="true" />
+    </bean>
+
+</beans>

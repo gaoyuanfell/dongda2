@@ -1,0 +1,46 @@
+package moka.role.ctrl;
+
+import moka.basic.annotation.IgnoreSecurity;
+import moka.basic.ctrl.BasicController;
+import moka.basic.log4j.LoggerService;
+import moka.basic.page.Page;
+import moka.role.service.RoleService;
+import moka.role.vo.RoleVo;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * Created by moka on 2017/3/5 0005.
+ */
+@Controller
+@RequestMapping(value = "/role")
+public class RoleController extends BasicController {
+
+    @Resource
+    private RoleService roleService;
+    private Logger logger = LoggerService.getLogger(this.getClass());
+
+    @RequestMapping(value = "insert.htm")
+    @ResponseBody
+    public Object insert(@RequestBody RoleVo vo){
+        int i = roleService.insert(vo);
+        return result(i);
+    }
+
+    /**
+     * 查 分页
+     *
+     */
+    @RequestMapping(value = "findPage.htm")
+    @ResponseBody
+    public Object findPage(@RequestBody RoleVo vo) {
+        Page list = roleService.findPage(vo);
+        return result(list);
+    }
+}
