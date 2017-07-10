@@ -1,5 +1,5 @@
 .idea
 target
-/web/
+/web/*
 !/web/WEB-INF/
 /dongda2.iml
