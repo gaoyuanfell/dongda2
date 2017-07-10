@@ -30,13 +30,65 @@ public class MenuController extends BasicController {
 
     /**
      * 查看根目录下所有的子目录 id存在就查找某条分支下面的所有子目录
-     *
+     * {
+     *     id:0
+     * }
      */
     @RequestMapping(value = "findAllMenu.htm")
     @ResponseBody
     public Object findAllMenu(@RequestBody MenuVo vo){
         MenuTo to = menuService.findAllMenu(vo);
         return result(to);
+    }
+
+    /**
+     * 添加菜单
+     * {
+     *      name:'',
+     *      link:'',
+     *      icon:'',
+     *      type:'',
+     *      parentId:'',
+     * }
+     */
+    @RequestMapping(value = "insert.htm")
+    @ResponseBody
+    public Object insert(@RequestBody MenuVo vo){
+        int i = menuService.insert(vo);
+        return result(i);
+    }
+
+    /**
+     * 修改菜单
+     * {
+     *      name:'',
+     *      link:'',
+     *      icon:'',
+     *      type:'',
+     * }
+     */
+    @RequestMapping(value = "update.htm")
+    @ResponseBody
+    public Object update(@RequestBody MenuVo vo){
+        int i = menuService.update(vo);
+        return result(i);
+    }
+
+    /**
+     * 删除菜单
+     * {
+     *      id:'',
+     * }
+     */
+    @RequestMapping(value = "delete.htm")
+    @ResponseBody
+    public Object delete(@RequestBody MenuVo vo){
+        List<MenuTo> list = menuService.findNextChild(vo);
+        if(list.size() > 0){
+            return result(CODE_PROMPT,"不能删除，有子集的菜单！");
+        }
+        int i = menuService.delete(vo.getId());
+        return result(i);
     }
 
 }

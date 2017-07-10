@@ -30,6 +30,16 @@ public class Menu extends IdEntity implements Serializable {
      */
     private int parentId;
 
+    /**
+     * 是否是最顶目录
+     */
+    private int isRoot;
+
+    /**
+     * 菜单类型
+     */
+    private int type;
+
     public String getName() {
         return name;
     }
@@ -60,5 +70,21 @@ public class Menu extends IdEntity implements Serializable {
 
     public void setParentId(int parentId) {
         this.parentId = parentId;
+    }
+
+    public int getIsRoot() {
+        return isRoot;
+    }
+
+    public void setIsRoot(int isRoot) {
+        this.isRoot = isRoot;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

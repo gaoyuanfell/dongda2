@@ -30,4 +30,16 @@ public class BasicServiceImpl implements BasicService {
         }
         return (T) target;
     }
+
+    @Override
+    public <T> T convertBusinessValueClass(Object resource, Object target, Class<T> zlass, String... ignoreProperties) {
+        try{
+            T t = zlass.newInstance();
+            BeanUtils.copyProperties(resource, target, ignoreProperties);
+            BeanUtils.copyProperties(target, t, ignoreProperties);
+            return t;
+        }catch (Exception e){
+            throw new ConvertValueException(e.getMessage(), e);
+        }
+    }
 }

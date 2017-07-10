@@ -12,5 +12,18 @@ import java.util.List;
 public interface MenuService extends BasicService {
     int insert(MenuVo vo);
 
+    MenuTo findOne(int id);
+
+    int update(MenuVo vo);
+
+    int delete(int id);
+
     MenuTo findAllMenu(MenuVo vo);
+
+    /**
+     * 查找子集集合
+     * @param vo
+     * @return
+     */
+    List<MenuTo> findNextChild(MenuVo vo);
 }

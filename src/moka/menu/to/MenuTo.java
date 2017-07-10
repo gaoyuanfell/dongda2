@@ -15,9 +15,32 @@ public class MenuTo implements Serializable {
     private Date updateDate;
     private int state;
 
+    /**
+     * 菜单名称
+     */
     private String name;
+    /**
+     * 菜单路由
+     */
     private String link;
+    /**
+     * 菜单图标
+     */
     private String icon;
+    /**
+     * 父级id
+     */
+    private int parentId;
+
+    /**
+     * 是否是最顶目录
+     */
+    private int isRoot;
+
+    /**
+     * 菜单类型
+     */
+    private int type;
 
     private List<MenuTo> childList = new ArrayList<>();
 
@@ -83,5 +106,29 @@ public class MenuTo implements Serializable {
 
     public void setChildList(List<MenuTo> childList) {
         this.childList = childList;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
+    }
+
+    public int getIsRoot() {
+        return isRoot;
+    }
+
+    public void setIsRoot(int isRoot) {
+        this.isRoot = isRoot;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

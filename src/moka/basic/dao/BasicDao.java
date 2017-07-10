@@ -21,7 +21,7 @@ public interface BasicDao<E, T> {
 
     int findCount();
 
-    int delete(Basic basic);
+    int delete(Integer id);
 
     int update(Basic basic);
 }

@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.menu.dao.MenuDao">
+    <insert id="insert" parameterType="moka.menu.bo.Menu" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO menu (
+
+          createDate, updateDate, state, name, link, icon, parentId, isRoot, type
+        ) VALUES ( #{createDate},#{updateDate},#{state},#{name},#{link},#{icon},#{parentId},#{isRoot},#{type});
+    </insert>
+
     <select id="findAllMenu" resultMap="menu_map">
         SELECT * FROM menu m WHERE m.id = #{id} AND m.state != 1;
     </select>
+
+    <select id="findOne" parameterType="Integer" resultType="moka.menu.to.MenuTo">
+        SELECT * FROM menu WHERE id = #{id};
+    </select>
+
+    <update id="update" parameterType="moka.menu.vo.MenuVo">
+      UPDATE menu SET menu.updateDate = #{updateDate},menu.name = #{name},menu.link = #{link},menu.icon = #{icon},menu.type = #{type} WHERE menu.id = #{id};
+    </update>
+
+    <select id="findNextChild" parameterType="moka.menu.vo.MenuVo" resultType="moka.menu.to.MenuTo">
+        SELECT * FROM menu WHERE menu.parentId = #{id};
+    </select>
+
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM menu WHERE menu.id = #{id};
+    </delete>
 
     <!-- 返回结果集 -->
     <resultMap type="moka.menu.to.MenuTo" id="menu_map">

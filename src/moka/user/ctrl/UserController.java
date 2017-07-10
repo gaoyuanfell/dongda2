@@ -37,8 +37,7 @@ public class UserController extends BasicController {
 
     /**
      * 登录
-     * <p>
-     * body:{
+     * {
      * phoneNumber:'',
      * password:''
      * }
@@ -80,7 +79,6 @@ public class UserController extends BasicController {
 
     /**
      * 检查手机号是否重复
-     * <p>
      * {
      * phoneNumber:''
      * }
@@ -98,7 +96,6 @@ public class UserController extends BasicController {
 
     /**
      * 检查手机号是否重复
-     * <p>
      * {
      * mail:''
      * }

@@ -28,7 +28,7 @@ public class BasicController {
     protected static final int CODE_SUCCESS = 200;//成功
     protected static final int CODE_NO_LOGIN = 201;//未登录
     protected static final int CODE_PROMPT = 202;//文字提示
-    protected static final int CODE_PROMPT_MASK = 203;//弹幕提示
+//    protected static final int CODE_PROMPT_MASK = 203;//弹幕提示
 
     protected static JSONObject result(Object obj) {
         JSONObject json = new JSONObject();

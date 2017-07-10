@@ -14,4 +14,6 @@ import java.util.List;
 @Repository("menuDao")
 public interface MenuDao extends BasicDao<Menu, MenuTo> {
     MenuTo findAllMenu(MenuVo vo);
+
+    List<MenuTo> findNextChild(MenuVo vo);
 }

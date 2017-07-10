@@ -9,4 +9,6 @@ public interface BasicService {
 
     <T> T convertBusinessValue(Object resource, Object target, String... ignoreProperties);
 
+    <T> T convertBusinessValueClass(Object resource, Object target, Class<T> zlass, String... ignoreProperties);
+
 }
