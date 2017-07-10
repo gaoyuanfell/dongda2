@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : dongda
 Source Server Version : 50718
 Source Host           : localhost:3306
-Source Database       : moka
+Source Database       : dongda
 
 Target Server Type    : MYSQL
 Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2017-07-09 22:03:40
+Date: 2017-07-10 23:40:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -56,36 +56,37 @@ CREATE TABLE `menu` (
   `icon` varchar(255) DEFAULT NULL COMMENT '菜单图标',
   `parentId` int(11) DEFAULT NULL COMMENT '父级id',
   `isRoot` int(11) DEFAULT NULL COMMENT '是否根目录',
+  `type` int(11) unsigned zerofill DEFAULT NULL COMMENT '0 菜单 1 链接 2功能',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES ('1', null, null, '00000000000', '根目录', null, null, null, '00000000001');
-INSERT INTO `menu` VALUES ('2', null, null, '00000000000', '首页', null, '&#xe601;', '1', '00000000000');
-INSERT INTO `menu` VALUES ('3', null, null, '00000000000', '个人信息', null, '&#xe61c;', '1', '00000000000');
-INSERT INTO `menu` VALUES ('4', null, null, '00000000000', '平台信息', null, '&#xe629;', '1', '00000000000');
-INSERT INTO `menu` VALUES ('5', null, null, '00000000000', '权限', null, '&#xe62d;', '1', '00000000000');
-INSERT INTO `menu` VALUES ('6', null, null, '00000000000', '合同信息', null, '&#xe63a;', '1', '00000000000');
-INSERT INTO `menu` VALUES ('7', null, null, '00000000000', '发票信息', null, '&#xe647;', '1', '00000000000');
-INSERT INTO `menu` VALUES ('8', null, null, '00000000000', '客户资料', null, '&#xe711;', '1', '00000000000');
-INSERT INTO `menu` VALUES ('9', null, null, '00000000000', '销售计划', null, '&#xe644;', '1', '00000000000');
-INSERT INTO `menu` VALUES ('10', null, null, '00000000000', '应收账款', null, '&#xe724;', '1', '00000000000');
-INSERT INTO `menu` VALUES ('11', null, null, '00000000000', '报表', null, '&#xe639;', '1', '00000000000');
-INSERT INTO `menu` VALUES ('12', null, null, '00000000000', '我的日程', 'index', null, '2', '00000000000');
-INSERT INTO `menu` VALUES ('13', null, null, '00000000000', '个人信息', 'user', null, '3', '00000000000');
-INSERT INTO `menu` VALUES ('14', null, null, '00000000000', '员工信息', 'platform', null, '4', '00000000000');
-INSERT INTO `menu` VALUES ('15', null, null, '00000000000', '公司信息', 'company', null, '4', '00000000000');
-INSERT INTO `menu` VALUES ('16', null, null, '00000000001', '查看权限', 'auth', null, '5', '00000000000');
-INSERT INTO `menu` VALUES ('17', null, null, '00000000000', '合同信息', 'contract', null, '6', '00000000000');
-INSERT INTO `menu` VALUES ('18', null, null, '00000000000', '发票信息', 'invoice', null, '7', '00000000000');
-INSERT INTO `menu` VALUES ('19', null, null, '00000000000', '客户资料', 'customer', null, '8', '00000000000');
-INSERT INTO `menu` VALUES ('20', null, null, '00000000000', '销售计划', 'sale', null, '9', '00000000000');
-INSERT INTO `menu` VALUES ('21', null, null, '00000000000', '应收账款', 'money', null, '10', '00000000000');
-INSERT INTO `menu` VALUES ('22', null, null, '00000000000', '报表', 'report', null, '11', '00000000000');
-INSERT INTO `menu` VALUES ('23', null, null, '00000000000', '查看菜单', 'menu', null, '5', '00000000000');
-INSERT INTO `menu` VALUES ('24', null, null, '00000000000', '查看角色', 'role', null, '5', '00000000000');
+INSERT INTO `menu` VALUES ('1', null, null, '00000000000', '根目录', null, null, null, '1', '00000000000');
+INSERT INTO `menu` VALUES ('2', null, null, '00000000000', '首页', null, '&#xe601;', '1', '0', '00000000000');
+INSERT INTO `menu` VALUES ('3', null, null, '00000000000', '个人信息', null, '&#xe61c;', '1', '0', '00000000000');
+INSERT INTO `menu` VALUES ('4', null, null, '00000000000', '平台信息', null, '&#xe629;', '1', '0', '00000000000');
+INSERT INTO `menu` VALUES ('5', null, null, '00000000000', '权限', null, '&#xe62d;', '1', '0', '00000000000');
+INSERT INTO `menu` VALUES ('6', null, null, '00000000000', '合同信息', null, '&#xe63a;', '1', '0', '00000000000');
+INSERT INTO `menu` VALUES ('7', null, null, '00000000000', '发票信息', null, '&#xe647;', '1', '0', '00000000000');
+INSERT INTO `menu` VALUES ('8', null, null, '00000000000', '客户资料', null, '&#xe711;', '1', '0', '00000000000');
+INSERT INTO `menu` VALUES ('9', null, null, '00000000000', '销售计划', null, '&#xe644;', '1', '0', '00000000000');
+INSERT INTO `menu` VALUES ('10', null, null, '00000000000', '应收账款', null, '&#xe724;', '1', '0', '00000000000');
+INSERT INTO `menu` VALUES ('11', null, null, '00000000000', '报表', null, '&#xe639;', '1', '0', '00000000000');
+INSERT INTO `menu` VALUES ('12', null, null, '00000000000', '我的日程', 'index', null, '2', '0', '00000000001');
+INSERT INTO `menu` VALUES ('13', null, null, '00000000000', '个人信息', 'user', null, '3', '0', '00000000001');
+INSERT INTO `menu` VALUES ('14', null, null, '00000000000', '员工信息', 'platform', null, '4', '0', '00000000001');
+INSERT INTO `menu` VALUES ('15', null, null, '00000000000', '公司信息', 'company', null, '4', '0', '00000000001');
+INSERT INTO `menu` VALUES ('16', null, null, '00000000001', '查看权限', 'auth', null, '5', '0', '00000000001');
+INSERT INTO `menu` VALUES ('17', null, null, '00000000000', '合同信息', 'contract', null, '6', '0', '00000000001');
+INSERT INTO `menu` VALUES ('18', null, null, '00000000000', '发票信息', 'invoice', null, '7', '0', '00000000001');
+INSERT INTO `menu` VALUES ('19', null, null, '00000000000', '客户资料', 'customer', null, '8', '0', '00000000001');
+INSERT INTO `menu` VALUES ('20', null, null, '00000000000', '销售计划', 'sale', null, '9', '0', '00000000001');
+INSERT INTO `menu` VALUES ('21', null, null, '00000000000', '应收账款', 'money', null, '10', '0', '00000000001');
+INSERT INTO `menu` VALUES ('22', null, null, '00000000000', '报表', 'report', null, '11', '0', '00000000001');
+INSERT INTO `menu` VALUES ('23', null, null, '00000000000', '查看菜单', 'menu', null, '5', '0', '00000000001');
+INSERT INTO `menu` VALUES ('24', null, null, '00000000000', '查看角色', 'role', null, '5', '0', '00000000001');
 
 -- ----------------------------
 -- Table structure for role
