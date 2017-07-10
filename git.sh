@@ -10,9 +10,9 @@ git commit -am '1'
 
 if [ $1 == 'push' ]
     then
-    git pull origin master
-    git push origin master
+    git pull yuan master
+    git push yuan master
     else
-    git pull origin master
+    git pull yuan master
 fi
 echo "Success";
