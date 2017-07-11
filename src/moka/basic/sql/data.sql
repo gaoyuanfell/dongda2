@@ -63,30 +63,30 @@ CREATE TABLE `menu` (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES ('1', null, null, '00000000000', '根目录', null, null, null, '1', '00000000000');
-INSERT INTO `menu` VALUES ('2', null, null, '00000000000', '首页', null, '&#xe601;', '1', '0', '00000000000');
-INSERT INTO `menu` VALUES ('3', null, null, '00000000000', '个人信息', null, '&#xe61c;', '1', '0', '00000000000');
-INSERT INTO `menu` VALUES ('4', null, null, '00000000000', '平台信息', null, '&#xe629;', '1', '0', '00000000000');
-INSERT INTO `menu` VALUES ('5', null, null, '00000000000', '权限', null, '&#xe62d;', '1', '0', '00000000000');
-INSERT INTO `menu` VALUES ('6', null, null, '00000000000', '合同信息', null, '&#xe63a;', '1', '0', '00000000000');
-INSERT INTO `menu` VALUES ('7', null, null, '00000000000', '发票信息', null, '&#xe647;', '1', '0', '00000000000');
-INSERT INTO `menu` VALUES ('8', null, null, '00000000000', '客户资料', null, '&#xe711;', '1', '0', '00000000000');
-INSERT INTO `menu` VALUES ('9', null, null, '00000000000', '销售计划', null, '&#xe644;', '1', '0', '00000000000');
-INSERT INTO `menu` VALUES ('10', null, null, '00000000000', '应收账款', null, '&#xe724;', '1', '0', '00000000000');
-INSERT INTO `menu` VALUES ('11', null, null, '00000000000', '报表', null, '&#xe639;', '1', '0', '00000000000');
-INSERT INTO `menu` VALUES ('12', null, null, '00000000000', '我的日程', 'index', null, '2', '0', '00000000001');
-INSERT INTO `menu` VALUES ('13', null, null, '00000000000', '个人信息', 'user', null, '3', '0', '00000000001');
-INSERT INTO `menu` VALUES ('14', null, null, '00000000000', '员工信息', 'platform', null, '4', '0', '00000000001');
-INSERT INTO `menu` VALUES ('15', null, null, '00000000000', '公司信息', 'company', null, '4', '0', '00000000001');
-INSERT INTO `menu` VALUES ('16', null, null, '00000000001', '查看权限', 'auth', null, '5', '0', '00000000001');
-INSERT INTO `menu` VALUES ('17', null, null, '00000000000', '合同信息', 'contract', null, '6', '0', '00000000001');
-INSERT INTO `menu` VALUES ('18', null, null, '00000000000', '发票信息', 'invoice', null, '7', '0', '00000000001');
-INSERT INTO `menu` VALUES ('19', null, null, '00000000000', '客户资料', 'customer', null, '8', '0', '00000000001');
-INSERT INTO `menu` VALUES ('20', null, null, '00000000000', '销售计划', 'sale', null, '9', '0', '00000000001');
-INSERT INTO `menu` VALUES ('21', null, null, '00000000000', '应收账款', 'money', null, '10', '0', '00000000001');
-INSERT INTO `menu` VALUES ('22', null, null, '00000000000', '报表', 'report', null, '11', '0', '00000000001');
-INSERT INTO `menu` VALUES ('23', null, null, '00000000000', '查看菜单', 'menu', null, '5', '0', '00000000001');
-INSERT INTO `menu` VALUES ('24', null, null, '00000000000', '查看角色', 'role', null, '5', '0', '00000000001');
+INSERT INTO `menu` VALUES ('1', null, null, '0', '根目录', null, null, null, '1', '0');
+INSERT INTO `menu` VALUES ('2', null, null, '0', '首页', null, '&#xe601;', '1', '0', '0');
+INSERT INTO `menu` VALUES ('3', null, null, '0', '个人信息', null, '&#xe61c;', '1', '0', '0');
+INSERT INTO `menu` VALUES ('4', null, null, '0', '平台信息', null, '&#xe629;', '1', '0', '0');
+INSERT INTO `menu` VALUES ('5', null, null, '0', '权限', null, '&#xe62d;', '1', '0', '0');
+INSERT INTO `menu` VALUES ('6', null, null, '0', '合同信息', null, '&#xe63a;', '1', '0', '0');
+INSERT INTO `menu` VALUES ('7', null, null, '0', '发票信息', null, '&#xe647;', '1', '0', '0');
+INSERT INTO `menu` VALUES ('8', null, null, '0', '客户资料', null, '&#xe711;', '1', '0', '0');
+INSERT INTO `menu` VALUES ('9', null, null, '0', '销售计划', null, '&#xe644;', '1', '0', '0');
+INSERT INTO `menu` VALUES ('10', null, null, '0', '应收账款', null, '&#xe724;', '1', '0', '0');
+INSERT INTO `menu` VALUES ('11', null, null, '0', '报表', null, '&#xe639;', '1', '0', '0');
+INSERT INTO `menu` VALUES ('12', null, null, '0', '我的日程', 'index', null, '2', '0', '1');
+INSERT INTO `menu` VALUES ('13', null, null, '0', '个人信息', 'user', null, '3', '0', '1');
+INSERT INTO `menu` VALUES ('14', null, null, '0', '员工信息', 'platform', null, '4', '0', '1');
+INSERT INTO `menu` VALUES ('15', null, null, '0', '公司信息', 'company', null, '4', '0', '1');
+INSERT INTO `menu` VALUES ('16', null, null, '1', '查看权限', 'auth', null, '5', '0', '1');
+INSERT INTO `menu` VALUES ('17', null, null, '0', '合同信息', 'contract', null, '6', '0', '1');
+INSERT INTO `menu` VALUES ('18', null, null, '0', '发票信息', 'invoice', null, '7', '0', '1');
+INSERT INTO `menu` VALUES ('19', null, null, '0', '客户资料', 'customer', null, '8', '0', '1');
+INSERT INTO `menu` VALUES ('20', null, null, '0', '销售计划', 'sale', null, '9', '0', '1');
+INSERT INTO `menu` VALUES ('21', null, null, '0', '应收账款', 'money', null, '10', '0', '1');
+INSERT INTO `menu` VALUES ('22', null, null, '0', '报表', 'report', null, '11', '0', '1');
+INSERT INTO `menu` VALUES ('23', null, null, '0', '查看菜单', 'menu', null, '5', '0', '1');
+INSERT INTO `menu` VALUES ('24', null, null, '0', '查看角色', 'role', null, '5', '0', '1');
 
 -- ----------------------------
 -- Table structure for role
@@ -104,11 +104,11 @@ CREATE TABLE `role` (
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES ('1', '管理员', '2017-07-09 11:29:49', null, '00000000000');
-INSERT INTO `role` VALUES ('2', '销售经理', '2017-07-09 12:14:09', null, '00000000000');
-INSERT INTO `role` VALUES ('3', '销售助理', '2017-07-09 12:14:59', null, '00000000000');
-INSERT INTO `role` VALUES ('4', '销售部助经理', '2017-07-09 12:15:58', null, '00000000000');
-INSERT INTO `role` VALUES ('5', '财务', '2017-07-09 12:16:11', null, '00000000000');
+INSERT INTO `role` VALUES ('1', '管理员', '2017-07-09 11:29:49', null, '0');
+INSERT INTO `role` VALUES ('2', '销售经理', '2017-07-09 12:14:09', null, '0');
+INSERT INTO `role` VALUES ('3', '销售助理', '2017-07-09 12:14:59', null, '0');
+INSERT INTO `role` VALUES ('4', '销售部助经理', '2017-07-09 12:15:58', null, '0');
+INSERT INTO `role` VALUES ('5', '财务', '2017-07-09 12:16:11', null, '0');
 
 -- ----------------------------
 -- Table structure for user
@@ -134,4 +134,4 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '2017-07-08 18:42:52', null, '00000000000', null, '13870814611', '465716992@qq.com', 'f379eaf3c831b04de153469d1bec345e', null, null, null, null, null);
+INSERT INTO `user` VALUES ('1', '2017-07-08 18:42:52', null, '0', null, '13870814611', '465716992@qq.com', 'f379eaf3c831b04de153469d1bec345e', null, null, null, null, null);
