@@ -23,6 +23,10 @@ public class CompanyVo extends Page {
      */
     private String companyName;
     /**
+     * 公司开户行
+     */
+    private String companyBank;
+    /**
      * 公司电话
      */
     private String companyTel;
@@ -34,30 +38,16 @@ public class CompanyVo extends Page {
      * 公司邮件
      */
     private String companyEmail;
+
     /**
-     * 注册资金
+     * 公司纳税识别号
      */
-    private String regCapital;
-    /**
-     * 法人代表
-     */
-    private String corporateName;
-    /**
-     * 经营期限
-     */
-    private Integer operatingPeriod;
+    private String taxCode;
+
     /**
      * 企业类型
      */
     private String companyType;
-    /**
-     * 登记机关
-     */
-    private String registrationAuthority;
-    /**
-     * 成立时间
-     */
-    private Date companyDate;
 
     public int getId() {
         return id;
@@ -107,6 +97,14 @@ public class CompanyVo extends Page {
         this.companyName = companyName;
     }
 
+    public String getCompanyBank() {
+        return companyBank;
+    }
+
+    public void setCompanyBank(String companyBank) {
+        this.companyBank = companyBank;
+    }
+
     public String getCompanyTel() {
         return companyTel;
     }
@@ -131,28 +129,12 @@ public class CompanyVo extends Page {
         this.companyEmail = companyEmail;
     }
 
-    public String getRegCapital() {
-        return regCapital;
+    public String getTaxCode() {
+        return taxCode;
     }
 
-    public void setRegCapital(String regCapital) {
-        this.regCapital = regCapital;
-    }
-
-    public String getCorporateName() {
-        return corporateName;
-    }
-
-    public void setCorporateName(String corporateName) {
-        this.corporateName = corporateName;
-    }
-
-    public Integer getOperatingPeriod() {
-        return operatingPeriod;
-    }
-
-    public void setOperatingPeriod(Integer operatingPeriod) {
-        this.operatingPeriod = operatingPeriod;
+    public void setTaxCode(String taxCode) {
+        this.taxCode = taxCode;
     }
 
     public String getCompanyType() {
@@ -161,21 +143,5 @@ public class CompanyVo extends Page {
 
     public void setCompanyType(String companyType) {
         this.companyType = companyType;
-    }
-
-    public String getRegistrationAuthority() {
-        return registrationAuthority;
-    }
-
-    public void setRegistrationAuthority(String registrationAuthority) {
-        this.registrationAuthority = registrationAuthority;
-    }
-
-    public Date getCompanyDate() {
-        return companyDate;
-    }
-
-    public void setCompanyDate(Date companyDate) {
-        this.companyDate = companyDate;
     }
 }
