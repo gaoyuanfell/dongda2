@@ -26,4 +26,12 @@ public interface MenuService extends BasicService {
      * @return
      */
     List<MenuTo> findNextChild(MenuVo vo);
+
+    /**
+     * 查找子集集合 对应权限
+     * @param vo
+     * @return
+     */
+    MenuTo findMenuByRoleId(MenuVo vo);
+
 }

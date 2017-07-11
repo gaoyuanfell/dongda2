@@ -41,6 +41,19 @@ public class MenuVo extends Page {
      */
     private int type;
 
+    /**
+     * 角色id
+     */
+    private int roleId;
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
     public Date getCreateDate() {
         return createDate;
     }

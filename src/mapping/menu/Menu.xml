@@ -8,6 +8,7 @@
         ) VALUES ( #{createDate},#{updateDate},#{state},#{name},#{link},#{icon},#{parentId},#{isRoot},#{type});
     </insert>
 
+    <!--查询父级下所有的子集-->
     <select id="findAllMenu" resultMap="menu_map">
         SELECT * FROM menu m WHERE m.id = #{id} AND m.state != 1;
     </select>
@@ -38,4 +39,12 @@
     <select id="findMenuByParentId" parameterType="Integer" resultMap="menu_map">
         select * from menu m where m.parentId=#{id} AND m.state != 1;
     </select>
+
+    <!--获取角色拥有的-->
+    <select id="findMenuByRoleId" parameterType="Integer" resultMap="menu_map">
+        select * from
+        (SELECT mr.id,mr.roleId,mr.menuId,mr.menuParentId as parentId FROM menu_role mr WHERE mr.roleId = #{roleId}) as m
+        WHERE m.menuId = #{id}
+    </select>
+
 </mapper>

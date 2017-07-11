@@ -42,6 +42,20 @@ public class MenuController extends BasicController {
     }
 
     /**
+     * 查看根目录下所有的子目录 关联Role角色
+     * {
+     *     id:0
+     * }
+     */
+    @RequestMapping(value = "findRoleMenu.htm")
+    @ResponseBody
+    @IgnoreSecurity
+    public Object findRoleMenu(@RequestBody MenuVo vo){
+        MenuTo to = menuService.findMenuByRoleId(vo);
+        return result(to);
+    }
+
+    /**
      * 添加菜单
      * {
      *      name:'',
