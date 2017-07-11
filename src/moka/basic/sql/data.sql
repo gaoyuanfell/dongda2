@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2017-07-10 23:40:27
+Date: 2017-07-11 22:44:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,12 +29,9 @@ CREATE TABLE `company` (
   `companyTel` varchar(255) DEFAULT NULL COMMENT '公司电话',
   `companyAddress` varchar(255) DEFAULT NULL COMMENT '公司地址',
   `companyEmail` varchar(255) DEFAULT NULL COMMENT '公司邮件',
-  `regCapital` varchar(255) DEFAULT NULL COMMENT '注册资金',
-  `corporateName` varchar(255) DEFAULT NULL COMMENT '法人代表',
-  `operatingPeriod` varchar(255) DEFAULT NULL COMMENT '经营期限',
   `companyType` varchar(255) DEFAULT NULL COMMENT '企业类型',
-  `registrationAuthority` varchar(255) DEFAULT NULL COMMENT '登记机关',
-  `companyDate` datetime DEFAULT NULL COMMENT '成立时间',
+  `companyBank` varchar(255) DEFAULT NULL COMMENT '公司开户行',
+  `taxCode` varchar(255) DEFAULT NULL COMMENT '公司纳税识别号',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -58,7 +55,7 @@ CREATE TABLE `menu` (
   `isRoot` int(11) DEFAULT NULL COMMENT '是否根目录',
   `type` int(11) unsigned zerofill DEFAULT NULL COMMENT '0 菜单 1 链接 2功能',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu

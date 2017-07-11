@@ -3,9 +3,9 @@
 <mapper namespace="moka.company.dao.CompanyDao">
     <insert id="insert" parameterType="moka.company.bo.Company" useGeneratedKeys="true" keyProperty="id">
       INSERT INTO company (
-        createDate, updateDate, state, companyCode, companyName, companyTel, companyAddress, companyEmail, regCapital, corporateName, operatingPeriod, companyType, registrationAuthority, companyDate
+        createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank, taxCode
       ) VALUES (
-        #{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{regCapital},#{corporateName},#{operatingPeriod},#{companyType},#{registrationAuthority},#{companyDate}
+        #{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{taxCode}
       )
     </insert>
 
