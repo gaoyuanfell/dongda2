@@ -14,4 +14,7 @@ import java.util.List;
 @Repository("roleDao")
 public interface RoleDao extends BasicDao<Role, RoleTo> {
 
+    int insertMenuOfRole(List<RoleVo> vo);
+
+    int deleteMenuOfRole(int id);
 }

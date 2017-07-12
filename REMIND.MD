@@ -30,3 +30,7 @@ moka下面的是对应的模块
 mapping 是mybatis对应的sql映射文件
 保证每个模块都能新增一条数据、和分页查询数据。
 例子你看company模块
+
+项目工具下载地址
+
+[redis](https://github.com/MicrosoftArchive/redis/releases/download/win-3.2.100/Redis-x64-3.2.100.msi)

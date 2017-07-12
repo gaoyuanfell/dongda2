@@ -30,9 +30,25 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     }
 
     @Override
+    public RoleTo findOne(Integer id) {
+        return roleDao.findOne(id);
+    }
+
+    @Override
     public Page findPage(RoleVo vo) {
         List list = roleDao.findPage(vo);
         int count = roleDao.findCount();
         return new Page(vo.getPageSize(), count, list);
+    }
+
+    @Override
+    public int insertMenuOfRole(List<RoleVo> vo) {
+        roleDao.deleteMenuOfRole(vo.get(0).getId());
+        return roleDao.insertMenuOfRole(vo);
+    }
+
+    @Override
+    public int deleteMenuOfRole(int id) {
+        return roleDao.deleteMenuOfRole(id);
     }
 }

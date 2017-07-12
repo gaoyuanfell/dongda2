@@ -34,4 +34,6 @@ public interface MenuService extends BasicService {
      */
     MenuTo findMenuByRoleId(MenuVo vo);
 
+
+
 }

@@ -5,11 +5,13 @@ import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
 import moka.role.service.RoleService;
+import moka.role.to.RoleTo;
 import moka.role.vo.RoleVo;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -34,8 +36,18 @@ public class RoleController extends BasicController {
     }
 
     /**
+     * 根据id查找
+     */
+    @RequestMapping(value = "findOne.htm",method = RequestMethod.GET)
+    @ResponseBody
+    public Object findOne(int id) {
+        RoleTo to = roleService.findOne(id);
+        return result(to);
+    }
+
+
+    /**
      * 查 分页
-     *
      */
     @RequestMapping(value = "findPage.htm")
     @ResponseBody
@@ -43,4 +55,17 @@ public class RoleController extends BasicController {
         Page list = roleService.findPage(vo);
         return result(list);
     }
+
+    /**
+     * 角色关联菜单
+     *
+     */
+    @RequestMapping(value = "insertMenuOfRole.htm")
+    @ResponseBody
+    public Object insertMenuOfRole(@RequestBody List<RoleVo> vo) {
+        int i = roleService.insertMenuOfRole(vo);
+        return result(i);
+    }
+
+
 }

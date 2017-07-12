@@ -19,6 +19,16 @@ public class RoleVo extends Page {
      */
     private String name;
 
+    private int menuId;
+
+    public int getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(int menuId) {
+        this.menuId = menuId;
+    }
+
     public String getName() {
         return name;
     }
