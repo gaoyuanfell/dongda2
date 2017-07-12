@@ -43,7 +43,7 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
 
     @Override
     public int insertMenuOfRole(List<RoleVo> vo) {
-        roleDao.deleteMenuOfRole(vo.get(0).getId());
+        roleDao.deleteMenuOfRole(vo.get(0).getRoleId());
         return roleDao.insertMenuOfRole(vo);
     }
 

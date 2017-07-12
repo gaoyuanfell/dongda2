@@ -21,4 +21,15 @@
         SELECT * FROM role LIMIT #{pageStart} , #{pageSize};
     </select>
 
+    <delete id="deleteMenuOfRole" parameterType="Integer">
+        DELETE FROM menu_role WHERE roleId = #{roleId}
+    </delete>
+
+    <insert id="insertMenuOfRole" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO menu_role (roleId, menuId) VALUES
+        <foreach collection="list" item="item" index="index" separator =",">
+            (#{item.roleId},#{item.menuId})
+        </foreach>
+    </insert>
+
 </mapper>
