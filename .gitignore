@@ -3,3 +3,4 @@ target
 /web/*
 !/web/WEB-INF/
 /dongda2.iml
+/test/

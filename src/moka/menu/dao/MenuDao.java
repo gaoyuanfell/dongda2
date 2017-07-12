@@ -17,5 +17,5 @@ public interface MenuDao extends BasicDao<Menu, MenuTo> {
 
     List<MenuTo> findNextChild(MenuVo vo);
 
-    MenuTo findMenuByRoleId(MenuVo vo);
+    List<MenuTo> findMenuByRoleId(MenuVo vo);
 }

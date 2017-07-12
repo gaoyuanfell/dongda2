@@ -40,11 +40,9 @@
         select * from menu m where m.parentId=#{id} AND m.state != 1;
     </select>
 
-    <!--获取角色拥有的-->
-    <select id="findMenuByRoleId" parameterType="Integer" resultMap="menu_map">
-        select * from
-        (SELECT mr.id,mr.roleId,mr.menuId,mr.menuParentId as parentId FROM menu_role mr WHERE mr.roleId = #{roleId}) as m
-        WHERE m.menuId = #{id}
+    <!--获取角色拥有的菜单-->
+    <select id="findMenuByRoleId" parameterType="Integer" resultType="moka.menu.to.MenuTo">
+        SELECT m.*,mr.roleId FROM menu_role mr LEFT JOIN menu m ON m.id= mr.menuId WHERE mr.roleId = #{roleId} ORDER BY m.isRoot DESC
     </select>
 
 </mapper>
