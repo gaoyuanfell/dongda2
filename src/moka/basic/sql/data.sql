@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : dongda
-Source Server Version : 50718
+Source Server         : moka
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : dongda
 
 Target Server Type    : MYSQL
-Target Server Version : 50718
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-07-12 23:25:54
+Date: 2017-07-13 18:54:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -90,17 +90,33 @@ INSERT INTO `menu` VALUES ('24', null, null, '00000000000', '查看角色', 'rol
 -- ----------------------------
 DROP TABLE IF EXISTS `menu_role`;
 CREATE TABLE `menu_role` (
-  `id` int(11) NOT NULL,
-  `menuId` int(11) unsigned zerofill DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roleId` int(10) unsigned zerofill DEFAULT NULL,
+  `menuId` int(10) unsigned zerofill DEFAULT NULL,
   `createDate` datetime DEFAULT NULL,
   `updateDate` datetime DEFAULT NULL,
   `state` int(11) unsigned zerofill DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu_role
 -- ----------------------------
+INSERT INTO `menu_role` VALUES ('35', '0000000005', '0000000001', null, null, null);
+INSERT INTO `menu_role` VALUES ('36', '0000000005', '0000000010', null, null, null);
+INSERT INTO `menu_role` VALUES ('37', '0000000005', '0000000021', null, null, null);
+INSERT INTO `menu_role` VALUES ('38', '0000000005', '0000000011', null, null, null);
+INSERT INTO `menu_role` VALUES ('39', '0000000005', '0000000022', null, null, null);
+INSERT INTO `menu_role` VALUES ('40', '0000000001', '0000000001', null, null, null);
+INSERT INTO `menu_role` VALUES ('41', '0000000001', '0000000002', null, null, null);
+INSERT INTO `menu_role` VALUES ('42', '0000000001', '0000000012', null, null, null);
+INSERT INTO `menu_role` VALUES ('43', '0000000001', '0000000003', null, null, null);
+INSERT INTO `menu_role` VALUES ('44', '0000000001', '0000000013', null, null, null);
+INSERT INTO `menu_role` VALUES ('45', '0000000002', '0000000001', null, null, null);
+INSERT INTO `menu_role` VALUES ('46', '0000000002', '0000000008', null, null, null);
+INSERT INTO `menu_role` VALUES ('47', '0000000002', '0000000019', null, null, null);
+INSERT INTO `menu_role` VALUES ('48', '0000000002', '0000000009', null, null, null);
+INSERT INTO `menu_role` VALUES ('49', '0000000002', '0000000020', null, null, null);
 
 -- ----------------------------
 -- Table structure for role
@@ -123,6 +139,26 @@ INSERT INTO `role` VALUES ('2', '销售经理', '2017-07-09 12:14:09', null, '00
 INSERT INTO `role` VALUES ('3', '销售助理', '2017-07-09 12:14:59', null, '00000000000');
 INSERT INTO `role` VALUES ('4', '销售部助经理', '2017-07-09 12:15:58', null, '00000000000');
 INSERT INTO `role` VALUES ('5', '财务', '2017-07-09 12:16:11', null, '00000000000');
+
+-- ----------------------------
+-- Table structure for role_user
+-- ----------------------------
+DROP TABLE IF EXISTS `role_user`;
+CREATE TABLE `role_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roleId` int(11) DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `createDate` datetime DEFAULT NULL,
+  `updateDate` datetime DEFAULT NULL,
+  `state` int(11) unsigned zerofill DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of role_user
+-- ----------------------------
+INSERT INTO `role_user` VALUES ('1', '1', '1', null, null, null);
+INSERT INTO `role_user` VALUES ('2', '2', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for user
