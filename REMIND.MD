@@ -34,3 +34,8 @@ mapping 是mybatis对应的sql映射文件
 项目工具下载地址
 
 [redis](https://github.com/MicrosoftArchive/redis/releases/download/win-3.2.100/Redis-x64-3.2.100.msi)
+
+云主机
+120.77.83.117
+Administrator
+tingqiao@123

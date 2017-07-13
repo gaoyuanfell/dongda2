@@ -32,4 +32,11 @@
         </foreach>
     </insert>
 
+    <insert id="insertRoleOfUser" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO role_user (roleId, userId) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.roleId},#{item.userId})
+        </foreach>
+    </insert>
+
 </mapper>
