@@ -4,3 +4,6 @@ target
 !/web/WEB-INF/
 /dongda2.iml
 /test/
+.classpath
+.project
+.settings/
