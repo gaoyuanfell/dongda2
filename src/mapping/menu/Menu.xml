@@ -45,4 +45,9 @@
         SELECT m.*,mr.roleId FROM menu_role mr LEFT JOIN menu m ON m.id= mr.menuId WHERE mr.roleId = #{roleId} ORDER BY m.isRoot DESC
     </select>
 
+    <!--返回用户的菜单-->
+    <select id="findMenuByUserId" parameterType="Integer" resultType="moka.menu.to.MenuTo">
+        SELECT * FROM (SELECT mr.menuId, ru.roleId, ru.userId, count(distinct mr.menuId) as c from role_user ru LEFT JOIN menu_role mr ON mr.roleId = ru.roleId WHERE ru.userId = #{userId} GROUP BY mr.menuId) as mm LEFT JOIN menu m ON m.id = mm.menuId
+    </select>
+
 </mapper>

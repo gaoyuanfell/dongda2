@@ -57,19 +57,32 @@ public class MenuServiceImpl extends BasicServiceImpl implements MenuService {
     }
 
     @Override
-    public MenuTo findMenuByRoleId(MenuVo vo) {
-        List<MenuTo> list = menuDao.findMenuByRoleId(vo);
-        List<MenuTo> _list = new ArrayList<>();
-        MenuTo m = list.get(0);
-        list.remove(0);
-        _list.add(m);
-        findChild(list,_list);
-        return m;
+    public List<MenuTo> findNextChild(MenuVo vo) {
+        return menuDao.findNextChild(vo);
     }
 
     @Override
-    public List<MenuTo> findNextChild(MenuVo vo) {
-        return menuDao.findNextChild(vo);
+    public MenuTo findMenuByRoleId(MenuVo vo) {
+        List<MenuTo> list = menuDao.findMenuByRoleId(vo.getRoleId());
+        return getMenuTree(list);
+    }
+
+    /**
+     * 菜单树构造
+     */
+    private MenuTo getMenuTree(List<MenuTo> list){
+        List<MenuTo> _list = new ArrayList<>();
+        MenuTo m = null;
+        for(MenuTo t:list){
+            if(t.getIsRoot() == 1){
+                m = t;
+                _list.add(m);
+                list.remove(m);
+                break;
+            }
+        }
+        findChild(list,_list);
+        return m;
     }
 
     //递归出所有的子集
@@ -90,5 +103,11 @@ public class MenuServiceImpl extends BasicServiceImpl implements MenuService {
                 findChild(list,_list);
             }
         }
+    }
+
+    @Override
+    public MenuTo findMenuByUserId(int userId) {
+        List<MenuTo> list = menuDao.findMenuByUserId(userId);
+        return getMenuTree(list);
     }
 }

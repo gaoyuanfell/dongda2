@@ -78,3 +78,6 @@ INSERT INTO `tree` VALUES ('6', 'Yellow', 'Banana', '8', '9');
 INSERT INTO `tree` VALUES ('7', 'Food', 'Meat', '12', '17');
 INSERT INTO `tree` VALUES ('8', 'Meat', 'Beef', '13', '14');
 INSERT INTO `tree` VALUES ('9', 'Meat', 'Pork', '15', '16');
+
+
+SELECT mr.menuId,ru.roleId,ru.userId,count(distinct mr.menuId) as c from role_user ru LEFT JOIN menu_role mr ON mr.roleId = ru.roleId WHERE ru.userId = 1 GROUP BY mr.menuId

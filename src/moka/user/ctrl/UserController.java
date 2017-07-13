@@ -5,6 +5,8 @@ import moka.basic.bo.Token;
 import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
+import moka.menu.service.MenuService;
+import moka.menu.to.MenuTo;
 import moka.user.service.UserService;
 import moka.user.to.UserTo;
 import moka.user.vo.UserVo;
@@ -30,6 +32,8 @@ public class UserController extends BasicController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private MenuService menuService;
     private Logger logger = LoggerService.getLogger(this.getClass());
 
     @Value("#{propertyConfigurer['data_token_name']}")
@@ -50,6 +54,9 @@ public class UserController extends BasicController {
         boolean b = false;
         Token t = null;
         if (u != null) {
+            u.setPassword("");
+            MenuTo menuTo = menuService.findMenuByUserId(u.getId());
+            u.setMenuTo(menuTo);
             t = new Token(u, Integer.toString(u.getId()));
             b = addUserSession(t);
         }

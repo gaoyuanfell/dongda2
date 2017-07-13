@@ -1,7 +1,11 @@
 package moka.user.to;
 
+import moka.menu.to.MenuTo;
+import moka.role.to.RoleTo;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 返回数据
@@ -50,6 +54,32 @@ public class UserTo implements Serializable {
      * 身份证号码
      */
     private String idCardNo;
+
+    /**
+     * 菜单
+     */
+    private MenuTo menuTo;
+
+    /**
+     * 角色集合
+     */
+    private List<RoleTo> roles;
+
+    public MenuTo getMenuTo() {
+        return menuTo;
+    }
+
+    public void setMenuTo(MenuTo menuTo) {
+        this.menuTo = menuTo;
+    }
+
+    public List<RoleTo> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleTo> roles) {
+        this.roles = roles;
+    }
 
     public int getId() {
         return id;
