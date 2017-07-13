@@ -31,4 +31,13 @@ public interface RoleService extends BasicService {
      */
     int deleteMenuOfRole(int id);
 
+
+    /**
+     * 用户关联角色
+     * @param userId 用户id
+     * @param roles 角色集合
+     * @return
+     */
+    int insertRoleOfUser(int userId, List<Integer> roles);
+
 }

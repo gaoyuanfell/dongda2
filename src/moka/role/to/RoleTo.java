@@ -20,6 +20,19 @@ public class RoleTo implements Serializable {
      */
     private String name;
 
+    /**
+     * 资源ID
+     */
+    private String applicationId;
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
     public String getName() {
         return name;
     }

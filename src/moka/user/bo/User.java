@@ -50,6 +50,31 @@ public class User extends IdEntity implements Serializable {
      * 身份证号码
      */
     private String idCardNo;
+    /**
+     * 公司ID
+     */
+    private String companyId;
+
+    /**
+     * 资源ID
+     */
+    private String applicationId;
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
 
     public String getName() {
         return name;

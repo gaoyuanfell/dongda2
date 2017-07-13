@@ -21,6 +21,28 @@ public class RoleVo extends Page {
 
     private int roleId;
     private int menuId;
+    private int userId;
+
+    /**
+     * 资源ID
+     */
+    private String applicationId;
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public int getRoleId() {
         return roleId;

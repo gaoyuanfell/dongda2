@@ -54,7 +54,15 @@ public class UserTo implements Serializable {
      * 身份证号码
      */
     private String idCardNo;
+    /**
+     * 公司ID
+     */
+    private String companyId;
 
+    /**
+     * 资源ID
+     */
+    private String applicationId;
     /**
      * 菜单
      */
@@ -64,6 +72,22 @@ public class UserTo implements Serializable {
      * 角色集合
      */
     private List<RoleTo> roles;
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
 
     public MenuTo getMenuTo() {
         return menuTo;

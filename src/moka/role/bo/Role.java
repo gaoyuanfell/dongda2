@@ -16,6 +16,18 @@ public class Role extends IdEntity implements Serializable {
      * 角色名称
      */
     private String name;
+    /**
+     * 资源ID
+     */
+    private String applicationId;
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
 
     public String getName() {
         return name;

@@ -48,6 +48,19 @@ public class CompanyTo implements Serializable {
      */
     private String companyType;
 
+    /**
+     * 资源ID
+     */
+    private String applicationId;
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
     public int getId() {
         return id;
     }

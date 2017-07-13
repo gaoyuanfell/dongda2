@@ -39,3 +39,10 @@ mapping 是mybatis对应的sql映射文件
 120.77.83.117
 Administrator
 tingqiao@123
+
+# 资源共享
+
+权限模块（菜单）
+
+
+

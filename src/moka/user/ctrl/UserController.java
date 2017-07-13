@@ -70,12 +70,27 @@ public class UserController extends BasicController {
     }
 
     /**
-     * 增
+     * 增 注册专用 后面完善角色初始化、公司初始化。
      */
     @RequestMapping(value = "register.htm")
     @ResponseBody
     @IgnoreSecurity
     public Object insert(@RequestBody UserVo user) {
+        int n = userService.findRepeatUser(user);
+        if (n > 0) {
+            return result(CODE_PROMPT, "用户名已存在！");
+        }
+        userService.insert(user);
+        return result(CODE_SUCCESS,"创建成功，请登录");
+    }
+
+    /**
+     * 系统用户添加
+     */
+    @RequestMapping(value = "insertSysUser.htm")
+    @ResponseBody
+    @IgnoreSecurity
+    public Object insertSysUser(@RequestBody UserVo user){
         int n = userService.findRepeatUser(user);
         if (n > 0) {
             return result(CODE_PROMPT, "用户名已存在！");

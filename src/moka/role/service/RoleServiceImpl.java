@@ -9,6 +9,7 @@ import moka.role.vo.RoleVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     public Page findPage(RoleVo vo) {
         List list = roleDao.findPage(vo);
         int count = roleDao.findCount();
-        return new Page(vo.getPageSize(), count, list);
+        return new Page(vo.getPageIndex(), vo.getPageSize(), count, list);
     }
 
     @Override
@@ -50,5 +51,17 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     @Override
     public int deleteMenuOfRole(int id) {
         return roleDao.deleteMenuOfRole(id);
+    }
+
+    @Override
+    public int insertRoleOfUser(int userId, List<Integer> roles) {
+        List<RoleVo> vo = new ArrayList<>();
+        for (int i : roles) {
+            RoleVo v = new RoleVo();
+            v.setRoleId(i);
+            v.setUserId(userId);
+            vo.add(v);
+        }
+        return roleDao.insertRoleOfUser(vo);
     }
 }
