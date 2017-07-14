@@ -5,6 +5,7 @@ import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
 import moka.company.service.CompanyService;
 import moka.company.vo.CompanyVo;
+import moka.user.to.UserTo;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,8 @@ public class CompanyController extends BasicController {
     private Logger logger = LoggerService.getLogger(this.getClass());
 
     public Object insert(@RequestBody CompanyVo vo){
+        UserTo userTo = getUserSession();
+        vo.setApplicationId(userTo.getApplicationId());
         int i = companyService.insert(vo);
         return result(i);
     }
@@ -35,6 +38,8 @@ public class CompanyController extends BasicController {
     @RequestMapping(value = "findPage.htm")
     @ResponseBody
     public Object findPage(@RequestBody CompanyVo vo) {
+        UserTo to = getUserSession();
+        vo.setApplicationId(to.getApplicationId());
         Page list = companyService.findPage(vo);
         return result(list);
     }

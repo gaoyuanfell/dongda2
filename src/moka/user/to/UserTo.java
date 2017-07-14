@@ -57,7 +57,7 @@ public class UserTo implements Serializable {
     /**
      * 公司ID
      */
-    private String companyId;
+    private int companyId;
 
     /**
      * 资源ID
@@ -73,11 +73,11 @@ public class UserTo implements Serializable {
      */
     private List<RoleTo> roles;
 
-    public String getCompanyId() {
+    public int getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(String companyId) {
+    public void setCompanyId(int companyId) {
         this.companyId = companyId;
     }
 

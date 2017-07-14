@@ -53,18 +53,18 @@ public class User extends IdEntity implements Serializable {
     /**
      * 公司ID
      */
-    private String companyId;
+    private int companyId;
 
     /**
      * 资源ID
      */
     private String applicationId;
 
-    public String getCompanyId() {
+    public int getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(String companyId) {
+    public void setCompanyId(int companyId) {
         this.companyId = companyId;
     }
 

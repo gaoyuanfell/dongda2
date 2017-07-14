@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.company.dao.CompanyDao">
     <insert id="insert" parameterType="moka.company.bo.Company" useGeneratedKeys="true" keyProperty="id">
-      INSERT INTO company (
-        createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank, taxCode
+      INSERT INTO t_company (
+        createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank, taxCode, applicationId
       ) VALUES (
-        #{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{taxCode}
+        #{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{taxCode},#{applicationId}
       )
     </insert>
 
     <select id="findCount" resultType="Integer">
-        SELECT COUNT(id) FROM company;
+        SELECT COUNT(id) FROM t_company c WHERE c.applicationId = #{applicationId} AND c.state != 1;
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.company.to.CompanyTo">
-        SELECT * FROM company LIMIT #{pageStart} , #{pageSize};
+        SELECT * FROM t_company c WHERE c.applicationId = #{applicationId} AND c.state != 1 LIMIT #{pageStart} , #{pageSize};
     </select>
 
 </mapper>

@@ -15,11 +15,15 @@ public interface BasicDao<E, T> {
 
     T findOneAll(Integer id);
 
+    List<T> findList();
+
     List<T> findList(Page page);
 
     List<T> findPage(Page page);
 
     int findCount();
+
+    int findCount(Page page);
 
     int delete(Integer id);
 

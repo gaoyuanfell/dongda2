@@ -40,4 +40,11 @@ public interface RoleService extends BasicService {
      */
     int insertRoleOfUser(int userId, List<Integer> roles);
 
+    /**
+     * 查找用户下所有的角色
+     * @param userId
+     * @return
+     */
+    List<RoleTo> findUserRoles(int userId);
+
 }

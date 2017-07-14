@@ -14,12 +14,12 @@ public class Page<T> extends Basic {
     private int pageSize = 5;
     private int totalPage;
     private int totalCount;
-    private List<T> list;
+    private List list;
 
     public Page() {
     }
 
-    public Page(int pageIndex,int pageSize,int totalCount, List<T> list) {
+    public Page(int pageIndex,int pageSize,int totalCount, List list) {
         this.setPageIndex(pageIndex);
         this.setList(list);
         this.setPageSize(pageSize);
@@ -86,7 +86,7 @@ public class Page<T> extends Basic {
         return list;
     }
 
-    public void setList(List<T> list) {
+    public void setList(List list) {
         this.list = list;
     }
 }

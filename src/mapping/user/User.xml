@@ -4,9 +4,9 @@
 
     <insert id="insert" parameterType="moka.user.bo.User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user (
-        createDate, updateDate, state, name, phoneNumber, mail, password, employeeNo, currAddress, homeAdress, birthday, idCardNo
+        createDate, updateDate, state, name, phoneNumber, mail, password, employeeNo, currAddress, homeAdress, birthday, idCardNo, applicationId, companyId
         ) VALUES (
-        #{createDate}, #{updateDate}, #{state}, #{name}, #{phoneNumber}, #{mail}, #{password}, #{employeeNo}, #{currAddress}, #{homeAdress}, #{birthday}, #{idCardNo}
+        #{createDate}, #{updateDate}, #{state}, #{name}, #{phoneNumber}, #{mail}, #{password}, #{employeeNo}, #{currAddress}, #{homeAdress}, #{birthday}, #{idCardNo}, #{applicationId}, #{companyId}
         );
     </insert>
 
@@ -19,15 +19,15 @@
     </select>
 
     <select id="findCount" resultType="Integer">
-        SELECT COUNT(id) FROM user;
+        SELECT COUNT(id) FROM user u WHERE u.applicationId = #{applicationId} AND u.state != 1;
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultMap="map">
-        SELECT * FROM user LIMIT #{pageStart} , #{pageSize};
+        SELECT * FROM user u WHERE u.applicationId = #{applicationId} AND u.state != 1 LIMIT #{pageStart} , #{pageSize};
     </select>
 
     <select id="findList" parameterType="moka.basic.page.Page" resultType="moka.user.to.UserTo">
-        SELECT * FROM user;
+        SELECT * FROM user u WHERE u.applicationId = #{applicationId} AND u.state != 1;
     </select>
 
     <select id="login" parameterType="moka.user.vo.UserVo" resultType="moka.user.to.UserTo">

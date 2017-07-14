@@ -38,7 +38,7 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     @Override
     public Page findPage(RoleVo vo) {
         List list = roleDao.findPage(vo);
-        int count = roleDao.findCount();
+        int count = roleDao.findCount(vo);
         return new Page(vo.getPageIndex(), vo.getPageSize(), count, list);
     }
 
@@ -63,5 +63,10 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
             vo.add(v);
         }
         return roleDao.insertRoleOfUser(vo);
+    }
+
+    @Override
+    public List<RoleTo> findUserRoles(int userId) {
+        return roleDao.findUserRoles(userId);
     }
 }

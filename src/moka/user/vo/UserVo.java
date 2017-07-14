@@ -3,6 +3,7 @@ package moka.user.vo;
 import moka.basic.page.Page;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 接收应用层的数据
@@ -52,18 +53,31 @@ public class UserVo extends Page {
     /**
      * 公司ID
      */
-    private String companyId;
+    private int companyId;
 
     /**
      * 资源ID
      */
     private String applicationId;
 
-    public String getCompanyId() {
+    /**
+     * 角色数组
+     */
+    private List<Integer> roles;
+
+    public List<Integer> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Integer> roles) {
+        this.roles = roles;
+    }
+
+    public int getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(String companyId) {
+    public void setCompanyId(int companyId) {
         this.companyId = companyId;
     }
 

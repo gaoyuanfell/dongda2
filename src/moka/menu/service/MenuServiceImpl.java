@@ -53,7 +53,7 @@ public class MenuServiceImpl extends BasicServiceImpl implements MenuService {
     @Override
     public MenuTo findAllMenu(MenuVo vo) {
         if(vo.getId() == 0) vo.setId(1);//默认获取根目录的所有子集
-        return menuDao.findAllMenu(vo);
+        return menuDao.findAllMenu(vo.getId());
     }
 
     @Override

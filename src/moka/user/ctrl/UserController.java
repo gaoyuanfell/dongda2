@@ -5,8 +5,14 @@ import moka.basic.bo.Token;
 import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
+import moka.basic.util.Util;
+import moka.company.bo.Company;
+import moka.company.service.CompanyService;
+import moka.company.vo.CompanyVo;
 import moka.menu.service.MenuService;
 import moka.menu.to.MenuTo;
+import moka.role.service.RoleService;
+import moka.role.to.RoleTo;
 import moka.user.service.UserService;
 import moka.user.to.UserTo;
 import moka.user.vo.UserVo;
@@ -21,7 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by moka on 2017/3/5 0005.
@@ -34,6 +42,10 @@ public class UserController extends BasicController {
     private UserService userService;
     @Resource
     private MenuService menuService;
+    @Resource
+    private RoleService roleService;
+    @Resource
+    private CompanyService companyService;
     private Logger logger = LoggerService.getLogger(this.getClass());
 
     @Value("#{propertyConfigurer['data_token_name']}")
@@ -55,8 +67,10 @@ public class UserController extends BasicController {
         Token t = null;
         if (u != null) {
             u.setPassword("");
-            MenuTo menuTo = menuService.findMenuByUserId(u.getId());
+            MenuTo menuTo = menuService.findMenuByUserId(u.getId());//菜单
+            List<RoleTo> roles = roleService.findUserRoles(u.getId());//角色
             u.setMenuTo(menuTo);
+            u.setRoles(roles);
             t = new Token(u, Integer.toString(u.getId()));
             b = addUserSession(t);
         }
@@ -95,7 +109,10 @@ public class UserController extends BasicController {
         if (n > 0) {
             return result(CODE_PROMPT, "用户名已存在！");
         }
-        userService.insert(user);
+        UserTo to = getUserSession();
+        user.setApplicationId(to.getApplicationId());
+        user.setCompanyId(to.getCompanyId());
+        userService.insertSysUser(user);
         return result(CODE_SUCCESS,"创建成功，请登录");
     }
 
@@ -174,8 +191,10 @@ public class UserController extends BasicController {
      */
     @RequestMapping(value = "findPage.htm")
     @ResponseBody
-    public Object findPage(@RequestBody UserVo user) {
-        Page list = userService.findPage(user);
+    public Object findPage(@RequestBody UserVo vo) {
+        UserTo to = getUserSession();
+        vo.setApplicationId(to.getApplicationId());
+        Page list = userService.findPage(vo);
         return result(list);
     }
 

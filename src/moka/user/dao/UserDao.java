@@ -18,4 +18,6 @@ public interface UserDao extends BasicDao<User, UserTo> {
     int checkPhone(UserVo vo);
 
     int checkEmail(UserVo vo);
+
+    int insertSysUser(User user);
 }
