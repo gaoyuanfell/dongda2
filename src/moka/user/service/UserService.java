@@ -14,6 +14,8 @@ import java.util.List;
 public interface UserService extends BasicService {
     int insert(UserVo vo);
 
+    int insertSysUser(UserVo vo);
+
     UserTo findOne(Integer id);
 
     List findList(UserVo vo);

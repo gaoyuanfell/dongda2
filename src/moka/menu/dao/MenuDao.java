@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Repository("menuDao")
 public interface MenuDao extends BasicDao<Menu, MenuTo> {
-    MenuTo findAllMenu(MenuVo vo);
+    MenuTo findAllMenu(int id);
 
     List<MenuTo> findNextChild(MenuVo vo);
 

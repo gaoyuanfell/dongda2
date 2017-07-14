@@ -7,6 +7,7 @@ import moka.basic.page.Page;
 import moka.role.service.RoleService;
 import moka.role.to.RoleTo;
 import moka.role.vo.RoleVo;
+import moka.user.to.UserTo;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +32,8 @@ public class RoleController extends BasicController {
     @RequestMapping(value = "insert.htm")
     @ResponseBody
     public Object insert(@RequestBody RoleVo vo){
+        UserTo userTo = getUserSession();
+        vo.setApplicationId(userTo.getApplicationId());
         int i = roleService.insert(vo);
         return result(i);
     }
@@ -52,6 +55,8 @@ public class RoleController extends BasicController {
     @RequestMapping(value = "findPage.htm")
     @ResponseBody
     public Object findPage(@RequestBody RoleVo vo) {
+        UserTo to = getUserSession();
+        vo.setApplicationId(to.getApplicationId());
         Page list = roleService.findPage(vo);
         return result(list);
     }

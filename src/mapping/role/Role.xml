@@ -3,9 +3,9 @@
 <mapper namespace="moka.role.dao.RoleDao">
     <insert id="insert" parameterType="moka.role.bo.Role" useGeneratedKeys="true" keyProperty="id">
       INSERT INTO role (
-        name, createDate, updateDate, state
+        name, createDate, updateDate, state,applicationId
       ) VALUES (
-        #{name},#{createDate},#{updateDate},#{state}
+        #{name},#{createDate},#{updateDate},#{state},#{applicationId}
       )
     </insert>
 
@@ -13,12 +13,16 @@
         SELECT * FROM role WHERE id = #{id};
     </select>
 
-    <select id="findCount" resultType="Integer">
-        SELECT COUNT(id) FROM role;
+    <select id="findCount" parameterType="moka.basic.page.Page" resultType="Integer">
+        SELECT COUNT(id) FROM role r WHERE r.applicationId = #{applicationId} AND r.state != 1;
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.role.to.RoleTo">
-        SELECT * FROM role LIMIT #{pageStart} , #{pageSize};
+        SELECT * FROM role r WHERE r.applicationId = #{applicationId} AND r.state != 1 LIMIT #{pageStart} , #{pageSize};
+    </select>
+
+    <select id="findUserRoles" parameterType="Integer" resultType="moka.role.to.RoleTo">
+        SELECT r.* FROM role_user ru LEFT JOIN role r ON r.id = ru.roleId WHERE 1 = 1 AND ru.userId = #{userId}
     </select>
 
     <delete id="deleteMenuOfRole" parameterType="Integer">
