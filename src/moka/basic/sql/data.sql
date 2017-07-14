@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-07-13 18:54:44
+Date: 2017-07-14 18:13:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,12 +32,15 @@ CREATE TABLE `company` (
   `companyType` varchar(255) DEFAULT NULL COMMENT '企业类型',
   `companyBank` varchar(255) DEFAULT NULL COMMENT '公司开户行',
   `taxCode` varchar(255) DEFAULT NULL COMMENT '公司纳税识别号',
+  `applicationId` varchar(255) DEFAULT NULL COMMENT '资源ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of company
 -- ----------------------------
+INSERT INTO `company` VALUES ('1', null, null, null, null, null, null, null, null, null, null, null, '1');
+INSERT INTO `company` VALUES ('3', null, null, '00000000000', null, null, null, null, null, null, null, null, 'f0da8668f77d8534eb08dfca0ed35d11');
 
 -- ----------------------------
 -- Table structure for menu
@@ -97,26 +100,58 @@ CREATE TABLE `menu_role` (
   `updateDate` datetime DEFAULT NULL,
   `state` int(11) unsigned zerofill DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu_role
 -- ----------------------------
-INSERT INTO `menu_role` VALUES ('35', '0000000005', '0000000001', null, null, null);
-INSERT INTO `menu_role` VALUES ('36', '0000000005', '0000000010', null, null, null);
-INSERT INTO `menu_role` VALUES ('37', '0000000005', '0000000021', null, null, null);
-INSERT INTO `menu_role` VALUES ('38', '0000000005', '0000000011', null, null, null);
-INSERT INTO `menu_role` VALUES ('39', '0000000005', '0000000022', null, null, null);
-INSERT INTO `menu_role` VALUES ('40', '0000000001', '0000000001', null, null, null);
-INSERT INTO `menu_role` VALUES ('41', '0000000001', '0000000002', null, null, null);
-INSERT INTO `menu_role` VALUES ('42', '0000000001', '0000000012', null, null, null);
-INSERT INTO `menu_role` VALUES ('43', '0000000001', '0000000003', null, null, null);
-INSERT INTO `menu_role` VALUES ('44', '0000000001', '0000000013', null, null, null);
-INSERT INTO `menu_role` VALUES ('45', '0000000002', '0000000001', null, null, null);
-INSERT INTO `menu_role` VALUES ('46', '0000000002', '0000000008', null, null, null);
-INSERT INTO `menu_role` VALUES ('47', '0000000002', '0000000019', null, null, null);
-INSERT INTO `menu_role` VALUES ('48', '0000000002', '0000000009', null, null, null);
-INSERT INTO `menu_role` VALUES ('49', '0000000002', '0000000020', null, null, null);
+INSERT INTO `menu_role` VALUES ('1', '0000000001', '0000000001', null, null, null);
+INSERT INTO `menu_role` VALUES ('2', '0000000001', '0000000002', null, null, null);
+INSERT INTO `menu_role` VALUES ('3', '0000000001', '0000000003', null, null, null);
+INSERT INTO `menu_role` VALUES ('4', '0000000001', '0000000004', null, null, null);
+INSERT INTO `menu_role` VALUES ('5', '0000000001', '0000000005', null, null, null);
+INSERT INTO `menu_role` VALUES ('6', '0000000001', '0000000006', null, null, null);
+INSERT INTO `menu_role` VALUES ('7', '0000000001', '0000000007', null, null, null);
+INSERT INTO `menu_role` VALUES ('8', '0000000001', '0000000008', null, null, null);
+INSERT INTO `menu_role` VALUES ('9', '0000000001', '0000000009', null, null, null);
+INSERT INTO `menu_role` VALUES ('10', '0000000001', '0000000010', null, null, null);
+INSERT INTO `menu_role` VALUES ('11', '0000000001', '0000000011', null, null, null);
+INSERT INTO `menu_role` VALUES ('12', '0000000001', '0000000012', null, null, null);
+INSERT INTO `menu_role` VALUES ('13', '0000000001', '0000000013', null, null, null);
+INSERT INTO `menu_role` VALUES ('14', '0000000001', '0000000014', null, null, null);
+INSERT INTO `menu_role` VALUES ('15', '0000000001', '0000000015', null, null, null);
+INSERT INTO `menu_role` VALUES ('16', '0000000001', '0000000016', null, null, null);
+INSERT INTO `menu_role` VALUES ('17', '0000000001', '0000000017', null, null, null);
+INSERT INTO `menu_role` VALUES ('18', '0000000001', '0000000018', null, null, null);
+INSERT INTO `menu_role` VALUES ('19', '0000000001', '0000000019', null, null, null);
+INSERT INTO `menu_role` VALUES ('20', '0000000001', '0000000020', null, null, null);
+INSERT INTO `menu_role` VALUES ('21', '0000000001', '0000000021', null, null, null);
+INSERT INTO `menu_role` VALUES ('22', '0000000001', '0000000022', null, null, null);
+INSERT INTO `menu_role` VALUES ('23', '0000000001', '0000000023', null, null, null);
+INSERT INTO `menu_role` VALUES ('24', '0000000001', '0000000024', null, null, null);
+INSERT INTO `menu_role` VALUES ('25', '0000000006', '0000000001', null, null, null);
+INSERT INTO `menu_role` VALUES ('26', '0000000006', '0000000002', null, null, null);
+INSERT INTO `menu_role` VALUES ('27', '0000000006', '0000000003', null, null, null);
+INSERT INTO `menu_role` VALUES ('28', '0000000006', '0000000004', null, null, null);
+INSERT INTO `menu_role` VALUES ('29', '0000000006', '0000000005', null, null, null);
+INSERT INTO `menu_role` VALUES ('30', '0000000006', '0000000006', null, null, null);
+INSERT INTO `menu_role` VALUES ('31', '0000000006', '0000000007', null, null, null);
+INSERT INTO `menu_role` VALUES ('32', '0000000006', '0000000008', null, null, null);
+INSERT INTO `menu_role` VALUES ('33', '0000000006', '0000000009', null, null, null);
+INSERT INTO `menu_role` VALUES ('34', '0000000006', '0000000010', null, null, null);
+INSERT INTO `menu_role` VALUES ('35', '0000000006', '0000000011', null, null, null);
+INSERT INTO `menu_role` VALUES ('36', '0000000006', '0000000012', null, null, null);
+INSERT INTO `menu_role` VALUES ('37', '0000000006', '0000000013', null, null, null);
+INSERT INTO `menu_role` VALUES ('38', '0000000006', '0000000014', null, null, null);
+INSERT INTO `menu_role` VALUES ('39', '0000000006', '0000000015', null, null, null);
+INSERT INTO `menu_role` VALUES ('40', '0000000006', '0000000017', null, null, null);
+INSERT INTO `menu_role` VALUES ('41', '0000000006', '0000000018', null, null, null);
+INSERT INTO `menu_role` VALUES ('42', '0000000006', '0000000019', null, null, null);
+INSERT INTO `menu_role` VALUES ('43', '0000000006', '0000000020', null, null, null);
+INSERT INTO `menu_role` VALUES ('44', '0000000006', '0000000021', null, null, null);
+INSERT INTO `menu_role` VALUES ('45', '0000000006', '0000000022', null, null, null);
+INSERT INTO `menu_role` VALUES ('46', '0000000006', '0000000023', null, null, null);
+INSERT INTO `menu_role` VALUES ('47', '0000000006', '0000000024', null, null, null);
 
 -- ----------------------------
 -- Table structure for role
@@ -128,17 +163,19 @@ CREATE TABLE `role` (
   `createDate` datetime DEFAULT NULL,
   `updateDate` datetime DEFAULT NULL,
   `state` int(11) unsigned zerofill DEFAULT NULL,
+  `applicationId` varchar(255) DEFAULT NULL COMMENT '资源ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES ('1', '管理员', '2017-07-09 11:29:49', null, '00000000000');
-INSERT INTO `role` VALUES ('2', '销售经理', '2017-07-09 12:14:09', null, '00000000000');
-INSERT INTO `role` VALUES ('3', '销售助理', '2017-07-09 12:14:59', null, '00000000000');
-INSERT INTO `role` VALUES ('4', '销售部助经理', '2017-07-09 12:15:58', null, '00000000000');
-INSERT INTO `role` VALUES ('5', '财务', '2017-07-09 12:16:11', null, '00000000000');
+INSERT INTO `role` VALUES ('1', '管理员', '2017-07-09 11:29:49', null, '00000000000', '1');
+INSERT INTO `role` VALUES ('2', '销售经理', '2017-07-09 12:14:09', null, '00000000000', '1');
+INSERT INTO `role` VALUES ('3', '销售助理', '2017-07-09 12:14:59', null, '00000000000', '1');
+INSERT INTO `role` VALUES ('4', '销售部助经理', '2017-07-09 12:15:58', null, '00000000000', '1');
+INSERT INTO `role` VALUES ('5', '财务', '2017-07-09 12:16:11', null, '00000000000', '1');
+INSERT INTO `role` VALUES ('6', '公司管理员', '2017-07-14 09:51:27', null, '00000000000', 'f0da8668f77d8534eb08dfca0ed35d11');
 
 -- ----------------------------
 -- Table structure for role_user
@@ -158,7 +195,7 @@ CREATE TABLE `role_user` (
 -- Records of role_user
 -- ----------------------------
 INSERT INTO `role_user` VALUES ('1', '1', '1', null, null, null);
-INSERT INTO `role_user` VALUES ('2', '2', '1', null, null, null);
+INSERT INTO `role_user` VALUES ('2', '6', '2', null, null, null);
 
 -- ----------------------------
 -- Table structure for user
@@ -178,10 +215,13 @@ CREATE TABLE `user` (
   `homeAdress` varchar(255) DEFAULT NULL COMMENT '家庭住址',
   `birthday` varchar(255) DEFAULT NULL COMMENT '出生日期',
   `idCardNo` int(11) DEFAULT NULL COMMENT '身份证号码',
+  `applicationId` varchar(255) DEFAULT NULL COMMENT '资源ID',
+  `companyId` int(11) unsigned zerofill DEFAULT NULL COMMENT '公司ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '2017-07-08 18:42:52', null, '00000000000', null, '13870814611', '465716992@qq.com', 'f379eaf3c831b04de153469d1bec345e', null, null, null, null, null);
+INSERT INTO `user` VALUES ('1', '2017-07-08 18:42:52', null, '00000000000', null, '13870814611', '465716992@qq.com', 'f379eaf3c831b04de153469d1bec345e', null, null, null, null, null, '1', '00000000001');
+INSERT INTO `user` VALUES ('2', '2017-07-14 09:51:22', null, '00000000000', null, '13870814613', '465716993@qq.com', 'f379eaf3c831b04de153469d1bec345e', null, null, null, null, null, 'f0da8668f77d8534eb08dfca0ed35d11', '00000000003');
