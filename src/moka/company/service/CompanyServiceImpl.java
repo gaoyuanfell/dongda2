@@ -32,6 +32,6 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
     public Page findPage(CompanyVo vo) {
         List list = companyDao.findPage(vo);
         int count = companyDao.findCount();
-        return new Page(vo.getPageSize(), count, list);
+        return new Page(vo.getPageIndex(),vo.getPageSize(), count, list);
     }
 }

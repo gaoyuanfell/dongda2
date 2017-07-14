@@ -19,14 +19,8 @@ public class Page<T> extends Basic {
     public Page() {
     }
 
-    public Page(int pageIndex,int pageSize,int totalCount, List list) {
+    public Page(int pageIndex,int pageSize,int totalCount, List<T> list) {
         this.setPageIndex(pageIndex);
-        this.setList(list);
-        this.setPageSize(pageSize);
-        this.setTotalCount(totalCount);
-    }
-
-    public Page(int pageSize,int totalCount, List list) {
         this.setList(list);
         this.setPageSize(pageSize);
         this.setTotalCount(totalCount);
