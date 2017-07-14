@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="moka.contract.dao.ContractDao">
+
+    <insert id="insert" parameterType="moka.contract.bo.Contract"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_contract(
+        contractNo,versionNo,companyIdA, companyContractIdA,
+        companyIdB,
+        companyContractIdB, companyIdC, companyContractIdC,
+        signDate,
+        startDate,endDate,itemName,item,paymentPlan,amt,createDate
+        )
+        VALUES (
+        #{contractNo},#{versionNo},#{companyIdA},#{companyContractIdA},#{companyIdB},#{companyContractIdB},#{companyIdC},#{companyContractIdC},#{signDate},#{startDate},#{endDate}
+        ,#{itemName},#{item},#{paymentPlan},#{amt},#{createDate}
+        )
+    </insert>
+
+    <select id="findCount" resultType="Integer">
+        SELECT COUNT(id) FROM
+        t_contract;
+    </select>
+
+    <select id="findPage" parameterType="moka.basic.page.Page"
+        resultType="moka.contract.bo.Contract">
+        SELECT * FROM t_contract LIMIT #{pageStart} ,
+        #{pageSize};
+    </select>
+
+</mapper>

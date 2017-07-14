@@ -21,7 +21,7 @@ public class Contract extends IdEntity implements Serializable {
     /**
      * 合同号
      */
-    private String contactNo;
+    private String contractNo;
     /**
      * 版本号
      */
@@ -33,7 +33,7 @@ public class Contract extends IdEntity implements Serializable {
     /**
      * 甲方联系人ID
      */
-    private int companyContactIdA;
+    private int companyContractIdA;
     /**
      * 乙方公司ID
      */
@@ -41,7 +41,7 @@ public class Contract extends IdEntity implements Serializable {
     /**
      * 乙方联系人ID
      */
-    private int companyContactIdB;
+    private int companyContractIdB;
     /**
      * 丙方公司ID
      */
@@ -49,7 +49,7 @@ public class Contract extends IdEntity implements Serializable {
     /**
      * 丙方联系人ID
      */
-    private int companyContactIdC;
+    private int companyContractIdC;
     /**
      * 合同签订日期
      */
@@ -74,12 +74,11 @@ public class Contract extends IdEntity implements Serializable {
      * 合同金额
      */
     private BigDecimal amt;
-    public String getContactNo() {
-        return contactNo;
-    }
-    public void setContactNo(String contactNo) {
-        this.contactNo = contactNo;
-    }
+    /**
+     * 开票计划
+     */
+    private int paymentPlan;
+
     public int getVersionNo() {
         return versionNo;
     }
@@ -92,36 +91,21 @@ public class Contract extends IdEntity implements Serializable {
     public void setCompanyIdA(int companyIdA) {
         this.companyIdA = companyIdA;
     }
-    public int getCompanyContactIdA() {
-        return companyContactIdA;
-    }
-    public void setCompanyContactIdA(int companyContactIdA) {
-        this.companyContactIdA = companyContactIdA;
-    }
+
     public int getCompanyIdB() {
         return companyIdB;
     }
     public void setCompanyIdB(int companyIdB) {
         this.companyIdB = companyIdB;
     }
-    public int getCompanyContactIdB() {
-        return companyContactIdB;
-    }
-    public void setCompanyContactIdB(int companyContactIdB) {
-        this.companyContactIdB = companyContactIdB;
-    }
+
     public int getCompanyIdC() {
         return companyIdC;
     }
     public void setCompanyIdC(int companyIdC) {
         this.companyIdC = companyIdC;
     }
-    public int getCompanyContactIdC() {
-        return companyContactIdC;
-    }
-    public void setCompanyContactIdC(int companyContactIdC) {
-        this.companyContactIdC = companyContactIdC;
-    }
+
     public Date getSignDate() {
         return signDate;
     }
@@ -163,5 +147,35 @@ public class Contract extends IdEntity implements Serializable {
     }
     public void setContactId(int contactId) {
         this.contactId = contactId;
+    }
+    public int getPaymentPlan() {
+        return paymentPlan;
+    }
+    public void setPaymentPlan(int paymentPlan) {
+        this.paymentPlan = paymentPlan;
+    }
+    public String getContractNo() {
+        return contractNo;
+    }
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
+    }
+    public int getCompanyContractIdA() {
+        return companyContractIdA;
+    }
+    public void setCompanyContractIdA(int companyContractIdA) {
+        this.companyContractIdA = companyContractIdA;
+    }
+    public int getCompanyContractIdB() {
+        return companyContractIdB;
+    }
+    public void setCompanyContractIdB(int companyContractIdB) {
+        this.companyContractIdB = companyContractIdB;
+    }
+    public int getCompanyContractIdC() {
+        return companyContractIdC;
+    }
+    public void setCompanyContractIdC(int companyContractIdC) {
+        this.companyContractIdC = companyContractIdC;
     }
 }
