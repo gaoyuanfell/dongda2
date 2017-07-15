@@ -27,5 +27,5 @@ public interface BasicDao<E, T> {
 
     int delete(Integer id);
 
-    int update(Basic basic);
+    int update(E e);
 }

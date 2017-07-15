@@ -25,6 +25,26 @@ public class RoleTo implements Serializable {
      */
     private String applicationId;
 
+    private String[] menus;
+
+    private String menuStr;
+
+    public String[] getMenus() {
+        return menus;
+    }
+
+    public void setMenus(String[] menus) {
+        this.menus = menus;
+    }
+
+    public String getMenuStr() {
+        return menuStr;
+    }
+
+    public void setMenuStr(String menuStr) {
+        this.menuStr = menuStr;
+    }
+
     public String getApplicationId() {
         return applicationId;
     }

@@ -3,47 +3,63 @@
 <mapper namespace="moka.user.dao.UserDao">
 
     <insert id="insert" parameterType="moka.user.bo.User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user (
+        INSERT INTO t_user (
         createDate, updateDate, state, name, phoneNumber, mail, password, employeeNo, currAddress, homeAdress, birthday, idCardNo, applicationId, companyId
         ) VALUES (
         #{createDate}, #{updateDate}, #{state}, #{name}, #{phoneNumber}, #{mail}, #{password}, #{employeeNo}, #{currAddress}, #{homeAdress}, #{birthday}, #{idCardNo}, #{applicationId}, #{companyId}
         );
     </insert>
 
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM t_user WHERE id = #{id};
+    </delete>
+
+    <update id="update" parameterType="moka.user.bo.User">
+        UPDATE t_user
+        <trim prefix="SET" suffixOverrides=",">
+          <if test="name != null and name != ''"> name = #{name}, </if>
+          <if test="mail != null and mail != ''"> mail = #{mail}, </if>
+          <if test="phoneNumber != null and phoneNumber != ''"> phoneNumber = #{phoneNumber}, </if>
+          <if test="employeeNo != null and employeeNo != ''"> employeeNo = #{employeeNo}, </if>
+          <if test="updateDate != null"> updateDate = #{updateDate}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
     <resultMap id="map" type="moka.user.to.UserTo">
         <id property="id" column="id"/>
     </resultMap>
 
     <select id="findOne" parameterType="Integer" resultType="moka.user.to.UserTo">
-        SELECT * FROM user WHERE id = #{id};
+        SELECT * FROM t_user WHERE id = #{id};
     </select>
 
     <select id="findCount" resultType="Integer">
-        SELECT COUNT(id) FROM user u WHERE u.applicationId = #{applicationId} AND u.state != 1;
+        SELECT COUNT(id) FROM t_user u WHERE u.applicationId = #{applicationId} AND u.state != 1;
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultMap="map">
-        SELECT * FROM user u WHERE u.applicationId = #{applicationId} AND u.state != 1 LIMIT #{pageStart} , #{pageSize};
+        SELECT * FROM t_user u WHERE u.applicationId = #{applicationId} AND u.state != 1 LIMIT #{pageStart} , #{pageSize};
     </select>
 
     <select id="findList" parameterType="moka.basic.page.Page" resultType="moka.user.to.UserTo">
-        SELECT * FROM user u WHERE u.applicationId = #{applicationId} AND u.state != 1;
+        SELECT * FROM t_user u WHERE u.applicationId = #{applicationId} AND u.state != 1;
     </select>
 
     <select id="login" parameterType="moka.user.vo.UserVo" resultType="moka.user.to.UserTo">
-        SELECT * FROM user u WHERE 1 = 1 AND u.phoneNumber = #{phoneNumber} AND u.password = #{password}
+        SELECT * FROM t_user u WHERE 1 = 1 AND u.phoneNumber = #{phoneNumber} AND u.password = #{password}
     </select>
 
     <select id="checkPhone" parameterType="moka.user.vo.UserVo" resultType="Integer">
-        SELECT COUNT(*) FROM user u WHERE 1 = 1 AND u.phoneNumber = #{phoneNumber}
+        SELECT COUNT(*) FROM t_user u WHERE 1 = 1 AND u.phoneNumber = #{phoneNumber}
     </select>
 
     <select id="checkEmail" parameterType="moka.user.vo.UserVo" resultType="Integer">
-        SELECT COUNT(*) FROM user u WHERE 1 = 1 AND u.mail = #{mail}
+        SELECT COUNT(*) FROM t_user u WHERE 1 = 1 AND u.mail = #{mail}
     </select>
 
     <select id="findRepeatUser" parameterType="moka.user.vo.UserVo" resultType="Integer">
-        SELECT COUNT(*) FROM user u WHERE 1 = 1 AND (u.phoneNumber = #{phoneNumber} OR u.mail = #{mail})
+        SELECT COUNT(*) FROM t_user u WHERE 1 = 1 AND (u.phoneNumber = #{phoneNumber} OR u.mail = #{mail})
     </select>
 
 </mapper>

@@ -27,9 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by moka on 2017/3/5 0005.
@@ -160,6 +158,45 @@ public class UserController extends BasicController {
     @ResponseBody
     public Object findOne(int id) {
         UserTo user = userService.findOne(id);
+        return result(user);
+    }
+
+
+    /**
+     * 用户修改
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "update.htm")
+    @ResponseBody
+    public Object update(@RequestBody UserVo user) {
+        int i = userService.update(user);
+        return result(i);
+    }
+
+    /**
+     * 用户删除
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "delete.htm")
+    @ResponseBody
+    public Object delete(int id) {
+        int i = userService.delete(id);
+        return result(i);
+    }
+
+
+    /**
+     * 查
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "findOneAll.htm")
+    @ResponseBody
+    public Object findOneAll(int id) {
+        UserTo user = userService.findOneAll(id);
         return result(user);
     }
 

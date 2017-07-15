@@ -39,6 +39,31 @@ public class RoleController extends BasicController {
     }
 
     /**
+     * 修改
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "update.htm")
+    @ResponseBody
+    public Object update(@RequestBody RoleVo vo){
+        roleService.update(vo);
+        return result();
+    }
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "delete.htm")
+    @ResponseBody
+    public Object delete(int id){
+        roleService.delete(id);
+        return result();
+    }
+
+
+    /**
      * 根据id查找
      */
     @RequestMapping(value = "findOne.htm",method = RequestMethod.GET)
@@ -70,6 +95,22 @@ public class RoleController extends BasicController {
     public Object insertMenuOfRole(@RequestBody List<RoleVo> vo) {
         int i = roleService.insertMenuOfRole(vo);
         return result(i);
+    }
+
+    /**
+     * 作用于下拉 搜索条件
+     * {
+     *     name:''
+     * }
+     *
+     */
+    @RequestMapping(value = "findUseSelect.htm")
+    @ResponseBody
+    public Object findUseSelect(@RequestBody RoleVo vo){
+        UserTo to = getUserSession();
+        vo.setApplicationId(to.getApplicationId());
+        List<RoleTo> list = roleService.findUseSelect(vo);
+        return result(list);
     }
 
 

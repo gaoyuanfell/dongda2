@@ -18,6 +18,9 @@ public interface RoleService extends BasicService {
 
     Page findPage(RoleVo vo);
 
+    int update(RoleVo vo);
+
+    int delete(int id);
     /**
      * 角色关联菜单
      * @return
@@ -26,10 +29,17 @@ public interface RoleService extends BasicService {
 
     /**
      * 删除角色下的菜单
-     * @param id
+     * @param roleId
      * @return
      */
-    int deleteMenuOfRole(int id);
+    int deleteMenuOfRole(int roleId);
+
+    /**
+     * 删除用户下的角色
+     * @param userId
+     * @return
+     */
+    int deleteRoleOfUser(int userId);
 
 
     /**
@@ -46,5 +56,12 @@ public interface RoleService extends BasicService {
      * @return
      */
     List<RoleTo> findUserRoles(int userId);
+
+    /**
+     * 作用于下拉
+     * @param vo
+     * @return
+     */
+    List<RoleTo> findUseSelect(RoleVo vo);
 
 }
