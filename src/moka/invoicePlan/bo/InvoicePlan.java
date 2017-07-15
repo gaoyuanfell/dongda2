@@ -46,6 +46,9 @@ public class InvoicePlan extends IdEntity implements Serializable {
      * 已入账金额
      */
     private BigDecimal receiveAmt;
+    /**
+     * 状态
+     */
     public int getContractId() {
         return contractId;
     }
