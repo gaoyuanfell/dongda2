@@ -1,7 +1,6 @@
 package moka.user.to;
 
 import moka.menu.to.MenuTo;
-import moka.role.to.RoleTo;
 
 import java.io.Serializable;
 import java.util.Date;

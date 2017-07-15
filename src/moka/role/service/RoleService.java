@@ -2,7 +2,6 @@ package moka.role.service;
 
 import moka.basic.page.Page;
 import moka.basic.service.BasicService;
-import moka.role.bo.Role;
 import moka.role.to.RoleTo;
 import moka.role.vo.RoleVo;
 

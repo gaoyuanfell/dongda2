@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import moka.basic.annotation.IgnoreSecurity;
 import moka.basic.bo.Token;
 import moka.basic.service.RedisService;
-import moka.user.bo.User;
 import moka.user.to.UserTo;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;

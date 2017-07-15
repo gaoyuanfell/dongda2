@@ -1,6 +1,5 @@
 package moka.basic.dao;
 
-import moka.basic.bo.Basic;
 import moka.basic.page.Page;
 
 import java.util.List;

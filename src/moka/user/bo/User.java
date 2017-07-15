@@ -2,11 +2,10 @@ package moka.user.bo;
 
 import moka.basic.bo.IdEntity;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Date;
 
 /**用户实体
  * Created by moka on 2017/3/5 0005.

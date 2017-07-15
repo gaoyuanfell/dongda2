@@ -2,7 +2,6 @@ package moka.user.service;
 
 import moka.basic.page.Page;
 import moka.basic.service.BasicService;
-import moka.user.bo.User;
 import moka.user.to.UserTo;
 import moka.user.vo.UserVo;
 

@@ -1,9 +1,7 @@
 package moka.role.to;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 返回数据
