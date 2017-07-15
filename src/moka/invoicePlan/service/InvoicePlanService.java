@@ -1,5 +1,10 @@
 package moka.invoicePlan.service;
 
-public class InvoicePlanService {
+import moka.basic.service.BasicService;
+import moka.invoicePlan.vo.InvoicePlanVo;
+
+public interface InvoicePlanService extends BasicService {
+
+    int insert(InvoicePlanVo inv);
 
 }
