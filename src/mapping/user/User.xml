@@ -34,7 +34,7 @@
         SELECT * FROM t_user WHERE id = #{id};
     </select>
 
-    <select id="findCount" resultType="Integer">
+    <select id="findCount" parameterType="moka.basic.page.Page" resultType="Integer">
         SELECT COUNT(id) FROM t_user u WHERE u.applicationId = #{applicationId} AND u.state != 1;
     </select>
 

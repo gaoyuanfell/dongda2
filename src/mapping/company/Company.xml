@@ -3,18 +3,47 @@
 <mapper namespace="moka.company.dao.CompanyDao">
     <insert id="insert" parameterType="moka.company.bo.Company" useGeneratedKeys="true" keyProperty="id">
       INSERT INTO t_company (
-        createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank, taxCode, applicationId
+        createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank,companyAccount, taxCode, applicationId
       ) VALUES (
-        #{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{taxCode},#{applicationId}
+        #{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{companyAccount},#{taxCode},#{applicationId}
       )
     </insert>
 
-    <select id="findCount" resultType="Integer">
-        SELECT COUNT(id) FROM t_company c WHERE c.applicationId = #{applicationId} AND c.state != 1;
+    <update id="update" parameterType="moka.company.bo.Company">
+        UPDATE t_company
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="companyName != null and companyName != ''"> companyName = #{companyName}, </if>
+            <if test="companyCode != null and companyCode != ''"> companyCode = #{companyCode}, </if>
+            <if test="companyTel != null and companyTel != ''"> companyTel = #{companyTel}, </if>
+            <if test="companyAddress != null and companyAddress != ''"> companyAddress = #{companyAddress}, </if>
+            <if test="companyEmail != null and companyEmail != ''"> companyEmail = #{companyEmail}, </if>
+            <if test="companyBank != null and companyBank != ''"> companyBank = #{companyBank}, </if>
+            <if test="companyAccount != null and companyAccount != ''"> companyAccount = #{companyAccount}, </if>
+            <if test="taxCode != null and taxCode != ''"> taxCode = #{taxCode}, </if>
+            <if test="updateDate != null"> updateDate = #{updateDate}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <select id="findOne" parameterType="Integer" resultType="moka.company.to.CompanyTo">
+        SELECT * FROM t_company WHERE id = #{id};
+    </select>
+
+    <select id="findCount" parameterType="moka.basic.page.Page" resultType="Integer">
+        SELECT COUNT(id) FROM t_company c
+        WHERE c.applicationId = #{applicationId} AND c.state != 1
+        <if test="companyName != null and companyName != ''">
+            AND c.companyName = #{companyName}
+        </if>
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.company.to.CompanyTo">
-        SELECT * FROM t_company c WHERE c.applicationId = #{applicationId} AND c.state != 1 LIMIT #{pageStart} , #{pageSize};
+        SELECT * FROM t_company c
+        WHERE c.applicationId = #{applicationId} AND c.state != 1
+        <if test="companyName != null and companyName != ''">
+            AND c.companyName = #{companyName}
+        </if>
+        LIMIT #{pageStart} , #{pageSize};
     </select>
 
 </mapper>

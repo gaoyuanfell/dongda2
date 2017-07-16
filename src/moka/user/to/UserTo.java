@@ -1,5 +1,6 @@
 package moka.user.to;
 
+import moka.company.to.CompanyTo;
 import moka.menu.to.MenuTo;
 
 import java.io.Serializable;
@@ -71,6 +72,15 @@ public class UserTo implements Serializable {
      * 角色集合
      */
     private List roles;
+    private CompanyTo company;
+
+    public CompanyTo getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyTo company) {
+        this.company = company;
+    }
 
     public int getCompanyId() {
         return companyId;

@@ -2,6 +2,7 @@ package moka.company.service;
 
 import moka.basic.page.Page;
 import moka.basic.service.BasicService;
+import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
 
 /**
@@ -10,5 +11,9 @@ import moka.company.vo.CompanyVo;
 public interface CompanyService extends BasicService {
     int insert(CompanyVo vo);
 
+    int update(CompanyVo vo);
+
     Page findPage(CompanyVo vo);
+
+    CompanyTo findOne(int id);
 }

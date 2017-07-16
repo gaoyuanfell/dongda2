@@ -4,6 +4,7 @@ import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
 import moka.company.service.CompanyService;
+import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
 import moka.user.to.UserTo;
 import org.apache.log4j.Logger;
@@ -25,6 +26,11 @@ public class CompanyController extends BasicController {
     private CompanyService companyService;
     private Logger logger = LoggerService.getLogger(this.getClass());
 
+    /**
+     * 新增公司
+     */
+    @RequestMapping(value = "insert.htm")
+    @ResponseBody
     public Object insert(@RequestBody CompanyVo vo){
         UserTo userTo = getUserSession();
         vo.setApplicationId(userTo.getApplicationId());
@@ -43,4 +49,27 @@ public class CompanyController extends BasicController {
         Page list = companyService.findPage(vo);
         return result(list);
     }
+
+    /**
+     * 查
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "findOne.htm")
+    @ResponseBody
+    public Object findOne(int id) {
+        CompanyTo to = companyService.findOne(id);
+        return result(to);
+    }
+    /**
+     * 修改公司信息
+     */
+    @RequestMapping(value = "update.htm")
+    @ResponseBody
+    public Object update(@RequestBody CompanyVo vo) {
+        int i = companyService.update(vo);
+        return result(i);
+    }
+
 }

@@ -6,6 +6,7 @@ import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
 import moka.company.service.CompanyService;
+import moka.company.to.CompanyTo;
 import moka.menu.service.MenuService;
 import moka.menu.to.MenuTo;
 import moka.role.service.RoleService;
@@ -64,8 +65,10 @@ public class UserController extends BasicController {
             u.setPassword("");
             MenuTo menuTo = menuService.findMenuByUserId(u.getId());//菜单
             List<RoleTo> roles = roleService.findUserRoles(u.getId());//角色
+            CompanyTo companyTo = companyService.findOne(u.getCompanyId());
             u.setMenuTo(menuTo);
             u.setRoles(roles);
+            u.setCompany(companyTo);
             t = new Token(u, Integer.toString(u.getId()));
             b = addUserSession(t);
         }

@@ -25,6 +25,10 @@ public class Company extends IdEntity implements Serializable {
      */
     private String companyBank;
     /**
+     * 公司开户行账号
+     */
+    private String companyAccount;
+    /**
      * 公司电话
      */
     private String companyTel;
@@ -51,6 +55,14 @@ public class Company extends IdEntity implements Serializable {
      * 资源ID
      */
     private String applicationId;
+
+    public String getCompanyAccount() {
+        return companyAccount;
+    }
+
+    public void setCompanyAccount(String companyAccount) {
+        this.companyAccount = companyAccount;
+    }
 
     public String getApplicationId() {
         return applicationId;

@@ -26,6 +26,10 @@ public class CompanyTo implements Serializable {
      */
     private String companyBank;
     /**
+     * 公司开户行账号
+     */
+    private String companyAccount;
+    /**
      * 公司电话
      */
     private String companyTel;
@@ -55,6 +59,14 @@ public class CompanyTo implements Serializable {
 
     public String getApplicationId() {
         return applicationId;
+    }
+
+    public String getCompanyAccount() {
+        return companyAccount;
+    }
+
+    public void setCompanyAccount(String companyAccount) {
+        this.companyAccount = companyAccount;
     }
 
     public void setApplicationId(String applicationId) {
