@@ -3,7 +3,6 @@ package moka.basic.ctrl;
 import com.alibaba.fastjson.JSONObject;
 import moka.basic.bo.Token;
 import moka.basic.service.RedisService;
-import moka.user.bo.User;
 import moka.user.to.UserTo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;

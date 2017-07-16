@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.role.dao.RoleDao">
     <insert id="insert" parameterType="moka.role.bo.Role" useGeneratedKeys="true" keyProperty="id">
-      INSERT INTO role (
+      INSERT INTO t_role (
         name, createDate, updateDate, state,applicationId
       ) VALUES (
         #{name},#{createDate},#{updateDate},#{state},#{applicationId}
@@ -10,37 +10,61 @@
     </insert>
 
     <select id="findOne" parameterType="Integer" resultType="moka.role.to.RoleTo">
-        SELECT * FROM role WHERE id = #{id};
+        SELECT * FROM t_role WHERE id = #{id};
     </select>
 
     <select id="findCount" parameterType="moka.basic.page.Page" resultType="Integer">
-        SELECT COUNT(id) FROM role r WHERE r.applicationId = #{applicationId} AND r.state != 1;
+        SELECT COUNT(id) FROM t_role r WHERE r.applicationId = #{applicationId} AND r.state != 1;
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.role.to.RoleTo">
-        SELECT * FROM role r WHERE r.applicationId = #{applicationId} AND r.state != 1 LIMIT #{pageStart} , #{pageSize};
+        SELECT r.* , (SELECT GROUP_CONCAT(m.id separator ',') as menus FROM r_menu_role mr LEFT JOIN t_menu m ON m.id= mr.menuId WHERE mr.roleId = r.id) as menuStr
+        FROM t_role r WHERE r.applicationId = #{applicationId} AND r.state != 1 LIMIT #{pageStart} , #{pageSize};
     </select>
 
+    <!--查找用户下的角色-->
     <select id="findUserRoles" parameterType="Integer" resultType="moka.role.to.RoleTo">
-        SELECT r.* FROM role_user ru LEFT JOIN role r ON r.id = ru.roleId WHERE 1 = 1 AND ru.userId = #{userId}
+        SELECT r.* FROM r_role_user ru LEFT JOIN t_role r ON r.id = ru.roleId WHERE 1 = 1 AND ru.userId = #{userId}
     </select>
+
+    <update id="update" parameterType="moka.role.bo.Role">
+        UPDATE t_role
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''"> name = #{name}, </if>
+            <if test="updateDate != null"> updateDate = #{updateDate}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM t_role WHERE id = #{id};
+    </delete>
 
     <delete id="deleteMenuOfRole" parameterType="Integer">
-        DELETE FROM menu_role WHERE roleId = #{roleId}
+        DELETE FROM r_menu_role WHERE roleId = #{roleId}
+    </delete>
+
+    <delete id="deleteRoleOfUser" parameterType="Integer">
+        DELETE FROM r_role_user WHERE userId = #{userId}
     </delete>
 
     <insert id="insertMenuOfRole" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO menu_role (roleId, menuId) VALUES
+        INSERT INTO r_menu_role (roleId, menuId) VALUES
         <foreach collection="list" item="item" index="index" separator =",">
             (#{item.roleId},#{item.menuId})
         </foreach>
     </insert>
 
+    <!--用户关联角色-->
     <insert id="insertRoleOfUser" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO role_user (roleId, userId) VALUES
+        INSERT INTO r_role_user (roleId, userId) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.roleId},#{item.userId})
         </foreach>
     </insert>
+
+    <select id="findUseSelect" parameterType="moka.role.vo.RoleVo" resultType="moka.role.to.RoleTo">
+        SELECT * FROM t_role r WHERE r.applicationId = #{applicationId} AND r.state != 1
+    </select>
 
 </mapper>

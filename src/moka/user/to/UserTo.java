@@ -1,7 +1,6 @@
 package moka.user.to;
 
 import moka.menu.to.MenuTo;
-import moka.role.to.RoleTo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -71,7 +70,7 @@ public class UserTo implements Serializable {
     /**
      * 角色集合
      */
-    private List<RoleTo> roles;
+    private List roles;
 
     public int getCompanyId() {
         return companyId;
@@ -97,11 +96,11 @@ public class UserTo implements Serializable {
         this.menuTo = menuTo;
     }
 
-    public List<RoleTo> getRoles() {
+    public List getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleTo> roles) {
+    public void setRoles(List roles) {
         this.roles = roles;
     }
 

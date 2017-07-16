@@ -1,6 +1,5 @@
 package moka.basic.dao;
 
-import moka.basic.bo.Basic;
 import moka.basic.page.Page;
 
 import java.util.List;
@@ -27,5 +26,5 @@ public interface BasicDao<E, T> {
 
     int delete(Integer id);
 
-    int update(Basic basic);
+    int update(E e);
 }

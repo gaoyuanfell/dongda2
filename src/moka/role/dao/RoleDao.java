@@ -16,9 +16,13 @@ public interface RoleDao extends BasicDao<Role, RoleTo> {
 
     int insertMenuOfRole(List<RoleVo> vo);
 
-    int deleteMenuOfRole(int id);
+    int deleteMenuOfRole(int roleId);
+
+    int deleteRoleOfUser(int userId);
 
     int insertRoleOfUser(List<RoleVo> vo);
 
     List<RoleTo> findUserRoles(int userId);
+
+    List<RoleTo> findUseSelect(RoleVo vo);
 }

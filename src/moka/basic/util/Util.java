@@ -26,6 +26,16 @@ public class Util {
         }
     }
 
+    public static String getMd5String(String str){
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(str.getBytes());
+            return new BigInteger(1, md5.digest()).toString(16);
+        } catch (Exception e) {
+            throw new BusinessRuntimeException(e.getMessage(), e);
+        }
+    }
+
     public static String dateFormat(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return simpleDateFormat.format(new Date());

@@ -7,12 +7,12 @@ import moka.company.bo.Company;
 import moka.company.dao.CompanyDao;
 import moka.menu.dao.MenuDao;
 import moka.menu.to.MenuTo;
-import moka.role.dao.RoleDao;
 import moka.role.service.RoleService;
+import moka.role.to.RoleTo;
 import moka.role.vo.RoleVo;
+import moka.user.bo.User;
 import moka.user.dao.UserDao;
 import moka.user.to.UserTo;
-import moka.user.bo.User;
 import moka.user.vo.UserVo;
 import org.springframework.stereotype.Service;
 
@@ -82,14 +82,43 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     public int insertSysUser(UserVo vo) {
         User user = this.convertBusinessValue(vo, User.class);
         user.setCreateDate(new Date());
+        user.setPassword(Util.getMd5String("666666"));
         userDao.insert(user);
         roleService.insertRoleOfUser(user.getId(),vo.getRoles());//关联角色
         return user.getId();
     }
 
     @Override
+    public int update(UserVo vo) {
+        roleService.insertRoleOfUser(vo.getId(),vo.getRoles());
+        User user = this.convertBusinessValue(vo, User.class);
+        user.setUpdateDate(new Date());
+        return userDao.update(user);
+    }
+
+    @Override
+    public int delete(int id) {
+        roleService.deleteRoleOfUser(id);
+        return userDao.delete(id);
+    }
+
+    @Override
     public UserTo findOne(Integer id) {
         return userDao.findOne(id);
+    }
+
+    @Override
+    public UserTo findOneAll(Integer id) {
+        UserTo to = userDao.findOne(id);
+        if(to != null){
+            List<Integer> roles = new ArrayList<>();
+            List<RoleTo> l = roleService.findUserRoles(id);
+            for (RoleTo t:l){
+                roles.add(t.getId());
+            }
+            to.setRoles(roles);
+        }
+        return to;
     }
 
     @Override

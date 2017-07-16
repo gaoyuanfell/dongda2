@@ -7,7 +7,6 @@ import moka.menu.dao.MenuDao;
 import moka.menu.to.MenuTo;
 import moka.menu.vo.MenuVo;
 import org.apache.log4j.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -37,7 +36,8 @@ public class MenuServiceImpl extends BasicServiceImpl implements MenuService {
     @Override
     public int update(MenuVo vo) {
         vo.setUpdateDate(new Date());
-        return menuDao.update(vo);
+        Menu menu = this.convertBusinessValue(vo, Menu.class);
+        return menuDao.update(menu);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class MenuServiceImpl extends BasicServiceImpl implements MenuService {
         List<MenuTo> _list = new ArrayList<>();
         MenuTo m = null;
         for(MenuTo t:list){
-            if(t.getIsRoot() == 1){
+            if(t != null && t.getIsRoot() == 1){
                 m = t;
                 _list.add(m);
                 list.remove(m);
@@ -92,7 +92,7 @@ public class MenuServiceImpl extends BasicServiceImpl implements MenuService {
             Iterator<MenuTo> iterator = list.iterator();
             while (iterator.hasNext()){
                 MenuTo l = iterator.next();
-                if(t.getId() == l.getParentId()){
+                if(t != null && t.getId() == l.getParentId()){
                     _list.add(l);
                     iterator.remove();
                     list.remove(l);

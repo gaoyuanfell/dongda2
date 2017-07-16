@@ -1,9 +1,7 @@
 package moka.role.to;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 返回数据
@@ -24,6 +22,26 @@ public class RoleTo implements Serializable {
      * 资源ID
      */
     private String applicationId;
+
+    private String[] menus;
+
+    private String menuStr;
+
+    public String[] getMenus() {
+        return menus;
+    }
+
+    public void setMenus(String[] menus) {
+        this.menus = menus;
+    }
+
+    public String getMenuStr() {
+        return menuStr;
+    }
+
+    public void setMenuStr(String menuStr) {
+        this.menuStr = menuStr;
+    }
 
     public String getApplicationId() {
         return applicationId;

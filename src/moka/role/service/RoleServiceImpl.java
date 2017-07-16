@@ -2,6 +2,7 @@ package moka.role.service;
 
 import moka.basic.page.Page;
 import moka.basic.service.BasicServiceImpl;
+import moka.menu.dao.MenuDao;
 import moka.role.bo.Role;
 import moka.role.dao.RoleDao;
 import moka.role.to.RoleTo;
@@ -21,6 +22,8 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
 
     @Resource
     private RoleDao roleDao;
+    @Resource
+    private MenuDao menuDao;
 
     @Override
     public int insert(RoleVo vo) {
@@ -37,9 +40,31 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
 
     @Override
     public Page findPage(RoleVo vo) {
-        List list = roleDao.findPage(vo);
+        List<RoleTo> list = roleDao.findPage(vo);
+        for (RoleTo t : list){
+            if(t != null){
+                String s = t.getMenuStr();
+                if(s != null){
+                    String[] ms = s.split(",");
+                    t.setMenus(ms);
+                }
+            }
+        }
         int count = roleDao.findCount(vo);
         return new Page(vo.getPageIndex(), vo.getPageSize(), count, list);
+    }
+
+    @Override
+    public int update(RoleVo vo) {
+        Role role = this.convertBusinessValue(vo, Role.class);
+        role.setUpdateDate(new Date());
+        return roleDao.update(role);
+    }
+
+    @Override
+    public int delete(int id) {
+        roleDao.deleteMenuOfRole(id);
+        return roleDao.delete(id);
     }
 
     @Override
@@ -49,24 +74,38 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     }
 
     @Override
-    public int deleteMenuOfRole(int id) {
-        return roleDao.deleteMenuOfRole(id);
+    public int deleteMenuOfRole(int roleId) {
+        return roleDao.deleteMenuOfRole(roleId);
+    }
+
+    @Override
+    public int deleteRoleOfUser(int userId) {
+        return roleDao.deleteRoleOfUser(userId);
     }
 
     @Override
     public int insertRoleOfUser(int userId, List<Integer> roles) {
-        List<RoleVo> vo = new ArrayList<>();
-        for (int i : roles) {
-            RoleVo v = new RoleVo();
-            v.setRoleId(i);
-            v.setUserId(userId);
-            vo.add(v);
+        roleDao.deleteRoleOfUser(userId);
+        if(roles != null && roles.size() > 0){
+            List<RoleVo> vo = new ArrayList<>();
+            for (int i : roles) {
+                RoleVo v = new RoleVo();
+                v.setRoleId(i);
+                v.setUserId(userId);
+                vo.add(v);
+            }
+            return roleDao.insertRoleOfUser(vo);
         }
-        return roleDao.insertRoleOfUser(vo);
+        return 0;
     }
 
     @Override
     public List<RoleTo> findUserRoles(int userId) {
         return roleDao.findUserRoles(userId);
+    }
+
+    @Override
+    public List<RoleTo> findUseSelect(RoleVo vo) {
+        return roleDao.findUseSelect(vo);
     }
 }
