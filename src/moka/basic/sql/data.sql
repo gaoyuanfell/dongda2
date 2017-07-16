@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2017-07-16 00:50:23
+Date: 2017-07-16 21:44:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -114,16 +114,52 @@ CREATE TABLE `t_company` (
   `companyEmail` varchar(255) DEFAULT NULL COMMENT '公司邮件',
   `companyType` varchar(255) DEFAULT NULL COMMENT '企业类型',
   `companyBank` varchar(255) DEFAULT NULL COMMENT '公司开户行',
+  `companyAccount` varchar(255) DEFAULT NULL COMMENT '公司开户行账号',
   `taxCode` varchar(255) DEFAULT NULL COMMENT '公司纳税识别号',
   `applicationId` varchar(255) DEFAULT NULL COMMENT '资源ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_company
 -- ----------------------------
-INSERT INTO `t_company` VALUES ('1', null, null, null, null, null, null, null, null, null, null, null, '1');
-INSERT INTO `t_company` VALUES ('3', null, null, '00000000000', null, null, null, null, null, null, null, null, 'f0da8668f77d8534eb08dfca0ed35d11');
+INSERT INTO `t_company` VALUES ('1', '2017-07-16 06:53:17', null, '00000000000', '1', '超级1', '13870814611', '北京', '465716992@qq.com', '2', '北京银行', '1', '1', '1');
+INSERT INTO `t_company` VALUES ('3', '2017-07-16 06:53:17', null, '00000000000', '1', '超级1', '13870814611', '北京', '465716992@qq.com', '1', '北京银行', '2', '1', 'f0da8668f77d8534eb08dfca0ed35d11');
+INSERT INTO `t_company` VALUES ('4', '2017-07-16 06:53:17', '2017-07-16 07:48:49', '00000000000', '111111', '百度1111', '13870814612', '上海11111', '465716993@qq.com', '1', '北京银行', '3111', '111111', '1');
+INSERT INTO `t_company` VALUES ('5', '2017-07-16 06:53:17', '2017-07-13 13:12:09', '00000000000', '1', '百度2', '13870814612', '上海2', '465716992@qq.com', '1', '北京银行', '4', '11', '1');
+INSERT INTO `t_company` VALUES ('6', '2017-07-16 06:53:17', '2017-07-13 13:12:09', '00000000000', '1', '百度3', '13870814613', '上海3', '465716992@qq.com', '2', '北京银行', '4', '111', '1');
+INSERT INTO `t_company` VALUES ('7', '2017-07-16 06:53:17', '2017-07-13 13:12:09', '00000000000', '1', '百度4', '13870814614', '上海4', '465716992@qq.com', '1', '北京银行', '4', '1111', '1');
+INSERT INTO `t_company` VALUES ('8', '2017-07-16 06:53:17', '2017-07-13 13:12:09', '00000000000', '1', '百度5', '13870814615', '上海5', '465716992@qq.com', '2', '北京银行', '4', '11111', '1');
+INSERT INTO `t_company` VALUES ('9', '2017-07-16 06:53:17', '2017-07-13 13:12:09', '00000000000', '1', '百度6', '13870814616', '上海6', '465716992@qq.com', '1', '北京银行', '4', '111111', '1');
+INSERT INTO `t_company` VALUES ('10', '2017-07-16 06:53:17', '2017-07-13 13:12:09', '00000000000', '1', '百度7', '13870814617', '上海7', '465716992@qq.com', '2', '北京银行', '4', '1111111', '1');
+INSERT INTO `t_company` VALUES ('11', '2017-07-16 07:16:41', null, '00000000000', '1', '阿里1', '13870814611', '1', '327085461@qq.com', '1', '1', null, '1', '1');
+
+-- ----------------------------
+-- Table structure for t_customer
+-- ----------------------------
+DROP TABLE IF EXISTS `t_customer`;
+CREATE TABLE `t_customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL COMMENT '客户名称',
+  `companyId` int(10) unsigned zerofill DEFAULT NULL COMMENT '客户所属公司',
+  `birthday` datetime DEFAULT NULL COMMENT '客户生日',
+  `sex` varchar(255) DEFAULT NULL COMMENT '客户性别 0 默认 1男 2女',
+  `contactAddress` varchar(255) DEFAULT NULL COMMENT '客户联系地址',
+  `contactTel` varchar(255) DEFAULT NULL COMMENT '客户联系电话',
+  `jobLevel` varchar(255) DEFAULT NULL COMMENT '客户职位',
+  `email` varchar(255) DEFAULT NULL COMMENT '客户邮箱',
+  `createDate` datetime DEFAULT NULL,
+  `updateDate` datetime DEFAULT NULL,
+  `state` int(10) unsigned zerofill DEFAULT NULL,
+  `applicationId` varchar(255) DEFAULT NULL COMMENT '资源id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_customer
+-- ----------------------------
+INSERT INTO `t_customer` VALUES ('1', '张三1', '0000000001', '1992-09-29 17:00:00', '1', '上海', '13870814611', '前端', '465716992@qq.com', '2017-07-16 12:10:38', '2017-07-16 14:11:25', '0000000000', '1');
+INSERT INTO `t_customer` VALUES ('3', '百度专员', '0000000004', '2017-07-27 18:00:00', '2', '北京', '1870814611', '百度专员', '465716992@qq.com', '2017-07-16 14:08:01', '2017-07-16 14:17:35', '0000000000', '1');
 
 -- ----------------------------
 -- Table structure for t_menu
@@ -139,37 +175,37 @@ CREATE TABLE `t_menu` (
   `icon` varchar(255) DEFAULT NULL COMMENT '菜单图标',
   `parentId` int(11) DEFAULT NULL COMMENT '父级id',
   `isRoot` int(11) DEFAULT NULL COMMENT '是否根目录',
-  `type` int(11) unsigned zerofill DEFAULT NULL COMMENT '0 菜单 1 链接 2功能',
+  `type` varchar(11) DEFAULT NULL COMMENT '0 菜单 1 链接 2功能',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_menu
 -- ----------------------------
-INSERT INTO `t_menu` VALUES ('1', null, null, '00000000000', '根目录', null, null, null, '1', '00000000000');
-INSERT INTO `t_menu` VALUES ('2', null, null, '00000000000', '首页', null, '&#xe601;', '1', '0', '00000000000');
-INSERT INTO `t_menu` VALUES ('3', null, null, '00000000000', '个人信息', null, '&#xe61c;', '1', '0', '00000000000');
-INSERT INTO `t_menu` VALUES ('4', null, null, '00000000000', '平台信息', null, '&#xe629;', '1', '0', '00000000000');
-INSERT INTO `t_menu` VALUES ('5', null, null, '00000000000', '权限', null, '&#xe62d;', '1', '0', '00000000000');
-INSERT INTO `t_menu` VALUES ('6', null, null, '00000000000', '合同信息', null, '&#xe63a;', '1', '0', '00000000000');
-INSERT INTO `t_menu` VALUES ('7', null, null, '00000000000', '发票信息', null, '&#xe647;', '1', '0', '00000000000');
-INSERT INTO `t_menu` VALUES ('8', null, null, '00000000000', '客户资料', null, '&#xe711;', '1', '0', '00000000000');
-INSERT INTO `t_menu` VALUES ('9', null, null, '00000000000', '销售计划', null, '&#xe644;', '1', '0', '00000000000');
-INSERT INTO `t_menu` VALUES ('10', null, null, '00000000000', '应收账款', null, '&#xe724;', '1', '0', '00000000000');
-INSERT INTO `t_menu` VALUES ('11', null, null, '00000000000', '报表', null, '&#xe639;', '1', '0', '00000000000');
-INSERT INTO `t_menu` VALUES ('12', null, null, '00000000000', '我的日程', 'index', null, '2', '0', '00000000001');
-INSERT INTO `t_menu` VALUES ('13', null, null, '00000000000', '个人信息', 'user', null, '3', '0', '00000000001');
-INSERT INTO `t_menu` VALUES ('14', null, null, '00000000000', '员工信息', 'platform', null, '4', '0', '00000000001');
-INSERT INTO `t_menu` VALUES ('15', null, null, '00000000000', '公司信息', 'company', null, '4', '0', '00000000001');
-INSERT INTO `t_menu` VALUES ('16', null, null, '00000000001', '查看权限', 'auth', null, '5', '0', '00000000001');
-INSERT INTO `t_menu` VALUES ('17', null, null, '00000000000', '合同信息', 'contract', null, '6', '0', '00000000001');
-INSERT INTO `t_menu` VALUES ('18', null, null, '00000000000', '发票信息', 'invoice', null, '7', '0', '00000000001');
-INSERT INTO `t_menu` VALUES ('19', null, null, '00000000000', '客户资料', 'customer', null, '8', '0', '00000000001');
-INSERT INTO `t_menu` VALUES ('20', null, null, '00000000000', '销售计划', 'sale', null, '9', '0', '00000000001');
-INSERT INTO `t_menu` VALUES ('21', null, null, '00000000000', '应收账款', 'money', null, '10', '0', '00000000001');
-INSERT INTO `t_menu` VALUES ('22', null, null, '00000000000', '报表', 'report', null, '11', '0', '00000000001');
-INSERT INTO `t_menu` VALUES ('23', null, null, '00000000000', '查看菜单', 'menu', null, '5', '0', '00000000001');
-INSERT INTO `t_menu` VALUES ('24', null, null, '00000000000', '查看角色', 'role', null, '5', '0', '00000000001');
+INSERT INTO `t_menu` VALUES ('1', null, null, '00000000000', '根目录', null, null, null, '1', '0');
+INSERT INTO `t_menu` VALUES ('2', null, null, '00000000000', '首页', null, '&#xe601;', '1', '0', '0');
+INSERT INTO `t_menu` VALUES ('3', null, null, '00000000000', '个人信息', null, '&#xe61c;', '1', '0', '0');
+INSERT INTO `t_menu` VALUES ('4', null, null, '00000000000', '平台信息', null, '&#xe629;', '1', '0', '0');
+INSERT INTO `t_menu` VALUES ('5', null, null, '00000000000', '权限', null, '&#xe62d;', '1', '0', '0');
+INSERT INTO `t_menu` VALUES ('6', null, null, '00000000000', '合同信息', null, '&#xe63a;', '1', '0', '0');
+INSERT INTO `t_menu` VALUES ('7', null, null, '00000000000', '发票信息', null, '&#xe647;', '1', '0', '0');
+INSERT INTO `t_menu` VALUES ('8', null, null, '00000000000', '客户资料', null, '&#xe711;', '1', '0', '0');
+INSERT INTO `t_menu` VALUES ('9', null, null, '00000000000', '销售计划', null, '&#xe644;', '1', '0', '0');
+INSERT INTO `t_menu` VALUES ('10', null, null, '00000000000', '应收账款', null, '&#xe724;', '1', '0', '0');
+INSERT INTO `t_menu` VALUES ('11', null, null, '00000000000', '报表', null, '&#xe639;', '1', '0', '0');
+INSERT INTO `t_menu` VALUES ('12', null, null, '00000000000', '我的日程', 'index', null, '2', '0', '1');
+INSERT INTO `t_menu` VALUES ('13', null, null, '00000000000', '个人信息', 'user', null, '3', '0', '1');
+INSERT INTO `t_menu` VALUES ('14', null, null, '00000000000', '员工信息', 'platform', null, '4', '0', '1');
+INSERT INTO `t_menu` VALUES ('15', null, null, '00000000000', '公司信息', 'company', null, '4', '0', '1');
+INSERT INTO `t_menu` VALUES ('16', null, null, '00000000001', '查看权限', 'auth', null, '5', '0', '1');
+INSERT INTO `t_menu` VALUES ('17', null, null, '00000000000', '合同信息', 'contract', null, '6', '0', '1');
+INSERT INTO `t_menu` VALUES ('18', null, null, '00000000000', '发票信息', 'invoice', null, '7', '0', '1');
+INSERT INTO `t_menu` VALUES ('19', null, null, '00000000000', '客户资料', 'customer', null, '8', '0', '1');
+INSERT INTO `t_menu` VALUES ('20', null, null, '00000000000', '销售计划', 'sale', null, '9', '0', '1');
+INSERT INTO `t_menu` VALUES ('21', null, null, '00000000000', '应收账款', 'money', null, '10', '0', '1');
+INSERT INTO `t_menu` VALUES ('22', null, null, '00000000000', '报表', 'report', null, '11', '0', '1');
+INSERT INTO `t_menu` VALUES ('23', null, null, '00000000000', '查看菜单', 'menu', null, '5', '0', '1');
+INSERT INTO `t_menu` VALUES ('24', null, null, '00000000000', '查看角色', 'role', null, '5', '0', '1');
 
 -- ----------------------------
 -- Table structure for t_role
@@ -183,7 +219,7 @@ CREATE TABLE `t_role` (
   `state` int(11) unsigned zerofill DEFAULT NULL,
   `applicationId` varchar(255) DEFAULT NULL COMMENT '资源ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_role
@@ -194,7 +230,7 @@ INSERT INTO `t_role` VALUES ('3', '销售助理', '2017-07-09 12:14:59', null, '
 INSERT INTO `t_role` VALUES ('4', '销售部助经理', '2017-07-09 12:15:58', null, '00000000000', '1');
 INSERT INTO `t_role` VALUES ('6', '公司管理员', '2017-07-14 09:51:27', null, '00000000000', 'f0da8668f77d8534eb08dfca0ed35d11');
 INSERT INTO `t_role` VALUES ('7', '出纳', '2017-07-14 17:40:46', null, '00000000000', 'f0da8668f77d8534eb08dfca0ed35d11');
-INSERT INTO `t_role` VALUES ('8', '财务', '2017-07-15 16:36:40', '2017-07-15 16:36:47', '00000000000', '1');
+INSERT INTO `t_role` VALUES ('9', '财务', '2017-07-16 05:48:19', null, '00000000000', '1');
 
 -- ----------------------------
 -- Table structure for t_user
