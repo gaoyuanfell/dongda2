@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by moka on 2017/3/5 0005.
@@ -70,6 +71,22 @@ public class CompanyController extends BasicController {
     public Object update(@RequestBody CompanyVo vo) {
         int i = companyService.update(vo);
         return result(i);
+    }
+
+    /**
+     * 作用于下拉 搜索条件
+     * {
+     *     companyName:''
+     * }
+     *
+     */
+    @RequestMapping(value = "findUseSelect.htm")
+    @ResponseBody
+    public Object findUseSelect(@RequestBody CompanyVo vo){
+        UserTo to = getUserSession();
+        vo.setApplicationId(to.getApplicationId());
+        List<CompanyTo> list = companyService.findUseSelect(vo);
+        return result(list);
     }
 
 }

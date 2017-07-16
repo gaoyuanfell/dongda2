@@ -47,4 +47,9 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
     public CompanyTo findOne(int id) {
         return companyDao.findOne(id);
     }
+
+    @Override
+    public List<CompanyTo> findUseSelect(CompanyVo vo) {
+        return companyDao.findUseSelect(vo);
+    }
 }

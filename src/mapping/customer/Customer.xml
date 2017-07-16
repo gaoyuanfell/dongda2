@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="moka.customer.dao.CustomerDao">
+
+    <insert id="insert" parameterType="moka.customer.bo.Customer" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_customer (
+        name, companyId, birthday, sex, contactAddress, contactTel, jobLevel, email, createDate, updateDate, state
+        ) VALUES (
+        #{name},#{companyId},#{birthday},#{sex},#{contactAddress},#{contactTel},#{jobLevel},#{email},#{createDate},#{updateDate},#{state}
+        )
+    </insert>
+
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM t_customer WHERE id = #{id};
+    </delete>
+
+    <update id="update" parameterType="moka.customer.bo.Customer">
+        UPDATE t_customer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''"> name = #{name}, </if>
+            <if test="birthday != null"> birthday = #{birthday}, </if>
+            <if test="sex != null and sex != ''"> sex = #{sex}, </if>
+            <if test="contactAddress != null and contactAddress != ''"> contactAddress = #{contactAddress}, </if>
+            <if test="contactTel != null and contactTel != ''"> contactTel = #{contactTel}, </if>
+            <if test="jobLevel != null and jobLevel != ''"> jobLevel = #{jobLevel}, </if>
+            <if test="email != null and email != ''"> email = #{email}, </if>
+            <if test="updateDate != null"> updateDate = #{updateDate}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <select id="findOne" parameterType="Integer" resultType="moka.customer.to.CustomerTo">
+        SELECT * FROM t_customer WHERE id = #{id};
+    </select>
+
+    <select id="findCount" parameterType="moka.basic.page.Page" resultType="Integer">
+        SELECT COUNT(id) FROM t_customer c
+        WHERE c.applicationId = #{applicationId} AND c.state != 1
+        <if test="name != null and name != ''">
+            AND c.name LIKE CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.customer.to.CustomerTo">
+        SELECT * FROM t_customer c
+        WHERE c.applicationId = #{applicationId} AND c.state != 1
+        <if test="name != null and name != ''">
+            AND c.name LIKE CONCAT('%',#{name},'%')
+        </if>
+        LIMIT #{pageStart} , #{pageSize};
+    </select>
+
+    <select id="findUseSelect" parameterType="moka.customer.vo.CustomerVo" resultType="moka.customer.to.CustomerTo">
+        SELECT c.id, c.name FROM t_customer c WHERE c.applicationId = #{applicationId} AND c.state != 1
+        <if test="name != null and name != ''">
+            AND c.name LIKE CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
+</mapper>

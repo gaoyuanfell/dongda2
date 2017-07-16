@@ -101,7 +101,6 @@ public class UserController extends BasicController {
      */
     @RequestMapping(value = "insertSysUser.htm")
     @ResponseBody
-    @IgnoreSecurity
     public Object insertSysUser(@RequestBody UserVo user){
         int n = userService.findRepeatUser(user);
         if (n > 0) {
@@ -217,6 +216,8 @@ public class UserController extends BasicController {
     @RequestMapping(value = "findList.htm")
     @ResponseBody
     public Object findList(@RequestBody UserVo user) {
+        UserTo to = getUserSession();
+        user.setApplicationId(to.getApplicationId());
         List list = userService.findList(user);
         return result(list);
     }
@@ -243,7 +244,6 @@ public class UserController extends BasicController {
      */
     @RequestMapping(value = "logout.htm", method = RequestMethod.GET)
     @ResponseBody
-    @IgnoreSecurity
     public Object logout(HttpServletRequest request) {
         String token = request.getHeader(DEFAULT_TOKEN_NAME);
         Token t = new Token(token);

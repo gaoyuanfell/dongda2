@@ -39,7 +39,7 @@ public class MenuVo extends Page {
     /**
      * 菜单类型
      */
-    private int type;
+    private String type;
 
     /**
      * 角色id
@@ -126,11 +126,11 @@ public class MenuVo extends Page {
         this.isRoot = isRoot;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

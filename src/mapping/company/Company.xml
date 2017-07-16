@@ -33,7 +33,7 @@
         SELECT COUNT(id) FROM t_company c
         WHERE c.applicationId = #{applicationId} AND c.state != 1
         <if test="companyName != null and companyName != ''">
-            AND c.companyName = #{companyName}
+            AND c.companyName LIKE CONCAT('%',#{companyName},'%')
         </if>
     </select>
 
@@ -41,9 +41,16 @@
         SELECT * FROM t_company c
         WHERE c.applicationId = #{applicationId} AND c.state != 1
         <if test="companyName != null and companyName != ''">
-            AND c.companyName = #{companyName}
+            AND c.companyName LIKE CONCAT('%',#{companyName},'%')
         </if>
         LIMIT #{pageStart} , #{pageSize};
+    </select>
+
+    <select id="findUseSelect" parameterType="moka.company.vo.CompanyVo" resultType="moka.company.to.CompanyTo">
+        SELECT c.id, c.companyName FROM t_company c WHERE c.applicationId = #{applicationId} AND c.state != 1
+        <if test="companyName != null and companyName != ''">
+            AND c.companyName LIKE CONCAT('%',#{companyName},'%')
+        </if>
     </select>
 
 </mapper>

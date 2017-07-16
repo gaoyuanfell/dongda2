@@ -40,7 +40,7 @@ public class MenuTo implements Serializable {
     /**
      * 菜单类型
      */
-    private int type;
+    private String type;
 
     private List<MenuTo> childList = new ArrayList<>();
 
@@ -124,11 +124,11 @@ public class MenuTo implements Serializable {
         this.isRoot = isRoot;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 }
