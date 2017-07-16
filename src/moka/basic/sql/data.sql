@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2017-07-16 21:44:24
+Date: 2017-07-16 21:48:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `r_menu_role` (
   `updateDate` datetime DEFAULT NULL,
   `state` int(11) unsigned zerofill DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of r_menu_role
@@ -69,10 +69,29 @@ INSERT INTO `r_menu_role` VALUES ('63', '0000000003', '0000000010', null, null, 
 INSERT INTO `r_menu_role` VALUES ('64', '0000000003', '0000000021', null, null, null);
 INSERT INTO `r_menu_role` VALUES ('65', '0000000003', '0000000011', null, null, null);
 INSERT INTO `r_menu_role` VALUES ('66', '0000000003', '0000000022', null, null, null);
-INSERT INTO `r_menu_role` VALUES ('96', '0000000001', '0000000001', null, null, null);
-INSERT INTO `r_menu_role` VALUES ('97', '0000000001', '0000000004', null, null, null);
-INSERT INTO `r_menu_role` VALUES ('98', '0000000001', '0000000014', null, null, null);
-INSERT INTO `r_menu_role` VALUES ('99', '0000000001', '0000000015', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('100', '0000000001', '0000000001', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('101', '0000000001', '0000000002', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('102', '0000000001', '0000000012', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('103', '0000000001', '0000000003', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('104', '0000000001', '0000000013', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('105', '0000000001', '0000000004', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('106', '0000000001', '0000000014', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('107', '0000000001', '0000000015', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('108', '0000000001', '0000000005', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('109', '0000000001', '0000000023', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('110', '0000000001', '0000000024', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('111', '0000000001', '0000000006', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('112', '0000000001', '0000000017', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('113', '0000000001', '0000000007', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('114', '0000000001', '0000000018', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('115', '0000000001', '0000000008', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('116', '0000000001', '0000000019', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('117', '0000000001', '0000000009', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('118', '0000000001', '0000000020', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('119', '0000000001', '0000000010', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('120', '0000000001', '0000000021', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('121', '0000000001', '0000000011', null, null, null);
+INSERT INTO `r_menu_role` VALUES ('122', '0000000001', '0000000022', null, null, null);
 
 -- ----------------------------
 -- Table structure for r_role_user
