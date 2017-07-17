@@ -40,6 +40,11 @@ mapping 是mybatis对应的sql映射文件
 Administrator
 tingqiao@123
 
+远程数据库
+120.77.83.117
+root
+root
+
 # 资源共享
 
 权限模块（菜单）
