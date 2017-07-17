@@ -5,6 +5,7 @@ import moka.basic.bo.Token;
 import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
+import moka.basic.util.Util;
 import moka.company.service.CompanyService;
 import moka.company.to.CompanyTo;
 import moka.menu.service.MenuService;
@@ -58,6 +59,7 @@ public class UserController extends BasicController {
     @ResponseBody
     @IgnoreSecurity
     public Object login(@RequestBody UserVo userVo, HttpServletResponse response) {
+        userVo.setPassword(Util.getMd5String(userVo.getPassword()));
         UserTo u = userService.login(userVo);
         boolean b = false;
         Token t = null;

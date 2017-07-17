@@ -46,18 +46,22 @@
         SELECT * FROM t_user u WHERE u.applicationId = #{applicationId} AND u.state != 1;
     </select>
 
+    <!--登录-->
     <select id="login" parameterType="moka.user.vo.UserVo" resultType="moka.user.to.UserTo">
         SELECT * FROM t_user u WHERE 1 = 1 AND u.phoneNumber = #{phoneNumber} AND u.password = #{password}
     </select>
 
+    <!--检查重复电话号码-->
     <select id="checkPhone" parameterType="moka.user.vo.UserVo" resultType="Integer">
         SELECT COUNT(*) FROM t_user u WHERE 1 = 1 AND u.phoneNumber = #{phoneNumber}
     </select>
 
+    <!--检查重复邮箱-->
     <select id="checkEmail" parameterType="moka.user.vo.UserVo" resultType="Integer">
         SELECT COUNT(*) FROM t_user u WHERE 1 = 1 AND u.mail = #{mail}
     </select>
 
+    <!--查询重复用户-->
     <select id="findRepeatUser" parameterType="moka.user.vo.UserVo" resultType="Integer">
         SELECT COUNT(*) FROM t_user u WHERE 1 = 1 AND (u.phoneNumber = #{phoneNumber} OR u.mail = #{mail})
     </select>

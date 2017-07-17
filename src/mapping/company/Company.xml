@@ -46,6 +46,7 @@
         LIMIT #{pageStart} , #{pageSize};
     </select>
 
+    <!--作用于下拉-->
     <select id="findUseSelect" parameterType="moka.company.vo.CompanyVo" resultType="moka.company.to.CompanyTo">
         SELECT c.id, c.companyName FROM t_company c WHERE c.applicationId = #{applicationId} AND c.state != 1
         <if test="companyName != null and companyName != ''">

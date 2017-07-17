@@ -3,7 +3,6 @@
 <mapper namespace="moka.menu.dao.MenuDao">
     <insert id="insert" parameterType="moka.menu.bo.Menu" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_menu (
-
           createDate, updateDate, state, name, link, icon, parentId, isRoot, type
         ) VALUES ( #{createDate},#{updateDate},#{state},#{name},#{link},#{icon},#{parentId},#{isRoot},#{type});
     </insert>
@@ -22,9 +21,26 @@
     </select>
 
     <update id="update" parameterType="moka.menu.vo.MenuVo">
-      UPDATE t_menu menu SET menu.updateDate = #{updateDate},menu.name = #{name},menu.link = #{link},menu.icon = #{icon},menu.type = #{type} WHERE menu.id = #{id};
+      UPDATE t_menu m
+
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''"> m.name = #{name}, </if>
+
+            <if test="type == 0">
+                m.link = "",
+                <if test="icon != null and icon != ''"> m.icon = #{icon}, </if>
+            </if>
+            <if test="type == 1 or type == 2">
+                m.icon = "",
+                <if test="link != null and link != ''"> m.link = #{link}, </if>
+            </if>
+            <if test="updateDate != null"> m.updateDate = #{updateDate}, </if>
+        </trim>
+
+      WHERE menu.id = #{id};
     </update>
 
+    <!--查询子集-->
     <select id="findNextChild" parameterType="moka.menu.vo.MenuVo" resultType="moka.menu.to.MenuTo">
         SELECT * FROM t_menu menu WHERE menu.parentId = #{id};
     </select>
@@ -36,7 +52,7 @@
     <!-- 返回结果集 -->
     <resultMap type="moka.menu.to.MenuTo" id="menu_map">
         <id column="id" property="id"/>
-        <collection property="childList" column="id" ofType="moka.menu.to.MenuTo" select="findMenuByParentId"></collection>
+        <collection property="childList" column="id" ofType="moka.menu.to.MenuTo" select="findMenuByParentId"/>
     </resultMap>
 
     <!-- 根据父键查询 -->

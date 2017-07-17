@@ -277,8 +277,8 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('1', '2017-07-08 18:42:52', null, '00000000000', '管理员', '13870814611', '465716992@qq.com', 'f379eaf3c831b04de153469d1bec345e', '1', null, null, null, null, '1', '00000000001');
-INSERT INTO `t_user` VALUES ('2', '2017-07-14 09:51:22', null, '00000000000', '管理员', '13870814613', '465716993@qq.com', 'f379eaf3c831b04de153469d1bec345e', '1', null, null, null, null, 'f0da8668f77d8534eb08dfca0ed35d11', '00000000003');
-INSERT INTO `t_user` VALUES ('3', '2017-07-14 22:04:41', null, '00000000000', '张三1', '13870814622', '465716991@qq.com', 'f379eaf3c831b04de153469d1bec345e', '1', null, null, null, null, '1', '00000000001');
-INSERT INTO `t_user` VALUES ('4', '2017-07-15 09:28:11', null, '00000000000', '张三2', '13870814616', '465716996@qq.com', 'f379eaf3c831b04de153469d1bec345e', '1', null, null, null, null, '1', '00000000001');
-INSERT INTO `t_user` VALUES ('6', '2017-07-15 11:46:56', null, '00000000000', '李四', '13870814614', '465716994@qq.com', 'f379eaf3c831b04de153469d1bec345e', '2', null, null, null, null, 'f0da8668f77d8534eb08dfca0ed35d11', '00000000003');
+INSERT INTO `t_user` VALUES ('1', '2017-07-08 18:42:52', null, '00000000000', '管理员', '13870814611', '465716992@qq.com', 'b9e79361b4040a3f3a71668163d2f058', '1', null, null, null, null, '1', '00000000001');
+INSERT INTO `t_user` VALUES ('2', '2017-07-14 09:51:22', null, '00000000000', '管理员', '13870814613', '465716993@qq.com', 'b9e79361b4040a3f3a71668163d2f058', '1', null, null, null, null, 'f0da8668f77d8534eb08dfca0ed35d11', '00000000003');
+INSERT INTO `t_user` VALUES ('3', '2017-07-14 22:04:41', null, '00000000000', '张三1', '13870814622', '465716991@qq.com', 'b9e79361b4040a3f3a71668163d2f058', '1', null, null, null, null, '1', '00000000001');
+INSERT INTO `t_user` VALUES ('4', '2017-07-15 09:28:11', null, '00000000000', '张三2', '13870814616', '465716996@qq.com', 'b9e79361b4040a3f3a71668163d2f058', '1', null, null, null, null, '1', '00000000001');
+INSERT INTO `t_user` VALUES ('6', '2017-07-15 11:46:56', null, '00000000000', '李四', '13870814614', '465716994@qq.com', 'b9e79361b4040a3f3a71668163d2f058', '2', null, null, null, null, 'f0da8668f77d8534eb08dfca0ed35d11', '00000000003');

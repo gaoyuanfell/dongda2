@@ -49,6 +49,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         user.setCompanyId(company.getId());
         user.setApplicationId(uuid);
         user.setCreateDate(new Date());
+        user.setPassword(Util.getMd5String(user.getPassword()));
         userDao.insert(user);
 
         //插入默认管理员角色
@@ -82,7 +83,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     public int insertSysUser(UserVo vo) {
         User user = this.convertBusinessValue(vo, User.class);
         user.setCreateDate(new Date());
-        user.setPassword(Util.getMd5String("666666"));
+        user.setPassword(Util.getMd5String(Util.getMd5String("666666")));
         userDao.insert(user);
         roleService.insertRoleOfUser(user.getId(),vo.getRoles());//关联角色
         return user.getId();

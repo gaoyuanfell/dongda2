@@ -36,18 +36,22 @@
         WHERE id = #{id}
     </update>
 
+    <!--删除角色-->
     <delete id="delete" parameterType="Integer">
         DELETE FROM t_role WHERE id = #{id};
     </delete>
 
+    <!--删除角色关联的菜单-->
     <delete id="deleteMenuOfRole" parameterType="Integer">
         DELETE FROM r_menu_role WHERE roleId = #{roleId}
     </delete>
 
+    <!--删除用户关联的角色-->
     <delete id="deleteRoleOfUser" parameterType="Integer">
         DELETE FROM r_role_user WHERE userId = #{userId}
     </delete>
 
+    <!--角色关联菜单-->
     <insert id="insertMenuOfRole" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO r_menu_role (roleId, menuId) VALUES
         <foreach collection="list" item="item" index="index" separator =",">
@@ -63,6 +67,7 @@
         </foreach>
     </insert>
 
+    <!--作用于下拉-->
     <select id="findUseSelect" parameterType="moka.role.vo.RoleVo" resultType="moka.role.to.RoleTo">
         SELECT r.id, r.name FROM t_role r WHERE r.applicationId = #{applicationId} AND r.state != 1
         <if test="name != null and name != ''">
