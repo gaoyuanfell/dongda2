@@ -14,6 +14,7 @@ import moka.user.bo.User;
 import moka.user.dao.UserDao;
 import moka.user.to.UserTo;
 import moka.user.vo.UserVo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,6 +37,9 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     @Resource
     private MenuDao menuDao;
 
+    @Value("#{propertyConfigurer['data_password_salt']}")
+    private String DATA_PASSWORD_SALT;
+
     @Override
     public int insert(UserVo vo) {
         User user = this.convertBusinessValue(vo, User.class);
@@ -49,7 +53,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         user.setCompanyId(company.getId());
         user.setApplicationId(uuid);
         user.setCreateDate(new Date());
-        user.setPassword(Util.getMd5String(user.getPassword()));
+        user.setPassword(Util.getMd5String(user.getPassword().concat(DATA_PASSWORD_SALT)));
         userDao.insert(user);
 
         //插入默认管理员角色
@@ -83,7 +87,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     public int insertSysUser(UserVo vo) {
         User user = this.convertBusinessValue(vo, User.class);
         user.setCreateDate(new Date());
-        user.setPassword(Util.getMd5String(Util.getMd5String("666666")));
+        user.setPassword(Util.getMd5String(Util.getMd5String("666666").concat(DATA_PASSWORD_SALT)));
         userDao.insert(user);
         roleService.insertRoleOfUser(user.getId(),vo.getRoles());//关联角色
         return user.getId();

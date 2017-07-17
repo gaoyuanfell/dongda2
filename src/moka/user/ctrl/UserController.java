@@ -47,6 +47,8 @@ public class UserController extends BasicController {
 
     @Value("#{propertyConfigurer['data_token_name']}")
     private String DEFAULT_TOKEN_NAME;
+    @Value("#{propertyConfigurer['data_password_salt']}")
+    private String DATA_PASSWORD_SALT;
 
     /**
      * 登录
@@ -59,7 +61,7 @@ public class UserController extends BasicController {
     @ResponseBody
     @IgnoreSecurity
     public Object login(@RequestBody UserVo userVo, HttpServletResponse response) {
-        userVo.setPassword(Util.getMd5String(userVo.getPassword()));
+        userVo.setPassword(Util.getMd5String(userVo.getPassword().concat(DATA_PASSWORD_SALT)));
         UserTo u = userService.login(userVo);
         boolean b = false;
         Token t = null;
