@@ -30,7 +30,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/contract")
+@RequestMapping(value = "/invoicePlan")
 public class InvoicePlanController extends BasicController {
     @Resource
     private InvoicePlanService invoicePlanService;

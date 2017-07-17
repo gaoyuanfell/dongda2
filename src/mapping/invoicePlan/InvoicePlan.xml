@@ -4,13 +4,13 @@
 
     <insert id="insert" parameterType="moka.invoicePlan.bo.InvoicePlan"
         useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_contractPlan(
+        INSERT INTO t_invoice_plan(
         contractId,paymentPlan,paymentPlanFact, versionNo,
-        amt,
-        planDate, planReceiveDate, receiveAmt,state,
+        amt,planDate,
+        planReceiveDate, receiveAmt,state
         )
         VALUES (
-        #{contractId},#{paymentPlan},#{paymentPlanFact},#{versionNo},#{amt},#{planDate},#{companyIdC},#{planReceiveDate},#{receiveAmt},
+        #{contractId},#{paymentPlan},#{paymentPlanFact},#{versionNo},#{amt},#{planDate},#{planReceiveDate},#{receiveAmt},
         #{state}
         )
     </insert>
