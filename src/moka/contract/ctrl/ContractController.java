@@ -4,13 +4,13 @@ import moka.basic.annotation.IgnoreSecurity;
 import moka.basic.ctrl.BasicController;
 import moka.contract.service.ContractService;
 import moka.contract.vo.ContractVo;
+import moka.user.to.UserTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -30,19 +30,16 @@ public class ContractController extends BasicController {
         return result(i);
     }
 
-
     /**
      * 批量添加合同
      */
-    @RequestMapping(value = "addContract.htm")
+    @RequestMapping(value = "insertBatch.htm")
     @ResponseBody
     @IgnoreSecurity
-    public Object inserts(@RequestBody List<ContractVo> contract) {
-        for (ContractVo con : contract) {
-            con.setCreateDate(new Date());
-            contractService.insert(con);
-        }
-        return result(CODE_SUCCESS, "添加成功");
+    public Object insertBatch(@RequestBody List<ContractVo> contract) {
+        UserTo user = getUserSession();
+        int i = contractService.insertBatch(contract,user);
+        return result(i);
     }
 
 }
