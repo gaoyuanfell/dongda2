@@ -13,10 +13,7 @@ public class ContractVo extends Page {
     private Date createDate;
     private Date updateDate;
     private int state;
-    /**
-     * 合同编号
-     */
-    private int contractId;
+
     /**
      * 合同号
      */
@@ -48,7 +45,7 @@ public class ContractVo extends Page {
     /**
      * 丙方联系人ID
      */
-    private int companyContarctIdC;
+    private int companyContractIdC;
     /**
      * 合同签订日期
      */
@@ -66,15 +63,80 @@ public class ContractVo extends Page {
      */
     private String itemName;
     /**
-     * 货物或服务名称
+     * 产品和服务
      */
     private String item;
     /**
      * 合同金额
      */
     private BigDecimal amt;
-    private int paymentPlan;
+    /**
+     * 资源ID
+     */
+    private String applicationId;
+    /**
+     * 合同类型
+     */
+    private String contactType;
 
+    /**
+     * 合同状态
+     */
+    private String contactState;
+    /**
+     * 备注
+     */
+    private String remark;
+    /**
+     * 付款期数
+     */
+    private int paymentNum;
+
+    public int getPaymentNum() {
+        return paymentNum;
+    }
+
+    public void setPaymentNum(int paymentNum) {
+        this.paymentNum = paymentNum;
+    }
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+    public String getContactState() {
+        return contactState;
+    }
+
+    public void setContactState(String contactState) {
+        this.contactState = contactState;
+    }
+
+    public String getContactType() {
+        return contactType;
+    }
+
+    public void setContactType(String contactType) {
+        this.contactType = contactType;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public String getContractNo() {
+        return contractNo;
+    }
+
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
+    }
 
     public int getVersionNo() {
         return versionNo;
@@ -92,7 +154,13 @@ public class ContractVo extends Page {
         this.companyIdA = companyIdA;
     }
 
+    public int getCompanyContractIdA() {
+        return companyContractIdA;
+    }
 
+    public void setCompanyContractIdA(int companyContractIdA) {
+        this.companyContractIdA = companyContractIdA;
+    }
 
     public int getCompanyIdB() {
         return companyIdB;
@@ -102,7 +170,13 @@ public class ContractVo extends Page {
         this.companyIdB = companyIdB;
     }
 
+    public int getCompanyContractIdB() {
+        return companyContractIdB;
+    }
 
+    public void setCompanyContractIdB(int companyContractIdB) {
+        this.companyContractIdB = companyContractIdB;
+    }
 
     public int getCompanyIdC() {
         return companyIdC;
@@ -112,7 +186,13 @@ public class ContractVo extends Page {
         this.companyIdC = companyIdC;
     }
 
+    public int getCompanyContractIdC() {
+        return companyContractIdC;
+    }
 
+    public void setCompanyContractIdC(int companyContractIdC) {
+        this.companyContractIdC = companyContractIdC;
+    }
 
     public Date getSignDate() {
         return signDate;
@@ -162,8 +242,6 @@ public class ContractVo extends Page {
         this.amt = amt;
     }
 
-
-
     public int getId() {
         return id;
     }
@@ -194,53 +272,5 @@ public class ContractVo extends Page {
 
     public void setState(int state) {
         this.state = state;
-    }
-
-    public String getContractNo() {
-        return contractNo;
-    }
-
-    public void setContractNo(String contractNo) {
-        this.contractNo = contractNo;
-    }
-
-    public int getContractId() {
-        return contractId;
-    }
-
-    public void setContractId(int contractId) {
-        this.contractId = contractId;
-    }
-
-    public int getPaymentPlan() {
-        return paymentPlan;
-    }
-
-    public void setPaymentPlan(int paymentPlan) {
-        this.paymentPlan = paymentPlan;
-    }
-
-    public int getCompanyContractIdB() {
-        return companyContractIdB;
-    }
-
-    public void setCompanyContractIdB(int companyContractIdB) {
-        this.companyContractIdB = companyContractIdB;
-    }
-
-    public int getCompanyContractIdA() {
-        return companyContractIdA;
-    }
-
-    public void setCompanyContractIdA(int companyContractIdA) {
-        this.companyContractIdA = companyContractIdA;
-    }
-
-    public int getCompanyContarctIdC() {
-        return companyContarctIdC;
-    }
-
-    public void setCompanyContarctIdC(int companyContarctIdC) {
-        this.companyContarctIdC = companyContarctIdC;
     }
 }

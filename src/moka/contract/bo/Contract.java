@@ -17,10 +17,6 @@ public class Contract extends IdEntity implements Serializable {
     /**
      * 合同编号
      */
-    private int contactId;
-    /**
-     * 合同号
-     */
     private String contractNo;
     /**
      * 版本号
@@ -67,115 +63,184 @@ public class Contract extends IdEntity implements Serializable {
      */
     private String itemName;
     /**
-     * 货物或服务名称
+     * 产品和服务
      */
     private String item;
     /**
      * 合同金额
      */
     private BigDecimal amt;
+
     /**
-     * 开票计划
+     * 资源ID
      */
-    private int paymentPlan;
+    private String applicationId;
+    /**
+     * 合同类型
+     */
+    private String contactType;
+    /**
+     * 合同状态
+     */
+    private String contactState;
+    /**
+     * 备注
+     */
+    private String remark;
+    /**
+     * 付款期数
+     */
+    private int paymentNum;
+
+    public int getPaymentNum() {
+        return paymentNum;
+    }
+
+    public void setPaymentNum(int paymentNum) {
+        this.paymentNum = paymentNum;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getContactState() {
+        return contactState;
+    }
+
+    public void setContactState(String contactState) {
+        this.contactState = contactState;
+    }
+
+    public String getContactType() {
+        return contactType;
+    }
+
+    public void setContactType(String contactType) {
+        this.contactType = contactType;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public String getContractNo() {
+        return contractNo;
+    }
+
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
+    }
 
     public int getVersionNo() {
         return versionNo;
     }
+
     public void setVersionNo(int versionNo) {
         this.versionNo = versionNo;
     }
+
     public int getCompanyIdA() {
         return companyIdA;
     }
+
     public void setCompanyIdA(int companyIdA) {
         this.companyIdA = companyIdA;
+    }
+
+    public int getCompanyContractIdA() {
+        return companyContractIdA;
+    }
+
+    public void setCompanyContractIdA(int companyContractIdA) {
+        this.companyContractIdA = companyContractIdA;
     }
 
     public int getCompanyIdB() {
         return companyIdB;
     }
+
     public void setCompanyIdB(int companyIdB) {
         this.companyIdB = companyIdB;
+    }
+
+    public int getCompanyContractIdB() {
+        return companyContractIdB;
+    }
+
+    public void setCompanyContractIdB(int companyContractIdB) {
+        this.companyContractIdB = companyContractIdB;
     }
 
     public int getCompanyIdC() {
         return companyIdC;
     }
+
     public void setCompanyIdC(int companyIdC) {
         this.companyIdC = companyIdC;
+    }
+
+    public int getCompanyContractIdC() {
+        return companyContractIdC;
+    }
+
+    public void setCompanyContractIdC(int companyContractIdC) {
+        this.companyContractIdC = companyContractIdC;
     }
 
     public Date getSignDate() {
         return signDate;
     }
+
     public void setSignDate(Date signDate) {
         this.signDate = signDate;
     }
+
     public Date getStartDate() {
         return startDate;
     }
+
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
+
     public Date getEndDate() {
         return endDate;
     }
+
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
     public String getItemName() {
         return itemName;
     }
+
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
+
     public String getItem() {
         return item;
     }
+
     public void setItem(String item) {
         this.item = item;
     }
+
     public BigDecimal getAmt() {
         return amt;
     }
+
     public void setAmt(BigDecimal amt) {
         this.amt = amt;
-    }
-    public int getContactId() {
-        return contactId;
-    }
-    public void setContactId(int contactId) {
-        this.contactId = contactId;
-    }
-    public int getPaymentPlan() {
-        return paymentPlan;
-    }
-    public void setPaymentPlan(int paymentPlan) {
-        this.paymentPlan = paymentPlan;
-    }
-    public String getContractNo() {
-        return contractNo;
-    }
-    public void setContractNo(String contractNo) {
-        this.contractNo = contractNo;
-    }
-    public int getCompanyContractIdA() {
-        return companyContractIdA;
-    }
-    public void setCompanyContractIdA(int companyContractIdA) {
-        this.companyContractIdA = companyContractIdA;
-    }
-    public int getCompanyContractIdB() {
-        return companyContractIdB;
-    }
-    public void setCompanyContractIdB(int companyContractIdB) {
-        this.companyContractIdB = companyContractIdB;
-    }
-    public int getCompanyContractIdC() {
-        return companyContractIdC;
-    }
-    public void setCompanyContractIdC(int companyContractIdC) {
-        this.companyContractIdC = companyContractIdC;
     }
 }
