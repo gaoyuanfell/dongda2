@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,6 +27,8 @@ public class ContractController extends BasicController {
     @ResponseBody
     @IgnoreSecurity
     public Object insert(@RequestBody ContractVo vo) {
+        UserTo user = getUserSession();
+        vo.setApplicationId(user.getApplicationId());
         int i = contractService.insert(vo);
         return result(i);
     }
@@ -38,7 +41,11 @@ public class ContractController extends BasicController {
     @IgnoreSecurity
     public Object insertBatch(@RequestBody List<ContractVo> contract) {
         UserTo user = getUserSession();
-        int i = contractService.insertBatch(contract,user);
+        for (ContractVo vo : contract){
+            vo.setCreateDate(new Date());
+            vo.setApplicationId(user.getApplicationId());
+        }
+        int i = contractService.insertBatch(contract);
         return result(i);
     }
 

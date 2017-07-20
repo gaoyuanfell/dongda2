@@ -4,9 +4,9 @@
 
     <insert id="insert" parameterType="moka.contract.bo.Contract" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_contract (
-          createDate, updateDate, state, contractNo, versionNo, companyIdA, companyContractIdA, companyIdB, companyContarctIdB, companyIdC, companyContractIdC, signDate, startDate, endDate, itemName, item, amt, applicationId, contactType, contactState, remark, paymentNum
+          createDate, updateDate, state, contractNo, versionNo, companyIdA, companyContractIdA, companyIdB, companyContractIdB, companyIdC, companyContractIdC, signDate, startDate, endDate, itemName, item, amt, applicationId, contactType, contactState, remark, paymentNum
         ) VALUES (
-          #{createDate},#{updateDate},#{state},#{contractNo},#{versionNo},#{companyIdA},#{companyContractIdA},#{companyIdB},#{companyContarctIdB},#{companyIdC},#{companyContractIdC},#{signDate},#{startDate},#{endDate},#{itemName},#{item},#{amt},#{applicationId},#{contactType},#{contactState},#{remark},#{paymentNum}
+          #{createDate},#{updateDate},#{state},#{contractNo},#{versionNo},#{companyIdA},#{companyContractIdA},#{companyIdB},#{companyContractIdB},#{companyIdC},#{companyContractIdC},#{signDate},#{startDate},#{endDate},#{itemName},#{item},#{amt},#{applicationId},#{contactType},#{contactState},#{remark},#{paymentNum}
         )
     </insert>
 

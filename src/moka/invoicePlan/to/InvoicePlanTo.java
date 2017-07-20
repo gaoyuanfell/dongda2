@@ -13,10 +13,6 @@ public class InvoicePlanTo {
      */
     private int contractId;
     /**
-     * 计划开票次数
-     */
-    private int paymentPlan;
-    /**
      * 本次开票次数
      */
     private int paymentPlanFact;
@@ -43,77 +39,113 @@ public class InvoicePlanTo {
     /**
      * 状态
      */
-    public int getContractId() {
-        return contractId;
+    private String planState;
+    /**
+     * 资源ID
+     */
+    private String applicationId;
+
+    public String getApplicationId() {
+        return applicationId;
     }
-    public void setContractId(int contractId) {
-        this.contractId = contractId;
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
     }
-    public int getPaymentPlan() {
-        return paymentPlan;
-    }
-    public void setPaymentPlan(int paymentPlan) {
-        this.paymentPlan = paymentPlan;
-    }
-    public int getPaymentPlanFact() {
-        return paymentPlanFact;
-    }
-    public void setPaymentPlanFact(int paymentPlanFact) {
-        this.paymentPlanFact = paymentPlanFact;
-    }
-    public int getVersionNo() {
-        return versionNo;
-    }
-    public void setVersionNo(int versionNo) {
-        this.versionNo = versionNo;
-    }
-    public BigDecimal getAmt() {
-        return amt;
-    }
-    public void setAmt(BigDecimal amt) {
-        this.amt = amt;
-    }
-    public Date getPlanDate() {
-        return planDate;
-    }
-    public void setPlanDate(Date planDate) {
-        this.planDate = planDate;
-    }
-    public Date getPlanReceiveDate() {
-        return planReceiveDate;
-    }
-    public void setPlanReceiveDate(Date planReceiveDate) {
-        this.planReceiveDate = planReceiveDate;
-    }
-    public BigDecimal getReceiveAmt() {
-        return receiveAmt;
-    }
-    public void setReceiveAmt(BigDecimal receiveAmt) {
-        this.receiveAmt = receiveAmt;
-    }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public Date getCreateDate() {
         return createDate;
     }
+
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+
     public Date getUpdateDate() {
         return updateDate;
     }
+
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
+
     public int getState() {
         return state;
     }
+
     public void setState(int state) {
         this.state = state;
     }
 
+    public int getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(int contractId) {
+        this.contractId = contractId;
+    }
+
+    public int getPaymentPlanFact() {
+        return paymentPlanFact;
+    }
+
+    public void setPaymentPlanFact(int paymentPlanFact) {
+        this.paymentPlanFact = paymentPlanFact;
+    }
+
+    public int getVersionNo() {
+        return versionNo;
+    }
+
+    public void setVersionNo(int versionNo) {
+        this.versionNo = versionNo;
+    }
+
+    public BigDecimal getAmt() {
+        return amt;
+    }
+
+    public void setAmt(BigDecimal amt) {
+        this.amt = amt;
+    }
+
+    public Date getPlanDate() {
+        return planDate;
+    }
+
+    public void setPlanDate(Date planDate) {
+        this.planDate = planDate;
+    }
+
+    public Date getPlanReceiveDate() {
+        return planReceiveDate;
+    }
+
+    public void setPlanReceiveDate(Date planReceiveDate) {
+        this.planReceiveDate = planReceiveDate;
+    }
+
+    public BigDecimal getReceiveAmt() {
+        return receiveAmt;
+    }
+
+    public void setReceiveAmt(BigDecimal receiveAmt) {
+        this.receiveAmt = receiveAmt;
+    }
+
+    public String getPlanState() {
+        return planState;
+    }
+
+    public void setPlanState(String planState) {
+        this.planState = planState;
+    }
 }

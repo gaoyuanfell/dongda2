@@ -15,6 +15,6 @@ public interface ContractService extends BasicService {
      * @param contracts
      * @return
      */
-    int insertBatch(List<ContractVo> contracts, UserTo user);
+    int insertBatch(List<ContractVo> contracts);
 
 }

@@ -38,14 +38,23 @@ public class InvoicePlanController extends BasicController {
     /**
      * 添加开票计划
      */
-    @RequestMapping(value = "addInvoicePlan.htm")
+    @RequestMapping(value = "insert.htm")
     @ResponseBody
     @IgnoreSecurity
-    public Object insert(@RequestBody List<InvoicePlanVo> invoice) {
-        for (InvoicePlanVo inv : invoice) {
-            invoicePlanService.insert(inv);
-        }
-        return result(CODE_SUCCESS, "添加成功");
+    public Object insert(@RequestBody InvoicePlanVo vo) {
+        int i = invoicePlanService.insert(vo);
+        return result(i);
+    }
+
+    /**
+     * 添加开票计划 批量
+     */
+    @RequestMapping(value = "insertBatch.htm")
+    @ResponseBody
+    @IgnoreSecurity
+    public Object insertBatch(@RequestBody List<InvoicePlanVo> invoicePlans) {
+        int i = invoicePlanService.insertBatch(invoicePlans);
+        return result(i);
     }
 
 }

@@ -2,19 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.invoicePlan.dao.InvoicePlanDao">
 
-    <insert id="insert" parameterType="moka.invoicePlan.bo.InvoicePlan"
-        useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="moka.invoicePlan.bo.InvoicePlan" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_invoice_plan(
-        contractId,paymentPlan,paymentPlanFact, versionNo,
-        amt,planDate,
-        planReceiveDate, receiveAmt,state
+            contractId, paymentPlanFact, versionNo, amt, planDate, planReceiveDate, receiveAmt, state, createDate, updateDate, planState
         )
         VALUES (
-        #{contractId},#{paymentPlan},#{paymentPlanFact},#{versionNo},#{amt},#{planDate},#{planReceiveDate},#{receiveAmt},
-        #{state}
+            #{contractId},#{paymentPlanFact},#{versionNo},#{amt},#{planDate},#{planReceiveDate},#{receiveAmt},#{state},#{createDate},#{updateDate},#{planState}
         )
     </insert>
 
+    <!--批量添加-->
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_invoice_plan(
+            contractId, paymentPlanFact, versionNo, amt, planDate, planReceiveDate, receiveAmt, state, createDate, updateDate, planState
+        )
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.contractId},#{item.paymentPlanFact},#{item.versionNo},#{item.amt},#{item.planDate},#{item.planReceiveDate},#{item.receiveAmt},#{item.state},#{item.createDate},#{item.updateDate},#{item.planState})
+        </foreach>
+    </insert>
 
 
 </mapper>
