@@ -43,7 +43,7 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public <T> T get(String k,Class c) {
+    public <T> T get(final String k,final Class c) {
         return redisTemplate.execute(new RedisCallback<T>() {
             public T doInRedis(RedisConnection connection) throws DataAccessException {
                 RedisSerializer<String> serializer = getRedisSerializer();
@@ -61,7 +61,7 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public boolean addUserSession(Token t) {
+    public boolean addUserSession(final Token t) {
         return redisTemplate.execute(new RedisCallback<Boolean>() {
             public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
                 RedisSerializer<String> serializer = getRedisSerializer();
