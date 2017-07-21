@@ -4,6 +4,9 @@ import moka.basic.dao.BasicDao;
 import moka.user.bo.User;
 import moka.user.to.UserTo;
 import moka.user.vo.UserVo;
+
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,4 +23,6 @@ public interface UserDao extends BasicDao<User, UserTo> {
     int checkEmail(UserVo vo);
 
     int insertSysUser(User user);
+
+    List findAllCom(UserVo vo);
 }

@@ -4,6 +4,7 @@ import moka.basic.page.Page;
 import moka.basic.service.BasicService;
 import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
+import moka.user.bo.User;
 
 import java.util.List;
 
@@ -25,4 +26,7 @@ public interface CompanyService extends BasicService {
      * @return
      */
     List<CompanyTo> findUseSelect(CompanyVo vo);
+
+    void insertComOfUser(User user);
+
 }

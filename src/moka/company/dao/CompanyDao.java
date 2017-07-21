@@ -4,6 +4,8 @@ import moka.basic.dao.BasicDao;
 import moka.company.bo.Company;
 import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
+import moka.user.bo.User;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +16,7 @@ import java.util.List;
 @Repository("companyDao")
 public interface CompanyDao extends BasicDao<Company, CompanyTo> {
     List<CompanyTo> findUseSelect(CompanyVo vo);
+
+    void insertComOfUser(User vo);
+
 }

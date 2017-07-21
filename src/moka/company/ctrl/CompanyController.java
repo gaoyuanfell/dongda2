@@ -6,6 +6,8 @@ import moka.basic.page.Page;
 import moka.company.service.CompanyService;
 import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
+import moka.user.bo.User;
+import moka.user.service.UserService;
 import moka.user.to.UserTo;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,8 @@ public class CompanyController extends BasicController {
 
     @Resource
     private CompanyService companyService;
+    @Resource
+    private UserService userService;
     private Logger logger = LoggerService.getLogger(this.getClass());
 
     /**
@@ -32,10 +36,14 @@ public class CompanyController extends BasicController {
      */
     @RequestMapping(value = "insert.htm")
     @ResponseBody
-    public Object insert(@RequestBody CompanyVo vo){
+    public Object insert(@RequestBody CompanyVo vo) {
         UserTo userTo = getUserSession();
         vo.setApplicationId(userTo.getApplicationId());
         int i = companyService.insert(vo);
+        User user = new User();
+        user.setCompanyId(i);
+        user.setId(userTo.getId());
+        companyService.insertComOfUser(user);
         return result(i);
     }
 
@@ -63,6 +71,7 @@ public class CompanyController extends BasicController {
         CompanyTo to = companyService.findOne(id);
         return result(to);
     }
+
     /**
      * 修改公司信息
      */
@@ -74,15 +83,12 @@ public class CompanyController extends BasicController {
     }
 
     /**
-     * 作用于下拉 搜索条件
-     * {
-     *     companyName:''
-     * }
+     * 作用于下拉 搜索条件 { companyName:'' }
      *
      */
     @RequestMapping(value = "findUseSelect.htm")
     @ResponseBody
-    public Object findUseSelect(@RequestBody CompanyVo vo){
+    public Object findUseSelect(@RequestBody CompanyVo vo) {
         UserTo to = getUserSession();
         vo.setApplicationId(to.getApplicationId());
         List<CompanyTo> list = companyService.findUseSelect(vo);

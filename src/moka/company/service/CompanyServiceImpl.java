@@ -6,6 +6,8 @@ import moka.company.bo.Company;
 import moka.company.dao.CompanyDao;
 import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
+import moka.user.bo.User;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -40,7 +42,7 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
     public Page findPage(CompanyVo vo) {
         List list = companyDao.findPage(vo);
         int count = companyDao.findCount(vo);
-        return new Page(vo.getPageIndex(),vo.getPageSize(), count, list);
+        return new Page(vo.getPageIndex(), vo.getPageSize(), count, list);
     }
 
     @Override
@@ -52,4 +54,10 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
     public List<CompanyTo> findUseSelect(CompanyVo vo) {
         return companyDao.findUseSelect(vo);
     }
+
+    @Override
+    public void insertComOfUser(User vo) {
+        companyDao.insertComOfUser(vo);
+    }
+
 }

@@ -48,7 +48,8 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         String uuid = Util.getTokenMd5();
         Company company = new Company();
         company.setApplicationId(uuid);
-        companyDao.insert(company);
+        //管理员注册时不添加公司
+        //companyDao.insert(company);
 
         user.setCompanyId(company.getId());
         user.setApplicationId(uuid);
@@ -156,5 +157,10 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     @Override
     public int checkEmail(UserVo vo) {
         return userDao.checkEmail(vo);
+    }
+
+    @Override
+    public List findAllCom(UserVo vo) {
+        return userDao.findAllCom(vo);
     }
 }

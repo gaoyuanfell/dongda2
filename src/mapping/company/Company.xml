@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.company.dao.CompanyDao">
-    <insert id="insert" parameterType="moka.company.bo.Company" useGeneratedKeys="true" keyProperty="id">
-      INSERT INTO t_company (
-        createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank,companyAccount, taxCode, applicationId
-      ) VALUES (
+    <insert id="insert" parameterType="moka.company.bo.Company"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_company (
+        createDate, updateDate, state,companyCode,
+        companyName,
+        companyTel, companyAddress, companyEmail,
+        companyType,
+        companyBank,companyAccount, taxCode, applicationId
+        ) VALUES (
         #{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{companyAccount},#{taxCode},#{applicationId}
-      )
+        )
     </insert>
 
     <update id="update" parameterType="moka.company.bo.Company">
@@ -25,33 +30,54 @@
         WHERE id = #{id}
     </update>
 
-    <select id="findOne" parameterType="Integer" resultType="moka.company.to.CompanyTo">
+    <select id="findOne" parameterType="Integer"
+        resultType="moka.company.to.CompanyTo">
         SELECT * FROM t_company WHERE id = #{id};
     </select>
 
-    <select id="findCount" parameterType="moka.basic.page.Page" resultType="Integer">
+    <select id="findCount" parameterType="moka.basic.page.Page"
+        resultType="Integer">
         SELECT COUNT(id) FROM t_company c
-        WHERE c.applicationId = #{applicationId} AND c.state != 1
+        WHERE c.applicationId =
+        #{applicationId} AND c.state != 1
         <if test="companyName != null and companyName != ''">
-            AND c.companyName LIKE CONCAT('%',#{companyName},'%')
+            AND c.companyName LIKE
+            CONCAT('%',#{companyName},'%')
         </if>
     </select>
 
-    <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.company.to.CompanyTo">
+    <select id="findPage" parameterType="moka.basic.page.Page"
+        resultType="moka.company.to.CompanyTo">
         SELECT * FROM t_company c
-        WHERE c.applicationId = #{applicationId} AND c.state != 1
+        WHERE c.applicationId =
+        #{applicationId} AND c.state != 1
         <if test="companyName != null and companyName != ''">
-            AND c.companyName LIKE CONCAT('%',#{companyName},'%')
+            AND c.companyName LIKE
+            CONCAT('%',#{companyName},'%')
         </if>
         LIMIT #{pageStart} , #{pageSize};
     </select>
 
-    <!--作用于下拉-->
-    <select id="findUseSelect" parameterType="moka.company.vo.CompanyVo" resultType="moka.company.to.CompanyTo">
-        SELECT c.id, c.companyName FROM t_company c WHERE c.applicationId = #{applicationId} AND c.state != 1
+    <!--作用于下拉 -->
+    <select id="findUseSelect" parameterType="moka.company.vo.CompanyVo"
+        resultType="moka.company.to.CompanyTo">
+        SELECT c.id, c.companyName FROM t_company c WHERE
+        c.applicationId = #{applicationId} AND c.state != 1
         <if test="companyName != null and companyName != ''">
-            AND c.companyName LIKE CONCAT('%',#{companyName},'%')
+            AND c.companyName LIKE
+            CONCAT('%',#{companyName},'%')
         </if>
     </select>
+    
+    <!-- 添加公司时插入关系表 -->
+    <insert id="insertComOfUser" parameterType="moka.company.bo.Company"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO r_company_user (
+        companyId, userId
+        ) VALUES (
+        #{companyId},#{id}
+        )
+    </insert>
+
 
 </mapper>

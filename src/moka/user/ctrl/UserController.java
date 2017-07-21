@@ -8,10 +8,12 @@ import moka.basic.page.Page;
 import moka.basic.util.Util;
 import moka.company.service.CompanyService;
 import moka.company.to.CompanyTo;
+import moka.company.vo.CompanyVo;
 import moka.menu.service.MenuService;
 import moka.menu.to.MenuTo;
 import moka.role.service.RoleService;
 import moka.role.to.RoleTo;
+import moka.user.bo.User;
 import moka.user.service.UserService;
 import moka.user.to.UserTo;
 import moka.user.vo.UserVo;
@@ -51,11 +53,7 @@ public class UserController extends BasicController {
     private String DATA_PASSWORD_SALT;
 
     /**
-     * 登录
-     * {
-     * phoneNumber:'',
-     * password:''
-     * }
+     * 登录 { phoneNumber:'', password:'' }
      */
     @RequestMapping(value = "login.htm")
     @ResponseBody
@@ -67,8 +65,8 @@ public class UserController extends BasicController {
         Token t = null;
         if (u != null) {
             u.setPassword("");
-            MenuTo menuTo = menuService.findMenuByUserId(u.getId());//菜单
-            List<RoleTo> roles = roleService.findUserRoles(u.getId());//角色
+            MenuTo menuTo = menuService.findMenuByUserId(u.getId());// 菜单
+            List<RoleTo> roles = roleService.findUserRoles(u.getId());// 角色
             CompanyTo companyTo = companyService.findOne(u.getCompanyId());
             u.setMenuTo(menuTo);
             u.setRoles(roles);
@@ -97,7 +95,7 @@ public class UserController extends BasicController {
             return result(CODE_PROMPT, "用户名已存在！");
         }
         userService.insert(user);
-        return result(CODE_SUCCESS,"创建成功，请登录");
+        return result(CODE_SUCCESS, "创建成功，请登录");
     }
 
     /**
@@ -105,23 +103,30 @@ public class UserController extends BasicController {
      */
     @RequestMapping(value = "insertSysUser.htm")
     @ResponseBody
-    public Object insertSysUser(@RequestBody UserVo user){
-        int n = userService.findRepeatUser(user);
-        if (n > 0) {
-            return result(CODE_PROMPT, "用户名已存在！");
+    public Object insertSysUser(@RequestBody UserVo user) {
+        while (user.getCompanyId() != null) {
+            int n = userService.findRepeatUser(user);
+            if (n > 0) {
+                return result(CODE_PROMPT, "用户名已存在！");
+            }
+            UserTo to = getUserSession();
+            user.setApplicationId(to.getApplicationId());
+            //user.setCompanyId(to.getCompanyId());
+            int i=userService.insertSysUser(user);
+            //将新员工添加到关系表
+            //检查管理员是否拥有此公司
+            //List<User> a = userService.findAllCom(user);
+            User employee= new User();
+            employee.setCompanyId(user.getCompanyId());
+            employee.setId(i);
+            companyService.insertComOfUser(employee);
+            return result(CODE_SUCCESS, "创建成功，请登录");
         }
-        UserTo to = getUserSession();
-        user.setApplicationId(to.getApplicationId());
-        user.setCompanyId(to.getCompanyId());
-        userService.insertSysUser(user);
-        return result(CODE_SUCCESS,"创建成功，请登录");
+        return result(CODE_SUCCESS, "参数错误");
     }
 
     /**
-     * 检查手机号是否重复
-     * {
-     * phoneNumber:''
-     * }
+     * 检查手机号是否重复 { phoneNumber:'' }
      */
     @RequestMapping(value = "checkPhone.htm")
     @ResponseBody
@@ -135,10 +140,7 @@ public class UserController extends BasicController {
     }
 
     /**
-     * 检查手机号是否重复
-     * {
-     * mail:''
-     * }
+     * 检查手机号是否重复 { mail:'' }
      */
     @RequestMapping(value = "checkEmail.htm")
     @ResponseBody
@@ -164,9 +166,9 @@ public class UserController extends BasicController {
         return result(user);
     }
 
-
     /**
      * 用户修改
+     * 
      * @param user
      * @return
      */
@@ -179,6 +181,7 @@ public class UserController extends BasicController {
 
     /**
      * 用户删除
+     * 
      * @param id
      * @return
      */
@@ -188,7 +191,6 @@ public class UserController extends BasicController {
         int i = userService.delete(id);
         return result(i);
     }
-
 
     /**
      * 查
@@ -206,9 +208,9 @@ public class UserController extends BasicController {
     /**
      * 从session获取用户信息
      */
-    @RequestMapping(value = "findSessionUser.htm",method = RequestMethod.GET)
+    @RequestMapping(value = "findSessionUser.htm", method = RequestMethod.GET)
     @ResponseBody
-    public Object findSessionUser(){
+    public Object findSessionUser() {
         return result(getUserSession());
     }
 
