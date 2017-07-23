@@ -104,25 +104,14 @@ public class UserController extends BasicController {
     @RequestMapping(value = "insertSysUser.htm")
     @ResponseBody
     public Object insertSysUser(@RequestBody UserVo user) {
-        while (user.getCompanyId() != null) {
-            int n = userService.findRepeatUser(user);
-            if (n > 0) {
-                return result(CODE_PROMPT, "用户名已存在！");
-            }
-            UserTo to = getUserSession();
-            user.setApplicationId(to.getApplicationId());
-            //user.setCompanyId(to.getCompanyId());
-            int i=userService.insertSysUser(user);
-            //将新员工添加到关系表
-            //检查管理员是否拥有此公司
-            //List<User> a = userService.findAllCom(user);
-            User employee= new User();
-            employee.setCompanyId(user.getCompanyId());
-            employee.setId(i);
-            companyService.insertComOfUser(employee);
-            return result(CODE_SUCCESS, "创建成功，请登录");
+        int n = userService.findRepeatUser(user);
+        if (n > 0) {
+            return result(CODE_PROMPT, "用户名已存在！");
         }
-        return result(CODE_SUCCESS, "参数错误");
+        UserTo to = getUserSession();
+        user.setApplicationId(to.getApplicationId());
+        userService.insertSysUser(user);
+        return result(CODE_SUCCESS, "创建成功，请登录");
     }
 
     /**

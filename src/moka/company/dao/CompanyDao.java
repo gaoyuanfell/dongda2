@@ -16,7 +16,4 @@ import java.util.List;
 @Repository("companyDao")
 public interface CompanyDao extends BasicDao<Company, CompanyTo> {
     List<CompanyTo> findUseSelect(CompanyVo vo);
-
-    void insertComOfUser(User vo);
-
 }

@@ -55,9 +55,4 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
         return companyDao.findUseSelect(vo);
     }
 
-    @Override
-    public void insertComOfUser(User vo) {
-        companyDao.insertComOfUser(vo);
-    }
-
 }

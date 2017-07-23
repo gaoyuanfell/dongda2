@@ -6,8 +6,6 @@ import moka.basic.page.Page;
 import moka.company.service.CompanyService;
 import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
-import moka.user.bo.User;
-import moka.user.service.UserService;
 import moka.user.to.UserTo;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -27,8 +25,6 @@ public class CompanyController extends BasicController {
 
     @Resource
     private CompanyService companyService;
-    @Resource
-    private UserService userService;
     private Logger logger = LoggerService.getLogger(this.getClass());
 
     /**
@@ -40,10 +36,6 @@ public class CompanyController extends BasicController {
         UserTo userTo = getUserSession();
         vo.setApplicationId(userTo.getApplicationId());
         int i = companyService.insert(vo);
-        User user = new User();
-        user.setCompanyId(i);
-        user.setId(userTo.getId());
-        companyService.insertComOfUser(user);
         return result(i);
     }
 
@@ -83,7 +75,10 @@ public class CompanyController extends BasicController {
     }
 
     /**
-     * 作用于下拉 搜索条件 { companyName:'' }
+     * 作用于下拉 搜索条件
+     * {
+     *      companyName:''
+     * }
      *
      */
     @RequestMapping(value = "findUseSelect.htm")

@@ -65,10 +65,5 @@
     <select id="findRepeatUser" parameterType="moka.user.vo.UserVo" resultType="Integer">
         SELECT COUNT(*) FROM t_user u WHERE 1 = 1 AND (u.phoneNumber = #{phoneNumber} OR u.mail = #{mail})
     </select>
-    
-    <!-- 查找用户所拥有的公司 -->
-    <select id="findAllCom" parameterType="Integer" resultType="moka.user.to.UserTo">
-        SELECT * FROM t_company_user WHERE userId = #{id};
-    </select>
 
 </mapper>

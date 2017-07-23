@@ -64,8 +64,4 @@ public interface UserService extends BasicService {
      * @return
      */
     int checkEmail(UserVo vo);
-    /**
-     * 查找用户所拥有的公司
-     */
-    List findAllCom(UserVo vo);
 }

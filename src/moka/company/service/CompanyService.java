@@ -27,6 +27,4 @@ public interface CompanyService extends BasicService {
      */
     List<CompanyTo> findUseSelect(CompanyVo vo);
 
-    void insertComOfUser(User user);
-
 }

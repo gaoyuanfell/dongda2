@@ -158,9 +158,4 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     public int checkEmail(UserVo vo) {
         return userDao.checkEmail(vo);
     }
-
-    @Override
-    public List findAllCom(UserVo vo) {
-        return userDao.findAllCom(vo);
-    }
 }
