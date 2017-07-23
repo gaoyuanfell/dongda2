@@ -3,9 +3,9 @@
 <mapper namespace="moka.company.dao.CompanyDao">
     <insert id="insert" parameterType="moka.company.bo.Company" useGeneratedKeys="true" keyProperty="id">
       INSERT INTO t_company (
-        createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank,companyAccount, taxCode, applicationId
+        createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank,companyAccount, taxCode, applicationId,companyBelong
       ) VALUES (
-        #{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{companyAccount},#{taxCode},#{applicationId}
+        #{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{companyAccount},#{taxCode},#{applicationId},#{companyBelong}
       )
     </insert>
 
@@ -31,8 +31,10 @@
 
     <select id="findCount" parameterType="moka.basic.page.Page" resultType="Integer">
         SELECT COUNT(id) FROM t_company c
-        WHERE c.applicationId =
-        #{applicationId} AND c.state != 1
+        WHERE
+        c.applicationId = #{applicationId}
+        AND c.state != 1
+        AND c.companyBelong = #{companyBelong}
         <if test="companyName != null and companyName != ''">
             AND c.companyName LIKE
             CONCAT('%',#{companyName},'%')
@@ -40,9 +42,13 @@
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.company.to.CompanyTo">
-        SELECT * FROM t_company c
-        WHERE c.applicationId =
-        #{applicationId} AND c.state != 1
+        SELECT c.*,ca.relationState FROM t_company c
+        LEFT JOIN r_company_admin ca
+        ON c.id = IF(c.companyType = 1,ca.companyId,ca.companyAdminId)
+        WHERE
+        c.applicationId = #{applicationId}
+        AND c.state != 1
+        AND c.companyBelong = #{companyBelong}
         <if test="companyName != null and companyName != ''">
             AND c.companyName LIKE
             CONCAT('%',#{companyName},'%')
@@ -53,12 +59,35 @@
     <!--作用于下拉 -->
     <select id="findUseSelect" parameterType="moka.company.vo.CompanyVo" resultType="moka.company.to.CompanyTo">
         SELECT c.id, c.companyName FROM t_company c WHERE
-        c.applicationId = #{applicationId} AND c.state != 1
+        c.applicationId = #{applicationId}
+        AND c.state != 1
+        AND c.companyBelong = #{companyBelong}
         <if test="companyName != null and companyName != ''">
             AND c.companyName LIKE
             CONCAT('%',#{companyName},'%')
         </if>
     </select>
+
+    <!--作用于下拉 全部有效数据 -->
+    <select id="findUseAllSelect" parameterType="moka.company.vo.CompanyVo" resultType="moka.company.to.CompanyTo">
+        SELECT c.id, c.companyName FROM t_company c WHERE
+        c.state != 1
+        AND c.companyBelong = #{companyBelong}
+        AND c.applicationId != #{applicationId}
+        <if test="companyName != null and companyName != ''">
+            AND c.companyName LIKE
+            CONCAT('%',#{companyName},'%')
+        </if>
+    </select>
+
+    <!--财务公司关联被管理公司-->
+    <insert id="relationCompany" parameterType="moka.company.vo.CompanyVo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO r_company_admin (
+        companyAdminId, companyId, applicationId, createDate, updateDate, state, relationState
+        ) VALUES (
+        #{companyAdminId},#{companyId},#{applicationId},#{createDate},#{updateDate},#{state},#{relationState}
+        )
+    </insert>
 
 
 </mapper>

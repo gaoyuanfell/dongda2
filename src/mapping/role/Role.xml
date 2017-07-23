@@ -33,12 +33,12 @@
             <if test="name != null and name != ''"> name = #{name}, </if>
             <if test="updateDate != null"> updateDate = #{updateDate}, </if>
         </trim>
-        WHERE id = #{id}
+        WHERE id = #{id} AND readOnly != '1'
     </update>
 
     <!--删除角色-->
     <delete id="delete" parameterType="Integer">
-        DELETE FROM t_role WHERE id = #{id};
+        DELETE FROM t_role WHERE id = #{id} AND readOnly != '2';
     </delete>
 
     <!--删除角色关联的菜单-->

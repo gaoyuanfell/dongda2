@@ -50,8 +50,12 @@ public class RoleController extends BasicController {
     @RequestMapping(value = "update.htm")
     @ResponseBody
     public Object update(@RequestBody RoleVo vo){
-        roleService.update(vo);
-        return result();
+        int i = roleService.update(vo);
+        if(i > 0){
+            return result();
+        }else{
+            return result(CODE_PROMPT,"修改失败，不能修改此项");
+        }
     }
 
     /**
@@ -62,8 +66,12 @@ public class RoleController extends BasicController {
     @RequestMapping(value = "delete.htm")
     @ResponseBody
     public Object delete(int id){
-        roleService.delete(id);
-        return result();
+        int i = roleService.delete(id);
+        if(i > 0){
+            return result();
+        }else{
+            return result(CODE_PROMPT,"删除失败，不能删除此项");
+        }
     }
 
 

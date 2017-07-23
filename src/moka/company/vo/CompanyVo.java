@@ -56,22 +56,23 @@ public class CompanyVo extends Page {
      * 资源ID
      */
     private String applicationId;
+    /**
+     * 公司所属 1内部 2外部（客户公司）
+     */
+    private String companyBelong;
 
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public String getCompanyAccount() {
-        return companyAccount;
-    }
-
-    public void setCompanyAccount(String companyAccount) {
-        this.companyAccount = companyAccount;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
-    }
+    /**
+     * 财务公司ID
+     */
+    private int companyAdminId;
+    /**
+     * 被管理公司
+     */
+    private int companyId;
+    /**
+     * 关联状态
+     */
+    private String relationState;
 
     public int getId() {
         return id;
@@ -129,6 +130,14 @@ public class CompanyVo extends Page {
         this.companyBank = companyBank;
     }
 
+    public String getCompanyAccount() {
+        return companyAccount;
+    }
+
+    public void setCompanyAccount(String companyAccount) {
+        this.companyAccount = companyAccount;
+    }
+
     public String getCompanyTel() {
         return companyTel;
     }
@@ -167,5 +176,45 @@ public class CompanyVo extends Page {
 
     public void setCompanyType(String companyType) {
         this.companyType = companyType;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public String getCompanyBelong() {
+        return companyBelong;
+    }
+
+    public void setCompanyBelong(String companyBelong) {
+        this.companyBelong = companyBelong;
+    }
+
+    public int getCompanyAdminId() {
+        return companyAdminId;
+    }
+
+    public void setCompanyAdminId(int companyAdminId) {
+        this.companyAdminId = companyAdminId;
+    }
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getRelationState() {
+        return relationState;
+    }
+
+    public void setRelationState(String relationState) {
+        this.relationState = relationState;
     }
 }

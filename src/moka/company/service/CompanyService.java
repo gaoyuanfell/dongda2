@@ -4,7 +4,6 @@ import moka.basic.page.Page;
 import moka.basic.service.BasicService;
 import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
-import moka.user.bo.User;
 
 import java.util.List;
 
@@ -22,9 +21,23 @@ public interface CompanyService extends BasicService {
 
     /**
      * 作用于下拉
-     * @param vo
+     * @param vo companyName companyBelong
      * @return
      */
     List<CompanyTo> findUseSelect(CompanyVo vo);
+
+    /**
+     * 作用于下拉 全部
+     * @param vo companyName companyBelong
+     * @return
+     */
+    List<CompanyTo> findUseAllSelect(CompanyVo vo);
+
+    /**
+     * 财务公司关联被管理公司
+     * @param vo
+     * @return
+     */
+    int relationCompany(CompanyVo vo);
 
 }

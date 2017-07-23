@@ -27,7 +27,18 @@ public class RoleVo extends Page {
      * 资源ID
      */
     private String applicationId;
+    /**
+     * 1 可以修改 2不能删除和修改
+     */
+    private String readOnly;
 
+    public String getReadOnly() {
+        return readOnly;
+    }
+
+    public void setReadOnly(String readOnly) {
+        this.readOnly = readOnly;
+    }
     public String getApplicationId() {
         return applicationId;
     }

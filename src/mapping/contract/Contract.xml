@@ -34,8 +34,9 @@
     <!--作用于下拉 -->
     <select id="findUseSelect" parameterType="moka.contract.vo.ContractVo" resultType="moka.contract.to.ContractTo">
         SELECT c.id, c.contractNo FROM t_contract c WHERE
-        c.applicationId = #{applicationId} AND c.state != 1
-        <if test="companyName != null and companyName != ''">
+        c.applicationId = #{applicationId}
+        AND c.state != 1
+        <if test="contractNo != null and contractNo != ''">
             AND c.contractNo LIKE
             CONCAT('%',#{contractNo},'%')
         </if>

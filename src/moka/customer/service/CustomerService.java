@@ -31,7 +31,7 @@ public interface CustomerService extends BasicService {
 
     /**
      * 作用于下拉
-     * @param vo
+     * @param vo companyId name
      * @return
      */
     List<CustomerTo> findUseSelect(CustomerVo vo);

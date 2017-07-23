@@ -63,8 +63,12 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
 
     @Override
     public int delete(int id) {
-        roleDao.deleteMenuOfRole(id);
-        return roleDao.delete(id);
+        int i = roleDao.delete(id);
+        if(i > 0){
+            roleDao.deleteMenuOfRole(id);
+            return 1;
+        }
+        return 0;
     }
 
     @Override

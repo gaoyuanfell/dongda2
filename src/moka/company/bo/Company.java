@@ -52,6 +52,19 @@ public class Company extends IdEntity implements Serializable {
     private String companyType;
 
     /**
+     * 公司所属 1内部 2外部（客户公司）
+     */
+    private String companyBelong;
+
+    public String getCompanyBelong() {
+        return companyBelong;
+    }
+
+    public void setCompanyBelong(String companyBelong) {
+        this.companyBelong = companyBelong;
+    }
+
+    /**
      * 资源ID
      */
     private String applicationId;

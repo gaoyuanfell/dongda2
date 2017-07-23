@@ -7,6 +7,7 @@ import moka.company.bo.Company;
 import moka.company.dao.CompanyDao;
 import moka.menu.dao.MenuDao;
 import moka.menu.to.MenuTo;
+import moka.role.enums.RoleEnum;
 import moka.role.service.RoleService;
 import moka.role.to.RoleTo;
 import moka.role.vo.RoleVo;
@@ -30,8 +31,8 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
 
     @Resource
     private UserDao userDao;
-    @Resource
-    private CompanyDao companyDao;
+//    @Resource
+//    private CompanyDao companyDao;
     @Resource
     private RoleService roleService;
     @Resource
@@ -39,34 +40,33 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
 
     @Value("#{propertyConfigurer['data_password_salt']}")
     private String DATA_PASSWORD_SALT;
+    @Value("#{propertyConfigurer['data_password_default']}")
+    private String DATA_PASSWORD_DEFAULT;
 
     @Override
     public int insert(UserVo vo) {
         User user = this.convertBusinessValue(vo, User.class);
 
         //初始化公司
-        String uuid = Util.getTokenMd5();
-        Company company = new Company();
-        company.setApplicationId(uuid);
-        //管理员注册时不添加公司
-        //companyDao.insert(company);
+        String uuid = Util.Md516();
+//        Company company = new Company();
+//        company.setApplicationId(uuid);
+//        companyDao.insert(company);
 
-        user.setCompanyId(company.getId());
+//        user.setCompanyId(company.getId());
         user.setApplicationId(uuid);
+        user.setName("管理员");
+        user.setEmployeeNo("1");
         user.setCreateDate(new Date());
         user.setPassword(Util.getMd5String(user.getPassword().concat(DATA_PASSWORD_SALT)));
         userDao.insert(user);
 
         //插入默认管理员角色
         RoleVo roleVo = new RoleVo();
-        roleVo.setName("公司管理员");
+        roleVo.setName("管理员");
         roleVo.setApplicationId(uuid);
+        roleVo.setReadOnly(RoleEnum.readOnly.getValue());
         int roleId = roleService.insert(roleVo);
-
-        //初始化角色对象
-        List<Integer> roles = new ArrayList<>();
-        roles.add(roleId);
-        vo.setRoles(roles);
 
         //角色关联菜单
         List<MenuTo> menuTo = menuDao.findList();
@@ -79,7 +79,10 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         }
         roleService.insertMenuOfRole(roleList);
 
-        //角色默认给管理员 需要初始化 所有默认角色。
+        //用户初始化角色对象
+        List<Integer> roles = new ArrayList<>();
+        roles.add(roleId);
+        vo.setRoles(roles);
         roleService.insertRoleOfUser(user.getId(),vo.getRoles());
         return user.getId();
     }
@@ -88,7 +91,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     public int insertSysUser(UserVo vo) {
         User user = this.convertBusinessValue(vo, User.class);
         user.setCreateDate(new Date());
-        user.setPassword(Util.getMd5String(Util.getMd5String("666666").concat(DATA_PASSWORD_SALT)));
+        user.setPassword(Util.getMd5String(Util.getMd5String(DATA_PASSWORD_DEFAULT).concat(DATA_PASSWORD_SALT)));
         userDao.insert(user);
         roleService.insertRoleOfUser(user.getId(),vo.getRoles());//关联角色
         return user.getId();

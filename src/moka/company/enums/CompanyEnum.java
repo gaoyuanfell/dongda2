@@ -1,17 +1,16 @@
-package moka.contract.enums;
+package moka.company.enums;
 
 import org.jetbrains.annotations.Contract;
 
-public enum ContractEnum{
-    initial("初始状态","1"),
-    inAudit("审核中","2"),
-    audited("审核通过","3"),
-    notAudit("审核不通过","4"),
+public enum CompanyEnum {
+    inside("内部公司","1"),
+    external("外部公司","2"),
+    adminInside("申请管理中","1"),
     ;
     private String name;
     private String value;
 
-    ContractEnum(String name, String value) {
+    CompanyEnum(String name, String value) {
         this.name = name;
         this.value = value;
     }

@@ -56,7 +56,30 @@ public class CompanyTo implements Serializable {
      * 资源ID
      */
     private String applicationId;
+    /**
+     * 公司所属 1内部 2外部（客户公司）
+     */
+    private String companyBelong;
+    /**
+     * 关联状态
+     */
+    private String relationState;
 
+    public String getRelationState() {
+        return relationState;
+    }
+
+    public void setRelationState(String relationState) {
+        this.relationState = relationState;
+    }
+
+    public String getCompanyBelong() {
+        return companyBelong;
+    }
+
+    public void setCompanyBelong(String companyBelong) {
+        this.companyBelong = companyBelong;
+    }
     public String getApplicationId() {
         return applicationId;
     }

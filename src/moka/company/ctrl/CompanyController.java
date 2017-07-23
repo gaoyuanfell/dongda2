@@ -3,6 +3,7 @@ package moka.company.ctrl;
 import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
+import moka.company.enums.CompanyEnum;
 import moka.company.service.CompanyService;
 import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
@@ -28,25 +29,55 @@ public class CompanyController extends BasicController {
     private Logger logger = LoggerService.getLogger(this.getClass());
 
     /**
-     * 新增公司
+     * 新增公司 内部
      */
     @RequestMapping(value = "insert.htm")
     @ResponseBody
     public Object insert(@RequestBody CompanyVo vo) {
         UserTo userTo = getUserSession();
         vo.setApplicationId(userTo.getApplicationId());
+        vo.setCompanyBelong(CompanyEnum.inside.getValue());
         int i = companyService.insert(vo);
         return result(i);
     }
 
     /**
-     * 查 分页
+     * 新增公司 外部
+     */
+    @RequestMapping(value = "insertBelong.htm")
+    @ResponseBody
+    public Object insertBelong(@RequestBody CompanyVo vo) {
+        UserTo userTo = getUserSession();
+        vo.setApplicationId(userTo.getApplicationId());
+        vo.setCompanyBelong(CompanyEnum.external.getValue());
+        int i = companyService.insert(vo);
+        return result(i);
+    }
+
+
+
+    /**
+     * 查 分页 内部
      */
     @RequestMapping(value = "findPage.htm")
     @ResponseBody
     public Object findPage(@RequestBody CompanyVo vo) {
         UserTo to = getUserSession();
         vo.setApplicationId(to.getApplicationId());
+        vo.setCompanyBelong(CompanyEnum.inside.getValue());
+        Page list = companyService.findPage(vo);
+        return result(list);
+    }
+
+    /**
+     * 查 分页 外部
+     */
+    @RequestMapping(value = "findPageBelong.htm")
+    @ResponseBody
+    public Object findPageBelong(@RequestBody CompanyVo vo) {
+        UserTo to = getUserSession();
+        vo.setApplicationId(to.getApplicationId());
+        vo.setCompanyBelong(CompanyEnum.external.getValue());
         Page list = companyService.findPage(vo);
         return result(list);
     }
@@ -77,7 +108,8 @@ public class CompanyController extends BasicController {
     /**
      * 作用于下拉 搜索条件
      * {
-     *      companyName:''
+     *      companyName:'',
+     *      companyBelong:'' 1 内部 2 外部
      * }
      *
      */
@@ -89,5 +121,43 @@ public class CompanyController extends BasicController {
         List<CompanyTo> list = companyService.findUseSelect(vo);
         return result(list);
     }
+
+    /**
+     * 作用于下拉 全部有效数据 搜索条件
+     * {
+     *      companyName:'',
+     *      companyBelong:'' 1 内部 2 外部,
+     *
+     * }
+     *
+     */
+    @RequestMapping(value = "findUseAllSelect.htm")
+    @ResponseBody
+    public Object findUseAllSelect(@RequestBody CompanyVo vo) {
+        UserTo to = getUserSession();
+        vo.setApplicationId(to.getApplicationId());
+        List<CompanyTo> list = companyService.findUseAllSelect(vo);
+        return result(list);
+    }
+
+
+    /**
+     * 财务公司关联其他业务公司
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "relationCompany.htm")
+    @ResponseBody
+    public Object relationCompany(@RequestBody CompanyVo vo) {
+        CompanyTo companyTo = companyService.findOne(vo.getCompanyId());
+        if(companyTo != null){
+            vo.setApplicationId(companyTo.getApplicationId());
+            int i = companyService.relationCompany(vo);
+            return result(i);
+        }
+        return result(CODE_PROMPT,"关联失败");
+    }
+
+
 
 }

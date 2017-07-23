@@ -4,10 +4,9 @@ import moka.basic.page.Page;
 import moka.basic.service.BasicServiceImpl;
 import moka.company.bo.Company;
 import moka.company.dao.CompanyDao;
+import moka.company.enums.CompanyEnum;
 import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
-import moka.user.bo.User;
-
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -55,4 +54,15 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
         return companyDao.findUseSelect(vo);
     }
 
+    @Override
+    public List<CompanyTo> findUseAllSelect(CompanyVo vo) {
+        return companyDao.findUseAllSelect(vo);
+    }
+
+    @Override
+    public int relationCompany(CompanyVo vo) {
+        vo.setCreateDate(new Date());
+        vo.setRelationState(CompanyEnum.adminInside.getValue());
+        return companyDao.relationCompany(vo);
+    }
 }

@@ -26,7 +26,18 @@ public class RoleTo implements Serializable {
     private String[] menus;
 
     private String menuStr;
+    /**
+     * 1 可以修改 2不能删除和修改
+     */
+    private String readOnly;
 
+    public String getReadOnly() {
+        return readOnly;
+    }
+
+    public void setReadOnly(String readOnly) {
+        this.readOnly = readOnly;
+    }
     public String[] getMenus() {
         return menus;
     }

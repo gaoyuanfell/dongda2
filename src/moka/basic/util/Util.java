@@ -29,6 +29,65 @@ public class Util {
         }
     }
 
+    private static StringBuffer Md5(String str){
+        try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(str.getBytes());
+            byte b[] = md.digest();
+            int i;
+            StringBuffer buf = new StringBuffer("");
+            for (int offset = 0; offset < b.length; offset++) {
+                i = b[offset];
+                if (i < 0)
+                    i += 256;
+                if (i < 16)
+                    buf.append("0");
+                buf.append(Integer.toHexString(i));
+            }
+            return buf;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public static String Md516(){
+        BigDecimal time = BigDecimal.valueOf(System.currentTimeMillis());
+        BigDecimal random = BigDecimal.valueOf(Math.floor(Math.random() * 1000));
+        BigDecimal str = time.add(random);
+        StringBuffer sb = Md5(str.toString());
+        if(sb != null){
+            return sb.toString().substring(8, 24);
+        }
+        return null;
+    }
+
+    public static String Md516(String str){
+        StringBuffer sb = Md5(str);
+        if(sb != null){
+            return sb.toString().substring(8, 24);
+        }
+        return null;
+    }
+
+    public static String Md532(){
+        BigDecimal time = BigDecimal.valueOf(System.currentTimeMillis());
+        BigDecimal random = BigDecimal.valueOf(Math.floor(Math.random() * 1000));
+        BigDecimal str = time.add(random);
+        StringBuffer sb = Md5(str.toString());
+        if(sb != null){
+            return sb.toString();
+        }
+        return null;
+    }
+
+    public static String Md532(String str){
+        StringBuffer sb = Md5(str);
+        if(sb != null){
+            return sb.toString();
+        }
+        return null;
+    }
+
     public static String getMd5String(String str){
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");

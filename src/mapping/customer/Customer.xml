@@ -52,7 +52,9 @@
 
     <!--作用于下拉-->
     <select id="findUseSelect" parameterType="moka.customer.vo.CustomerVo" resultType="moka.customer.to.CustomerTo">
-        SELECT c.id, c.name FROM t_customer c WHERE c.applicationId = #{applicationId} AND c.state != 1
+        SELECT c.id, c.name FROM t_customer c WHERE
+        c.applicationId = #{applicationId}
+        AND c.state != 1
         <if test="name != null and name != ''">
             AND c.name LIKE CONCAT('%',#{name},'%')
         </if>

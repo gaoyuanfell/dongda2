@@ -53,7 +53,7 @@ public class UserVo extends Page {
     /**
      * 公司ID
      */
-    private Integer companyId;
+    private int companyId;
 
     /**
      * 资源ID
@@ -73,11 +73,11 @@ public class UserVo extends Page {
         this.roles = roles;
     }
 
-    public Integer getCompanyId() {
+    public int getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Integer companyId) {
+    public void setCompanyId(int companyId) {
         this.companyId = companyId;
     }
 

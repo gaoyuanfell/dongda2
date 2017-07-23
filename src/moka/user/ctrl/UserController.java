@@ -156,6 +156,18 @@ public class UserController extends BasicController {
     }
 
     /**
+     * 查
+     *
+     * @return
+     */
+    @RequestMapping(value = "getUserMenu.htm",method = RequestMethod.GET)
+    @ResponseBody
+    public Object getUserMenu(){
+        UserTo to = getUserSession();
+        return result(to.getMenuTo());
+    }
+
+    /**
      * 用户修改
      * 
      * @param user
