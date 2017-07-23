@@ -1,9 +1,11 @@
 package moka.invoicePlan.vo;
 
+import moka.basic.page.Page;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class InvoicePlanVo {
+public class InvoicePlanVo extends Page{
     private int id;
     private Date createDate;
     private Date updateDate;

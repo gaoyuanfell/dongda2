@@ -13,4 +13,6 @@ import java.util.List;
 public interface InvoicePlanDao extends BasicDao<InvoicePlan, InvoicePlanTo> {
 
     int insertBatch(List<InvoicePlanVo> invoicePlans);
+
+    List<InvoicePlanTo> findByContract(int contractId);
 }

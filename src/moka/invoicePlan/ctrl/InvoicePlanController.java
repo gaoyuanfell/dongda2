@@ -1,32 +1,18 @@
 package moka.invoicePlan.ctrl;
 
 import moka.basic.annotation.IgnoreSecurity;
-import moka.basic.bo.Token;
 import moka.basic.ctrl.BasicController;
-import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
-import moka.contract.service.ContractService;
-import moka.contract.vo.ContractVo;
 import moka.invoicePlan.service.InvoicePlanService;
+import moka.invoicePlan.to.InvoicePlanTo;
 import moka.invoicePlan.vo.InvoicePlanVo;
-import moka.menu.service.MenuService;
-import moka.menu.to.MenuTo;
-import moka.user.service.UserService;
 import moka.user.to.UserTo;
-import moka.user.vo.UserVo;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -47,6 +33,38 @@ public class InvoicePlanController extends BasicController {
     }
 
     /**
+     * 计划开票修改
+     *
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "update.htm")
+    @ResponseBody
+    public Object update(@RequestBody InvoicePlanVo vo) {
+        int i = invoicePlanService.update(vo);
+        return result(i);
+    }
+
+    @RequestMapping(value = "findPage.htm")
+    @ResponseBody
+    @IgnoreSecurity
+    public Object findPage(@RequestBody InvoicePlanVo vo){
+        UserTo to = getUserSession();
+        vo.setApplicationId(to.getApplicationId());
+        Page list = invoicePlanService.findPage(vo);
+        return result(list);
+    }
+
+
+    @RequestMapping(value = "findOne.htm")
+    @ResponseBody
+    @IgnoreSecurity
+    public Object findOne(int id){
+        InvoicePlanTo to = invoicePlanService.findOne(id);
+        return result(to);
+    }
+
+    /**
      * 添加开票计划 批量
      */
     @RequestMapping(value = "insertBatch.htm")
@@ -55,6 +73,17 @@ public class InvoicePlanController extends BasicController {
     public Object insertBatch(@RequestBody List<InvoicePlanVo> invoicePlans) {
         int i = invoicePlanService.insertBatch(invoicePlans);
         return result(i);
+    }
+
+    /**
+     * 根据合同id获取开票计划
+     */
+    @RequestMapping(value = "findByContract.htm")
+    @ResponseBody
+    @IgnoreSecurity
+    public Object findByContract(int id){
+        List l = invoicePlanService.findByContract(id);
+        return result(l);
     }
 
 }

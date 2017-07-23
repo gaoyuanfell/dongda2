@@ -67,6 +67,10 @@
         </foreach>
     </insert>
 
+    <select id="findRepeatRole" parameterType="moka.role.vo.RoleVo" resultType="moka.role.to.RoleTo">
+        SELECT * FROM t_role r WHERE r.applicationId = #{applicationId} AND r.name = #{name}
+    </select>
+
     <!--作用于下拉-->
     <select id="findUseSelect" parameterType="moka.role.vo.RoleVo" resultType="moka.role.to.RoleTo">
         SELECT r.id, r.name FROM t_role r WHERE r.applicationId = #{applicationId} AND r.state != 1

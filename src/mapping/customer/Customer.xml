@@ -56,6 +56,9 @@
         <if test="name != null and name != ''">
             AND c.name LIKE CONCAT('%',#{name},'%')
         </if>
+        <if test="companyId != 0">
+            AND c.companyId = #{companyId}
+        </if>
     </select>
 
 </mapper>

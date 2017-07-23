@@ -20,6 +20,9 @@ public interface RoleService extends BasicService {
     int update(RoleVo vo);
 
     int delete(int id);
+
+    RoleTo findRepeatRole(RoleVo vo);
+
     /**
      * 角色关联菜单
      * @return

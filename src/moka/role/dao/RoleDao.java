@@ -13,6 +13,7 @@ import java.util.List;
  */
 @Repository("roleDao")
 public interface RoleDao extends BasicDao<Role, RoleTo> {
+    RoleTo findRepeatRole(RoleVo vo);
 
     int insertMenuOfRole(List<RoleVo> vo);
 

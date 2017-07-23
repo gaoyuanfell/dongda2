@@ -1,6 +1,8 @@
 package moka.contract.service;
 
+import moka.basic.page.Page;
 import moka.basic.service.BasicService;
+import moka.contract.to.ContractTo;
 import moka.contract.vo.ContractVo;
 import moka.user.to.UserTo;
 
@@ -10,11 +12,29 @@ public interface ContractService extends BasicService {
 
     int insert(ContractVo contract);
 
+    ContractTo findOne(Integer id);
+
+    Page findPage(ContractVo vo);
+
     /**
      * 批量添加合同
      * @param contracts
      * @return
      */
     int insertBatch(List<ContractVo> contracts);
+
+    /**
+     * 按合同号查询 即查询是否有相同的合同号
+     * @param vo contractNo
+     * @return
+     */
+    ContractTo findRepeatContract(ContractVo vo);
+
+    /**
+     * 作用于下拉
+     * @param vo contractNo
+     * @return
+     */
+    List<ContractTo> findUseSelect(ContractVo vo);
 
 }

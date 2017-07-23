@@ -11,6 +11,25 @@
         )
     </insert>
 
+    <update id="update" parameterType="moka.invoicePlan.bo.InvoicePlan">
+        UPDATE t_invoice_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="amt != null and amt != 0"> amt = #{amt}, </if>
+            <if test="planDate != null"> planDate = #{planDate}, </if>
+            <if test="planReceiveDate != null"> planReceiveDate = #{planReceiveDate}, </if>
+            <if test="updateDate != null"> updateDate = #{updateDate}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <select id="findOne" parameterType="Integer" resultType="moka.invoicePlan.to.InvoicePlanTo">
+        SELECT * FROM t_invoice_plan i WHERE i.id = #{id} AND i.state != 1;
+    </select>
+
+    <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.invoicePlan.to.InvoicePlanTo">
+        SELECT * FROM t_invoice_plan i WHERE i.applicationId = #{applicationId} AND i.state != 1 LIMIT #{pageStart} , #{pageSize};
+    </select>
+
     <!--批量添加-->
     <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_invoice_plan(
@@ -21,6 +40,11 @@
             (#{item.contractId},#{item.paymentPlanFact},#{item.versionNo},#{item.amt},#{item.planDate},#{item.planReceiveDate},#{item.receiveAmt},#{item.state},#{item.createDate},#{item.updateDate},#{item.planState})
         </foreach>
     </insert>
+
+    <!--根据合同id获取开票计划-->
+    <select id="findByContract" parameterType="Integer" resultType="moka.invoicePlan.to.InvoicePlanTo">
+        SELECT * FROM t_invoice_plan ip WHERE ip.contractId = #{contractId} AND ip.state != 1;
+    </select>
 
 
 </mapper>

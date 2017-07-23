@@ -68,6 +68,11 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     }
 
     @Override
+    public RoleTo findRepeatRole(RoleVo vo) {
+        return roleDao.findRepeatRole(vo);
+    }
+
+    @Override
     public int insertMenuOfRole(List<RoleVo> vo) {
         roleDao.deleteMenuOfRole(vo.get(0).getRoleId());
         return roleDao.insertMenuOfRole(vo);

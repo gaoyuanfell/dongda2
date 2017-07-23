@@ -1,13 +1,17 @@
 package moka.contract.service;
 
+import moka.basic.page.Page;
 import moka.basic.service.BasicServiceImpl;
 import moka.basic.util.Util;
 import moka.contract.bo.Contract;
 import moka.contract.dao.ContractDao;
 import moka.contract.enums.ContractEnum;
+import moka.contract.to.ContractTo;
 import moka.contract.vo.ContractVo;
+import moka.invoicePlan.enums.InvoicePlanEnum;
 import moka.invoicePlan.service.InvoicePlanService;
 import moka.invoicePlan.vo.InvoicePlanVo;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,40 +34,86 @@ public class ContractServiceImpl extends BasicServiceImpl implements ContractSer
         contract.setCreateDate(new Date());
         contract.setContactState(ContractEnum.initial.getValue());
         contractDao.insert(contract);
-        invoicePlanService.insertBatch(getPlanByContract(contract));
+        invoicePlanService.insertBatch(this.getPlanByContract(contract));
         return contract.getId();
+    }
+
+    @Override
+    public ContractTo findOne(Integer id) {
+        ContractTo to = contractDao.findOne(id);
+        if(to != null){
+            List l = invoicePlanService.findByContract(id);
+            to.setInvoicePlans(l);
+            return to;
+        }
+        return null;
     }
 
     @Override
     public int insertBatch(List<ContractVo> contracts) {
         //引入开票计划service 批量添加开票计划
-
-        return contractDao.insertBatch(contracts);
+        for (ContractVo vo : contracts) {
+            this.insert(vo);
+        }
+        return 1;
     }
 
-    public List<InvoicePlanVo> getPlanByContract(Contract contracts) {
+    @Override
+    public Page findPage(ContractVo vo) {
+        List list = contractDao.findPage(vo);
+        int count = contractDao.findCount(vo);
+        return new Page(vo.getPageIndex(),vo.getPageSize(),count, list);
+    }
+
+    @Override
+    public ContractTo findRepeatContract(ContractVo vo) {
+        return contractDao.findRepeatContract(vo);
+    }
+
+    @Override
+    public List<ContractTo> findUseSelect(ContractVo vo) {
+        return contractDao.findUseSelect(vo);
+    }
+
+    /**
+     * 根据合同你信息算出默认开票计划。
+     * @param contracts
+     * @return
+     */
+    @Nullable
+    private List<InvoicePlanVo> getPlanByContract(Contract contracts) {
         List<InvoicePlanVo> vos = new ArrayList<>();
         int s = contracts.getPaymentNum();
         Date start = contracts.getStartDate();
-        Calendar sc = Calendar.getInstance();
-        sc.setTime(start);
-        BigDecimal amts = contracts.getAmt();
         Date end = contracts.getEndDate();
+
+        Calendar sc = null;
+        //按次数分配开票计划的天数范围
+        List<Integer> days = null;
         if (s > 0 && start != null && end != null) {
-            int d = Util.differentDay(start,end);
-            List<Integer> days = averageDay(d,s);
+            sc = Calendar.getInstance();
+            sc.setTime(start);
+            int d = Util.differentDay(start, end);
+            days = averageDay(d, s);
+        }
+
+        if (days != null) {
+            BigDecimal amts = contracts.getAmt();
+            //按次数分配开票计划的金额
+            List<BigDecimal> bs = Util.average(amts, days.size());
             int index = 0;
-            for (Integer day : days){
+            for (Integer day : days) {
                 index++;
                 InvoicePlanVo planVo = new InvoicePlanVo();
                 planVo.setCreateDate(new Date());
                 planVo.setContractId(contracts.getId());
-                sc.add(Calendar.DATE,day);
+                sc.add(Calendar.DATE, day);
                 planVo.setPlanDate(sc.getTime());
                 planVo.setPlanReceiveDate(sc.getTime());
                 planVo.setPaymentPlanFact(index);
-                planVo.setAmt(amts);
+                planVo.setAmt(bs.get(index - 1));
                 planVo.setApplicationId(contracts.getApplicationId());
+                planVo.setPlanState(InvoicePlanEnum.initial.getValue());
                 vos.add(planVo);
             }
             return vos;
@@ -71,24 +121,30 @@ public class ContractServiceImpl extends BasicServiceImpl implements ContractSer
         return null;
     }
 
-    public List<Integer> averageDay(int day, int divisor){
-        if(day > divisor){
+    /**
+     * 按开票次数平均分配天数，最后一天补满
+     * @param day
+     * @param divisor
+     * @return
+     */
+    @Nullable
+    private List<Integer> averageDay(int day, int divisor) {
+        if (day > divisor) {
             List<Integer> ins = new ArrayList<>();
             int a = day % divisor;
-            if(a == 0){
+            if (a == 0) {
                 int b = day / divisor;
-                while (divisor != 0){
+                while (divisor != 0) {
                     --divisor;
                     ins.add(b);
                 }
                 return ins;
-            }else{
+            } else {
                 a = day / divisor;
-                for (int c = divisor; c > 0; --c){
-                    ins.add(a);
-                    if(c == 1){
+                for (int c = divisor; c > 0; --c) {
+                    if (c == 1) {
                         ins.add(day - a * (divisor - 1));
-                    }else{
+                    } else {
                         ins.add(a);
                     }
                 }

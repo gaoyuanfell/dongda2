@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository("contractDao")
 public interface ContractDao extends BasicDao<Contract, ContractTo> {
+    ContractTo findRepeatContract(ContractVo vo);
 
-    int insertBatch(List<ContractVo> contracts);
-
+    List<ContractTo> findUseSelect(ContractVo vo);
 }

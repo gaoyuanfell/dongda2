@@ -10,6 +10,10 @@
         )
     </insert>
 
+    <select id="findOne" parameterType="Integer" resultType="moka.contract.to.ContractTo">
+        SELECT * FROM t_contract c WHERE c.id = #{id} AND c.state != 1;
+    </select>
+
     <select id="findCount" resultType="Integer">
         SELECT COUNT(id) FROM t_contract c
         WHERE c.applicationId = #{applicationId} AND c.state != 1
@@ -18,7 +22,7 @@
         </if>
     </select>
 
-    <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.contract.bo.Contract">
+    <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.contract.to.ContractTo">
         SELECT * FROM t_contract c
         WHERE c.applicationId = #{applicationId} AND c.state != 1
         <if test="contractNo != null and contractNo != ''">
@@ -27,14 +31,28 @@
         LIMIT #{pageStart} , #{pageSize};
     </select>
 
+    <!--作用于下拉 -->
+    <select id="findUseSelect" parameterType="moka.contract.vo.ContractVo" resultType="moka.contract.to.ContractTo">
+        SELECT c.id, c.contractNo FROM t_contract c WHERE
+        c.applicationId = #{applicationId} AND c.state != 1
+        <if test="companyName != null and companyName != ''">
+            AND c.contractNo LIKE
+            CONCAT('%',#{contractNo},'%')
+        </if>
+    </select>
+
+    <select id="findRepeatContract" parameterType="moka.contract.vo.ContractVo" resultType="moka.contract.to.ContractTo">
+        SELECT * FROM  t_contract c WHERE c.contractNo = #{contractNo}
+    </select>
+
     <!--批量添加合同-->
-    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+    <!--<insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_contract (
           createDate, updateDate, state, contractNo, versionNo, companyIdA, companyContractIdA, companyIdB, companyContarctIdB, companyIdC, companyContractIdC, signDate, startDate, endDate, itemName, item, amt, applicationId, contactType, contactState, remark, paymentNum
         ) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.createDate},#{item.updateDate},#{item.state},#{item.contractNo},#{item.versionNo},#{item.companyIdA},#{item.companyContractIdA},#{item.companyIdB},#{item.companyContarctIdB},#{item.companyIdC},#{item.companyContractIdC},#{item.signDate},#{item.startDate},#{item.endDate},#{item.itemName},#{item.item},#{item.amt},#{item.applicationId},#{item.contactType},#{item.contactState},#{item.remark},#{item.paymentNum})
         </foreach>
-    </insert>
+    </insert>-->
 
 </mapper>

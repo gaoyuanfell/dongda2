@@ -33,8 +33,13 @@ public class RoleController extends BasicController {
     public Object insert(@RequestBody RoleVo vo){
         UserTo userTo = getUserSession();
         vo.setApplicationId(userTo.getApplicationId());
-        int i = roleService.insert(vo);
-        return result(i);
+        RoleTo to = roleService.findRepeatRole(vo);
+        if(to == null){
+            int i = roleService.insert(vo);
+            return result(i);
+        }else{
+            return result(CODE_PROMPT,"角色名称不能重复");
+        }
     }
 
     /**

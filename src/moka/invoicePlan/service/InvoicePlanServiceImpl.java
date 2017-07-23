@@ -2,7 +2,9 @@ package moka.invoicePlan.service;
 
 import javax.annotation.Resource;
 
+import moka.basic.page.Page;
 import moka.contract.vo.ContractVo;
+import moka.invoicePlan.to.InvoicePlanTo;
 import org.springframework.stereotype.Service;
 
 import moka.basic.service.BasicServiceImpl;
@@ -27,8 +29,31 @@ public class InvoicePlanServiceImpl extends BasicServiceImpl implements InvoiceP
     }
 
     @Override
+    public int update(InvoicePlanVo vo) {
+        InvoicePlan invoicePlan = this.convertBusinessValue(vo, InvoicePlan.class);
+        invoicePlan.setUpdateDate(new Date());
+        return invoicePlanDao.update(invoicePlan);
+    }
+
+    @Override
+    public InvoicePlanTo findOne(int id) {
+        return invoicePlanDao.findOne(id);
+    }
+
+    @Override
+    public Page findPage(InvoicePlanVo vo) {
+        List list = invoicePlanDao.findPage(vo);
+        int count = invoicePlanDao.findCount(vo);
+        return new Page(vo.getPageIndex(),vo.getPageSize(),count, list);
+    }
+
+    @Override
     public int insertBatch(List<InvoicePlanVo> invoicePlans) {
         return invoicePlanDao.insertBatch(invoicePlans);
     }
 
+    @Override
+    public List<InvoicePlanTo> findByContract(int contractId) {
+        return invoicePlanDao.findByContract(contractId);
+    }
 }

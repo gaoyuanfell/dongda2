@@ -2,6 +2,7 @@ package moka.contract.to;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class ContractTo {
     private int id;
@@ -85,6 +86,19 @@ public class ContractTo {
      * 付款期数
      */
     private int paymentNum;
+
+    /**
+     * 开票计划
+     */
+    private List invoicePlans;
+
+    public List getInvoicePlans() {
+        return invoicePlans;
+    }
+
+    public void setInvoicePlans(List invoicePlans) {
+        this.invoicePlans = invoicePlans;
+    }
 
     public int getPaymentNum() {
         return paymentNum;

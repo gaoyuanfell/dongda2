@@ -22,7 +22,5 @@ public interface UserDao extends BasicDao<User, UserTo> {
 
     int checkEmail(UserVo vo);
 
-    int insertSysUser(User user);
-
     List findAllCom(UserVo vo);
 }
