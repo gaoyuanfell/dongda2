@@ -68,12 +68,12 @@
         </if>
     </select>
 
-    <!--作用于下拉 全部有效数据 -->
+    <!--作用于下拉 全部有效数据 普通公司获取财务公司 AND c.applicationId != #{applicationId}-->
     <select id="findUseAllSelect" parameterType="moka.company.vo.CompanyVo" resultType="moka.company.to.CompanyTo">
         SELECT c.id, c.companyName FROM t_company c WHERE
         c.state != 1
         AND c.companyBelong = #{companyBelong}
-        AND c.applicationId != #{applicationId}
+        AND c.companyType = '2'
         <if test="companyName != null and companyName != ''">
             AND c.companyName LIKE
             CONCAT('%',#{companyName},'%')

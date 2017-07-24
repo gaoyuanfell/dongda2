@@ -64,4 +64,11 @@ public interface UserService extends BasicService {
      * @return
      */
     int checkEmail(UserVo vo);
+
+    /**
+     * 用于下拉
+     * @param vo
+     * @return
+     */
+    List<UserTo> findUseSelect(UserVo vo);
 }

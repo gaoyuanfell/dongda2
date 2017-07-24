@@ -21,4 +21,6 @@ public interface UserDao extends BasicDao<User, UserTo> {
     int checkPhone(UserVo vo);
 
     int checkEmail(UserVo vo);
+
+    List<UserTo> findUseSelect(UserVo vo);
 }

@@ -22,7 +22,7 @@ public class Role extends IdEntity implements Serializable {
     private String applicationId;
 
     /**
-     * 1 可以修改 2不能删除和修改
+     * 1 可以修改 2不能删除和修改 3不可查看
      */
     private String readOnly;
 

@@ -260,4 +260,20 @@ public class UserController extends BasicController {
         else
             return result(CODE_PROMPT, "注销登录失败");
     }
+
+    /**
+     * 作用于下拉 搜索条件
+     * {
+     *     name:''
+     * }
+     *
+     */
+    @RequestMapping(value = "findUseSelect.htm")
+    @ResponseBody
+    public Object findUseSelect(@RequestBody UserVo vo){
+        UserTo to = getUserSession();
+        vo.setApplicationId(to.getApplicationId());
+        List<UserTo> list = userService.findUseSelect(vo);
+        return result(list);
+    }
 }

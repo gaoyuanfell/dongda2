@@ -11,20 +11,28 @@
     </insert>
 
     <select id="findOne" parameterType="Integer" resultType="moka.contract.to.ContractTo">
-        SELECT * FROM t_contract c WHERE c.id = #{id} AND c.state != 1;
+        SELECT c.*,coa.companyName companyIdaName,cob.companyName companyIdbName,cu.name companyContractIdaName,u.name companyContractIdbName FROM t_contract c
+        LEFT JOIN t_company coa ON c.companyIdA = coa.id
+        LEFT JOIN t_company cob ON c.companyIdB = cob.id
+        LEFT JOIN t_customer cu ON c.companyContractIdA = cu.id
+        LEFT JOIN t_user u ON c.companyContractIdB = u.id
+        WHERE c.id = #{id} AND c.state != 1;
     </select>
 
     <select id="findCount" resultType="Integer">
         SELECT COUNT(id) FROM t_contract c
-        WHERE c.applicationId = #{applicationId} AND c.state != 1
+        WHERE 1=1
+        AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companyIdB = ca.companyId))
+        AND c.state != 1
         <if test="contractNo != null and contractNo != ''">
             AND c.contractNo LIKE CONCAT('%',#{contractNo},'%')
         </if>
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.contract.to.ContractTo">
-        SELECT * FROM t_contract c
-        WHERE c.applicationId = #{applicationId} AND c.state != 1
+        SELECT * FROM t_contract c WHERE 1=1
+        AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companyIdB = ca.companyId))
+        AND c.state != 1
         <if test="contractNo != null and contractNo != ''">
             AND c.contractNo LIKE CONCAT('%',#{contractNo},'%')
         </if>

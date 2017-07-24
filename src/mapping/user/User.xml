@@ -11,7 +11,7 @@
     </insert>
 
     <delete id="delete" parameterType="Integer">
-        DELETE FROM t_user WHERE id = #{id};
+        DELETE FROM t_user WHERE 1 = 1 AND id = #{id};
     </delete>
 
     <update id="update" parameterType="moka.user.bo.User">
@@ -23,7 +23,7 @@
           <if test="employeeNo != null and employeeNo != ''"> employeeNo = #{employeeNo}, </if>
           <if test="updateDate != null"> updateDate = #{updateDate}, </if>
         </trim>
-        WHERE id = #{id}
+        WHERE 1 = 1 AND id = #{id}
     </update>
 
     <resultMap id="map" type="moka.user.to.UserTo">
@@ -31,19 +31,19 @@
     </resultMap>
 
     <select id="findOne" parameterType="Integer" resultType="moka.user.to.UserTo">
-        SELECT * FROM t_user WHERE id = #{id};
+        SELECT * FROM t_user WHERE 1 = 1 AND id = #{id};
     </select>
 
     <select id="findCount" parameterType="moka.basic.page.Page" resultType="Integer">
-        SELECT COUNT(id) FROM t_user u WHERE u.applicationId = #{applicationId} AND u.state != 1;
+        SELECT COUNT(id) FROM t_user u WHERE 1 = 1 AND u.applicationId = #{applicationId} AND u.state != 1;
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultMap="map">
-        SELECT * FROM t_user u WHERE u.applicationId = #{applicationId} AND u.state != 1 LIMIT #{pageStart} , #{pageSize};
+        SELECT * FROM t_user u WHERE 1 = 1 AND u.applicationId = #{applicationId} AND u.state != 1 LIMIT #{pageStart} , #{pageSize};
     </select>
 
     <select id="findList" parameterType="moka.basic.page.Page" resultType="moka.user.to.UserTo">
-        SELECT * FROM t_user u WHERE u.applicationId = #{applicationId} AND u.state != 1;
+        SELECT * FROM t_user u WHERE 1 = 1 AND u.applicationId = #{applicationId} AND u.state != 1;
     </select>
 
     <!--登录-->
@@ -64,6 +64,17 @@
     <!--查询重复用户-->
     <select id="findRepeatUser" parameterType="moka.user.vo.UserVo" resultType="Integer">
         SELECT COUNT(*) FROM t_user u WHERE 1 = 1 AND (u.phoneNumber = #{phoneNumber} OR u.mail = #{mail})
+    </select>
+
+    <!--作用于下拉-->
+    <select id="findUseSelect" parameterType="moka.user.vo.UserVo" resultType="moka.user.to.UserTo">
+        SELECT c.id, c.name FROM t_user c WHERE 1=1
+        AND c.applicationId = #{applicationId}
+        AND c.state != 1
+        AND c.readOnly != '3'
+        <if test="name != null and name != ''">
+            AND c.name LIKE CONCAT('%',#{name},'%')
+        </if>
     </select>
 
 </mapper>

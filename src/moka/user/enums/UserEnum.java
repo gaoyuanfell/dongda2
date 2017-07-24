@@ -1,8 +1,8 @@
-package moka.role.enums;
+package moka.user.enums;
 
 import org.jetbrains.annotations.Contract;
 
-public enum RoleEnum {
+public enum UserEnum {
     updateOnly("修改","1"),
     readOnly("只读","2"),
     watchOnly("不可查看","3"),
@@ -10,7 +10,7 @@ public enum RoleEnum {
     private String name;
     private String value;
 
-    RoleEnum(String name, String value) {
+    UserEnum(String name, String value) {
         this.name = name;
         this.value = value;
     }

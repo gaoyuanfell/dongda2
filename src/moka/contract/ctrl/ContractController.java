@@ -32,7 +32,7 @@ public class ContractController extends BasicController {
         vo.setApplicationId(user.getApplicationId());
         ContractTo to = contractService.findRepeatContract(vo);
         if (to != null) {
-            return result(CODE_PROMPT,String.format("合同号：%s 已存在。", vo.getContractNo()));
+            return result(CODE_PROMPT,String.format("合同号：%s 已存在。\n", vo.getContractNo()));
         }
         int i = contractService.insert(vo);
         return result(i);
@@ -70,7 +70,7 @@ public class ContractController extends BasicController {
             vo.setApplicationId(user.getApplicationId());
             ContractTo to = contractService.findRepeatContract(vo);
             if (to != null) {
-                String s = String.format("合同号：%s 已存在。", to.getContractNo());
+                String s = String.format("合同号：%s 已存在。\n", to.getContractNo());
                 msg = msg.concat(s);
             }
         }

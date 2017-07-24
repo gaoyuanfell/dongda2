@@ -13,6 +13,7 @@ import moka.role.to.RoleTo;
 import moka.role.vo.RoleVo;
 import moka.user.bo.User;
 import moka.user.dao.UserDao;
+import moka.user.enums.UserEnum;
 import moka.user.to.UserTo;
 import moka.user.vo.UserVo;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,6 +59,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         user.setName("管理员");
         user.setEmployeeNo("1");
         user.setCreateDate(new Date());
+        user.setReadOnly(UserEnum.watchOnly.getValue());
         user.setPassword(Util.getMd5String(user.getPassword().concat(DATA_PASSWORD_SALT)));
         userDao.insert(user);
 
@@ -160,5 +162,10 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     @Override
     public int checkEmail(UserVo vo) {
         return userDao.checkEmail(vo);
+    }
+
+    @Override
+    public List<UserTo> findUseSelect(UserVo vo) {
+        return userDao.findUseSelect(vo);
     }
 }

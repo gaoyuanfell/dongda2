@@ -4,9 +4,9 @@
 
     <insert id="insert" parameterType="moka.customer.bo.Customer" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_customer (
-        name, companyId, birthday, sex, contactAddress, contactTel, jobLevel, email, createDate, updateDate, state
+        name, companyId, birthday, sex, contactAddress, contactTel, jobLevel, email, createDate, updateDate, state,applicationId
         ) VALUES (
-        #{name},#{companyId},#{birthday},#{sex},#{contactAddress},#{contactTel},#{jobLevel},#{email},#{createDate},#{updateDate},#{state}
+        #{name},#{companyId},#{birthday},#{sex},#{contactAddress},#{contactTel},#{jobLevel},#{email},#{createDate},#{updateDate},#{state},#{applicationId}
         )
     </insert>
 

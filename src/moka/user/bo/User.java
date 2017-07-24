@@ -32,15 +32,15 @@ public class User extends IdEntity implements Serializable {
     /**
      * 员工编号
      */
-    private String employeeNo;
+    private String employeeNo = "";
     /**
      * 现住地址
      */
-    private String currAddress;
+    private String currAddress = "";
     /**
      * 家庭住址
      */
-    private String homeAdress;
+    private String homeAdress = "";
     /**
      * 出生日期
      */
@@ -53,11 +53,22 @@ public class User extends IdEntity implements Serializable {
      * 公司ID
      */
     private int companyId;
-
     /**
      * 资源ID
      */
     private String applicationId;
+    /**
+     * 1 可以修改 2不能删除和修改 3不可查看
+     */
+    private String readOnly = "";
+
+    public String getReadOnly() {
+        return readOnly;
+    }
+
+    public void setReadOnly(String readOnly) {
+        this.readOnly = readOnly;
+    }
 
     public int getCompanyId() {
         return companyId;

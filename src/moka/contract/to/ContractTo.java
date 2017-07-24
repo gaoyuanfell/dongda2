@@ -91,6 +91,54 @@ public class ContractTo {
      * 开票计划
      */
     private List invoicePlans;
+    /**
+     * 甲公司名称
+     */
+    private String companyIdaName;
+    /**
+     * 乙公司名称
+     */
+    private String companyIdbName;
+    /**
+     * 甲公司客户
+     */
+    private String companyContractIdaName;
+    /**
+     * 销售
+     */
+    private String companyContractIdbName;
+
+    public String getCompanyIdaName() {
+        return companyIdaName;
+    }
+
+    public void setCompanyIdaName(String companyIdaName) {
+        this.companyIdaName = companyIdaName;
+    }
+
+    public String getCompanyIdbName() {
+        return companyIdbName;
+    }
+
+    public void setCompanyIdbName(String companyIdbName) {
+        this.companyIdbName = companyIdbName;
+    }
+
+    public String getCompanyContractIdaName() {
+        return companyContractIdaName;
+    }
+
+    public void setCompanyContractIdaName(String companyContractIdaName) {
+        this.companyContractIdaName = companyContractIdaName;
+    }
+
+    public String getCompanyContractIdbName() {
+        return companyContractIdbName;
+    }
+
+    public void setCompanyContractIdbName(String companyContractIdbName) {
+        this.companyContractIdbName = companyContractIdbName;
+    }
 
     public List getInvoicePlans() {
         return invoicePlans;
