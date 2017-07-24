@@ -40,4 +40,18 @@ public interface CompanyService extends BasicService {
      */
     int relationCompany(CompanyVo vo);
 
+    /**
+     * 根据公司id获取关联的财务公司
+     * @param companyId
+     * @return
+     */
+    CompanyTo findRelationByComId(int companyId);
+
+    /**
+     * 根据财务公司ID获取被管理的业务公司集合
+     * @param relationId
+     * @return
+     */
+    List<CompanyTo> findComByRelationId(int relationId);
+
 }

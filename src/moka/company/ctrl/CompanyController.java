@@ -142,7 +142,7 @@ public class CompanyController extends BasicController {
 
 
     /**
-     * 财务公司关联其他业务公司
+     * 业务公司关联财务公司
      * @param vo
      * @return
      */
@@ -156,6 +156,29 @@ public class CompanyController extends BasicController {
             return result(i);
         }
         return result(CODE_PROMPT,"关联失败");
+    }
+
+    /**
+     * 根据公司id获取关联的财务公司
+     * @param companyId
+     * @return
+     */
+    @RequestMapping(value = "findRelationByComId.htm")
+    @ResponseBody
+    public Object findRelationByComId(int companyId){
+        return null;
+    }
+
+
+    /**
+     * 根据财务公司ID获取被管理的业务公司集合
+     * @param relationId
+     * @return
+     */
+    @RequestMapping(value = "findComByRelationId.htm")
+    @ResponseBody
+    public Object findComByRelationId(int relationId){
+        return null;
     }
 
 

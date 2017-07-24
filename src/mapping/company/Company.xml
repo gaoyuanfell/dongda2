@@ -89,5 +89,15 @@
         )
     </insert>
 
+    <!--根据公司id获取关联的财务公司-->
+    <select id="findRelationByComId" parameterType="Integer" resultType="moka.company.to.CompanyTo">
+        SELECT c.*,ca.relationState from t_company c LEFT JOIN r_company_admin ca ON ca.companyId = c.id WHERE ca.companyId = #{companyId}
+    </select>
+
+    <!--根据财务公司ID获取被管理的业务公司集合-->
+    <select id="findComByRelationId" parameterType="Integer" resultType="moka.company.to.CompanyTo">
+        SELECT c.*,ca.relationState FROM t_company c LEFT JOIN r_company_admin ca ON ca.companyId = c.id WHERE ca.companyAdminId = #{relationId}
+    </select>
+
 
 </mapper>

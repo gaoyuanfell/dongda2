@@ -65,4 +65,14 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
         vo.setRelationState(CompanyEnum.adminInside.getValue());
         return companyDao.relationCompany(vo);
     }
+
+    @Override
+    public CompanyTo findRelationByComId(int companyId) {
+        return companyDao.findRelationByComId(companyId);
+    }
+
+    @Override
+    public List<CompanyTo> findComByRelationId(int relationId) {
+        return companyDao.findComByRelationId(relationId);
+    }
 }
