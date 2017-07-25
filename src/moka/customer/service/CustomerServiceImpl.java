@@ -29,7 +29,8 @@ public class CustomerServiceImpl extends BasicServiceImpl implements CustomerSer
     public int insert(CustomerVo vo) {
         Customer customer = this.convertBusinessValue(vo,Customer.class);
         customer.setCreateDate(new Date());
-        return customerDao.insert(customer);
+        customerDao.insert(customer);
+        return customer.getId();
     }
 
     @Override

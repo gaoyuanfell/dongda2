@@ -4,16 +4,24 @@
 
     <insert id="insert" parameterType="moka.salesPlan.bo.SalesPlan"
         useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_contract (
+        INSERT INTO t_sales_plan (
         buyComId, comContactsId, contractName, remarks, amt,
         userId,
-        comId, signDate
-        remark, paymentNum
+        comId, signDate,state,createDate,updateDate
         ) VALUES (
         #{buyComId},#{comContactsId},#{contractName},#{remarks},#{amt},#{userId},#{comId},#{signDate},
-        #{remark},#{paymentNum}
+        #{state},#{createDate},#{updateDate}
         )
     </insert>
+
+    <select id="checkSalesPlan" parameterType="moka.salesPlan.bo.SalesPlan"
+        resultType="moka.salesPlan.to.SalesPlanTo">
+        SELECT
+        c.buyComId,c.comContactsId,c.contractName,c.remarks,c.amt,c.userId,c.signDate
+        FROM t_sales_plan c WHERE
+        c.state != 1
+        AND c.comId = #{comId}
+    </select>
 
 
 </mapper>
