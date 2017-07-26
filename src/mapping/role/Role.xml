@@ -53,17 +53,17 @@
 
     <!--角色关联菜单-->
     <insert id="insertMenuOfRole" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO r_menu_role (roleId, menuId) VALUES
+        INSERT INTO r_menu_role (roleId, menuId,createDate) VALUES
         <foreach collection="list" item="item" index="index" separator =",">
-            (#{item.roleId},#{item.menuId})
+            (#{item.roleId},#{item.menuId},NOW())
         </foreach>
     </insert>
 
     <!--用户关联角色-->
     <insert id="insertRoleOfUser" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO r_role_user (roleId, userId) VALUES
+        INSERT INTO r_role_user (roleId, userId,createDate) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.roleId},#{item.userId})
+            (#{item.roleId},#{item.userId},NOW())
         </foreach>
     </insert>
 
