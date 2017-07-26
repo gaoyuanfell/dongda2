@@ -62,16 +62,18 @@ public class SalesPlanController extends BasicController {
                     salesPlan.setBuyComId(co.getId());
                 }
             } else {
-                comId = companyService.insert(company);
-                salesPlan.setBuyComId(comId);
+                //comId = companyService.insert(company);
+                //salesPlan.setBuyComId(comId);
+                return result("参数错误");
             }
             if (cus.size() != 0) {
                 for (CustomerTo cu : cus) {
                     salesPlan.setComContactsId(cu.getId());
                 }
             } else {
-                customer.setCompanyId(salesPlan.getBuyComId());
-                salesPlan.setComContactsId(customerService.insert(customer));
+                //customer.setCompanyId(salesPlan.getBuyComId());
+                //salesPlan.setComContactsId(customerService.insert(customer));
+                return result("参数错误");
             }
             salesPlanService.insert(salesPlan);
             return result(CODE_SUCCESS, "添加成功");
