@@ -10,6 +10,8 @@ import moka.company.vo.CompanyVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -74,5 +76,34 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
     @Override
     public List<CompanyTo> findComByRelationId(int relationId) {
         return companyDao.findComByRelationId(relationId);
+    }
+
+    @Override
+    public int insertComOfUser(int id, int companyId) {
+        if(id>0 && companyId>0){
+            CompanyVo company =new CompanyVo();
+            company.setCompanyId(companyId);
+            company.setUserId(id);
+            company.setCreateDate(new Date());
+            return companyDao.insertComOfUser(company);
+        }
+        return 0;
+    }
+
+    @Override
+    public int findComIdByName(CompanyVo company) {
+        List<CompanyTo> com =companyDao.findComIdByUser(company.getUserId());
+        for(CompanyTo co : com){
+            CompanyTo c = companyDao.findOne(co.getCompanyId());
+            if(company.getCompanyName().equals(c.getCompanyName())){
+                return co.getCompanyId();
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public List<CompanyTo> findComIdByUser(int id) {
+        return companyDao.findComIdByUser(id);
     }
 }

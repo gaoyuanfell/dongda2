@@ -66,7 +66,10 @@ public class UserVo extends Page {
      * 1 可以修改 2不能删除和修改 3不可查看
      */
     private String readOnly;
-
+    /**
+     * 公司名称
+     */
+    private String companyName;
     public String getReadOnly() {
         return readOnly;
     }
@@ -200,5 +203,13 @@ public class UserVo extends Page {
 
     public void setIdCardNo(String idCardNo) {
         this.idCardNo = idCardNo;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }

@@ -53,5 +53,22 @@ public interface CompanyService extends BasicService {
      * @return
      */
     List<CompanyTo> findComByRelationId(int relationId);
-
+    
+    /**
+     * 关联员工id和公司id
+     * @param id
+     * @param companyId
+     * @return
+     */
+    int insertComOfUser(int id, int companyId);
+    
+    /**
+     * 根据公司名称获取公司id
+     */
+    int findComIdByName(CompanyVo company);
+    
+    /**
+     * 查找和自己有关系的公司ID
+     */
+    List<CompanyTo> findComIdByUser(int id);
 }

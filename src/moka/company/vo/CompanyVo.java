@@ -73,7 +73,10 @@ public class CompanyVo extends Page {
      * 关联状态
      */
     private String relationState;
-
+    /**
+     * 所属员工id
+     */
+    private int userId; 
     public int getId() {
         return id;
     }
@@ -216,5 +219,13 @@ public class CompanyVo extends Page {
 
     public void setRelationState(String relationState) {
         this.relationState = relationState;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

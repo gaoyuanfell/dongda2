@@ -5,6 +5,7 @@ import moka.basic.service.BasicServiceImpl;
 import moka.basic.util.Util;
 import moka.company.bo.Company;
 import moka.company.dao.CompanyDao;
+import moka.company.service.CompanyService;
 import moka.menu.dao.MenuDao;
 import moka.menu.to.MenuTo;
 import moka.role.enums.RoleEnum;
@@ -32,8 +33,10 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
 
     @Resource
     private UserDao userDao;
-//    @Resource
-//    private CompanyDao companyDao;
+    //@Resource
+    //private CompanyDao companyDao;
+    @Resource
+    private CompanyService companyService;
     @Resource
     private RoleService roleService;
     @Resource
@@ -96,6 +99,8 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         user.setPassword(Util.getMd5String(Util.getMd5String(DATA_PASSWORD_DEFAULT).concat(DATA_PASSWORD_SALT)));
         userDao.insert(user);
         roleService.insertRoleOfUser(user.getId(),vo.getRoles());//关联角色
+        //关联公司
+        companyService.insertComOfUser(user.getId(),vo.getCompanyId());
         return user.getId();
     }
 

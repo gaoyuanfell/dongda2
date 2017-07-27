@@ -98,6 +98,15 @@
     <select id="findComByRelationId" parameterType="Integer" resultType="moka.company.to.CompanyTo">
         SELECT c.*,ca.relationState FROM t_company c LEFT JOIN r_company_admin ca ON ca.companyId = c.id WHERE ca.companyAdminId = #{relationId}
     </select>
+    
+    <!--用户关联公司-->
+    <insert id="insertComOfUser" parameterType="moka.company.vo.CompanyVo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO r_company_user (companyId, userId , createDate) VALUES
+            (#{companyId},#{userId},#{createDate})
+    </insert>
 
-
+    <!-- 查找所有和自己有关联的公司ID -->
+    <select id="findComIdByUser" parameterType="Integer" resultType="moka.company.to.CompanyTo">
+        SELECT companyId FROM r_company_user WHERE userId = #{userId}
+    </select>
 </mapper>

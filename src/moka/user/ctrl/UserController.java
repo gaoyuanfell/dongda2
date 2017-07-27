@@ -104,14 +104,22 @@ public class UserController extends BasicController {
     @RequestMapping(value = "insertSysUser.htm")
     @ResponseBody
     public Object insertSysUser(@RequestBody UserVo user) {
-        int n = userService.findRepeatUser(user);
-        if (n > 0) {
-            return result(CODE_PROMPT, "用户名已存在！");
-        }
         UserTo to = getUserSession();
-        user.setApplicationId(to.getApplicationId());
-        userService.insertSysUser(user);
-        return result(CODE_SUCCESS, "创建成功，请登录");
+        CompanyVo com = new CompanyVo();
+        com.setCompanyName(user.getCompanyName());
+        com.setUserId(to.getId());
+        user.setCompanyId(companyService.findComIdByName(com));
+        while (user.getCompanyId()>0 && user.getCompanyName() != null) {
+            int n = userService.findRepeatUser(user);
+            if (n > 0) {
+                return result(CODE_PROMPT, "用户名已存在！");
+            }
+            //UserTo to = getUserSession();
+            user.setApplicationId(to.getApplicationId());
+            userService.insertSysUser(user);
+            return result(CODE_SUCCESS, "创建成功，请登录");
+        }
+        return result(CODE_SUCCESS, "参数错误");
     }
 
     /**
@@ -160,9 +168,9 @@ public class UserController extends BasicController {
      *
      * @return
      */
-    @RequestMapping(value = "getUserMenu.htm",method = RequestMethod.GET)
+    @RequestMapping(value = "getUserMenu.htm", method = RequestMethod.GET)
     @ResponseBody
-    public Object getUserMenu(){
+    public Object getUserMenu() {
         UserTo to = getUserSession();
         return result(to.getMenuTo());
     }
@@ -262,15 +270,12 @@ public class UserController extends BasicController {
     }
 
     /**
-     * 作用于下拉 搜索条件
-     * {
-     *     name:''
-     * }
+     * 作用于下拉 搜索条件 { name:'' }
      *
      */
     @RequestMapping(value = "findUseSelect.htm")
     @ResponseBody
-    public Object findUseSelect(@RequestBody UserVo vo){
+    public Object findUseSelect(@RequestBody UserVo vo) {
         UserTo to = getUserSession();
         vo.setApplicationId(to.getApplicationId());
         List<UserTo> list = userService.findUseSelect(vo);

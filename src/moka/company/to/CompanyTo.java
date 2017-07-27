@@ -64,6 +64,8 @@ public class CompanyTo implements Serializable {
      * 关联状态
      */
     private String relationState;
+    
+    private int companyId;
 
     public String getRelationState() {
         return relationState;
@@ -190,5 +192,13 @@ public class CompanyTo implements Serializable {
 
     public void setCompanyType(String companyType) {
         this.companyType = companyType;
+    }
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 }
