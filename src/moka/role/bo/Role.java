@@ -26,6 +26,19 @@ public class Role extends IdEntity implements Serializable {
      */
     private String readOnly;
 
+    /**
+     * 公司ID
+     */
+    private int companyId;
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+
     public String getReadOnly() {
         return readOnly;
     }

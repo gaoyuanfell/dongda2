@@ -25,5 +25,7 @@ public interface CompanyDao extends BasicDao<Company, CompanyTo> {
 
     int insertComOfUser(CompanyVo company);
 
+    List<Integer> findCompanyIdByUser(int userId);
+
     List<CompanyTo> findComIdByUser(int userId);
 }

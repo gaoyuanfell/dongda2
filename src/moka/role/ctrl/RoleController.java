@@ -1,5 +1,7 @@
 package moka.role.ctrl;
 
+import moka.basic.annotation.MetaDataSecurity;
+import moka.basic.aspect.MetaData;
 import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
@@ -74,7 +76,6 @@ public class RoleController extends BasicController {
         }
     }
 
-
     /**
      * 根据id查找
      */
@@ -85,13 +86,12 @@ public class RoleController extends BasicController {
         return result(to);
     }
 
-
     /**
      * 查 分页
      */
     @RequestMapping(value = "findPage.htm")
     @ResponseBody
-    public Object findPage(@RequestBody RoleVo vo) {
+    public Object findPage(@RequestBody RoleVo vo, @MetaDataSecurity(value = {"companyIds","followUserIds"}) MetaData metaData) {
         UserTo to = getUserSession();
         vo.setApplicationId(to.getApplicationId());
         Page list = roleService.findPage(vo);

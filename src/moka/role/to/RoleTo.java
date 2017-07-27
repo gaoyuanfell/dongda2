@@ -30,7 +30,18 @@ public class RoleTo implements Serializable {
      * 1 可以修改 2不能删除和修改
      */
     private String readOnly;
+    /**
+     * 公司ID
+     */
+    private int companyId;
 
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
     public String getReadOnly() {
         return readOnly;
     }

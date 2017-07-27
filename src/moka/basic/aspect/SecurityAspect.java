@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
 /**
+ * 主要用于登录拦截
  * Created by moka on 2017/3/29 0029.
  */
 public class SecurityAspect {

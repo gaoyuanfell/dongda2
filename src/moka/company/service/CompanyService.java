@@ -66,6 +66,11 @@ public interface CompanyService extends BasicService {
      * 根据公司名称获取公司id
      */
     int findComIdByName(CompanyVo company);
+
+    /**
+     * 查找和自己有关系的公司ID
+     */
+    List<Integer> findCompanyIdByUser(int userId);
     
     /**
      * 查找和自己有关系的公司ID

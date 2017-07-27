@@ -103,6 +103,11 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
     }
 
     @Override
+    public List<Integer> findCompanyIdByUser(int userId) {
+        return companyDao.findCompanyIdByUser(userId);
+    }
+
+    @Override
     public List<CompanyTo> findComIdByUser(int id) {
         return companyDao.findComIdByUser(id);
     }

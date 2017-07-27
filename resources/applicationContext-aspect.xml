@@ -29,9 +29,14 @@
         <property name="tokenName" value="X-Token"/>
     </bean>
 
+    <!--<bean id="companyAspect" class="moka.basic.aspect.CompanyAspect"/>-->
+
     <aop:config>
         <aop:aspect ref="securityAspect">
             <aop:around method="execute" pointcut="@annotation(org.springframework.web.bind.annotation.RequestMapping)"/>
         </aop:aspect>
+        <!--<aop:aspect ref="companyAspect">-->
+            <!--<aop:around method="execute" pointcut="@annotation(moka.basic.annotation.SetCompanyId)"/>-->
+        <!--</aop:aspect>-->
     </aop:config>
 </beans>
