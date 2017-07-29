@@ -20,7 +20,7 @@ public class Invoice extends IdEntity implements Serializable{
     /**
      * 合同编号
      */
-    private int contractId;
+    private String contractId;
     /**
      * 实际开票批次
      */
@@ -44,11 +44,11 @@ public class Invoice extends IdEntity implements Serializable{
     /**
      * 购买方公司ID
      */
-    private int companyPayId;
+    private String companyPayId;
     /**
      * 销售方公司ID
      */
-    private int companySaleId;
+    private String companySaleId;
     /**
      * 收款人姓名
      */
@@ -82,101 +82,131 @@ public class Invoice extends IdEntity implements Serializable{
      */
     private String remaeks;
 
+    public String getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(String contractId) {
+        this.contractId = contractId;
+    }
+
     public int getPaymentPlanFact() {
         return paymentPlanFact;
     }
+
     public void setPaymentPlanFact(int paymentPlanFact) {
         this.paymentPlanFact = paymentPlanFact;
     }
-    public Date getFactIncoiveDate() {
-        return factIncoiveDate;
-    }
-    public void setFactIncoiveDate(Date factIncoiveDate) {
-        this.factIncoiveDate = factIncoiveDate;
-    }
+
     public Date getPlanInvoiceDate() {
         return planInvoiceDate;
     }
+
     public void setPlanInvoiceDate(Date planInvoiceDate) {
         this.planInvoiceDate = planInvoiceDate;
     }
+
+    public Date getFactIncoiveDate() {
+        return factIncoiveDate;
+    }
+
+    public void setFactIncoiveDate(Date factIncoiveDate) {
+        this.factIncoiveDate = factIncoiveDate;
+    }
+
     public Date getPlanPaymentDate() {
         return planPaymentDate;
     }
+
     public void setPlanPaymentDate(Date planPaymentDate) {
         this.planPaymentDate = planPaymentDate;
     }
+
     public Date getFactPaymentDate() {
         return factPaymentDate;
     }
+
     public void setFactPaymentDate(Date factPaymentDate) {
         this.factPaymentDate = factPaymentDate;
     }
-    public int getCompanyPayId() {
+
+    public String getCompanyPayId() {
         return companyPayId;
     }
-    public void setCompanyPayId(int companyPayId) {
+
+    public void setCompanyPayId(String companyPayId) {
         this.companyPayId = companyPayId;
     }
-    public int getCompanySaleId() {
+
+    public String getCompanySaleId() {
         return companySaleId;
     }
-    public void setCompanySaleId(int companySaleId) {
+
+    public void setCompanySaleId(String companySaleId) {
         this.companySaleId = companySaleId;
     }
+
     public String getPayeeName() {
         return payeeName;
     }
+
     public void setPayeeName(String payeeName) {
         this.payeeName = payeeName;
     }
+
     public String getCheckName() {
         return checkName;
     }
+
     public void setCheckName(String checkName) {
         this.checkName = checkName;
     }
+
     public String getBillingName() {
         return billingName;
     }
+
     public void setBillingName(String billingName) {
         this.billingName = billingName;
     }
+
     public BigDecimal getAmtWithoutTax() {
         return amtWithoutTax;
     }
+
     public void setAmtWithoutTax(BigDecimal amtWithoutTax) {
         this.amtWithoutTax = amtWithoutTax;
     }
+
     public Double getRate() {
         return rate;
     }
+
     public void setRate(Double rate) {
         this.rate = rate;
     }
+
     public BigDecimal getAmtOfTax() {
         return amtOfTax;
     }
+
     public void setAmtOfTax(BigDecimal amtOfTax) {
         this.amtOfTax = amtOfTax;
     }
+
     public BigDecimal getAmt() {
         return amt;
     }
+
     public void setAmt(BigDecimal amt) {
         this.amt = amt;
     }
+
     public String getRemaeks() {
         return remaeks;
     }
+
     public void setRemaeks(String remaeks) {
         this.remaeks = remaeks;
     }
-    public int getContractId() {
-        return contractId;
-    }
-    public void setContractId(int contractId) {
-        this.contractId = contractId;
-    }
-    
 }

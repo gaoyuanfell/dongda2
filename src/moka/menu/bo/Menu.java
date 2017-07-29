@@ -27,7 +27,7 @@ public class Menu extends IdEntity implements Serializable {
     /**
      * 父级id
      */
-    private int parentId;
+    private String parentId;
 
     /**
      * 是否是最顶目录
@@ -63,11 +63,11 @@ public class Menu extends IdEntity implements Serializable {
         this.icon = icon;
     }
 
-    public int getParentId() {
+    public String getParentId() {
         return parentId;
     }
 
-    public void setParentId(int parentId) {
+    public void setParentId(String parentId) {
         this.parentId = parentId;
     }
 

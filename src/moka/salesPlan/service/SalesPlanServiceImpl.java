@@ -20,7 +20,7 @@ public class SalesPlanServiceImpl extends BasicServiceImpl implements SalesPlanS
     private SalesPlanDao salesPlanDao;
     
     @Override
-    public int insert(SalesPlanVo sales) {
+    public String insert(SalesPlanVo sales) {
         SalesPlan salesplan = this.convertBusinessValue(sales, SalesPlan.class);
         salesplan.setCreateDate(new Date());
         salesPlanDao.insert(salesplan);

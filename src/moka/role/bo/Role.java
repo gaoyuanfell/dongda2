@@ -26,25 +26,12 @@ public class Role extends IdEntity implements Serializable {
      */
     private String readOnly;
 
-    /**
-     * 公司ID
-     */
-    private int companyId;
-
-    public int getCompanyId() {
-        return companyId;
+    public String getName() {
+        return name;
     }
 
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getReadOnly() {
-        return readOnly;
-    }
-
-    public void setReadOnly(String readOnly) {
-        this.readOnly = readOnly;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getApplicationId() {
@@ -55,11 +42,11 @@ public class Role extends IdEntity implements Serializable {
         this.applicationId = applicationId;
     }
 
-    public String getName() {
-        return name;
+    public String getReadOnly() {
+        return readOnly;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setReadOnly(String readOnly) {
+        this.readOnly = readOnly;
     }
 }

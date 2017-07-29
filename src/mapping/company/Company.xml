@@ -3,9 +3,9 @@
 <mapper namespace="moka.company.dao.CompanyDao">
     <insert id="insert" parameterType="moka.company.bo.Company" useGeneratedKeys="true" keyProperty="id">
       INSERT INTO t_company (
-        createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank,companyAccount, taxCode, applicationId,companyBelong
+        id,createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank,companyAccount, taxCode, applicationId,companyBelong
       ) VALUES (
-        #{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{companyAccount},#{taxCode},#{applicationId},#{companyBelong}
+        $uuid(),#{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{companyAccount},#{taxCode},#{applicationId},#{companyBelong}
       )
     </insert>
 
@@ -25,7 +25,7 @@
         WHERE id = #{id}
     </update>
 
-    <select id="findOne" parameterType="Integer" resultType="moka.company.to.CompanyTo">
+    <select id="findOne" parameterType="String" resultType="moka.company.to.CompanyTo">
         SELECT * FROM t_company WHERE id = #{id};
     </select>
 
@@ -83,35 +83,35 @@
     <!--财务公司关联被管理公司-->
     <insert id="relationCompany" parameterType="moka.company.vo.CompanyVo" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO r_company_admin (
-        companyAdminId, companyId, applicationId, createDate, updateDate, state, relationState
+        id,companyAdminId, companyId, applicationId, createDate, updateDate, state, relationState
         ) VALUES (
-        #{companyAdminId},#{companyId},#{applicationId},#{createDate},#{updateDate},#{state},#{relationState}
+        $uuid(),#{companyAdminId},#{companyId},#{applicationId},#{createDate},#{updateDate},#{state},#{relationState}
         )
     </insert>
 
     <!--根据公司id获取关联的财务公司-->
-    <select id="findRelationByComId" parameterType="Integer" resultType="moka.company.to.CompanyTo">
+    <select id="findRelationByComId" parameterType="String" resultType="moka.company.to.CompanyTo">
         SELECT c.*,ca.relationState from t_company c LEFT JOIN r_company_admin ca ON ca.companyId = c.id WHERE ca.companyId = #{companyId}
     </select>
 
     <!--根据财务公司ID获取被管理的业务公司集合-->
-    <select id="findComByRelationId" parameterType="Integer" resultType="moka.company.to.CompanyTo">
+    <select id="findComByRelationId" parameterType="String" resultType="moka.company.to.CompanyTo">
         SELECT c.*,ca.relationState FROM t_company c LEFT JOIN r_company_admin ca ON ca.companyId = c.id WHERE ca.companyAdminId = #{relationId}
     </select>
     
     <!--用户关联公司-->
     <insert id="insertComOfUser" parameterType="moka.company.vo.CompanyVo" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO r_company_user (companyId, userId , createDate) VALUES
-            (#{companyId},#{userId},#{createDate})
+        INSERT INTO r_company_user (id,companyId, userId , createDate) VALUES
+            ($uuid(),#{companyId},#{userId},#{createDate})
     </insert>
 
     <!-- 查找所有和自己有关联的公司ID -->
-    <select id="findCompanyIdByUser" parameterType="Integer" resultType="Integer">
+    <select id="findCompanyIdByUser" parameterType="String" resultType="Integer">
         SELECT companyId FROM r_company_user WHERE userId = #{userId}
     </select>
 
     <!-- 查找所有和自己有关联的公司ID -->
-    <select id="findComIdByUser" parameterType="Integer" resultType="moka.company.to.CompanyTo">
+    <select id="findComIdByUser" parameterType="String" resultType="moka.company.to.CompanyTo">
         SELECT companyId FROM r_company_user WHERE userId = #{userId}
     </select>
 </mapper>

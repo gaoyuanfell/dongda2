@@ -37,7 +37,7 @@ public class RoleController extends BasicController {
         vo.setApplicationId(userTo.getApplicationId());
         RoleTo to = roleService.findRepeatRole(vo);
         if(to == null){
-            int i = roleService.insert(vo);
+            String i = roleService.insert(vo);
             return result(i);
         }else{
             return result(CODE_PROMPT,"角色名称不能重复");
@@ -67,7 +67,7 @@ public class RoleController extends BasicController {
      */
     @RequestMapping(value = "delete.htm")
     @ResponseBody
-    public Object delete(int id){
+    public Object delete(String id){
         int i = roleService.delete(id);
         if(i > 0){
             return result();
@@ -81,7 +81,7 @@ public class RoleController extends BasicController {
      */
     @RequestMapping(value = "findOne.htm",method = RequestMethod.GET)
     @ResponseBody
-    public Object findOne(int id) {
+    public Object findOne(String id) {
         RoleTo to = roleService.findOne(id);
         return result(to);
     }

@@ -48,7 +48,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     private String DATA_PASSWORD_DEFAULT;
 
     @Override
-    public int insert(UserVo vo) {
+    public String insert(UserVo vo) {
         User user = this.convertBusinessValue(vo, User.class);
 
         //初始化公司
@@ -71,7 +71,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         roleVo.setName("管理员");
         roleVo.setApplicationId(uuid);
         roleVo.setReadOnly(RoleEnum.readOnly.getValue());
-        int roleId = roleService.insert(roleVo);
+        String roleId = roleService.insert(roleVo);
 
         //角色关联菜单
         List<MenuTo> menuTo = menuDao.findList();
@@ -85,7 +85,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         roleService.insertMenuOfRole(roleList);
 
         //用户初始化角色对象
-        List<Integer> roles = new ArrayList<>();
+        List<String> roles = new ArrayList<>();
         roles.add(roleId);
         vo.setRoles(roles);
         roleService.insertRoleOfUser(user.getId(),vo.getRoles());
@@ -93,7 +93,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     }
 
     @Override
-    public int insertSysUser(UserVo vo) {
+    public String insertSysUser(UserVo vo) {
         User user = this.convertBusinessValue(vo, User.class);
         user.setCreateDate(new Date());
         user.setPassword(Util.getMd5String(Util.getMd5String(DATA_PASSWORD_DEFAULT).concat(DATA_PASSWORD_SALT)));
@@ -113,21 +113,21 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     }
 
     @Override
-    public int delete(int id) {
+    public int delete(String id) {
         roleService.deleteRoleOfUser(id);
         return userDao.delete(id);
     }
 
     @Override
-    public UserTo findOne(Integer id) {
+    public UserTo findOne(String id) {
         return userDao.findOne(id);
     }
 
     @Override
-    public UserTo findOneAll(Integer id) {
+    public UserTo findOneAll(String id) {
         UserTo to = userDao.findOne(id);
         if(to != null){
-            List<Integer> roles = new ArrayList<>();
+            List<String> roles = new ArrayList<>();
             List<RoleTo> l = roleService.findUserRoles(id);
             for (RoleTo t:l){
                 roles.add(t.getId());

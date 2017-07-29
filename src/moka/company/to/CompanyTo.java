@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by moka on 2017/3/5 0005.
  */
 public class CompanyTo implements Serializable {
-    private int id;
+    private String id;
     private Date createDate;
     private Date updateDate;
     private int state;
@@ -65,44 +65,13 @@ public class CompanyTo implements Serializable {
      */
     private String relationState;
     
-    private int companyId;
+    private String companyId;
 
-    public String getRelationState() {
-        return relationState;
-    }
-
-    public void setRelationState(String relationState) {
-        this.relationState = relationState;
-    }
-
-    public String getCompanyBelong() {
-        return companyBelong;
-    }
-
-    public void setCompanyBelong(String companyBelong) {
-        this.companyBelong = companyBelong;
-    }
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public String getCompanyAccount() {
-        return companyAccount;
-    }
-
-    public void setCompanyAccount(String companyAccount) {
-        this.companyAccount = companyAccount;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -154,6 +123,14 @@ public class CompanyTo implements Serializable {
         this.companyBank = companyBank;
     }
 
+    public String getCompanyAccount() {
+        return companyAccount;
+    }
+
+    public void setCompanyAccount(String companyAccount) {
+        this.companyAccount = companyAccount;
+    }
+
     public String getCompanyTel() {
         return companyTel;
     }
@@ -194,11 +171,35 @@ public class CompanyTo implements Serializable {
         this.companyType = companyType;
     }
 
-    public int getCompanyId() {
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public String getCompanyBelong() {
+        return companyBelong;
+    }
+
+    public void setCompanyBelong(String companyBelong) {
+        this.companyBelong = companyBelong;
+    }
+
+    public String getRelationState() {
+        return relationState;
+    }
+
+    public void setRelationState(String relationState) {
+        this.relationState = relationState;
+    }
+
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 }

@@ -28,7 +28,7 @@ public class InvoicePlanController extends BasicController {
     @ResponseBody
     @IgnoreSecurity
     public Object insert(@RequestBody InvoicePlanVo vo) {
-        int i = invoicePlanService.insert(vo);
+        String i = invoicePlanService.insert(vo);
         return result(i);
     }
 
@@ -59,7 +59,7 @@ public class InvoicePlanController extends BasicController {
     @RequestMapping(value = "findOne.htm")
     @ResponseBody
     @IgnoreSecurity
-    public Object findOne(int id){
+    public Object findOne(String id){
         InvoicePlanTo to = invoicePlanService.findOne(id);
         return result(to);
     }
@@ -81,7 +81,7 @@ public class InvoicePlanController extends BasicController {
     @RequestMapping(value = "findByContract.htm")
     @ResponseBody
     @IgnoreSecurity
-    public Object findByContract(int id){
+    public Object findByContract(String id){
         List l = invoicePlanService.findByContract(id);
         return result(l);
     }

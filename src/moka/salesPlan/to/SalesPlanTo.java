@@ -5,19 +5,19 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class SalesPlanTo implements Serializable {
-    private Integer id;
+    private String id;
     private Date createDate;
     private Date updateDate;
-    private Integer state;
+    private int state;
 
     /**
      * 买方公司ID
      */
-    private Integer buyComId;
+    private String buyComId;
     /**
      * 买方联系人ID
      */
-    private Integer comContactsId;
+    private String comContactsId;
     /**
      * 合同名称
      */
@@ -33,11 +33,11 @@ public class SalesPlanTo implements Serializable {
     /**
      * 添加计划员工ID
      */
-    private Integer userId;
+    private String userId;
     /**
      * 所属公司
      */
-    private Integer comId;
+    private String comId;
     /**
      * 计划签订时间
      */
@@ -51,12 +51,52 @@ public class SalesPlanTo implements Serializable {
      */
     private String comContactsName;
 
-    public Integer getBuyComId() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public String getBuyComId() {
         return buyComId;
     }
 
-    public void setBuyComId(Integer buyComId) {
+    public void setBuyComId(String buyComId) {
         this.buyComId = buyComId;
+    }
+
+    public String getComContactsId() {
+        return comContactsId;
+    }
+
+    public void setComContactsId(String comContactsId) {
+        this.comContactsId = comContactsId;
     }
 
     public String getContractName() {
@@ -83,19 +123,19 @@ public class SalesPlanTo implements Serializable {
         this.amt = amt;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public Integer getComId() {
+    public String getComId() {
         return comId;
     }
 
-    public void setComId(Integer comId) {
+    public void setComId(String comId) {
         this.comId = comId;
     }
 
@@ -105,38 +145,6 @@ public class SalesPlanTo implements Serializable {
 
     public void setSignDate(Date signDate) {
         this.signDate = signDate;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
     }
 
     public String getBuyComName() {
@@ -153,13 +161,5 @@ public class SalesPlanTo implements Serializable {
 
     public void setComContactsName(String comContactsName) {
         this.comContactsName = comContactsName;
-    }
-
-    public Integer getComContactsId() {
-        return comContactsId;
-    }
-
-    public void setComContactsId(Integer comContactsId) {
-        this.comContactsId = comContactsId;
     }
 }

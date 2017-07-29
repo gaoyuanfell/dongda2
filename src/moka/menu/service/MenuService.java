@@ -10,13 +10,13 @@ import java.util.List;
  * Created by moka on 2017/3/5 0005.
  */
 public interface MenuService extends BasicService {
-    int insert(MenuVo vo);
+    String insert(MenuVo vo);
 
-    MenuTo findOne(int id);
+    MenuTo findOne(String id);
 
     int update(MenuVo vo);
 
-    int delete(int id);
+    int delete(String id);
 
     /**
      * 查询所有菜单
@@ -43,6 +43,6 @@ public interface MenuService extends BasicService {
      * @param userId
      * @return
      */
-    MenuTo findMenuByUserId(int userId);
+    MenuTo findMenuByUserId(String userId);
 
 }

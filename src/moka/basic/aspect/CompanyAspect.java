@@ -77,7 +77,7 @@ public class CompanyAspect implements HandlerMethodArgumentResolver {
      * @param userId
      * @return
      */
-    private List<Integer> getCompanyIds(int userId){
+    private List<Integer> getCompanyIds(String userId){
         return companyService.findCompanyIdByUser(userId);
     }
 }

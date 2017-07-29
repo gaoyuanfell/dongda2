@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by moka on 2017/3/5 0005.
  */
 public class CompanyVo extends Page {
-    private int id;
+    private String id;
     private Date createDate;
     private Date updateDate;
     private int state;
@@ -68,7 +68,7 @@ public class CompanyVo extends Page {
     /**
      * 被管理公司
      */
-    private int companyId;
+    private String companyId;
     /**
      * 关联状态
      */
@@ -76,12 +76,13 @@ public class CompanyVo extends Page {
     /**
      * 所属员工id
      */
-    private int userId; 
-    public int getId() {
+    private String userId;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -205,11 +206,11 @@ public class CompanyVo extends Page {
         this.companyAdminId = companyAdminId;
     }
 
-    public int getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 
@@ -221,11 +222,11 @@ public class CompanyVo extends Page {
         this.relationState = relationState;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 }

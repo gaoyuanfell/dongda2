@@ -18,11 +18,11 @@ public class SalesPlan extends IdEntity implements Serializable {
     /**
      * 买方公司ID
      */
-    private int buyComId;
+    private String buyComId;
     /**
      * 买方联系人ID
      */
-    private int comContactsId;
+    private String comContactsId;
     /**
      * 合同名称
      */
@@ -38,29 +38,29 @@ public class SalesPlan extends IdEntity implements Serializable {
     /**
      * 添加计划员工ID
      */
-    private int userId;
+    private String userId;
     /**
      * 所属公司
      */
-    private int comId;
+    private String comId;
     /**
      * 计划签订时间
      */
     private Date signDate;
 
-    public int getBuyComId() {
+    public String getBuyComId() {
         return buyComId;
     }
 
-    public void setBuyComId(int buyComId) {
+    public void setBuyComId(String buyComId) {
         this.buyComId = buyComId;
     }
 
-    public int getComContactsId() {
+    public String getComContactsId() {
         return comContactsId;
     }
 
-    public void setComContactsId(int comContactsId) {
+    public void setComContactsId(String comContactsId) {
         this.comContactsId = comContactsId;
     }
 
@@ -88,19 +88,19 @@ public class SalesPlan extends IdEntity implements Serializable {
         this.amt = amt;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public int getComId() {
+    public String getComId() {
         return comId;
     }
 
-    public void setComId(int comId) {
+    public void setComId(String comId) {
         this.comId = comId;
     }
 

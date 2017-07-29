@@ -2,14 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.salesPlan.dao.SalesPlanDao">
 
-    <insert id="insert" parameterType="moka.salesPlan.bo.SalesPlan"
-        useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="moka.salesPlan.bo.SalesPlan" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_sales_plan (
-        buyComId, comContactsId, contractName, remarks, amt,
+        id,buyComId, comContactsId, contractName, remarks, amt,
         userId,
         comId, signDate,state,createDate,updateDate
         ) VALUES (
-        #{buyComId},#{comContactsId},#{contractName},#{remarks},#{amt},#{userId},#{comId},#{signDate},
+        $uuid(),#{buyComId},#{comContactsId},#{contractName},#{remarks},#{amt},#{userId},#{comId},#{signDate},
         #{state},#{createDate},#{updateDate}
         )
     </insert>

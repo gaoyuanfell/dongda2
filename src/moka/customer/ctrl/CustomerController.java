@@ -39,7 +39,7 @@ public class CustomerController extends BasicController {
     public Object insert(@RequestBody CustomerVo vo) {
         UserTo userTo = getUserSession();
         vo.setApplicationId(userTo.getApplicationId());
-        int n = customerService.insert(vo);
+        String n = customerService.insert(vo);
         return result(n);
     }
 
@@ -50,7 +50,7 @@ public class CustomerController extends BasicController {
      */
     @RequestMapping(value = "delete.htm")
     @ResponseBody
-    public Object delete(int id) {
+    public Object delete(String id) {
         int n = customerService.delete(id);
         return result(n);
     }
@@ -88,7 +88,7 @@ public class CustomerController extends BasicController {
      */
     @RequestMapping(value = "findOne.htm")
     @ResponseBody
-    public Object findOne(int id) {
+    public Object findOne(String id) {
         CustomerTo to = customerService.findOne(id);
         return result(to);
     }
@@ -99,7 +99,7 @@ public class CustomerController extends BasicController {
      */
     @RequestMapping(value = "findComByCusId.htm")
     @ResponseBody
-    public Object findComByCusId(int id){
+    public Object findComByCusId(String id){
         CompanyTo to = customerService.findComByCusId(id);
         return result(to);
     }

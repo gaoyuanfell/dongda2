@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by moka on 2017/3/5 0005.
  */
 public class RoleVo extends Page {
-    private int id;
+    private String id;
     private Date createDate;
     private Date updateDate;
     private int state;
@@ -19,9 +19,9 @@ public class RoleVo extends Page {
      */
     private String name;
 
-    private int roleId;
-    private int menuId;
-    private int userId;
+    private String roleId;
+    private String menuId;
+    private String userId;
     /**
      * 资源ID
      */
@@ -30,70 +30,12 @@ public class RoleVo extends Page {
      * 1 可以修改 2不能删除和修改
      */
     private String readOnly;
-    /**
-     * 公司ID
-     */
-    private int companyId;
 
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
-    }
-    public String getReadOnly() {
-        return readOnly;
-    }
-
-    public void setReadOnly(String readOnly) {
-        this.readOnly = readOnly;
-    }
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    public int getMenuId() {
-        return menuId;
-    }
-
-    public void setMenuId(int menuId) {
-        this.menuId = menuId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -119,5 +61,53 @@ public class RoleVo extends Page {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(String menuId) {
+        this.menuId = menuId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public String getReadOnly() {
+        return readOnly;
+    }
+
+    public void setReadOnly(String readOnly) {
+        this.readOnly = readOnly;
     }
 }

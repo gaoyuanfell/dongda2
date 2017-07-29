@@ -13,11 +13,11 @@ import java.util.List;
  */
 @Repository("menuDao")
 public interface MenuDao extends BasicDao<Menu, MenuTo> {
-    MenuTo findAllMenu(int id);
+    MenuTo findAllMenu(String id);
 
     List<MenuTo> findNextChild(MenuVo vo);
 
-    List<MenuTo> findMenuByRoleId(int roleId);
+    List<MenuTo> findMenuByRoleId(String roleId);
 
-    List<MenuTo> findMenuByUserId(int userId);
+    List<MenuTo> findMenuByUserId(String userId);
 }

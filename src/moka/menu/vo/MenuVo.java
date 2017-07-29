@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by moka on 2017/3/5 0005.
  */
 public class MenuVo extends Page {
-    private int id;
+    private String id;
     private Date createDate;
     private Date updateDate;
     private int state;
@@ -29,7 +29,7 @@ public class MenuVo extends Page {
     /**
      * 父级id
      */
-    private int parentId;
+    private String parentId;
 
     /**
      * 是否是最顶目录
@@ -44,14 +44,14 @@ public class MenuVo extends Page {
     /**
      * 角色id
      */
-    private int roleId;
+    private String roleId;
 
-    public int getRoleId() {
-        return roleId;
+    public String getId() {
+        return id;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Date getCreateDate() {
@@ -102,19 +102,11 @@ public class MenuVo extends Page {
         this.icon = icon;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getParentId() {
+    public String getParentId() {
         return parentId;
     }
 
-    public void setParentId(int parentId) {
+    public void setParentId(String parentId) {
         this.parentId = parentId;
     }
 
@@ -132,5 +124,13 @@ public class MenuVo extends Page {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 }

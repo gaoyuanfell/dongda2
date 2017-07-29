@@ -11,13 +11,13 @@ import java.util.List;
  * Created by moka on 2017/3/5 0005.
  */
 public interface CompanyService extends BasicService {
-    int insert(CompanyVo vo);
+    String insert(CompanyVo vo);
 
     int update(CompanyVo vo);
 
     Page findPage(CompanyVo vo);
 
-    CompanyTo findOne(int id);
+    CompanyTo findOne(String id);
 
     /**
      * 作用于下拉
@@ -45,14 +45,14 @@ public interface CompanyService extends BasicService {
      * @param companyId
      * @return
      */
-    CompanyTo findRelationByComId(int companyId);
+    CompanyTo findRelationByComId(String companyId);
 
     /**
      * 根据财务公司ID获取被管理的业务公司集合
      * @param relationId
      * @return
      */
-    List<CompanyTo> findComByRelationId(int relationId);
+    List<CompanyTo> findComByRelationId(String relationId);
     
     /**
      * 关联员工id和公司id
@@ -60,20 +60,20 @@ public interface CompanyService extends BasicService {
      * @param companyId
      * @return
      */
-    int insertComOfUser(int id, int companyId);
+    int insertComOfUser(String id, String companyId);
     
     /**
      * 根据公司名称获取公司id
      */
-    int findComIdByName(CompanyVo company);
+    String findComIdByName(CompanyVo company);
 
     /**
      * 查找和自己有关系的公司ID
      */
-    List<Integer> findCompanyIdByUser(int userId);
+    List<Integer> findCompanyIdByUser(String userId);
     
     /**
      * 查找和自己有关系的公司ID
      */
-    List<CompanyTo> findComIdByUser(int id);
+    List<CompanyTo> findComIdByUser(String id);
 }

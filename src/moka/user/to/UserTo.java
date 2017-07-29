@@ -12,7 +12,7 @@ import java.util.List;
  * Created by moka on 2017/3/5 0005.
  */
 public class UserTo implements Serializable {
-    private int id;
+    private String id;
     private Date createDate;
     private Date updateDate;
     private int state;
@@ -57,7 +57,7 @@ public class UserTo implements Serializable {
     /**
      * 公司ID
      */
-    private int companyId;
+    private String companyId;
 
     /**
      * 资源ID
@@ -81,58 +81,11 @@ public class UserTo implements Serializable {
      */
     private String readOnly;
 
-    public String getReadOnly() {
-        return readOnly;
-    }
-
-    public void setReadOnly(String readOnly) {
-        this.readOnly = readOnly;
-    }
-    public CompanyTo getCompany() {
-        return company;
-    }
-
-    public void setCompany(CompanyTo company) {
-        this.company = company;
-    }
-
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
-    }
-
-    public MenuTo getMenuTo() {
-        return menuTo;
-    }
-
-    public void setMenuTo(MenuTo menuTo) {
-        this.menuTo = menuTo;
-    }
-
-    public List getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List roles) {
-        this.roles = roles;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -230,5 +183,53 @@ public class UserTo implements Serializable {
 
     public void setIdCardNo(String idCardNo) {
         this.idCardNo = idCardNo;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public MenuTo getMenuTo() {
+        return menuTo;
+    }
+
+    public void setMenuTo(MenuTo menuTo) {
+        this.menuTo = menuTo;
+    }
+
+    public List getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List roles) {
+        this.roles = roles;
+    }
+
+    public CompanyTo getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyTo company) {
+        this.company = company;
+    }
+
+    public String getReadOnly() {
+        return readOnly;
+    }
+
+    public void setReadOnly(String readOnly) {
+        this.readOnly = readOnly;
     }
 }

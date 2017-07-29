@@ -4,13 +4,13 @@
 
     <insert id="insert" parameterType="moka.customer.bo.Customer" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_customer (
-        name, companyId, birthday, sex, contactAddress, contactTel, jobLevel, email, createDate, updateDate, state,applicationId
+        id,name, companyId, birthday, sex, contactAddress, contactTel, jobLevel, email, createDate, updateDate, state,applicationId
         ) VALUES (
-        #{name},#{companyId},#{birthday},#{sex},#{contactAddress},#{contactTel},#{jobLevel},#{email},#{createDate},#{updateDate},#{state},#{applicationId}
+        $uuid(),#{name},#{companyId},#{birthday},#{sex},#{contactAddress},#{contactTel},#{jobLevel},#{email},#{createDate},#{updateDate},#{state},#{applicationId}
         )
     </insert>
 
-    <delete id="delete" parameterType="Integer">
+    <delete id="delete" parameterType="String">
         DELETE FROM t_customer WHERE id = #{id};
     </delete>
 
@@ -29,7 +29,7 @@
         WHERE id = #{id}
     </update>
 
-    <select id="findOne" parameterType="Integer" resultType="moka.customer.to.CustomerTo">
+    <select id="findOne" parameterType="String" resultType="moka.customer.to.CustomerTo">
         SELECT * FROM t_customer WHERE id = #{id};
     </select>
 

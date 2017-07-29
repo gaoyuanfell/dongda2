@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by moka on 2017/3/5 0005.
  */
 public class CustomerTo implements Serializable {
-    private int id;
+    private String id;
     private Date createDate;
     private Date updateDate;
     private int state;
@@ -19,7 +19,7 @@ public class CustomerTo implements Serializable {
     /**
      * 客户所属公司
      */
-    private int companyId;
+    private String companyId;
     /**
      * 客户生日
      */
@@ -50,19 +50,11 @@ public class CustomerTo implements Serializable {
      */
     private String applicationId;
 
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -98,11 +90,11 @@ public class CustomerTo implements Serializable {
         this.name = name;
     }
 
-    public int getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 
@@ -152,5 +144,13 @@ public class CustomerTo implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
     }
 }

@@ -26,7 +26,7 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     private MenuDao menuDao;
 
     @Override
-    public int insert(RoleVo vo) {
+    public String insert(RoleVo vo) {
         Role role = this.convertBusinessValue(vo, Role.class);
         role.setCreateDate(new Date());
         roleDao.insert(role);
@@ -34,7 +34,7 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleTo findOne(Integer id) {
+    public RoleTo findOne(String id) {
         return roleDao.findOne(id);
     }
 
@@ -62,7 +62,7 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     }
 
     @Override
-    public int delete(int id) {
+    public int delete(String id) {
         int i = roleDao.delete(id);
         if(i > 0){
             roleDao.deleteMenuOfRole(id);
@@ -83,21 +83,21 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     }
 
     @Override
-    public int deleteMenuOfRole(int roleId) {
+    public int deleteMenuOfRole(String roleId) {
         return roleDao.deleteMenuOfRole(roleId);
     }
 
     @Override
-    public int deleteRoleOfUser(int userId) {
+    public int deleteRoleOfUser(String userId) {
         return roleDao.deleteRoleOfUser(userId);
     }
 
     @Override
-    public int insertRoleOfUser(int userId, List<Integer> roles) {
+    public int insertRoleOfUser(String userId, List<String> roles) {
         roleDao.deleteRoleOfUser(userId);
         if(roles != null && roles.size() > 0){
             List<RoleVo> vo = new ArrayList<>();
-            for (int i : roles) {
+            for (String i : roles) {
                 RoleVo v = new RoleVo();
                 v.setRoleId(i);
                 v.setUserId(userId);
@@ -109,7 +109,7 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     }
 
     @Override
-    public List<RoleTo> findUserRoles(int userId) {
+    public List<RoleTo> findUserRoles(String userId) {
         return roleDao.findUserRoles(userId);
     }
 

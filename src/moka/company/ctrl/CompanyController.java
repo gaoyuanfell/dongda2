@@ -37,7 +37,7 @@ public class CompanyController extends BasicController {
         UserTo userTo = getUserSession();
         vo.setApplicationId(userTo.getApplicationId());
         vo.setCompanyBelong(CompanyEnum.inside.getValue());
-        int i = companyService.insert(vo);
+        String i = companyService.insert(vo);
         return result(i);
     }
 
@@ -50,7 +50,7 @@ public class CompanyController extends BasicController {
         UserTo userTo = getUserSession();
         vo.setApplicationId(userTo.getApplicationId());
         vo.setCompanyBelong(CompanyEnum.external.getValue());
-        int i = companyService.insert(vo);
+        String i = companyService.insert(vo);
         return result(i);
     }
 
@@ -90,7 +90,7 @@ public class CompanyController extends BasicController {
      */
     @RequestMapping(value = "findOne.htm")
     @ResponseBody
-    public Object findOne(int id) {
+    public Object findOne(String id) {
         CompanyTo to = companyService.findOne(id);
         return result(to);
     }

@@ -16,27 +16,27 @@ public interface UserService extends BasicService {
      * @param vo
      * @return
      */
-    int insert(UserVo vo);
+    String insert(UserVo vo);
 
     /**
      * 用户添加
      * @param vo
      * @return
      */
-    int insertSysUser(UserVo vo);
+    String insertSysUser(UserVo vo);
 
     int update(UserVo vo);
 
-    int delete(int id);
+    int delete(String id);
 
-    UserTo findOne(Integer id);
+    UserTo findOne(String id);
 
     /**
      * 查找用户 关联查询
      * @param id
      * @return
      */
-    UserTo findOneAll(Integer id);
+    UserTo findOneAll(String id);
 
     List findList(UserVo vo);
 

@@ -16,7 +16,7 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
     private InvoiceDao invoiceDao;
     
     @Override
-    public int insert(InvoiceVo invoices){
+    public String insert(InvoiceVo invoices){
         Invoice invoice =this.convertBusinessValue(invoices,Invoice.class);
         invoiceDao.insert(invoice);
         return invoice.getId();

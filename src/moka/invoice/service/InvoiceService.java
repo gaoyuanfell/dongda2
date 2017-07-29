@@ -5,6 +5,6 @@ import moka.invoice.vo.InvoiceVo;
 
 public interface InvoiceService extends BasicService{
 
-    int insert(InvoiceVo invoice);
+    String insert(InvoiceVo invoice);
 
 }

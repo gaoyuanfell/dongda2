@@ -20,6 +20,7 @@ import moka.user.vo.UserVo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -71,7 +72,7 @@ public class UserController extends BasicController {
             u.setMenuTo(menuTo);
             u.setRoles(roles);
             u.setCompany(companyTo);
-            t = new Token(u, Integer.toString(u.getId()));
+            t = new Token(u, u.getId());
             b = addUserSession(t);
         }
         if (b) {
@@ -109,7 +110,7 @@ public class UserController extends BasicController {
         com.setCompanyName(user.getCompanyName());
         com.setUserId(to.getId());
         user.setCompanyId(companyService.findComIdByName(com));
-        while (user.getCompanyId()>0 && user.getCompanyName() != null) {
+        if(!StringUtils.isEmpty(user.getCompanyId()) && user.getCompanyName() != null){
             int n = userService.findRepeatUser(user);
             if (n > 0) {
                 return result(CODE_PROMPT, "用户名已存在！");
@@ -158,7 +159,7 @@ public class UserController extends BasicController {
      */
     @RequestMapping(value = "findOne.htm")
     @ResponseBody
-    public Object findOne(int id) {
+    public Object findOne(String id) {
         UserTo user = userService.findOne(id);
         return result(user);
     }
@@ -196,7 +197,7 @@ public class UserController extends BasicController {
      */
     @RequestMapping(value = "delete.htm")
     @ResponseBody
-    public Object delete(int id) {
+    public Object delete(String id) {
         int i = userService.delete(id);
         return result(i);
     }
@@ -209,7 +210,7 @@ public class UserController extends BasicController {
      */
     @RequestMapping(value = "findOneAll.htm")
     @ResponseBody
-    public Object findOneAll(int id) {
+    public Object findOneAll(String id) {
         UserTo user = userService.findOneAll(id);
         return result(user);
     }

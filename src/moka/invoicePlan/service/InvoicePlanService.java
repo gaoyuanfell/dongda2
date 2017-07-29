@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface InvoicePlanService extends BasicService {
 
-    int insert(InvoicePlanVo vo);
+    String insert(InvoicePlanVo vo);
 
     int update(InvoicePlanVo vo);
 
     Page findPage(InvoicePlanVo vo);
 
-    InvoicePlanTo findOne(int id);
+    InvoicePlanTo findOne(String id);
 
     /**
      * 批量添加
@@ -29,6 +29,6 @@ public interface InvoicePlanService extends BasicService {
      * @param contractId
      * @return
      */
-    List<InvoicePlanTo> findByContract(int contractId);
+    List<InvoicePlanTo> findByContract(String contractId);
 
 }

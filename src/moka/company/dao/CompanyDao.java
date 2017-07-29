@@ -19,13 +19,13 @@ public interface CompanyDao extends BasicDao<Company, CompanyTo> {
 
     int relationCompany(CompanyVo vo);
 
-    CompanyTo findRelationByComId(int companyId);
+    CompanyTo findRelationByComId(String companyId);
 
-    List<CompanyTo> findComByRelationId(int relationId);
+    List<CompanyTo> findComByRelationId(String relationId);
 
     int insertComOfUser(CompanyVo company);
 
-    List<Integer> findCompanyIdByUser(int userId);
+    List<Integer> findCompanyIdByUser(String userId);
 
-    List<CompanyTo> findComIdByUser(int userId);
+    List<CompanyTo> findComIdByUser(String userId);
 }
