@@ -52,7 +52,7 @@ public class User extends IdEntity implements Serializable {
     /**
      * 公司ID
      */
-    private String companyId;
+//    private String companyId;
     /**
      * 资源ID
      */
@@ -132,14 +132,6 @@ public class User extends IdEntity implements Serializable {
 
     public void setIdCardNo(String idCardNo) {
         this.idCardNo = idCardNo;
-    }
-
-    public String getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId;
     }
 
     public String getApplicationId() {

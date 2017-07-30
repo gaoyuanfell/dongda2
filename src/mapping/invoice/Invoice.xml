@@ -3,6 +3,9 @@
 <mapper namespace="moka.invoice.dao.InvoiceDao">
 
     <insert id="insert" parameterType="moka.invoice.bo.Invoice" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
         INSERT INTO t_invoice(
         id,contractId,paymentPlanFact,planInvoiceDate, factIncoiveDate,
         planPaymentDate,factPaymentDate,companyPayId,
@@ -10,7 +13,7 @@
         amtWithoutTax,rate,amtOfTax,amt,remaeks,state
         )
         VALUES (
-        $uuid(),#{contractId},#{paymentPlanFact},#{planInvoiceDate},#{factIncoiveDate},#{planPaymentDate},#{factPaymentDate},
+        #{id},#{contractId},#{paymentPlanFact},#{planInvoiceDate},#{factIncoiveDate},#{planPaymentDate},#{factPaymentDate},
         #{companyPayId},#{companySaleId},#{payeeName},#{checkName},#{billingName},#{amtWithoutTax},#{rate},
         #{amtOfTax},#{amt},#{remaeks},
         #{state}

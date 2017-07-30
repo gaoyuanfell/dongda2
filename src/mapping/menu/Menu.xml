@@ -2,9 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.menu.dao.MenuDao">
     <insert id="insert" parameterType="moka.menu.bo.Menu" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
         INSERT INTO t_menu (
           id,createDate, updateDate, state, name, link, icon, parentId, isRoot, type
-        ) VALUES ( $uuid(),#{createDate},#{updateDate},#{state},#{name},#{link},#{icon},#{parentId},#{isRoot},#{type});
+        ) VALUES ( #{id},#{createDate},#{updateDate},#{state},#{name},#{link},#{icon},#{parentId},#{isRoot},#{type});
     </insert>
 
     <!--查询父级下所有的子集-->
@@ -66,8 +69,11 @@
     </select>
 
     <!--返回用户的菜单-->
-    <select id="findMenuByUserId" parameterType="String" resultType="moka.menu.to.MenuTo">
+    <!--<select id="findMenuByUserId" parameterType="String" resultType="moka.menu.to.MenuTo">
         SELECT * FROM (SELECT mr.menuId, ru.roleId, ru.userId, count(distinct mr.menuId) as c from r_menu_role mr LEFT JOIN r_role_user ru ON mr.roleId = ru.roleId WHERE ru.userId = #{userId} GROUP BY mr.menuId) as mm LEFT JOIN t_menu m ON m.id = mm.menuId
+    </select>-->
+    <select id="findMenuByUserId" parameterType="String" resultType="moka.menu.to.MenuTo">
+        SELECT * FROM (SELECT mr.menuId, ruc.roleId, ruc.userId, count(distinct mr.menuId) as c from r_menu_role mr LEFT JOIN r_role_user_company ruc ON mr.roleId = ruc.roleId WHERE ruc.userId = #{userId} GROUP BY mr.menuId) as mm LEFT JOIN t_menu m ON m.id = mm.menuId ORDER BY m.order ASC
     </select>
 
 </mapper>

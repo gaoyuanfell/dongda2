@@ -22,6 +22,7 @@ public class RoleVo extends Page {
     private String roleId;
     private String menuId;
     private String userId;
+    private String companyId;
     /**
      * 资源ID
      */
@@ -30,6 +31,14 @@ public class RoleVo extends Page {
      * 1 可以修改 2不能删除和修改
      */
     private String readOnly;
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
 
     public String getId() {
         return id;

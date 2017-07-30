@@ -3,6 +3,7 @@ package moka.role.service;
 import moka.basic.page.Page;
 import moka.basic.service.BasicService;
 import moka.role.to.RoleTo;
+import moka.role.vo.RoleUserCompany;
 import moka.role.vo.RoleVo;
 
 import java.util.List;
@@ -46,11 +47,9 @@ public interface RoleService extends BasicService {
 
     /**
      * 用户关联角色
-     * @param userId 用户id
-     * @param roles 角色集合
      * @return
      */
-    int insertRoleOfUser(String userId, List<String> roles);
+    int insertRoleOfUser(String userId,List<RoleUserCompany> roleUserCompanies);
 
     /**
      * 查找用户下所有的角色

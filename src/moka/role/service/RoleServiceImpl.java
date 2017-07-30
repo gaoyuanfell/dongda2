@@ -6,6 +6,7 @@ import moka.menu.dao.MenuDao;
 import moka.role.bo.Role;
 import moka.role.dao.RoleDao;
 import moka.role.to.RoleTo;
+import moka.role.vo.RoleUserCompany;
 import moka.role.vo.RoleVo;
 import org.springframework.stereotype.Service;
 
@@ -93,19 +94,19 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     }
 
     @Override
-    public int insertRoleOfUser(String userId, List<String> roles) {
+    public int insertRoleOfUser(String userId,List<RoleUserCompany> roleUserCompanies) {
         roleDao.deleteRoleOfUser(userId);
-        if(roles != null && roles.size() > 0){
-            List<RoleVo> vo = new ArrayList<>();
-            for (String i : roles) {
+        List<RoleVo> vo = new ArrayList<>();
+        for (RoleUserCompany userCompany:roleUserCompanies){
+            for (String roleId : userCompany.getRoleId()){
                 RoleVo v = new RoleVo();
-                v.setRoleId(i);
+                v.setRoleId(roleId);
+                v.setCompanyId(userCompany.getCompanyId());
                 v.setUserId(userId);
                 vo.add(v);
             }
-            return roleDao.insertRoleOfUser(vo);
         }
-        return 0;
+        return roleDao.insertRoleOfUser(vo);
     }
 
     @Override

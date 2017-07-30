@@ -93,7 +93,7 @@ public class MenuServiceImpl extends BasicServiceImpl implements MenuService {
             Iterator<MenuTo> iterator = list.iterator();
             while (iterator.hasNext()){
                 MenuTo l = iterator.next();
-                if(t != null && t.getId() == l.getParentId()){
+                if(t.getId().equals(l.getParentId())){
                     _list.add(l);
                     iterator.remove();
                     list.remove(l);

@@ -2,10 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.role.dao.RoleDao">
     <insert id="insert" parameterType="moka.role.bo.Role" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
       INSERT INTO t_role (
         id,name, createDate, updateDate, state,applicationId
       ) VALUES (
-        $uuid(),#{name},#{createDate},#{updateDate},#{state},#{applicationId}
+        #{id},#{name},#{createDate},#{updateDate},#{state},#{applicationId}
       )
     </insert>
 
@@ -23,8 +26,11 @@
     </select>
 
     <!--查找用户下的角色-->
-    <select id="findUserRoles" parameterType="String" resultType="moka.role.to.RoleTo">
+    <!--<select id="findUserRoles" parameterType="String" resultType="moka.role.to.RoleTo">
         SELECT r.* FROM r_role_user ru LEFT JOIN t_role r ON r.id = ru.roleId WHERE 1 = 1 AND ru.userId = #{userId}
+    </select>-->
+    <select id="findUserRoles" parameterType="String" resultType="moka.role.to.RoleTo">
+        SELECT r.* FROM r_role_user_company ruc LEFT JOIN t_role r ON r.id = ruc.roleId WHERE 1 = 1 AND ruc.userId = #{userId}
     </select>
 
     <update id="update" parameterType="moka.role.bo.Role">
@@ -47,26 +53,32 @@
     </delete>
 
     <!--删除用户关联的角色-->
-    <delete id="deleteRoleOfUser" parameterType="String">
+    <!--<delete id="deleteRoleOfUser" parameterType="String">
         DELETE FROM r_role_user WHERE userId = #{userId}
+    </delete>-->
+    <delete id="deleteRoleOfUser" parameterType="String">
+        DELETE FROM r_role_user_company WHERE userId = #{userId}
     </delete>
 
     <!--角色关联菜单-->
     <insert id="insertMenuOfRole" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO r_menu_role (id,roleId, menuId) VALUES
+        <!--<selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>-->
+        INSERT INTO r_menu_role (roleId, menuId) VALUES
         <foreach collection="list" item="item" index="index" separator =",">
-            ($uuid(),#{item.roleId},#{item.menuId})
+            (#{item.roleId},#{item.menuId})
         </foreach>
     </insert>
 
     <!--用户关联角色-->
     <insert id="insertRoleOfUser" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+        <!--<selectKey keyProperty="id" resultType="String" order="BEFORE">
             SELECT replace(UUID(),'-','')
-        </selectKey>
-        INSERT INTO r_role_user (id,roleId, userId) VALUES
+        </selectKey>-->
+        INSERT INTO r_role_user_company (roleId, userId, companyId) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{id},#{item.roleId},#{item.userId})
+            (#{item.roleId},#{item.userId},#{item.companyId})
         </foreach>
     </insert>
 

@@ -1,6 +1,7 @@
 package moka.user.vo;
 
 import moka.basic.page.Page;
+import moka.role.vo.RoleUserCompany;
 
 import java.util.Date;
 import java.util.List;
@@ -70,6 +71,19 @@ public class UserVo extends Page {
      * 公司名称
      */
     private String companyName;
+
+    /**
+     * 用户角色公司关联
+     */
+    private List<RoleUserCompany> roleUserCompanies;
+
+    public List<RoleUserCompany> getRoleUserCompanies() {
+        return roleUserCompanies;
+    }
+
+    public void setRoleUserCompanies(List<RoleUserCompany> roleUserCompanies) {
+        this.roleUserCompanies = roleUserCompanies;
+    }
 
     public String getId() {
         return id;

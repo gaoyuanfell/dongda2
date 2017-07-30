@@ -65,7 +65,7 @@ public interface CompanyService extends BasicService {
     /**
      * 根据公司名称获取公司id
      */
-    String findComIdByName(CompanyVo company);
+//    String findComIdByName(CompanyVo company);
 
     /**
      * 查找和自己有关系的公司ID
@@ -75,5 +75,5 @@ public interface CompanyService extends BasicService {
     /**
      * 查找和自己有关系的公司ID
      */
-    List<CompanyTo> findComIdByUser(String id);
+//    List<CompanyTo> findComIdByUser(String id);
 }

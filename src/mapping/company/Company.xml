@@ -2,10 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.company.dao.CompanyDao">
     <insert id="insert" parameterType="moka.company.bo.Company" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
       INSERT INTO t_company (
         id,createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank,companyAccount, taxCode, applicationId,companyBelong
       ) VALUES (
-        $uuid(),#{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{companyAccount},#{taxCode},#{applicationId},#{companyBelong}
+        #{id},#{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{companyAccount},#{taxCode},#{applicationId},#{companyBelong}
       )
     </insert>
 
@@ -82,10 +85,13 @@
 
     <!--财务公司关联被管理公司-->
     <insert id="relationCompany" parameterType="moka.company.vo.CompanyVo" useGeneratedKeys="true" keyProperty="id">
+        <!--<selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>-->
         INSERT INTO r_company_admin (
-        id,companyAdminId, companyId, applicationId, createDate, updateDate, state, relationState
+        companyAdminId, companyId, applicationId, createDate, updateDate, state, relationState
         ) VALUES (
-        $uuid(),#{companyAdminId},#{companyId},#{applicationId},#{createDate},#{updateDate},#{state},#{relationState}
+        #{companyAdminId},#{companyId},#{applicationId},#{createDate},#{updateDate},#{state},#{relationState}
         )
     </insert>
 
@@ -100,18 +106,22 @@
     </select>
     
     <!--用户关联公司-->
-    <insert id="insertComOfUser" parameterType="moka.company.vo.CompanyVo" useGeneratedKeys="true" keyProperty="id">
+    <!--<insert id="insertComOfUser" parameterType="moka.company.vo.CompanyVo" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
         INSERT INTO r_company_user (id,companyId, userId , createDate) VALUES
-            ($uuid(),#{companyId},#{userId},#{createDate})
-    </insert>
+            (#{id},#{companyId},#{userId},#{createDate})
+    </insert>-->
 
     <!-- 查找所有和自己有关联的公司ID -->
     <select id="findCompanyIdByUser" parameterType="String" resultType="Integer">
-        SELECT companyId FROM r_company_user WHERE userId = #{userId}
+        SELECT companyId FROM r_role_user_company WHERE userId = #{userId}
     </select>
 
     <!-- 查找所有和自己有关联的公司ID -->
-    <select id="findComIdByUser" parameterType="String" resultType="moka.company.to.CompanyTo">
+
+    <!--<select id="findComIdByUser" parameterType="String" resultType="moka.company.to.CompanyTo">
         SELECT companyId FROM r_company_user WHERE userId = #{userId}
-    </select>
+    </select>-->
 </mapper>

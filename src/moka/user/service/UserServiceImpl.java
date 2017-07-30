@@ -11,6 +11,7 @@ import moka.menu.to.MenuTo;
 import moka.role.enums.RoleEnum;
 import moka.role.service.RoleService;
 import moka.role.to.RoleTo;
+import moka.role.vo.RoleUserCompany;
 import moka.role.vo.RoleVo;
 import moka.user.bo.User;
 import moka.user.dao.UserDao;
@@ -33,8 +34,8 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
 
     @Resource
     private UserDao userDao;
-    //@Resource
-    //private CompanyDao companyDao;
+    @Resource
+    private CompanyDao companyDao;
     @Resource
     private CompanyService companyService;
     @Resource
@@ -53,11 +54,10 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
 
         //初始化公司
         String uuid = Util.Md516();
-//        Company company = new Company();
-//        company.setApplicationId(uuid);
-//        companyDao.insert(company);
+        Company company = new Company();
+        company.setApplicationId(uuid);
+        companyDao.insert(company);
 
-//        user.setCompanyId(company.getId());
         user.setApplicationId(uuid);
         user.setName("管理员");
         user.setEmployeeNo("1");
@@ -88,7 +88,13 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         List<String> roles = new ArrayList<>();
         roles.add(roleId);
         vo.setRoles(roles);
-        roleService.insertRoleOfUser(user.getId(),vo.getRoles());
+        List<RoleUserCompany> userCompanies = new ArrayList<>();
+        RoleUserCompany userCompany = new RoleUserCompany();
+        userCompany.setCompanyId(company.getId());
+        userCompany.setRoleId(roles);
+        userCompanies.add(userCompany);
+
+        roleService.insertRoleOfUser(user.getId(),userCompanies);
         return user.getId();
     }
 
@@ -98,7 +104,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         user.setCreateDate(new Date());
         user.setPassword(Util.getMd5String(Util.getMd5String(DATA_PASSWORD_DEFAULT).concat(DATA_PASSWORD_SALT)));
         userDao.insert(user);
-        roleService.insertRoleOfUser(user.getId(),vo.getRoles());//关联角色
+        roleService.insertRoleOfUser(user.getId(),vo.getRoleUserCompanies());//关联角色
         //关联公司
         companyService.insertComOfUser(user.getId(),vo.getCompanyId());
         return user.getId();
@@ -106,7 +112,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
 
     @Override
     public int update(UserVo vo) {
-        roleService.insertRoleOfUser(vo.getId(),vo.getRoles());
+        roleService.insertRoleOfUser(vo.getId(),vo.getRoleUserCompanies());
         User user = this.convertBusinessValue(vo, User.class);
         user.setUpdateDate(new Date());
         return userDao.update(user);
