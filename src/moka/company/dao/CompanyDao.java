@@ -23,9 +23,5 @@ public interface CompanyDao extends BasicDao<Company, CompanyTo> {
 
     List<CompanyTo> findComByRelationId(String relationId);
 
-    int insertComOfUser(CompanyVo company);
-
-    List<Integer> findCompanyIdByUser(String userId);
-
-//    List<CompanyTo> findComIdByUser(String userId);
+    List<String> findCompanyIdByUser(String userId);
 }

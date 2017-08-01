@@ -11,7 +11,7 @@
     </insert>
 
     <!--查询父级下所有的子集-->
-    <select id="findAllMenu" parameterType="String" resultMap="menu_map">
+    <select id="findAllMenu" parameterType="String" resultMap="menu_map" useCache="true">
         SELECT * FROM t_menu m WHERE m.id = #{id} AND m.state != 1;
     </select>
 
@@ -44,7 +44,7 @@
     </update>
 
     <!--查询子集-->
-    <select id="findNextChild" parameterType="moka.menu.vo.MenuVo" resultType="moka.menu.to.MenuTo">
+    <select id="findNextChild" parameterType="moka.menu.vo.MenuVo" resultType="moka.menu.to.MenuTo" useCache="true">
         SELECT * FROM t_menu menu WHERE menu.parentId = #{id};
     </select>
 
@@ -59,12 +59,12 @@
     </resultMap>
 
     <!-- 根据父键查询 -->
-    <select id="findMenuByParentId" parameterType="String" resultMap="menu_map">
+    <select id="findMenuByParentId" parameterType="String" resultMap="menu_map" useCache="true">
         select * from t_menu m where m.parentId=#{id} AND m.state != 1;
     </select>
 
     <!--获取角色拥有的菜单-->
-    <select id="findMenuByRoleId" parameterType="String" resultType="moka.menu.to.MenuTo">
+    <select id="findMenuByRoleId" parameterType="String" resultType="moka.menu.to.MenuTo" useCache="true">
         SELECT m.*,mr.roleId FROM r_menu_role mr LEFT JOIN t_menu m ON m.id= mr.menuId WHERE mr.roleId = #{roleId} ORDER BY m.isRoot DESC
     </select>
 
@@ -72,7 +72,7 @@
     <!--<select id="findMenuByUserId" parameterType="String" resultType="moka.menu.to.MenuTo">
         SELECT * FROM (SELECT mr.menuId, ru.roleId, ru.userId, count(distinct mr.menuId) as c from r_menu_role mr LEFT JOIN r_role_user ru ON mr.roleId = ru.roleId WHERE ru.userId = #{userId} GROUP BY mr.menuId) as mm LEFT JOIN t_menu m ON m.id = mm.menuId
     </select>-->
-    <select id="findMenuByUserId" parameterType="String" resultType="moka.menu.to.MenuTo">
+    <select id="findMenuByUserId" parameterType="String" resultType="moka.menu.to.MenuTo" useCache="true">
         SELECT * FROM (SELECT mr.menuId, ruc.roleId, ruc.userId, count(distinct mr.menuId) as c from r_menu_role mr LEFT JOIN r_role_user_company ruc ON mr.roleId = ruc.roleId WHERE ruc.userId = #{userId} GROUP BY mr.menuId) as mm LEFT JOIN t_menu m ON m.id = mm.menuId ORDER BY m.order ASC
     </select>
 

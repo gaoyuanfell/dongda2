@@ -6,6 +6,7 @@ public enum UserEnum {
     updateOnly("修改","1"),
     readOnly("只读","2"),
     watchOnly("不可查看","3"),
+    adminName("管理员名称","超级管理员"),
     ;
     private String name;
     private String value;

@@ -5,6 +5,7 @@ import moka.basic.service.BasicServiceImpl;
 import moka.basic.util.Util;
 import moka.company.bo.Company;
 import moka.company.dao.CompanyDao;
+import moka.company.enums.CompanyEnum;
 import moka.company.service.CompanyService;
 import moka.menu.dao.MenuDao;
 import moka.menu.to.MenuTo;
@@ -56,10 +57,12 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         String uuid = Util.Md516();
         Company company = new Company();
         company.setApplicationId(uuid);
+        company.setCompanyBelong(CompanyEnum.inside.getValue());
+        company.setCompanyType(CompanyEnum.ordinaryType.getValue());
         companyDao.insert(company);
 
         user.setApplicationId(uuid);
-        user.setName("管理员");
+        user.setName(UserEnum.adminName.getValue());
         user.setEmployeeNo("1");
         user.setCreateDate(new Date());
         user.setReadOnly(UserEnum.watchOnly.getValue());
@@ -84,7 +87,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         }
         roleService.insertMenuOfRole(roleList);
 
-        //用户初始化角色对象
+        //用户初始化角色用户公司关联对象
         List<String> roles = new ArrayList<>();
         roles.add(roleId);
         vo.setRoles(roles);
@@ -93,8 +96,8 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         userCompany.setCompanyId(company.getId());
         userCompany.setRoleId(roles);
         userCompanies.add(userCompany);
-
         roleService.insertRoleOfUser(user.getId(),userCompanies);
+
         return user.getId();
     }
 
@@ -105,8 +108,6 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         user.setPassword(Util.getMd5String(Util.getMd5String(DATA_PASSWORD_DEFAULT).concat(DATA_PASSWORD_SALT)));
         userDao.insert(user);
         roleService.insertRoleOfUser(user.getId(),vo.getRoleUserCompanies());//关联角色
-        //关联公司
-        companyService.insertComOfUser(user.getId(),vo.getCompanyId());
         return user.getId();
     }
 

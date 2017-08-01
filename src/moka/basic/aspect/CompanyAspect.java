@@ -62,7 +62,7 @@ public class CompanyAspect implements HandlerMethodArgumentResolver {
         for (int i = 0; i < fields.length; ++i){
             switch (fields[i]){
                 case "companyIds":
-                    List<Integer> companyIds = this.getCompanyIds(userTo.getId());
+                    List<String> companyIds = this.getCompanyIds(userTo.getId());
                     metaData.setCompanyIds(companyIds);
                     break;
                 case "followUserIds":
@@ -77,7 +77,7 @@ public class CompanyAspect implements HandlerMethodArgumentResolver {
      * @param userId
      * @return
      */
-    private List<Integer> getCompanyIds(String userId){
+    private List<String> getCompanyIds(String userId){
         return companyService.findCompanyIdByUser(userId);
     }
 }

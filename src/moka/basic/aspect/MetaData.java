@@ -18,13 +18,13 @@ public class MetaData {
         this.companyIds = companyIds;
     }
 
-    private int followUserIds;
+    private List followUserIds;
 
-    public int getFollowUserIds() {
+    public List getFollowUserIds() {
         return followUserIds;
     }
 
-    public void setFollowUserIds(int followUserIds) {
+    public void setFollowUserIds(List followUserIds) {
         this.followUserIds = followUserIds;
     }
 }

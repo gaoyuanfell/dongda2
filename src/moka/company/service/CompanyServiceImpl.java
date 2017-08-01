@@ -80,19 +80,7 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
     }
 
     @Override
-    public int insertComOfUser(String id, String companyId) {
-        if (!StringUtils.isEmpty(id) && !StringUtils.isEmpty(companyId)) {
-            CompanyVo company = new CompanyVo();
-            company.setCompanyId(companyId);
-            company.setUserId(id);
-            company.setCreateDate(new Date());
-            return companyDao.insertComOfUser(company);
-        }
-        return 0;
-    }
-
-    @Override
-    public List<Integer> findCompanyIdByUser(String userId) {
+    public List<String> findCompanyIdByUser(String userId) {
         return companyDao.findCompanyIdByUser(userId);
     }
 }

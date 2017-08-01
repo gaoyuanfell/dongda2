@@ -6,6 +6,8 @@ public enum CompanyEnum {
     inside("内部公司","1"),
     external("外部公司","2"),
     adminInside("申请管理中","1"),
+    ordinaryType("普通公司","1"),
+    financeType("财务公司","2"),
     ;
     private String name;
     private String value;

@@ -6,6 +6,7 @@
         <selectKey keyProperty="id" order="BEFORE" resultType="String">
             select $uuid()
         </selectKey>
+
         INSERT INTO t_user (
         id,createDate, updateDate, state, name, phoneNumber, mail, password, employeeNo, currAddress, homeAdress, birthday, idCardNo, applicationId
         ) VALUES (

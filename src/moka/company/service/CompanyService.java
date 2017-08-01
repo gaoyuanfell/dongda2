@@ -20,6 +20,7 @@ public interface CompanyService extends BasicService {
     CompanyTo findOne(String id);
 
     /**
+     * moka
      * 作用于下拉
      * @param vo companyName companyBelong
      * @return
@@ -27,6 +28,7 @@ public interface CompanyService extends BasicService {
     List<CompanyTo> findUseSelect(CompanyVo vo);
 
     /**
+     * moka
      * 作用于下拉 全部
      * @param vo companyName companyBelong
      * @return
@@ -34,6 +36,7 @@ public interface CompanyService extends BasicService {
     List<CompanyTo> findUseAllSelect(CompanyVo vo);
 
     /**
+     * moka
      * 财务公司关联被管理公司
      * @param vo
      * @return
@@ -41,6 +44,7 @@ public interface CompanyService extends BasicService {
     int relationCompany(CompanyVo vo);
 
     /**
+     * moka
      * 根据公司id获取关联的财务公司
      * @param companyId
      * @return
@@ -48,32 +52,23 @@ public interface CompanyService extends BasicService {
     CompanyTo findRelationByComId(String companyId);
 
     /**
+     * moka
      * 根据财务公司ID获取被管理的业务公司集合
      * @param relationId
      * @return
      */
     List<CompanyTo> findComByRelationId(String relationId);
-    
+
     /**
-     * 关联员工id和公司id
-     * @param id
-     * @param companyId
-     * @return
-     */
-    int insertComOfUser(String id, String companyId);
-    
-    /**
+     * 有问题
      * 根据公司名称获取公司id
      */
 //    String findComIdByName(CompanyVo company);
 
     /**
+     * moka
      * 查找和自己有关系的公司ID
      */
-    List<Integer> findCompanyIdByUser(String userId);
-    
-    /**
-     * 查找和自己有关系的公司ID
-     */
-//    List<CompanyTo> findComIdByUser(String id);
+    List<String> findCompanyIdByUser(String userId);
+
 }
