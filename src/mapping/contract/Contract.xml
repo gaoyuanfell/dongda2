@@ -3,14 +3,14 @@
 <mapper namespace="moka.contract.dao.ContractDao">
 
     <insert id="insert" parameterType="moka.contract.bo.Contract" useGeneratedKeys="true" keyProperty="id">
-        <selectKey keyProperty="id" order="BEFORE" resultType="String">
-            select $uuid()
-        </selectKey>
         INSERT INTO t_contract (
           id,createDate, updateDate, state, contractNo, versionNo, companyIdA, companyContractIdA, companyIdB, companyContractIdB, companyIdC, companyContractIdC, signDate, startDate, endDate, itemName, item, amt, applicationId, contactType, contactState, remark, paymentNum
         ) VALUES (
           #{id},#{createDate},#{updateDate},#{state},#{contractNo},#{versionNo},#{companyIdA},#{companyContractIdA},#{companyIdB},#{companyContractIdB},#{companyIdC},#{companyContractIdC},#{signDate},#{startDate},#{endDate},#{itemName},#{item},#{amt},#{applicationId},#{contactType},#{contactState},#{remark},#{paymentNum}
         )
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
     <select id="findOne" parameterType="String" resultType="moka.contract.to.ContractTo">

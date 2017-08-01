@@ -3,9 +3,6 @@
 <mapper namespace="moka.salesPlan.dao.SalesPlanDao">
 
     <insert id="insert" parameterType="moka.salesPlan.bo.SalesPlan" useGeneratedKeys="true" keyProperty="id">
-        <selectKey keyProperty="id" order="BEFORE" resultType="String">
-            select $uuid()
-        </selectKey>
         INSERT INTO t_sales_plan (
         id,buyComId, comContactsId, contractName, remarks, amt,
         userId,
@@ -14,6 +11,10 @@
         #{id},#{buyComId},#{comContactsId},#{contractName},#{remarks},#{amt},#{userId},#{comId},#{signDate},
         #{state},#{createDate},#{updateDate}
         )
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
     <select id="checkSalesPlan" parameterType="moka.salesPlan.bo.SalesPlan"

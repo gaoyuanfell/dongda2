@@ -2,12 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.menu.dao.MenuDao">
     <insert id="insert" parameterType="moka.menu.bo.Menu" useGeneratedKeys="true" keyProperty="id">
-        <selectKey keyProperty="id" order="BEFORE" resultType="String">
-            select $uuid()
-        </selectKey>
         INSERT INTO t_menu (
           id,createDate, updateDate, state, name, link, icon, parentId, isRoot, type
         ) VALUES ( #{id},#{createDate},#{updateDate},#{state},#{name},#{link},#{icon},#{parentId},#{isRoot},#{type});
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
     <!--查询父级下所有的子集-->

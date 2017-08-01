@@ -3,15 +3,16 @@
 <mapper namespace="moka.invoicePlan.dao.InvoicePlanDao">
 
     <insert id="insert" parameterType="moka.invoicePlan.bo.InvoicePlan" useGeneratedKeys="true" keyProperty="id">
-        <selectKey keyProperty="id" order="BEFORE" resultType="String">
-            select $uuid()
-        </selectKey>
         INSERT INTO t_invoice_plan(
             id,contractId, paymentPlanFact, versionNo, amt, planDate, planReceiveDate, receiveAmt, state, createDate, updateDate, planState
         )
         VALUES (
             #{id},#{contractId},#{paymentPlanFact},#{versionNo},#{amt},#{planDate},#{planReceiveDate},#{receiveAmt},#{state},#{createDate},#{updateDate},#{planState}
         )
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
     <update id="update" parameterType="moka.invoicePlan.bo.InvoicePlan">

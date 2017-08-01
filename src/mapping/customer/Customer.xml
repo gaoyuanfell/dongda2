@@ -3,14 +3,14 @@
 <mapper namespace="moka.customer.dao.CustomerDao">
 
     <insert id="insert" parameterType="moka.customer.bo.Customer" useGeneratedKeys="true" keyProperty="id">
-        <selectKey keyProperty="id" order="BEFORE" resultType="String">
-            select $uuid()
-        </selectKey>
         INSERT INTO t_customer (
         id,name, companyId, birthday, sex, contactAddress, contactTel, jobLevel, email, createDate, updateDate, state,applicationId
         ) VALUES (
         #{id},#{name},#{companyId},#{birthday},#{sex},#{contactAddress},#{contactTel},#{jobLevel},#{email},#{createDate},#{updateDate},#{state},#{applicationId}
         )
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
     <delete id="delete" parameterType="String">

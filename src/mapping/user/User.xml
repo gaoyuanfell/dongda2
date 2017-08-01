@@ -3,15 +3,15 @@
 <mapper namespace="moka.user.dao.UserDao">
 
     <insert id="insert" parameterType="moka.user.bo.User" useGeneratedKeys="true" keyProperty="id">
-        <selectKey keyProperty="id" order="BEFORE" resultType="String">
-            select $uuid()
-        </selectKey>
-
         INSERT INTO t_user (
         id,createDate, updateDate, state, name, phoneNumber, mail, password, employeeNo, currAddress, homeAdress, birthday, idCardNo, applicationId
         ) VALUES (
         #{id},#{createDate}, #{updateDate}, #{state}, #{name}, #{phoneNumber}, #{mail}, #{password}, #{employeeNo}, #{currAddress}, #{homeAdress}, #{birthday}, #{idCardNo}, #{applicationId}
         );
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
     <delete id="delete" parameterType="String">
