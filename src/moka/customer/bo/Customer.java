@@ -21,7 +21,7 @@ public class Customer extends IdEntity implements Serializable {
     /**
      * 客户所属公司
      */
-    private int companyId;
+    private String companyId;
     /**
      * 客户生日
      */
@@ -75,11 +75,11 @@ public class Customer extends IdEntity implements Serializable {
         this.name = name;
     }
 
-    public int getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 

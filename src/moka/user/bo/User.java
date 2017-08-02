@@ -50,17 +50,13 @@ public class User extends IdEntity implements Serializable {
      */
     private String idCardNo;
     /**
-     * 公司ID
-     */
-//    private String companyId;
-    /**
      * 资源ID
      */
     private String applicationId;
     /**
      * 1 可以修改 2不能删除和修改 3不可查看
      */
-    private String readOnly = "";
+    private String readOnly;
 
     public String getName() {
         return name;
