@@ -14,23 +14,28 @@
         </selectKey>
     </insert>
 
+    <delete id="delete" parameterType="String">
+        DELETE FROM t_user WHERE 1 = 1 AND id = #{id};
+    </delete>
+
     <!--用户关联直接上级领导-->
-    <insert id="insertLeaderRelation" parameterType="String">
+    <insert id="insertLeaderRelation" parameterType="moka.user.vo.UserVo">
         INSERT INTO r_user_leader (
-        userId, leaderId, state, createDate, updateDate
+        userId, leaderId, createDate,updateDate,state
         ) VALUES (
-        #{userId},#{leaderId},#{state},NOW(),#{updateDate}
+        #{id},#{leaderId},NOW(),#{updateDate},#{state}
         )
     </insert>
 
     <!--用户解除直接上级领导-->
-    <delete id="deleteLeaderRelation" parameterType="String">
-        DELETE FROM r_user_leader ul 1 = 1 AND ul.userId = #{userId}
+    <delete id="deleteLeaderRelation" parameterType="moka.user.vo.UserVo">
+        DELETE FROM r_user_leader WHERE userId = #{id} AND leaderId = #{leaderId}
     </delete>
 
-    <delete id="delete" parameterType="String">
-        DELETE FROM t_user WHERE 1 = 1 AND id = #{id};
-    </delete>
+    <!--获取用户下所有下属ID-->
+    <select id="findUserLeader" parameterType="String" resultType="String">
+        SELECT ul.userId FROM r_user_leader ul WHERE ul.leaderId = #{userId}
+    </select>
 
     <update id="update" parameterType="moka.user.bo.User">
         UPDATE t_user
@@ -49,7 +54,7 @@
     </resultMap>
 
     <select id="findOne" parameterType="String" resultType="moka.user.to.UserTo">
-        SELECT * FROM t_user WHERE 1 = 1 AND id = #{id};
+        SELECT u.*,ul.leaderId FROM t_user u LEFT JOIN r_user_leader ul ON ul.userId = u.id WHERE 1 = 1 AND u.id = #{id}
     </select>
 
     <select id="findCount" parameterType="moka.basic.page.Page" resultType="Integer">
@@ -99,5 +104,6 @@
     <select id="findCompanyRoleByUserId" parameterType="String" resultType="moka.role.to.RoleUserCompanyTo">
         SELECT ruc.*,r.name as roleName,c.companyName FROM r_role_user_company ruc LEFT JOIN t_role r ON r.id = ruc.roleId LEFT JOIN t_company c ON c.id=ruc.companyId WHERE 1=1 AND ruc.userId = #{userId}
     </select>
+
 
 </mapper>

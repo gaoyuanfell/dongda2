@@ -26,6 +26,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -109,8 +110,8 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         String userId = user.getId();
         if(!StringUtils.isEmpty(userId)){
             //关联直属领导
-            if(!StringUtils.isEmpty(vo.getLeaderId())){
-                this.insertLeaderRelation(userId,vo.getLeaderId());
+            if(!StringUtils.isEmpty(vo.getLeaderId()) && !vo.getLeaderId().equals(userId)){
+                this.insertLeaderRelation(vo);
             }
             //关联角色
             if(vo.getRoleUserCompanies() != null && vo.getRoleUserCompanies().size() > 0){
@@ -125,9 +126,15 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         User user = this.convertBusinessValue(vo, User.class);
         user.setUpdateDate(new Date());
         String userId = vo.getId();
-        roleService.insertRoleOfUser(userId,vo.getRoleUserCompanies());
-        if(!StringUtils.isEmpty(vo.getLeaderId())){
-            this.insertLeaderRelation(userId,vo.getLeaderId());
+        if(!StringUtils.isEmpty(userId)){
+            //关联直属领导
+            if(!StringUtils.isEmpty(vo.getLeaderId())){
+                this.insertLeaderRelation(vo);
+            }
+            //关联角色
+            if(vo.getRoleUserCompanies() != null && vo.getRoleUserCompanies().size() > 0){
+                roleService.insertRoleOfUser(userId,vo.getRoleUserCompanies());
+            }
         }
         return userDao.update(user);
     }
@@ -140,29 +147,41 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
 
     @Override
     public UserTo findOne(String id) {
-        UserTo to = userDao.findOne(id);
-
-        List<RoleUserCompanyTo> roleUserCompanyTos = this.findCompanyRoleByUserId(id);
-
-        for (RoleUserCompanyTo userCompanyTo:roleUserCompanyTos){
-
-        }
-
-        to.setRoleUserCompanies(null);
-        return to;
+        return userDao.findOne(id);
     }
 
     @Override
     public UserTo findOneAll(String id) {
         UserTo to = userDao.findOne(id);
-        if(to != null){
-            List<String> roles = new ArrayList<>();
-            List<RoleTo> l = roleService.findUserRoles(id);
-            for (RoleTo t:l){
-                roles.add(t.getId());
+        List<RoleUserCompanyTo> roleUserCompanyTos = this.findCompanyRoleByUserId(id);
+        /**
+         * 获取同公司的角色
+         */
+        HashMap<String,RoleUserCompanyVo> m = new HashMap<>();
+        for (RoleUserCompanyTo userCompanyTo:roleUserCompanyTos){
+            String companyId = userCompanyTo.getCompanyId();
+            RoleUserCompanyVo roles = m.get(companyId);
+            if(roles == null){
+                roles = new RoleUserCompanyVo();
             }
-            to.setRoles(roles);
+            roles.setCompanyId(companyId);
+            if(roles.getRoleId() == null){
+                roles.setRoleId(new ArrayList<>());
+            }
+            roles.getRoleId().add(userCompanyTo.getRoleId());
+            roles.setCompanyName(userCompanyTo.getCompanyName());
+            m.put(companyId,roles);
         }
+
+        List<RoleUserCompanyVo> roleUserCompanyVos = new ArrayList<>();
+        List<String> companyIds = new ArrayList<>();
+        for (String key : m.keySet()){
+            roleUserCompanyVos.add(m.get(key));
+            companyIds.add(key);
+        }
+
+        to.setRoleUserCompanies(roleUserCompanyVos);
+        to.setCompanyIds(companyIds);
         return to;
     }
 
@@ -204,18 +223,23 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     }
 
     @Override
-    public int insertLeaderRelation(String userId,String leaderId) {
-        userDao.deleteLeaderRelation(userId);
-        return userDao.insertLeaderRelation(userId,leaderId);
+    public int insertLeaderRelation(UserVo vo) {
+        userDao.deleteLeaderRelation(vo);
+        return userDao.insertLeaderRelation(vo);
     }
 
     @Override
-    public int deleteLeaderRelation(String userId) {
-        return userDao.deleteLeaderRelation(userId);
+    public int deleteLeaderRelation(UserVo vo) {
+        return userDao.deleteLeaderRelation(vo);
     }
 
     @Override
     public List<RoleUserCompanyTo> findCompanyRoleByUserId(String userId) {
         return userDao.findCompanyRoleByUserId(userId);
+    }
+
+    @Override
+    public List<String> findUserLeader(String userId) {
+        return userDao.findUserLeader(userId);
     }
 }

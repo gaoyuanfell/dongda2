@@ -76,18 +76,25 @@ public interface UserService extends BasicService {
 
     /**
      * 用户关联直接上级领导
-     * @param userId
-     * @param leaderId
+     * userId
+     * leaderId
      * @return
      */
-    int insertLeaderRelation(String userId,String leaderId);
+    int insertLeaderRelation(UserVo vo);
 
     /**
      * 用户解除直接上级领导
+     * userId
+     * @return
+     */
+    int deleteLeaderRelation(UserVo vo);
+
+    /**
+     * 获取用户下所有下属ID
      * @param userId
      * @return
      */
-    int deleteLeaderRelation(String userId);
+    List<String> findUserLeader(String userId);
 
     /**
      * 根据用户id获取每个公司的角色情况

@@ -78,6 +78,10 @@ public class UserTo implements Serializable {
      */
     private List<CompanyTo> companies;
     /**
+     * 所在公司集合
+     */
+    private List<String> companyIds;
+    /**
      * 1 可以修改 2不能删除和修改 3不可查看
      */
     private String readOnly;
@@ -105,6 +109,14 @@ public class UserTo implements Serializable {
      * 用户角色公司关联
      */
     private List<RoleUserCompanyVo> roleUserCompanies;
+
+    public List<String> getCompanyIds() {
+        return companyIds;
+    }
+
+    public void setCompanyIds(List<String> companyIds) {
+        this.companyIds = companyIds;
+    }
 
     public String getLeaderId() {
         return leaderId;
