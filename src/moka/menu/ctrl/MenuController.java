@@ -67,7 +67,7 @@ public class MenuController extends BasicController {
     @RequestMapping(value = "insert.htm")
     @ResponseBody
     public Object insert(@RequestBody MenuVo vo){
-        int i = menuService.insert(vo);
+        String i = menuService.insert(vo);
         return result(i);
     }
 

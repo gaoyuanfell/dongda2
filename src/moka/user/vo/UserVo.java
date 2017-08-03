@@ -1,6 +1,7 @@
 package moka.user.vo;
 
 import moka.basic.page.Page;
+import moka.role.bo.RoleUserCompany;
 
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by moka on 2017/3/5 0005.
  */
 public class UserVo extends Page {
-    private int id;
+    private String id;
     private Date createDate;
     private Date updateDate;
     private int state;
@@ -53,7 +54,7 @@ public class UserVo extends Page {
     /**
      * 公司ID
      */
-    private int companyId;
+    private String companyId;
     /**
      * 资源ID
      */
@@ -61,48 +62,57 @@ public class UserVo extends Page {
     /**
      * 角色数组
      */
-    private List<Integer> roles;
+    private List<String> roles;
     /**
      * 1 可以修改 2不能删除和修改 3不可查看
      */
     private String readOnly;
+    /**
+     * 公司名称
+     */
+    private String companyName;
+    /**
+     * 用户角色公司关联
+     */
+    private List<RoleUserCompany> roleUserCompanies;
+    /**
+     * 上级领导ID
+     */
+    private String leaderId;
+    /**
+     * 部门ID
+     */
+    private String departmentId;
 
-    public String getReadOnly() {
-        return readOnly;
+    public String getLeaderId() {
+        return leaderId;
     }
 
-    public void setReadOnly(String readOnly) {
-        this.readOnly = readOnly;
-    }
-    public List<Integer> getRoles() {
-        return roles;
+    public void setLeaderId(String leaderId) {
+        this.leaderId = leaderId;
     }
 
-    public void setRoles(List<Integer> roles) {
-        this.roles = roles;
+    public String getDepartmentId() {
+        return departmentId;
     }
 
-    public int getCompanyId() {
-        return companyId;
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
+    public List<RoleUserCompany> getRoleUserCompanies() {
+        return roleUserCompanies;
     }
 
-    public String getApplicationId() {
-        return applicationId;
+    public void setRoleUserCompanies(List<RoleUserCompany> roleUserCompanies) {
+        this.roleUserCompanies = roleUserCompanies;
     }
 
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -200,5 +210,45 @@ public class UserVo extends Page {
 
     public void setIdCardNo(String idCardNo) {
         this.idCardNo = idCardNo;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public String getReadOnly() {
+        return readOnly;
+    }
+
+    public void setReadOnly(String readOnly) {
+        this.readOnly = readOnly;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }

@@ -12,18 +12,18 @@ import java.util.Date;
  */
 @MappedSuperclass
 public class IdEntity implements Serializable {
-    protected int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected String id;
     protected Date createDate;
     protected Date updateDate;
     protected int state;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

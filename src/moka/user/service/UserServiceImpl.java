@@ -5,11 +5,13 @@ import moka.basic.service.BasicServiceImpl;
 import moka.basic.util.Util;
 import moka.company.bo.Company;
 import moka.company.dao.CompanyDao;
+import moka.company.enums.CompanyEnum;
 import moka.menu.dao.MenuDao;
 import moka.menu.to.MenuTo;
 import moka.role.enums.RoleEnum;
 import moka.role.service.RoleService;
 import moka.role.to.RoleTo;
+import moka.role.bo.RoleUserCompany;
 import moka.role.vo.RoleVo;
 import moka.user.bo.User;
 import moka.user.dao.UserDao;
@@ -18,6 +20,7 @@ import moka.user.to.UserTo;
 import moka.user.vo.UserVo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -32,8 +35,8 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
 
     @Resource
     private UserDao userDao;
-//    @Resource
-//    private CompanyDao companyDao;
+    @Resource
+    private CompanyDao companyDao;
     @Resource
     private RoleService roleService;
     @Resource
@@ -45,18 +48,19 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     private String DATA_PASSWORD_DEFAULT;
 
     @Override
-    public int insert(UserVo vo) {
+    public String insert(UserVo vo) {
         User user = this.convertBusinessValue(vo, User.class);
 
         //初始化公司
         String uuid = Util.Md516();
-//        Company company = new Company();
-//        company.setApplicationId(uuid);
-//        companyDao.insert(company);
+        Company company = new Company();
+        company.setApplicationId(uuid);
+        company.setCompanyBelong(CompanyEnum.inside.getValue());
+        company.setCompanyType(CompanyEnum.ordinaryType.getValue());
+        companyDao.insert(company);
 
-//        user.setCompanyId(company.getId());
         user.setApplicationId(uuid);
-        user.setName("管理员");
+        user.setName(UserEnum.adminName.getValue());
         user.setEmployeeNo("1");
         user.setCreateDate(new Date());
         user.setReadOnly(UserEnum.watchOnly.getValue());
@@ -68,7 +72,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         roleVo.setName("管理员");
         roleVo.setApplicationId(uuid);
         roleVo.setReadOnly(RoleEnum.readOnly.getValue());
-        int roleId = roleService.insert(roleVo);
+        String roleId = roleService.insert(roleVo);
 
         //角色关联菜单
         List<MenuTo> menuTo = menuDao.findList();
@@ -81,48 +85,68 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         }
         roleService.insertMenuOfRole(roleList);
 
-        //用户初始化角色对象
-        List<Integer> roles = new ArrayList<>();
+        //用户初始化角色用户公司关联对象
+        List<String> roles = new ArrayList<>();
         roles.add(roleId);
         vo.setRoles(roles);
-        roleService.insertRoleOfUser(user.getId(),vo.getRoles());
+        List<RoleUserCompany> userCompanies = new ArrayList<>();
+        RoleUserCompany userCompany = new RoleUserCompany();
+        userCompany.setCompanyId(company.getId());
+        userCompany.setRoleId(roles);
+        userCompanies.add(userCompany);
+        roleService.insertRoleOfUser(user.getId(),userCompanies);
+
         return user.getId();
     }
 
     @Override
-    public int insertSysUser(UserVo vo) {
+    public String insertSysUser(UserVo vo) {
         User user = this.convertBusinessValue(vo, User.class);
         user.setCreateDate(new Date());
         user.setPassword(Util.getMd5String(Util.getMd5String(DATA_PASSWORD_DEFAULT).concat(DATA_PASSWORD_SALT)));
         userDao.insert(user);
-        roleService.insertRoleOfUser(user.getId(),vo.getRoles());//关联角色
-        return user.getId();
+        String userId = user.getId();
+        if(!StringUtils.isEmpty(userId)){
+            //关联直属领导
+            if(!StringUtils.isEmpty(vo.getLeaderId())){
+                this.insertLeaderRelation(userId,vo.getLeaderId());
+            }
+            //关联角色
+            if(vo.getRoleUserCompanies() != null && vo.getRoleUserCompanies().size() > 0){
+                roleService.insertRoleOfUser(userId,vo.getRoleUserCompanies());
+            }
+        }
+        return userId;
     }
 
     @Override
     public int update(UserVo vo) {
-        roleService.insertRoleOfUser(vo.getId(),vo.getRoles());
         User user = this.convertBusinessValue(vo, User.class);
         user.setUpdateDate(new Date());
+        String userId = vo.getId();
+        roleService.insertRoleOfUser(userId,vo.getRoleUserCompanies());
+        if(!StringUtils.isEmpty(vo.getLeaderId())){
+            this.insertLeaderRelation(userId,vo.getLeaderId());
+        }
         return userDao.update(user);
     }
 
     @Override
-    public int delete(int id) {
+    public int delete(String id) {
         roleService.deleteRoleOfUser(id);
         return userDao.delete(id);
     }
 
     @Override
-    public UserTo findOne(Integer id) {
+    public UserTo findOne(String id) {
         return userDao.findOne(id);
     }
 
     @Override
-    public UserTo findOneAll(Integer id) {
+    public UserTo findOneAll(String id) {
         UserTo to = userDao.findOne(id);
         if(to != null){
-            List<Integer> roles = new ArrayList<>();
+            List<String> roles = new ArrayList<>();
             List<RoleTo> l = roleService.findUserRoles(id);
             for (RoleTo t:l){
                 roles.add(t.getId());
@@ -167,5 +191,16 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     @Override
     public List<UserTo> findUseSelect(UserVo vo) {
         return userDao.findUseSelect(vo);
+    }
+
+    @Override
+    public int insertLeaderRelation(String userId,String leaderId) {
+        userDao.deleteLeaderRelation(userId);
+        return userDao.insertLeaderRelation(userId,leaderId);
+    }
+
+    @Override
+    public int deleteLeaderRelation(String userId) {
+        return userDao.deleteLeaderRelation(userId);
     }
 }

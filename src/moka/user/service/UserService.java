@@ -2,6 +2,7 @@ package moka.user.service;
 
 import moka.basic.page.Page;
 import moka.basic.service.BasicService;
+import moka.user.bo.User;
 import moka.user.to.UserTo;
 import moka.user.vo.UserVo;
 
@@ -16,27 +17,27 @@ public interface UserService extends BasicService {
      * @param vo
      * @return
      */
-    int insert(UserVo vo);
+    String insert(UserVo vo);
 
     /**
      * 用户添加
      * @param vo
      * @return
      */
-    int insertSysUser(UserVo vo);
+    String insertSysUser(UserVo vo);
 
     int update(UserVo vo);
 
-    int delete(int id);
+    int delete(String id);
 
-    UserTo findOne(Integer id);
+    UserTo findOne(String id);
 
     /**
      * 查找用户 关联查询
      * @param id
      * @return
      */
-    UserTo findOneAll(Integer id);
+    UserTo findOneAll(String id);
 
     List findList(UserVo vo);
 
@@ -71,4 +72,20 @@ public interface UserService extends BasicService {
      * @return
      */
     List<UserTo> findUseSelect(UserVo vo);
+
+    /**
+     * 用户关联直接上级领导
+     * @param userId
+     * @param leaderId
+     * @return
+     */
+    int insertLeaderRelation(String userId,String leaderId);
+
+    /**
+     * 用户解除直接上级领导
+     * @param userId
+     * @return
+     */
+    int deleteLeaderRelation(String userId);
+
 }

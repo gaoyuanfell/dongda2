@@ -25,27 +25,27 @@ public class Contract extends IdEntity implements Serializable {
     /**
      * 甲方公司ID
      */
-    private int companyIdA;
+    private String companyIdA;
     /**
      * 甲方联系人ID
      */
-    private int companyContractIdA;
+    private String companyContractIdA;
     /**
      * 乙方公司ID
      */
-    private int companyIdB;
+    private String companyIdB;
     /**
      * 乙方联系人ID
      */
-    private int companyContractIdB;
+    private String companyContractIdB;
     /**
      * 丙方公司ID
      */
-    private int companyIdC;
+    private String companyIdC;
     /**
      * 丙方联系人ID
      */
-    private int companyContractIdC;
+    private String companyContractIdC;
     /**
      * 合同签订日期
      */
@@ -92,46 +92,6 @@ public class Contract extends IdEntity implements Serializable {
      */
     private int paymentNum;
 
-    public int getPaymentNum() {
-        return paymentNum;
-    }
-
-    public void setPaymentNum(int paymentNum) {
-        this.paymentNum = paymentNum;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public String getContactState() {
-        return contactState;
-    }
-
-    public void setContactState(String contactState) {
-        this.contactState = contactState;
-    }
-
-    public String getContactType() {
-        return contactType;
-    }
-
-    public void setContactType(String contactType) {
-        this.contactType = contactType;
-    }
-
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
-    }
-
     public String getContractNo() {
         return contractNo;
     }
@@ -148,51 +108,51 @@ public class Contract extends IdEntity implements Serializable {
         this.versionNo = versionNo;
     }
 
-    public int getCompanyIdA() {
+    public String getCompanyIdA() {
         return companyIdA;
     }
 
-    public void setCompanyIdA(int companyIdA) {
+    public void setCompanyIdA(String companyIdA) {
         this.companyIdA = companyIdA;
     }
 
-    public int getCompanyContractIdA() {
+    public String getCompanyContractIdA() {
         return companyContractIdA;
     }
 
-    public void setCompanyContractIdA(int companyContractIdA) {
+    public void setCompanyContractIdA(String companyContractIdA) {
         this.companyContractIdA = companyContractIdA;
     }
 
-    public int getCompanyIdB() {
+    public String getCompanyIdB() {
         return companyIdB;
     }
 
-    public void setCompanyIdB(int companyIdB) {
+    public void setCompanyIdB(String companyIdB) {
         this.companyIdB = companyIdB;
     }
 
-    public int getCompanyContractIdB() {
+    public String getCompanyContractIdB() {
         return companyContractIdB;
     }
 
-    public void setCompanyContractIdB(int companyContractIdB) {
+    public void setCompanyContractIdB(String companyContractIdB) {
         this.companyContractIdB = companyContractIdB;
     }
 
-    public int getCompanyIdC() {
+    public String getCompanyIdC() {
         return companyIdC;
     }
 
-    public void setCompanyIdC(int companyIdC) {
+    public void setCompanyIdC(String companyIdC) {
         this.companyIdC = companyIdC;
     }
 
-    public int getCompanyContractIdC() {
+    public String getCompanyContractIdC() {
         return companyContractIdC;
     }
 
-    public void setCompanyContractIdC(int companyContractIdC) {
+    public void setCompanyContractIdC(String companyContractIdC) {
         this.companyContractIdC = companyContractIdC;
     }
 
@@ -242,5 +202,45 @@ public class Contract extends IdEntity implements Serializable {
 
     public void setAmt(BigDecimal amt) {
         this.amt = amt;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public String getContactType() {
+        return contactType;
+    }
+
+    public void setContactType(String contactType) {
+        this.contactType = contactType;
+    }
+
+    public String getContactState() {
+        return contactState;
+    }
+
+    public void setContactState(String contactState) {
+        this.contactState = contactState;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public int getPaymentNum() {
+        return paymentNum;
+    }
+
+    public void setPaymentNum(int paymentNum) {
+        this.paymentNum = paymentNum;
     }
 }

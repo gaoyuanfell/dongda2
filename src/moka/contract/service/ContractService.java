@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface ContractService extends BasicService {
 
-    int insert(ContractVo contract);
+    String insert(ContractVo contract);
 
-    ContractTo findOne(Integer id);
+    ContractTo findOne(String id);
 
     Page findPage(ContractVo vo);
 

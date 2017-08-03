@@ -2,30 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.company.dao.CompanyDao">
     <insert id="insert" parameterType="moka.company.bo.Company" useGeneratedKeys="true" keyProperty="id">
-      INSERT INTO t_company (
-        createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank,companyAccount, taxCode, applicationId,companyBelong
-      ) VALUES (
-        #{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{companyAccount},#{taxCode},#{applicationId},#{companyBelong}
-      )
+        INSERT INTO t_company (
+        id,createDate, updateDate, state,companyCode, companyName, companyTel, companyAddress, companyEmail, companyType, companyBank,companyAccount, taxCode, applicationId,companyBelong
+        ) VALUES (
+        #{id},#{createDate},#{updateDate},#{state},#{companyCode},#{companyName},#{companyTel},#{companyAddress},#{companyEmail},#{companyType},#{companyBank},#{companyAccount},#{taxCode},#{applicationId},#{companyBelong}
+        )
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
     <update id="update" parameterType="moka.company.bo.Company">
         UPDATE t_company
         <trim prefix="SET" suffixOverrides=",">
-            <if test="companyName != null and companyName != ''"> companyName = #{companyName}, </if>
-            <if test="companyCode != null and companyCode != ''"> companyCode = #{companyCode}, </if>
-            <if test="companyTel != null and companyTel != ''"> companyTel = #{companyTel}, </if>
-            <if test="companyAddress != null and companyAddress != ''"> companyAddress = #{companyAddress}, </if>
-            <if test="companyEmail != null and companyEmail != ''"> companyEmail = #{companyEmail}, </if>
-            <if test="companyBank != null and companyBank != ''"> companyBank = #{companyBank}, </if>
-            <if test="companyAccount != null and companyAccount != ''"> companyAccount = #{companyAccount}, </if>
-            <if test="taxCode != null and taxCode != ''"> taxCode = #{taxCode}, </if>
-            <if test="updateDate != null"> updateDate = #{updateDate}, </if>
+            <if test="companyName != null and companyName != ''">companyName = #{companyName},</if>
+            <if test="companyCode != null and companyCode != ''">companyCode = #{companyCode},</if>
+            <if test="companyTel != null and companyTel != ''">companyTel = #{companyTel},</if>
+            <if test="companyAddress != null and companyAddress != ''">companyAddress = #{companyAddress},</if>
+            <if test="companyEmail != null and companyEmail != ''">companyEmail = #{companyEmail},</if>
+            <if test="companyBank != null and companyBank != ''">companyBank = #{companyBank},</if>
+            <if test="companyAccount != null and companyAccount != ''">companyAccount = #{companyAccount},</if>
+            <if test="taxCode != null and taxCode != ''">taxCode = #{taxCode},</if>
+            <if test="updateDate != null">updateDate = #{updateDate},</if>
         </trim>
         WHERE id = #{id}
     </update>
 
-    <select id="findOne" parameterType="Integer" resultType="moka.company.to.CompanyTo">
+    <select id="findOne" parameterType="String" resultType="moka.company.to.CompanyTo">
         SELECT * FROM t_company WHERE id = #{id};
     </select>
 
@@ -62,6 +66,7 @@
         c.applicationId = #{applicationId}
         AND c.state != 1
         AND c.companyBelong = #{companyBelong}
+        AND LENGTH(c.companyName) > 0
         <if test="companyName != null and companyName != ''">
             AND c.companyName LIKE
             CONCAT('%',#{companyName},'%')
@@ -74,6 +79,7 @@
         c.state != 1
         AND c.companyBelong = #{companyBelong}
         AND c.companyType = '2'
+        AND LENGTH(c.companyName) > 0
         <if test="companyName != null and companyName != ''">
             AND c.companyName LIKE
             CONCAT('%',#{companyName},'%')
@@ -90,14 +96,22 @@
     </insert>
 
     <!--根据公司id获取关联的财务公司-->
-    <select id="findRelationByComId" parameterType="Integer" resultType="moka.company.to.CompanyTo">
+    <select id="findRelationByComId" parameterType="String" resultType="moka.company.to.CompanyTo">
         SELECT c.*,ca.relationState from t_company c LEFT JOIN r_company_admin ca ON ca.companyId = c.id WHERE ca.companyId = #{companyId}
     </select>
 
     <!--根据财务公司ID获取被管理的业务公司集合-->
-    <select id="findComByRelationId" parameterType="Integer" resultType="moka.company.to.CompanyTo">
+    <select id="findComByRelationId" parameterType="String" resultType="moka.company.to.CompanyTo">
         SELECT c.*,ca.relationState FROM t_company c LEFT JOIN r_company_admin ca ON ca.companyId = c.id WHERE ca.companyAdminId = #{relationId}
     </select>
 
+    <!-- 查找所有和自己有关联的公司ID -->
+    <select id="findCompanyIdByUser" parameterType="String" resultType="String">
+        SELECT companyId FROM r_role_user_company WHERE userId = #{userId}
+    </select>
 
+    <!-- 查找所有和自己有关联的公司详情 -->
+    <select id="findCompanyByUser" parameterType="String" resultType="moka.company.to.CompanyTo">
+        SELECT c.* FROM r_role_user_company ruc LEFT JOIN t_company c ON c.id = ruc.companyId WHERE userId = #{userId}
+    </select>
 </mapper>

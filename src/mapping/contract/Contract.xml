@@ -4,13 +4,16 @@
 
     <insert id="insert" parameterType="moka.contract.bo.Contract" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_contract (
-          createDate, updateDate, state, contractNo, versionNo, companyIdA, companyContractIdA, companyIdB, companyContractIdB, companyIdC, companyContractIdC, signDate, startDate, endDate, itemName, item, amt, applicationId, contactType, contactState, remark, paymentNum
+          id,createDate, updateDate, state, contractNo, versionNo, companyIdA, companyContractIdA, companyIdB, companyContractIdB, companyIdC, companyContractIdC, signDate, startDate, endDate, itemName, item, amt, applicationId, contactType, contactState, remark, paymentNum
         ) VALUES (
-          #{createDate},#{updateDate},#{state},#{contractNo},#{versionNo},#{companyIdA},#{companyContractIdA},#{companyIdB},#{companyContractIdB},#{companyIdC},#{companyContractIdC},#{signDate},#{startDate},#{endDate},#{itemName},#{item},#{amt},#{applicationId},#{contactType},#{contactState},#{remark},#{paymentNum}
+          #{id},#{createDate},#{updateDate},#{state},#{contractNo},#{versionNo},#{companyIdA},#{companyContractIdA},#{companyIdB},#{companyContractIdB},#{companyIdC},#{companyContractIdC},#{signDate},#{startDate},#{endDate},#{itemName},#{item},#{amt},#{applicationId},#{contactType},#{contactState},#{remark},#{paymentNum}
         )
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
-    <select id="findOne" parameterType="Integer" resultType="moka.contract.to.ContractTo">
+    <select id="findOne" parameterType="String" resultType="moka.contract.to.ContractTo">
         SELECT c.*,coa.companyName companyIdaName,cob.companyName companyIdbName,cu.name companyContractIdaName,u.name companyContractIdbName FROM t_contract c
         LEFT JOIN t_company coa ON c.companyIdA = coa.id
         LEFT JOIN t_company cob ON c.companyIdB = cob.id

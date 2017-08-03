@@ -8,8 +8,11 @@ import moka.company.enums.CompanyEnum;
 import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +26,7 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
     private CompanyDao companyDao;
 
     @Override
-    public int insert(CompanyVo vo) {
+    public String insert(CompanyVo vo) {
         Company company = this.convertBusinessValue(vo, Company.class);
         company.setCreateDate(new Date());
         companyDao.insert(company);
@@ -45,7 +48,7 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
     }
 
     @Override
-    public CompanyTo findOne(int id) {
+    public CompanyTo findOne(String id) {
         return companyDao.findOne(id);
     }
 
@@ -67,12 +70,22 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
     }
 
     @Override
-    public CompanyTo findRelationByComId(int companyId) {
+    public CompanyTo findRelationByComId(String companyId) {
         return companyDao.findRelationByComId(companyId);
     }
 
     @Override
-    public List<CompanyTo> findComByRelationId(int relationId) {
+    public List<CompanyTo> findComByRelationId(String relationId) {
         return companyDao.findComByRelationId(relationId);
+    }
+
+    @Override
+    public List<String> findCompanyIdByUser(String userId) {
+        return companyDao.findCompanyIdByUser(userId);
+    }
+
+    @Override
+    public List<CompanyTo> findCompanyByUser(String userId) {
+        return companyDao.findCompanyByUser(userId);
     }
 }

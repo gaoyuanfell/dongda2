@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by moka on 2017/3/5 0005.
  */
 public class RoleTo implements Serializable {
-    private int id;
+    private String id;
     private Date createDate;
     private Date updateDate;
     private int state;
@@ -31,50 +31,11 @@ public class RoleTo implements Serializable {
      */
     private String readOnly;
 
-    public String getReadOnly() {
-        return readOnly;
-    }
-
-    public void setReadOnly(String readOnly) {
-        this.readOnly = readOnly;
-    }
-    public String[] getMenus() {
-        return menus;
-    }
-
-    public void setMenus(String[] menus) {
-        this.menus = menus;
-    }
-
-    public String getMenuStr() {
-        return menuStr;
-    }
-
-    public void setMenuStr(String menuStr) {
-        this.menuStr = menuStr;
-    }
-
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -100,5 +61,45 @@ public class RoleTo implements Serializable {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public String[] getMenus() {
+        return menus;
+    }
+
+    public void setMenus(String[] menus) {
+        this.menus = menus;
+    }
+
+    public String getMenuStr() {
+        return menuStr;
+    }
+
+    public void setMenuStr(String menuStr) {
+        this.menuStr = menuStr;
+    }
+
+    public String getReadOnly() {
+        return readOnly;
+    }
+
+    public void setReadOnly(String readOnly) {
+        this.readOnly = readOnly;
     }
 }

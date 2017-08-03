@@ -34,7 +34,7 @@ public class ContractController extends BasicController {
         if (to != null) {
             return result(CODE_PROMPT,String.format("合同号：%s 已存在。\n", vo.getContractNo()));
         }
-        int i = contractService.insert(vo);
+        String i = contractService.insert(vo);
         return result(i);
     }
 
@@ -52,7 +52,7 @@ public class ContractController extends BasicController {
     @RequestMapping(value = "findOne.htm")
     @ResponseBody
     @IgnoreSecurity
-    public Object findOne(int id){
+    public Object findOne(String id){
         ContractTo to = contractService.findOne(id);
         return result(to);
     }

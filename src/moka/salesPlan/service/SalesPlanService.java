@@ -9,7 +9,7 @@ import moka.salesPlan.vo.SalesPlanVo;
 
 public interface SalesPlanService extends BasicService {
 
-    int insert(SalesPlanVo salesPlan);
+    String insert(SalesPlanVo salesPlan);
 
     List<SalesPlanTo> checkSalesPlan(SalesPlanVo salesPlan);
 

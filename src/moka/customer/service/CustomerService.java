@@ -12,22 +12,22 @@ import java.util.List;
  * Created by moka on 2017/3/5 0005.
  */
 public interface CustomerService extends BasicService {
-    int insert(CustomerVo vo);
+    String insert(CustomerVo vo);
 
-    int delete(int id);
+    int delete(String id);
 
     int update(CustomerVo vo);
 
     Page findPage(CustomerVo vo);
 
-    CustomerTo findOne(int id);
+    CustomerTo findOne(String id);
 
     /**
      * 根据客户id获取公司信息
      * @param id
      * @return
      */
-    CompanyTo findComByCusId(int id);
+    CompanyTo findComByCusId(String id);
 
     /**
      * 作用于下拉

@@ -6,14 +6,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class InvoicePlanVo extends Page{
-    private int id;
+    private String id;
     private Date createDate;
     private Date updateDate;
     private int state;
     /**
      * 合同ID
      */
-    private int contractId;
+    private String contractId;
     /**
      * 本次开票次数
      */
@@ -47,19 +47,11 @@ public class InvoicePlanVo extends Page{
      */
     private String applicationId;
 
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -87,11 +79,11 @@ public class InvoicePlanVo extends Page{
         this.state = state;
     }
 
-    public int getContractId() {
+    public String getContractId() {
         return contractId;
     }
 
-    public void setContractId(int contractId) {
+    public void setContractId(String contractId) {
         this.contractId = contractId;
     }
 
@@ -149,5 +141,13 @@ public class InvoicePlanVo extends Page{
 
     public void setPlanState(String planState) {
         this.planState = planState;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
     }
 }

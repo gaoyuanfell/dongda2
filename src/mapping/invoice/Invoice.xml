@@ -2,20 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.invoice.dao.InvoiceDao">
 
-    <insert id="insert" parameterType="moka.invoice.bo.Invoice"
-        useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="moka.invoice.bo.Invoice" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_invoice(
-        contractId,paymentPlanFact,planInvoiceDate, factIncoiveDate,
+        id,contractId,paymentPlanFact,planInvoiceDate, factIncoiveDate,
         planPaymentDate,factPaymentDate,companyPayId,
         companySaleId, payeeName,checkName,billingName,
         amtWithoutTax,rate,amtOfTax,amt,remaeks,state
         )
         VALUES (
-        #{contractId},#{paymentPlanFact},#{planInvoiceDate},#{factIncoiveDate},#{planPaymentDate},#{factPaymentDate},
+        #{id},#{contractId},#{paymentPlanFact},#{planInvoiceDate},#{factIncoiveDate},#{planPaymentDate},#{factPaymentDate},
         #{companyPayId},#{companySaleId},#{payeeName},#{checkName},#{billingName},#{amtWithoutTax},#{rate},
         #{amtOfTax},#{amt},#{remaeks},
         #{state}
         )
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
 

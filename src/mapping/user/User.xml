@@ -4,13 +4,31 @@
 
     <insert id="insert" parameterType="moka.user.bo.User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_user (
-        createDate, updateDate, state, name, phoneNumber, mail, password, employeeNo, currAddress, homeAdress, birthday, idCardNo, applicationId, companyId
+        id,createDate, updateDate, state, name, phoneNumber, mail, password, employeeNo, currAddress, homeAdress, birthday, idCardNo, applicationId, departmentId
         ) VALUES (
-        #{createDate}, #{updateDate}, #{state}, #{name}, #{phoneNumber}, #{mail}, #{password}, #{employeeNo}, #{currAddress}, #{homeAdress}, #{birthday}, #{idCardNo}, #{applicationId}, #{companyId}
+        #{id},#{createDate}, #{updateDate}, #{state}, #{name}, #{phoneNumber}, #{mail}, #{password}, #{employeeNo}, #{currAddress}, #{homeAdress}, #{birthday}, #{idCardNo}, #{applicationId}, #{departmentId}
         );
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
-    <delete id="delete" parameterType="Integer">
+    <!--用户关联直接上级领导-->
+    <insert id="insertLeaderRelation" parameterType="String">
+        INSERT INTO r_user_leader (
+        userId, leaderId, state, createDate, updateDate
+        ) VALUES (
+        #{userId},#{leaderId},#{state},NOW(),#{updateDate}
+        )
+    </insert>
+
+    <!--用户解除直接上级领导-->
+    <delete id="deleteLeaderRelation" parameterType="String">
+        DELETE FROM r_user_leader ul 1 = 1 AND ul.userId = #{userId}
+    </delete>
+
+    <delete id="delete" parameterType="String">
         DELETE FROM t_user WHERE 1 = 1 AND id = #{id};
     </delete>
 
@@ -30,7 +48,7 @@
         <id property="id" column="id"/>
     </resultMap>
 
-    <select id="findOne" parameterType="Integer" resultType="moka.user.to.UserTo">
+    <select id="findOne" parameterType="String" resultType="moka.user.to.UserTo">
         SELECT * FROM t_user WHERE 1 = 1 AND id = #{id};
     </select>
 

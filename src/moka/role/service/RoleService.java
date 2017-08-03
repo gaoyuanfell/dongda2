@@ -3,6 +3,7 @@ package moka.role.service;
 import moka.basic.page.Page;
 import moka.basic.service.BasicService;
 import moka.role.to.RoleTo;
+import moka.role.bo.RoleUserCompany;
 import moka.role.vo.RoleVo;
 
 import java.util.List;
@@ -11,15 +12,15 @@ import java.util.List;
  * Created by moka on 2017/3/5 0005.
  */
 public interface RoleService extends BasicService {
-    int insert(RoleVo vo);
+    String insert(RoleVo vo);
 
-    RoleTo findOne(Integer id);
+    RoleTo findOne(String id);
 
     Page findPage(RoleVo vo);
 
     int update(RoleVo vo);
 
-    int delete(int id);
+    int delete(String id);
 
     RoleTo findRepeatRole(RoleVo vo);
 
@@ -34,30 +35,28 @@ public interface RoleService extends BasicService {
      * @param roleId
      * @return
      */
-    int deleteMenuOfRole(int roleId);
+    int deleteMenuOfRole(String roleId);
 
     /**
      * 删除用户下的角色
      * @param userId
      * @return
      */
-    int deleteRoleOfUser(int userId);
+    int deleteRoleOfUser(String userId);
 
 
     /**
      * 用户关联角色
-     * @param userId 用户id
-     * @param roles 角色集合
      * @return
      */
-    int insertRoleOfUser(int userId, List<Integer> roles);
+    int insertRoleOfUser(String userId,List<RoleUserCompany> roleUserCompanies);
 
     /**
      * 查找用户下所有的角色
      * @param userId
      * @return
      */
-    List<RoleTo> findUserRoles(int userId);
+    List<RoleTo> findUserRoles(String userId);
 
     /**
      * 作用于下拉

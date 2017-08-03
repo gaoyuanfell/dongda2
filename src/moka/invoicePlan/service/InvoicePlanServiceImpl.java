@@ -22,7 +22,7 @@ public class InvoicePlanServiceImpl extends BasicServiceImpl implements InvoiceP
     private InvoicePlanDao invoicePlanDao;
 
     @Override
-    public int insert(InvoicePlanVo inv) {
+    public String insert(InvoicePlanVo inv) {
         InvoicePlan invoicePlan = this.convertBusinessValue(inv, InvoicePlan.class);
         invoicePlanDao.insert(invoicePlan);
         return invoicePlan.getId();
@@ -36,7 +36,7 @@ public class InvoicePlanServiceImpl extends BasicServiceImpl implements InvoiceP
     }
 
     @Override
-    public InvoicePlanTo findOne(int id) {
+    public InvoicePlanTo findOne(String id) {
         return invoicePlanDao.findOne(id);
     }
 
@@ -53,7 +53,7 @@ public class InvoicePlanServiceImpl extends BasicServiceImpl implements InvoiceP
     }
 
     @Override
-    public List<InvoicePlanTo> findByContract(int contractId) {
+    public List<InvoicePlanTo> findByContract(String contractId) {
         return invoicePlanDao.findByContract(contractId);
     }
 }

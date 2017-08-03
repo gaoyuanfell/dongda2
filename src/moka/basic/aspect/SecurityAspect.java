@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
 /**
+ * 主要用于登录拦截
  * Created by moka on 2017/3/29 0029.
  */
 public class SecurityAspect {
@@ -53,7 +54,7 @@ public class SecurityAspect {
         if(!StringUtils.isEmpty(token)){
             Token t = new Token(token);
             UserTo user = redisService.getUserSession(t);
-            if (user == null || user.getId() == 0) return result();
+            if (user == null || StringUtils.isEmpty(user.getId())) return result();
             redisService.flashLoginSession(t);
             response.setHeader(tokenName,token);
         }else{

@@ -20,6 +20,7 @@ import moka.user.vo.UserVo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -67,11 +68,11 @@ public class UserController extends BasicController {
             u.setPassword("");
             MenuTo menuTo = menuService.findMenuByUserId(u.getId());// 菜单
             List<RoleTo> roles = roleService.findUserRoles(u.getId());// 角色
-            CompanyTo companyTo = companyService.findOne(u.getCompanyId());
+            List<CompanyTo> companies = companyService.findCompanyByUser(u.getId());//用户所在公司
             u.setMenuTo(menuTo);
             u.setRoles(roles);
-            u.setCompany(companyTo);
-            t = new Token(u, Integer.toString(u.getId()));
+            u.setCompanies(companies);
+            t = new Token(u, u.getId());
             b = addUserSession(t);
         }
         if (b) {
@@ -104,14 +105,14 @@ public class UserController extends BasicController {
     @RequestMapping(value = "insertSysUser.htm")
     @ResponseBody
     public Object insertSysUser(@RequestBody UserVo user) {
+        UserTo to = getUserSession();
         int n = userService.findRepeatUser(user);
         if (n > 0) {
             return result(CODE_PROMPT, "用户名已存在！");
         }
-        UserTo to = getUserSession();
         user.setApplicationId(to.getApplicationId());
-        userService.insertSysUser(user);
-        return result(CODE_SUCCESS, "创建成功，请登录");
+        String i = userService.insertSysUser(user);
+        return result(i);
     }
 
     /**
@@ -150,7 +151,7 @@ public class UserController extends BasicController {
      */
     @RequestMapping(value = "findOne.htm")
     @ResponseBody
-    public Object findOne(int id) {
+    public Object findOne(String id) {
         UserTo user = userService.findOne(id);
         return result(user);
     }
@@ -160,9 +161,9 @@ public class UserController extends BasicController {
      *
      * @return
      */
-    @RequestMapping(value = "getUserMenu.htm",method = RequestMethod.GET)
+    @RequestMapping(value = "getUserMenu.htm", method = RequestMethod.GET)
     @ResponseBody
-    public Object getUserMenu(){
+    public Object getUserMenu() {
         UserTo to = getUserSession();
         return result(to.getMenuTo());
     }
@@ -188,7 +189,7 @@ public class UserController extends BasicController {
      */
     @RequestMapping(value = "delete.htm")
     @ResponseBody
-    public Object delete(int id) {
+    public Object delete(String id) {
         int i = userService.delete(id);
         return result(i);
     }
@@ -201,7 +202,7 @@ public class UserController extends BasicController {
      */
     @RequestMapping(value = "findOneAll.htm")
     @ResponseBody
-    public Object findOneAll(int id) {
+    public Object findOneAll(String id) {
         UserTo user = userService.findOneAll(id);
         return result(user);
     }
@@ -262,15 +263,12 @@ public class UserController extends BasicController {
     }
 
     /**
-     * 作用于下拉 搜索条件
-     * {
-     *     name:''
-     * }
+     * 作用于下拉 搜索条件 { name:'' }
      *
      */
     @RequestMapping(value = "findUseSelect.htm")
     @ResponseBody
-    public Object findUseSelect(@RequestBody UserVo vo){
+    public Object findUseSelect(@RequestBody UserVo vo) {
         UserTo to = getUserSession();
         vo.setApplicationId(to.getApplicationId());
         List<UserTo> list = userService.findUseSelect(vo);

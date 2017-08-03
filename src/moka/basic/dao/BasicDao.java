@@ -10,9 +10,9 @@ import java.util.List;
 public interface BasicDao<E, T> {
     int insert(E e);
 
-    T findOne(Integer id);
+    T findOne(String id);
 
-    T findOneAll(Integer id);
+    T findOneAll(String id);
 
     List<T> findList();
 
@@ -24,7 +24,7 @@ public interface BasicDao<E, T> {
 
     int findCount(Page page);
 
-    int delete(Integer id);
+    int delete(String id);
 
     int update(E e);
 }

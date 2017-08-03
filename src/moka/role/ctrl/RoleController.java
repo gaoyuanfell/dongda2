@@ -1,5 +1,7 @@
 package moka.role.ctrl;
 
+import moka.basic.annotation.MetaDataSecurity;
+import moka.basic.aspect.MetaData;
 import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
@@ -35,7 +37,7 @@ public class RoleController extends BasicController {
         vo.setApplicationId(userTo.getApplicationId());
         RoleTo to = roleService.findRepeatRole(vo);
         if(to == null){
-            int i = roleService.insert(vo);
+            String i = roleService.insert(vo);
             return result(i);
         }else{
             return result(CODE_PROMPT,"角色名称不能重复");
@@ -65,7 +67,7 @@ public class RoleController extends BasicController {
      */
     @RequestMapping(value = "delete.htm")
     @ResponseBody
-    public Object delete(int id){
+    public Object delete(String id){
         int i = roleService.delete(id);
         if(i > 0){
             return result();
@@ -74,24 +76,22 @@ public class RoleController extends BasicController {
         }
     }
 
-
     /**
      * 根据id查找
      */
     @RequestMapping(value = "findOne.htm",method = RequestMethod.GET)
     @ResponseBody
-    public Object findOne(int id) {
+    public Object findOne(String id) {
         RoleTo to = roleService.findOne(id);
         return result(to);
     }
-
 
     /**
      * 查 分页
      */
     @RequestMapping(value = "findPage.htm")
     @ResponseBody
-    public Object findPage(@RequestBody RoleVo vo) {
+    public Object findPage(@RequestBody RoleVo vo, @MetaDataSecurity(value = {"companyIds","followUserIds"}) MetaData metaData) {
         UserTo to = getUserSession();
         vo.setApplicationId(to.getApplicationId());
         Page list = roleService.findPage(vo);

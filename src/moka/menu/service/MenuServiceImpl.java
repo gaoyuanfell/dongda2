@@ -8,6 +8,7 @@ import moka.menu.to.MenuTo;
 import moka.menu.vo.MenuVo;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class MenuServiceImpl extends BasicServiceImpl implements MenuService {
     private Logger logger = LoggerService.getLogger(this.getClass());
 
     @Override
-    public int insert(MenuVo vo) {
+    public String insert(MenuVo vo) {
         Menu menu = this.convertBusinessValue(vo, Menu.class);
         menu.setCreateDate(new Date());
         menuDao.insert(menu);
@@ -41,18 +42,18 @@ public class MenuServiceImpl extends BasicServiceImpl implements MenuService {
     }
 
     @Override
-    public int delete(int id) {
+    public int delete(String id) {
         return menuDao.delete(id);
     }
 
     @Override
-    public MenuTo findOne(int id) {
+    public MenuTo findOne(String id) {
         return menuDao.findOne(id);
     }
 
     @Override
     public MenuTo findAllMenu(MenuVo vo) {
-        if(vo.getId() == 0) vo.setId(1);//默认获取根目录的所有子集
+        if(StringUtils.isEmpty(vo.getId())) vo.setId("1");//默认获取根目录的所有子集
         return menuDao.findAllMenu(vo.getId());
     }
 
@@ -92,7 +93,7 @@ public class MenuServiceImpl extends BasicServiceImpl implements MenuService {
             Iterator<MenuTo> iterator = list.iterator();
             while (iterator.hasNext()){
                 MenuTo l = iterator.next();
-                if(t != null && t.getId() == l.getParentId()){
+                if(t.getId().equals(l.getParentId())){
                     _list.add(l);
                     iterator.remove();
                     list.remove(l);
@@ -106,7 +107,7 @@ public class MenuServiceImpl extends BasicServiceImpl implements MenuService {
     }
 
     @Override
-    public MenuTo findMenuByUserId(int userId) {
+    public MenuTo findMenuByUserId(String userId) {
         List<MenuTo> list = menuDao.findMenuByUserId(userId);
         return getMenuTree(list);
     }

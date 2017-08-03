@@ -3,7 +3,7 @@ package moka.contract.enums;
 import org.jetbrains.annotations.Contract;
 
 public enum ContractEnum{
-    initial("初始状态","1"),
+    initial("初始状态-待审核","1"),
     inAudit("审核中","2"),
     audited("审核通过","3"),
     notAudit("审核不通过","4"),

@@ -4,13 +4,16 @@
 
     <insert id="insert" parameterType="moka.customer.bo.Customer" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_customer (
-        name, companyId, birthday, sex, contactAddress, contactTel, jobLevel, email, createDate, updateDate, state,applicationId
+        id,name, companyId, birthday, sex, contactAddress, contactTel, jobLevel, email, createDate, updateDate, state,applicationId
         ) VALUES (
-        #{name},#{companyId},#{birthday},#{sex},#{contactAddress},#{contactTel},#{jobLevel},#{email},#{createDate},#{updateDate},#{state},#{applicationId}
+        #{id},#{name},#{companyId},#{birthday},#{sex},#{contactAddress},#{contactTel},#{jobLevel},#{email},#{createDate},#{updateDate},#{state},#{applicationId}
         )
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
-    <delete id="delete" parameterType="Integer">
+    <delete id="delete" parameterType="String">
         DELETE FROM t_customer WHERE id = #{id};
     </delete>
 
@@ -29,7 +32,7 @@
         WHERE id = #{id}
     </update>
 
-    <select id="findOne" parameterType="Integer" resultType="moka.customer.to.CustomerTo">
+    <select id="findOne" parameterType="String" resultType="moka.customer.to.CustomerTo">
         SELECT * FROM t_customer WHERE id = #{id};
     </select>
 
@@ -53,12 +56,13 @@
     <!--作用于下拉-->
     <select id="findUseSelect" parameterType="moka.customer.vo.CustomerVo" resultType="moka.customer.to.CustomerTo">
         SELECT c.id, c.name FROM t_customer c WHERE
-        c.applicationId = #{applicationId}
+        1=1
+        AND c.applicationId = #{applicationId}
         AND c.state != 1
         <if test="name != null and name != ''">
             AND c.name LIKE CONCAT('%',#{name},'%')
         </if>
-        <if test="companyId != 0">
+        <if test="companyId != null and companyId != ''">
             AND c.companyId = #{companyId}
         </if>
     </select>

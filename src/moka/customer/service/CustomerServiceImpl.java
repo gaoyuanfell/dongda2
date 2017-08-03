@@ -26,7 +26,7 @@ public class CustomerServiceImpl extends BasicServiceImpl implements CustomerSer
     private CompanyDao companyDao;
 
     @Override
-    public int insert(CustomerVo vo) {
+    public String insert(CustomerVo vo) {
         Customer customer = this.convertBusinessValue(vo,Customer.class);
         customer.setCreateDate(new Date());
         customerDao.insert(customer);
@@ -34,7 +34,7 @@ public class CustomerServiceImpl extends BasicServiceImpl implements CustomerSer
     }
 
     @Override
-    public int delete(int id) {
+    public int delete(String id) {
         return customerDao.delete(id);
     }
 
@@ -53,12 +53,12 @@ public class CustomerServiceImpl extends BasicServiceImpl implements CustomerSer
     }
 
     @Override
-    public CustomerTo findOne(int id) {
+    public CustomerTo findOne(String id) {
         return customerDao.findOne(id);
     }
 
     @Override
-    public CompanyTo findComByCusId(int id) {
+    public CompanyTo findComByCusId(String id) {
         CustomerTo to = customerDao.findOne(id);
         if(to != null){
             CompanyTo companyTo = companyDao.findOne(to.getCompanyId());

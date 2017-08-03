@@ -2,14 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="moka.role.dao.RoleDao">
     <insert id="insert" parameterType="moka.role.bo.Role" useGeneratedKeys="true" keyProperty="id">
-      INSERT INTO t_role (
-        name, createDate, updateDate, state,applicationId
-      ) VALUES (
-        #{name},#{createDate},#{updateDate},#{state},#{applicationId}
-      )
+        INSERT INTO t_role (
+        id,name, createDate, updateDate, state,applicationId,readOnly
+        ) VALUES (
+        #{id},#{name},#{createDate},#{updateDate},#{state},#{applicationId},#{readOnly}
+        )
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
-    <select id="findOne" parameterType="Integer" resultType="moka.role.to.RoleTo">
+    <select id="findOne" parameterType="String" resultType="moka.role.to.RoleTo">
         SELECT * FROM t_role WHERE id = #{id};
     </select>
 
@@ -23,47 +27,47 @@
     </select>
 
     <!--查找用户下的角色-->
-    <select id="findUserRoles" parameterType="Integer" resultType="moka.role.to.RoleTo">
-        SELECT r.* FROM r_role_user ru LEFT JOIN t_role r ON r.id = ru.roleId WHERE 1 = 1 AND ru.userId = #{userId}
+    <select id="findUserRoles" parameterType="String" resultType="moka.role.to.RoleTo">
+        SELECT r.* FROM r_role_user_company ruc LEFT JOIN t_role r ON r.id = ruc.roleId WHERE 1 = 1 AND ruc.userId = #{userId}
     </select>
 
     <update id="update" parameterType="moka.role.bo.Role">
         UPDATE t_role
         <trim prefix="SET" suffixOverrides=",">
-            <if test="name != null and name != ''"> name = #{name}, </if>
-            <if test="updateDate != null"> updateDate = #{updateDate}, </if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="updateDate != null">updateDate = #{updateDate},</if>
         </trim>
-        WHERE id = #{id} AND readOnly != '1'
+        WHERE id = #{id}
     </update>
 
     <!--删除角色-->
-    <delete id="delete" parameterType="Integer">
-        DELETE FROM t_role WHERE id = #{id} AND readOnly != '2';
+    <delete id="delete" parameterType="String">
+        DELETE FROM t_role WHERE id = #{id}
     </delete>
 
     <!--删除角色关联的菜单-->
-    <delete id="deleteMenuOfRole" parameterType="Integer">
+    <delete id="deleteMenuOfRole" parameterType="String">
         DELETE FROM r_menu_role WHERE roleId = #{roleId}
     </delete>
 
     <!--删除用户关联的角色-->
-    <delete id="deleteRoleOfUser" parameterType="Integer">
-        DELETE FROM r_role_user WHERE userId = #{userId}
+    <delete id="deleteRoleOfUser" parameterType="String">
+        DELETE FROM r_role_user_company WHERE userId = #{userId}
     </delete>
 
     <!--角色关联菜单-->
     <insert id="insertMenuOfRole" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO r_menu_role (roleId, menuId,createDate) VALUES
-        <foreach collection="list" item="item" index="index" separator =",">
+        <foreach collection="list" item="item" index="index" separator=",">
             (#{item.roleId},#{item.menuId},NOW())
         </foreach>
     </insert>
 
     <!--用户关联角色-->
     <insert id="insertRoleOfUser" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO r_role_user (roleId, userId,createDate) VALUES
+        INSERT INTO r_role_user_company (roleId, userId, companyId,createDate) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.roleId},#{item.userId},NOW())
+            (#{item.roleId},#{item.userId},#{item.companyId},NOW())
         </foreach>
     </insert>
 

@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ContractTo {
-    private int id;
+    private String id;
     private Date createDate;
     private Date updateDate;
     private int state;
@@ -21,27 +21,27 @@ public class ContractTo {
     /**
      * 甲方公司ID
      */
-    private int companyIdA;
+    private String companyIdA;
     /**
      * 甲方联系人ID
      */
-    private int companyContractIdA;
+    private String companyContractIdA;
     /**
      * 乙方公司ID
      */
-    private int companyIdB;
+    private String companyIdB;
     /**
      * 乙方联系人ID
      */
-    private int companyContractIdB;
+    private String companyContractIdB;
     /**
      * 丙方公司ID
      */
-    private int companyIdC;
+    private String companyIdC;
     /**
      * 丙方联系人ID
      */
-    private int companyContractIdC;
+    private String companyContractIdC;
     /**
      * 合同签订日期
      */
@@ -108,82 +108,36 @@ public class ContractTo {
      */
     private String companyContractIdbName;
 
-    public String getCompanyIdaName() {
-        return companyIdaName;
+    public String getId() {
+        return id;
     }
 
-    public void setCompanyIdaName(String companyIdaName) {
-        this.companyIdaName = companyIdaName;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getCompanyIdbName() {
-        return companyIdbName;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCompanyIdbName(String companyIdbName) {
-        this.companyIdbName = companyIdbName;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public String getCompanyContractIdaName() {
-        return companyContractIdaName;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setCompanyContractIdaName(String companyContractIdaName) {
-        this.companyContractIdaName = companyContractIdaName;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public String getCompanyContractIdbName() {
-        return companyContractIdbName;
+    public int getState() {
+        return state;
     }
 
-    public void setCompanyContractIdbName(String companyContractIdbName) {
-        this.companyContractIdbName = companyContractIdbName;
-    }
-
-    public List getInvoicePlans() {
-        return invoicePlans;
-    }
-
-    public void setInvoicePlans(List invoicePlans) {
-        this.invoicePlans = invoicePlans;
-    }
-
-    public int getPaymentNum() {
-        return paymentNum;
-    }
-
-    public void setPaymentNum(int paymentNum) {
-        this.paymentNum = paymentNum;
-    }
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-    public String getContactState() {
-        return contactState;
-    }
-
-    public void setContactState(String contactState) {
-        this.contactState = contactState;
-    }
-
-    public String getContactType() {
-        return contactType;
-    }
-
-    public void setContactType(String contactType) {
-        this.contactType = contactType;
-    }
-
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public void setState(int state) {
+        this.state = state;
     }
 
     public String getContractNo() {
@@ -202,51 +156,51 @@ public class ContractTo {
         this.versionNo = versionNo;
     }
 
-    public int getCompanyIdA() {
+    public String getCompanyIdA() {
         return companyIdA;
     }
 
-    public void setCompanyIdA(int companyIdA) {
+    public void setCompanyIdA(String companyIdA) {
         this.companyIdA = companyIdA;
     }
 
-    public int getCompanyContractIdA() {
+    public String getCompanyContractIdA() {
         return companyContractIdA;
     }
 
-    public void setCompanyContractIdA(int companyContractIdA) {
+    public void setCompanyContractIdA(String companyContractIdA) {
         this.companyContractIdA = companyContractIdA;
     }
 
-    public int getCompanyIdB() {
+    public String getCompanyIdB() {
         return companyIdB;
     }
 
-    public void setCompanyIdB(int companyIdB) {
+    public void setCompanyIdB(String companyIdB) {
         this.companyIdB = companyIdB;
     }
 
-    public int getCompanyContractIdB() {
+    public String getCompanyContractIdB() {
         return companyContractIdB;
     }
 
-    public void setCompanyContractIdB(int companyContractIdB) {
+    public void setCompanyContractIdB(String companyContractIdB) {
         this.companyContractIdB = companyContractIdB;
     }
 
-    public int getCompanyIdC() {
+    public String getCompanyIdC() {
         return companyIdC;
     }
 
-    public void setCompanyIdC(int companyIdC) {
+    public void setCompanyIdC(String companyIdC) {
         this.companyIdC = companyIdC;
     }
 
-    public int getCompanyContractIdC() {
+    public String getCompanyContractIdC() {
         return companyContractIdC;
     }
 
-    public void setCompanyContractIdC(int companyContractIdC) {
+    public void setCompanyContractIdC(String companyContractIdC) {
         this.companyContractIdC = companyContractIdC;
     }
 
@@ -298,35 +252,83 @@ public class ContractTo {
         this.amt = amt;
     }
 
-    public int getId() {
-        return id;
+    public String getApplicationId() {
+        return applicationId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public String getContactType() {
+        return contactType;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setContactType(String contactType) {
+        this.contactType = contactType;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
+    public String getContactState() {
+        return contactState;
     }
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    public void setContactState(String contactState) {
+        this.contactState = contactState;
     }
 
-    public int getState() {
-        return state;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public int getPaymentNum() {
+        return paymentNum;
+    }
+
+    public void setPaymentNum(int paymentNum) {
+        this.paymentNum = paymentNum;
+    }
+
+    public List getInvoicePlans() {
+        return invoicePlans;
+    }
+
+    public void setInvoicePlans(List invoicePlans) {
+        this.invoicePlans = invoicePlans;
+    }
+
+    public String getCompanyIdaName() {
+        return companyIdaName;
+    }
+
+    public void setCompanyIdaName(String companyIdaName) {
+        this.companyIdaName = companyIdaName;
+    }
+
+    public String getCompanyIdbName() {
+        return companyIdbName;
+    }
+
+    public void setCompanyIdbName(String companyIdbName) {
+        this.companyIdbName = companyIdbName;
+    }
+
+    public String getCompanyContractIdaName() {
+        return companyContractIdaName;
+    }
+
+    public void setCompanyContractIdaName(String companyContractIdaName) {
+        this.companyContractIdaName = companyContractIdaName;
+    }
+
+    public String getCompanyContractIdbName() {
+        return companyContractIdbName;
+    }
+
+    public void setCompanyContractIdbName(String companyContractIdbName) {
+        this.companyContractIdbName = companyContractIdbName;
     }
 }

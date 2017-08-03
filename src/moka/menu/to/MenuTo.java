@@ -10,7 +10,7 @@ import java.util.List;
  * Created by moka on 2017/3/5 0005.
  */
 public class MenuTo implements Serializable {
-    private int id;
+    private String id;
     private Date createDate;
     private Date updateDate;
     private int state;
@@ -30,7 +30,7 @@ public class MenuTo implements Serializable {
     /**
      * 父级id
      */
-    private int parentId;
+    private String parentId;
 
     /**
      * 是否是最顶目录
@@ -43,6 +43,14 @@ public class MenuTo implements Serializable {
     private String type;
 
     private List<MenuTo> childList = new ArrayList<>();
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Date getCreateDate() {
         return createDate;
@@ -92,27 +100,11 @@ public class MenuTo implements Serializable {
         this.icon = icon;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public List<MenuTo> getChildList() {
-        return childList;
-    }
-
-    public void setChildList(List<MenuTo> childList) {
-        this.childList = childList;
-    }
-
-    public int getParentId() {
+    public String getParentId() {
         return parentId;
     }
 
-    public void setParentId(int parentId) {
+    public void setParentId(String parentId) {
         this.parentId = parentId;
     }
 
@@ -130,5 +122,13 @@ public class MenuTo implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public List<MenuTo> getChildList() {
+        return childList;
+    }
+
+    public void setChildList(List<MenuTo> childList) {
+        this.childList = childList;
     }
 }

@@ -4,11 +4,15 @@
 
     <insert id="insert" parameterType="moka.invoicePlan.bo.InvoicePlan" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_invoice_plan(
-            contractId, paymentPlanFact, versionNo, amt, planDate, planReceiveDate, receiveAmt, state, createDate, updateDate, planState
+            id,contractId, paymentPlanFact, versionNo, amt, planDate, planReceiveDate, receiveAmt, state, createDate, updateDate, planState
         )
         VALUES (
-            #{contractId},#{paymentPlanFact},#{versionNo},#{amt},#{planDate},#{planReceiveDate},#{receiveAmt},#{state},#{createDate},#{updateDate},#{planState}
+            #{id},#{contractId},#{paymentPlanFact},#{versionNo},#{amt},#{planDate},#{planReceiveDate},#{receiveAmt},#{state},#{createDate},#{updateDate},#{planState}
         )
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
     </insert>
 
     <update id="update" parameterType="moka.invoicePlan.bo.InvoicePlan">
@@ -22,7 +26,7 @@
         WHERE id = #{id}
     </update>
 
-    <select id="findOne" parameterType="Integer" resultType="moka.invoicePlan.to.InvoicePlanTo">
+    <select id="findOne" parameterType="String" resultType="moka.invoicePlan.to.InvoicePlanTo">
         SELECT * FROM t_invoice_plan i WHERE i.id = #{id} AND i.state != 1;
     </select>
 
@@ -32,17 +36,20 @@
 
     <!--批量添加-->
     <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
         INSERT INTO t_invoice_plan(
-            contractId, paymentPlanFact, versionNo, amt, planDate, planReceiveDate, receiveAmt, state, createDate, updateDate, planState
+            id,contractId, paymentPlanFact, versionNo, amt, planDate, planReceiveDate, receiveAmt, state, createDate, updateDate, planState
         )
         VALUES
         <foreach collection="list" index="index" item="item" separator=",">
-            (#{item.contractId},#{item.paymentPlanFact},#{item.versionNo},#{item.amt},#{item.planDate},#{item.planReceiveDate},#{item.receiveAmt},#{item.state},#{item.createDate},#{item.updateDate},#{item.planState})
+            (#{id},#{item.contractId},#{item.paymentPlanFact},#{item.versionNo},#{item.amt},#{item.planDate},#{item.planReceiveDate},#{item.receiveAmt},#{item.state},#{item.createDate},#{item.updateDate},#{item.planState})
         </foreach>
     </insert>
 
     <!--根据合同id获取开票计划-->
-    <select id="findByContract" parameterType="Integer" resultType="moka.invoicePlan.to.InvoicePlanTo">
+    <select id="findByContract" parameterType="String" resultType="moka.invoicePlan.to.InvoicePlanTo">
         SELECT * FROM t_invoice_plan ip WHERE ip.contractId = #{contractId} AND ip.state != 1;
     </select>
 

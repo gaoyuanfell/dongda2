@@ -72,10 +72,10 @@ public class BasicController {
             return redisService.getUserSession(new Token(token));
     }
 
-    protected int getUserSessionId() {
+    protected String getUserSessionId() {
         UserTo user = getUserSession();
         if (user == null)
-            return 0;
+            return null;
         else
             return user.getId();
     }

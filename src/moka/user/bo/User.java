@@ -50,40 +50,24 @@ public class User extends IdEntity implements Serializable {
      */
     private String idCardNo;
     /**
-     * 公司ID
-     */
-    private int companyId;
-    /**
      * 资源ID
      */
     private String applicationId;
     /**
      * 1 可以修改 2不能删除和修改 3不可查看
      */
-    private String readOnly = "";
+    private String readOnly;
+    /**
+     * 部门ID
+     */
+    private String departmentId;
 
-    public String getReadOnly() {
-        return readOnly;
+    public String getDepartmentId() {
+        return departmentId;
     }
 
-    public void setReadOnly(String readOnly) {
-        this.readOnly = readOnly;
-    }
-
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 
     public String getName() {
@@ -156,5 +140,21 @@ public class User extends IdEntity implements Serializable {
 
     public void setIdCardNo(String idCardNo) {
         this.idCardNo = idCardNo;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public String getReadOnly() {
+        return readOnly;
+    }
+
+    public void setReadOnly(String readOnly) {
+        this.readOnly = readOnly;
     }
 }

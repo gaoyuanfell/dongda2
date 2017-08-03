@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
+ * 错误拦截 返回对应的错误提示
  * Created by moka on 2017/3/29 0029.
  */
 @ControllerAdvice

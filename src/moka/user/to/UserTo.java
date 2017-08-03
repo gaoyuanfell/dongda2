@@ -12,7 +12,7 @@ import java.util.List;
  * Created by moka on 2017/3/5 0005.
  */
 public class UserTo implements Serializable {
-    private int id;
+    private String id;
     private Date createDate;
     private Date updateDate;
     private int state;
@@ -57,7 +57,7 @@ public class UserTo implements Serializable {
     /**
      * 公司ID
      */
-    private int companyId;
+    private String companyId;
 
     /**
      * 资源ID
@@ -73,66 +73,67 @@ public class UserTo implements Serializable {
      */
     private List roles;
     /**
-     * 所在公司
+     * 所在公司集合
      */
-    private CompanyTo company;
+    private List<CompanyTo> companies;
     /**
      * 1 可以修改 2不能删除和修改 3不可查看
      */
     private String readOnly;
+    /**
+     * 下级用户ID集合
+     */
+    private List<String> lowerIds;
+    /**
+     * 下级用户集合
+     */
+    private List<UserTo> lowers;
+    /**
+     * 部门ID
+     */
+    private String departmentId;
+    /**
+     * 部门名称
+     */
+    private String departmentName;
 
-    public String getReadOnly() {
-        return readOnly;
+    public List<UserTo> getLowers() {
+        return lowers;
     }
 
-    public void setReadOnly(String readOnly) {
-        this.readOnly = readOnly;
-    }
-    public CompanyTo getCompany() {
-        return company;
+    public void setLowers(List<UserTo> lowers) {
+        this.lowers = lowers;
     }
 
-    public void setCompany(CompanyTo company) {
-        this.company = company;
+    public List<String> getLowerIds() {
+        return lowerIds;
     }
 
-    public int getCompanyId() {
-        return companyId;
+    public void setLowerIds(List<String> lowerIds) {
+        this.lowerIds = lowerIds;
     }
 
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
+    public String getDepartmentId() {
+        return departmentId;
     }
 
-    public String getApplicationId() {
-        return applicationId;
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public MenuTo getMenuTo() {
-        return menuTo;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    public void setMenuTo(MenuTo menuTo) {
-        this.menuTo = menuTo;
-    }
-
-    public List getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List roles) {
-        this.roles = roles;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -230,5 +231,53 @@ public class UserTo implements Serializable {
 
     public void setIdCardNo(String idCardNo) {
         this.idCardNo = idCardNo;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public MenuTo getMenuTo() {
+        return menuTo;
+    }
+
+    public void setMenuTo(MenuTo menuTo) {
+        this.menuTo = menuTo;
+    }
+
+    public List getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List roles) {
+        this.roles = roles;
+    }
+
+    public List<CompanyTo> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(List<CompanyTo> companies) {
+        this.companies = companies;
+    }
+
+    public String getReadOnly() {
+        return readOnly;
+    }
+
+    public void setReadOnly(String readOnly) {
+        this.readOnly = readOnly;
     }
 }

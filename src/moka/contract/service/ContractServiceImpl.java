@@ -29,7 +29,7 @@ public class ContractServiceImpl extends BasicServiceImpl implements ContractSer
     private InvoicePlanService invoicePlanService;
 
     @Override
-    public int insert(ContractVo con) {
+    public String insert(ContractVo con) {
         Contract contract = this.convertBusinessValue(con, Contract.class);
         contract.setCreateDate(new Date());
         contract.setContactState(ContractEnum.initial.getValue());
@@ -39,7 +39,7 @@ public class ContractServiceImpl extends BasicServiceImpl implements ContractSer
     }
 
     @Override
-    public ContractTo findOne(Integer id) {
+    public ContractTo findOne(String id) {
         ContractTo to = contractDao.findOne(id);
         if(to != null){
             List l = invoicePlanService.findByContract(id);

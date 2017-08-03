@@ -91,7 +91,7 @@ public class RedisServiceImpl implements RedisService {
     public boolean flashLoginSession(Token t) {
         UserTo u = get(t.getToken(),UserTo.class);
         if (u == null) return false;
-        String key = Integer.toString(u.getId());
+        String key = u.getId();
         return redisTemplate.expire(key, data_session_expire, TimeUnit.MINUTES) && redisTemplate.expire(t.getToken(), data_session_expire, TimeUnit.MINUTES);
     }
 
@@ -99,7 +99,7 @@ public class RedisServiceImpl implements RedisService {
     public boolean deleteLoginSession(Token t) {
         UserTo user = this.getUserSession(t);
         if(user != null){
-            String key = Integer.toString(user.getId());
+            String key = user.getId();
             String token = t.getToken();
             if(StringUtils.isEmpty(key) || StringUtils.isEmpty(token)) return false;
             delete(key);
