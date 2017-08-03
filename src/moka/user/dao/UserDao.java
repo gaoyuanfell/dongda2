@@ -1,6 +1,7 @@
 package moka.user.dao;
 
 import moka.basic.dao.BasicDao;
+import moka.role.to.RoleUserCompanyTo;
 import moka.user.bo.User;
 import moka.user.to.UserTo;
 import moka.user.vo.UserVo;
@@ -27,4 +28,6 @@ public interface UserDao extends BasicDao<User, UserTo> {
     int insertLeaderRelation(String userId,String leaderId);
 
     int deleteLeaderRelation(String userId);
+
+    List<RoleUserCompanyTo> findCompanyRoleByUserId(String userId);
 }

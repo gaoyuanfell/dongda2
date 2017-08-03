@@ -2,6 +2,7 @@ package moka.user.service;
 
 import moka.basic.page.Page;
 import moka.basic.service.BasicService;
+import moka.role.to.RoleUserCompanyTo;
 import moka.user.bo.User;
 import moka.user.to.UserTo;
 import moka.user.vo.UserVo;
@@ -87,5 +88,12 @@ public interface UserService extends BasicService {
      * @return
      */
     int deleteLeaderRelation(String userId);
+
+    /**
+     * 根据用户id获取每个公司的角色情况
+     * @param userId
+     * @return
+     */
+    List<RoleUserCompanyTo> findCompanyRoleByUserId(String userId);
 
 }

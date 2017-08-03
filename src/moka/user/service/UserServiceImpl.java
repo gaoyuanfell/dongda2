@@ -11,7 +11,8 @@ import moka.menu.to.MenuTo;
 import moka.role.enums.RoleEnum;
 import moka.role.service.RoleService;
 import moka.role.to.RoleTo;
-import moka.role.bo.RoleUserCompany;
+import moka.role.to.RoleUserCompanyTo;
+import moka.role.vo.RoleUserCompanyVo;
 import moka.role.vo.RoleVo;
 import moka.user.bo.User;
 import moka.user.dao.UserDao;
@@ -89,8 +90,8 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         List<String> roles = new ArrayList<>();
         roles.add(roleId);
         vo.setRoles(roles);
-        List<RoleUserCompany> userCompanies = new ArrayList<>();
-        RoleUserCompany userCompany = new RoleUserCompany();
+        List<RoleUserCompanyVo> userCompanies = new ArrayList<>();
+        RoleUserCompanyVo userCompany = new RoleUserCompanyVo();
         userCompany.setCompanyId(company.getId());
         userCompany.setRoleId(roles);
         userCompanies.add(userCompany);
@@ -139,7 +140,16 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
 
     @Override
     public UserTo findOne(String id) {
-        return userDao.findOne(id);
+        UserTo to = userDao.findOne(id);
+
+        List<RoleUserCompanyTo> roleUserCompanyTos = this.findCompanyRoleByUserId(id);
+
+        for (RoleUserCompanyTo userCompanyTo:roleUserCompanyTos){
+
+        }
+
+        to.setRoleUserCompanies(null);
+        return to;
     }
 
     @Override
@@ -202,5 +212,10 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     @Override
     public int deleteLeaderRelation(String userId) {
         return userDao.deleteLeaderRelation(userId);
+    }
+
+    @Override
+    public List<RoleUserCompanyTo> findCompanyRoleByUserId(String userId) {
+        return userDao.findCompanyRoleByUserId(userId);
     }
 }

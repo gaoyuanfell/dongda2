@@ -1,7 +1,7 @@
 package moka.user.vo;
 
 import moka.basic.page.Page;
-import moka.role.bo.RoleUserCompany;
+import moka.role.vo.RoleUserCompanyVo;
 
 import java.util.Date;
 import java.util.List;
@@ -68,13 +68,9 @@ public class UserVo extends Page {
      */
     private String readOnly;
     /**
-     * 公司名称
-     */
-    private String companyName;
-    /**
      * 用户角色公司关联
      */
-    private List<RoleUserCompany> roleUserCompanies;
+    private List<RoleUserCompanyVo> roleUserCompanies;
     /**
      * 上级领导ID
      */
@@ -100,11 +96,11 @@ public class UserVo extends Page {
         this.departmentId = departmentId;
     }
 
-    public List<RoleUserCompany> getRoleUserCompanies() {
+    public List<RoleUserCompanyVo> getRoleUserCompanies() {
         return roleUserCompanies;
     }
 
-    public void setRoleUserCompanies(List<RoleUserCompany> roleUserCompanies) {
+    public void setRoleUserCompanies(List<RoleUserCompanyVo> roleUserCompanies) {
         this.roleUserCompanies = roleUserCompanies;
     }
 
@@ -242,13 +238,5 @@ public class UserVo extends Page {
 
     public void setReadOnly(String readOnly) {
         this.readOnly = readOnly;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
     }
 }

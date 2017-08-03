@@ -1,11 +1,18 @@
-package moka.role.bo;
+package moka.role.to;
 
-import java.util.List;
-
-public class RoleUserCompany {
-    private List<String> roleId;
+public class RoleUserCompanyTo {
+    private String roleId;
+    private String roleName;
     private String companyId;
     private String companyName;
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     public String getCompanyName() {
         return companyName;
@@ -15,11 +22,11 @@ public class RoleUserCompany {
         this.companyName = companyName;
     }
 
-    public List<String> getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(List<String> roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 

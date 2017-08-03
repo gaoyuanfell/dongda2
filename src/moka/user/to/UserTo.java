@@ -2,6 +2,7 @@ package moka.user.to;
 
 import moka.company.to.CompanyTo;
 import moka.menu.to.MenuTo;
+import moka.role.vo.RoleUserCompanyVo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -81,6 +82,10 @@ public class UserTo implements Serializable {
      */
     private String readOnly;
     /**
+     * 上级领导ID
+     */
+    private String leaderId;
+    /**
      * 下级用户ID集合
      */
     private List<String> lowerIds;
@@ -96,6 +101,26 @@ public class UserTo implements Serializable {
      * 部门名称
      */
     private String departmentName;
+    /**
+     * 用户角色公司关联
+     */
+    private List<RoleUserCompanyVo> roleUserCompanies;
+
+    public String getLeaderId() {
+        return leaderId;
+    }
+
+    public void setLeaderId(String leaderId) {
+        this.leaderId = leaderId;
+    }
+
+    public List<RoleUserCompanyVo> getRoleUserCompanies() {
+        return roleUserCompanies;
+    }
+
+    public void setRoleUserCompanies(List<RoleUserCompanyVo> roleUserCompanies) {
+        this.roleUserCompanies = roleUserCompanies;
+    }
 
     public List<UserTo> getLowers() {
         return lowers;
