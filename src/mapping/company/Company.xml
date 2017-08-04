@@ -114,4 +114,14 @@
     <select id="findCompanyByUser" parameterType="String" resultType="moka.company.to.CompanyTo">
         SELECT c.* FROM r_role_user_company ruc LEFT JOIN t_company c ON c.id = ruc.companyId WHERE userId = #{userId}
     </select>
+    
+    <!-- 添加部门 -->
+    <insert id="insertDepartment" parameterType="moka.company.vo.DepartmentVo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_department (
+        id,createDate, updateDate, state,name,parentId,companyId
+        ) VALUES (
+        #{id},#{createDate},#{updateDate},#{state},#{name},#{parentId},#{companyId}
+        )
+
+    </insert>
 </mapper>

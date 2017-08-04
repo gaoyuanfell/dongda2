@@ -1,6 +1,7 @@
 package moka.user.dao;
 
 import moka.basic.dao.BasicDao;
+import moka.company.vo.DepartmentVo;
 import moka.role.to.RoleUserCompanyTo;
 import moka.user.bo.User;
 import moka.user.to.UserTo;
@@ -32,4 +33,6 @@ public interface UserDao extends BasicDao<User, UserTo> {
     List<String> findUserLeader(String userId);
 
     List<RoleUserCompanyTo> findCompanyRoleByUserId(String userId);
+
+    int updateDepartment(DepartmentVo department);
 }

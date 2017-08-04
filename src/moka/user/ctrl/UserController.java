@@ -183,6 +183,9 @@ public class UserController extends BasicController {
     @RequestMapping(value = "update.htm")
     @ResponseBody
     public Object update(@RequestBody UserVo user) {
+        UserTo to = getUserSession();
+        user.setDepartmentId(to.getDepartmentId());
+        user.setId(to.getId());
         int i = userService.update(user);
         return result(i);
     }

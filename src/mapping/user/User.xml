@@ -36,7 +36,18 @@
     <select id="findUserLeader" parameterType="String" resultType="String">
         SELECT ul.userId FROM r_user_leader ul WHERE ul.leaderId = #{userId}
     </select>
-
+    
+    <!-- 修改用户部门领导 -->
+    <update id="updateDepartment" parameterType="moka.company.vo.DepartmentVo">
+        UPDATE t_department
+        <trim prefix="SET" suffixOverrides=",">
+          <if test="name != null and name != ''"> name = #{name}, </if>
+          <if test="parentId != null and parentId != ''"> parentId = #{parentId}, </if>
+          <if test="updateDate != null"> updateDate = #{updateDate}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+    
     <update id="update" parameterType="moka.user.bo.User">
         UPDATE t_user
         <trim prefix="SET" suffixOverrides=",">

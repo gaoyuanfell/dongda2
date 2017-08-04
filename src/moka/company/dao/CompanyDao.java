@@ -4,6 +4,8 @@ import moka.basic.dao.BasicDao;
 import moka.company.bo.Company;
 import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
+import moka.company.vo.DepartmentVo;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,4 +28,6 @@ public interface CompanyDao extends BasicDao<Company, CompanyTo> {
     List<String> findCompanyIdByUser(String userId);
 
     List<CompanyTo> findCompanyByUser(String userId);
+
+    int insertDepartment(DepartmentVo department);
 }
