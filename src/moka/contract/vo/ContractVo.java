@@ -91,7 +91,18 @@ public class ContractVo extends Page {
      * 付款期数
      */
     private int paymentNum;
+    /**
+     * 创建人
+     */
+    private String createUser;
 
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
     public String getId() {
         return id;
     }

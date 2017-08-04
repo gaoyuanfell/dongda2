@@ -67,8 +67,14 @@ public class UserController extends BasicController {
         if (u != null) {
             u.setPassword("");
             MenuTo menuTo = menuService.findMenuByUserId(u.getId());// 菜单
-            List<RoleTo> roles = roleService.findUserRoles(u.getId());// 角色
             List<CompanyTo> companies = companyService.findCompanyByUser(u.getId());//用户所在公司
+            if(menuTo == null || companies == null || companies.size() == 0){
+                return result(CODE_PROMPT, "账户信息有误，不能登陆！");
+            }
+            List<RoleTo> roles = roleService.findUserRoles(u.getId());// 角色
+
+            List<String> lowerIds = userService.findUserLeader(u.getId());//获取直属下级id集合
+            u.setLowerIds(lowerIds);
             u.setMenuTo(menuTo);
             u.setRoles(roles);
             u.setCompanies(companies);

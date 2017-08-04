@@ -240,6 +240,8 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
 
     @Override
     public List<String> findUserLeader(String userId) {
-        return userDao.findUserLeader(userId);
+        List<String> l = userDao.findUserLeader(userId);
+        l.add(userId);
+        return l;
     }
 }

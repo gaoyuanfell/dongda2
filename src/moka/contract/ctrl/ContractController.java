@@ -30,6 +30,7 @@ public class ContractController extends BasicController {
     public Object insert(@RequestBody ContractVo vo) {
         UserTo user = getUserSession();
         vo.setApplicationId(user.getApplicationId());
+        vo.setCreateUser(user.getId());
         ContractTo to = contractService.findRepeatContract(vo);
         if (to != null) {
             return result(CODE_PROMPT,String.format("合同号：%s 已存在。\n", vo.getContractNo()));

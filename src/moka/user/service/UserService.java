@@ -90,7 +90,7 @@ public interface UserService extends BasicService {
     int deleteLeaderRelation(UserVo vo);
 
     /**
-     * 获取用户下所有下属ID
+     * 获取用户下所有下属ID 包含自己的ID 方便查询
      * @param userId
      * @return
      */

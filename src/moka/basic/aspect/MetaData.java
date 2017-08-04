@@ -8,6 +8,9 @@ import java.util.List;
  * 用法  @MetaDataSecurity(value = {"companyIds","followUserIds"}) MetaData metaData
  */
 public class MetaData {
+    /**
+     * 用户所在公司ID
+     */
     private List companyIds;
 
     public List getCompanyIds() {
@@ -17,14 +20,16 @@ public class MetaData {
     public void setCompanyIds(List companyIds) {
         this.companyIds = companyIds;
     }
+    /**
+     * 用户直属下级ID
+     */
+    private List<String> lowerIds;
 
-    private List followUserIds;
-
-    public List getFollowUserIds() {
-        return followUserIds;
+    public List<String> getLowerIds() {
+        return lowerIds;
     }
 
-    public void setFollowUserIds(List followUserIds) {
-        this.followUserIds = followUserIds;
+    public void setLowerIds(List<String> lowerIds) {
+        this.lowerIds = lowerIds;
     }
 }
