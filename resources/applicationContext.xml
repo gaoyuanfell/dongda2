@@ -61,7 +61,7 @@
             </bean>
         </mvc:message-converters>
         <mvc:argument-resolvers>
-            <bean class="moka.basic.aspect.CompanyAspect"/>
+            <bean class="moka.basic.aspect.MetaDataAspect"/>
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
 

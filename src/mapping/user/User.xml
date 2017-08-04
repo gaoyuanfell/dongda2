@@ -37,17 +37,6 @@
         SELECT ul.userId FROM r_user_leader ul WHERE ul.leaderId = #{userId}
     </select>
     
-    <!-- 修改用户部门领导 -->
-    <update id="updateDepartment" parameterType="moka.company.vo.DepartmentVo">
-        UPDATE t_department
-        <trim prefix="SET" suffixOverrides=",">
-          <if test="name != null and name != ''"> name = #{name}, </if>
-          <if test="parentId != null and parentId != ''"> parentId = #{parentId}, </if>
-          <if test="updateDate != null"> updateDate = #{updateDate}, </if>
-        </trim>
-        WHERE id = #{id}
-    </update>
-    
     <update id="update" parameterType="moka.user.bo.User">
         UPDATE t_user
         <trim prefix="SET" suffixOverrides=",">
@@ -109,6 +98,13 @@
         <if test="name != null and name != ''">
             AND c.name LIKE CONCAT('%',#{name},'%')
         </if>
+    </select>
+
+    <!--根据公司Id获取用户 作用于下拉-->
+    <select id="findSelectByCompanyId" parameterType="String" resultType="moka.user.to.UserTo">
+        SELECT u.id, u.name FROM r_role_user_company ruc LEFT JOIN t_user u ON u.id = ruc.userId
+        WHERE 1=1
+        AND ruc.companyId = #{companyId}
     </select>
 
     <!--根据用户id获取每个公司的角色情况-->

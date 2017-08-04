@@ -183,9 +183,6 @@ public class UserController extends BasicController {
     @RequestMapping(value = "update.htm")
     @ResponseBody
     public Object update(@RequestBody UserVo user) {
-        UserTo to = getUserSession();
-        user.setDepartmentId(to.getDepartmentId());
-        user.setId(to.getId());
         int i = userService.update(user);
         return result(i);
     }
@@ -283,4 +280,16 @@ public class UserController extends BasicController {
         List<UserTo> list = userService.findUseSelect(vo);
         return result(list);
     }
+
+    /**
+     * 作用于下拉 搜索条件 { companyId:'' }
+     *
+     */
+    @RequestMapping(value = "findSelectByCompanyId.htm")
+    @ResponseBody
+    public Object findSelectByCompanyId(String companyId) {
+        List<UserTo> list = userService.findSelectByCompanyId(companyId);
+        return result(list);
+    }
+
 }

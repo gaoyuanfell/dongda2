@@ -35,7 +35,7 @@ public class Contract extends IdEntity implements Serializable {
      */
     private String companyIdB;
     /**
-     * 乙方联系人ID
+     * 乙方联系人ID 销售
      */
     private String companyContractIdB;
     /**

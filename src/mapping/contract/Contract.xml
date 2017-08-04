@@ -25,6 +25,11 @@
     <select id="findCount" resultType="Integer">
         SELECT COUNT(id) FROM t_contract c
         WHERE 1=1
+        AND (c.createUser = #{userId} OR c.companyContractIdB IN
+        <foreach collection="lowerIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        )
         AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companyIdB = ca.companyId))
         AND c.state != 1
         <if test="contractNo != null and contractNo != ''">
@@ -33,7 +38,15 @@
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.contract.to.ContractTo">
-        SELECT * FROM t_contract c WHERE 1=1
+        SELECT c.*,uc.name as userName,ucb.name as companyContractIdbName FROM t_contract c
+        LEFT JOIN t_user uc ON uc.id = c.createUser
+        LEFT JOIN t_user ucb ON ucb.id = c.companyContractIdB
+        WHERE 1=1
+        AND (c.createUser = #{userId} OR c.companyContractIdB IN
+          <foreach collection="lowerIds" item="item" index="index" open="(" close=")" separator=",">
+              #{item}
+          </foreach>
+        )
         AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companyIdB = ca.companyId))
         AND c.state != 1
         <if test="contractNo != null and contractNo != ''">

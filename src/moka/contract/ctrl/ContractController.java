@@ -1,6 +1,8 @@
 package moka.contract.ctrl;
 
 import moka.basic.annotation.IgnoreSecurity;
+import moka.basic.annotation.MetaDataSecurity;
+import moka.basic.aspect.MetaData;
 import moka.basic.ctrl.BasicController;
 import moka.basic.page.Page;
 import moka.contract.service.ContractService;
@@ -42,9 +44,14 @@ public class ContractController extends BasicController {
     @RequestMapping(value = "findPage.htm")
     @ResponseBody
     @IgnoreSecurity
-    public Object findPage(@RequestBody ContractVo vo){
+    public Object findPage(@RequestBody ContractVo vo,@MetaDataSecurity(value = {"lowerIds"}) MetaData metaData){
+        if(metaData == null){
+            return result(CODE_PROMPT,"参数错误");
+        }
         UserTo to = getUserSession();
+        vo.setUserId(to.getId());
         vo.setApplicationId(to.getApplicationId());
+        vo.setLowerIds(metaData.getLowerIds());
         Page list = contractService.findPage(vo);
         return result(list);
     }

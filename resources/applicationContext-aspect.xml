@@ -29,7 +29,7 @@
         <property name="tokenName" value="X-Token"/>
     </bean>
 
-    <!--<bean id="companyAspect" class="moka.basic.aspect.CompanyAspect"/>-->
+    <!--<bean id="companyAspect" class="moka.basic.aspect.MetaDataAspectt"/>-->
 
     <aop:config>
         <aop:aspect ref="securityAspect">

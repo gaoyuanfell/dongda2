@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * 增加绑定controller参数  必须MetaData 其实可以通过 MetaDataSecurity注解来获取对应的参数，不过目前不需要，没有复杂的业务，固定对象即可。
  */
-public class CompanyAspect implements HandlerMethodArgumentResolver {
+public class MetaDataAspect implements HandlerMethodArgumentResolver {
 
     private Logger logger = LoggerService.getLogger(this.getClass());
 
@@ -65,7 +65,8 @@ public class CompanyAspect implements HandlerMethodArgumentResolver {
                     List<String> companyIds = this.getCompanyIds(userTo.getId());
                     metaData.setCompanyIds(companyIds);
                     break;
-                case "followUserIds":
+                case "lowerIds":
+                    metaData.setLowerIds(userTo.getLowerIds());
                     break;
             }
         }

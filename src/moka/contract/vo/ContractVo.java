@@ -4,6 +4,7 @@ import moka.basic.page.Page;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 合同实体
@@ -95,6 +96,31 @@ public class ContractVo extends Page {
      * 创建人
      */
     private String createUser;
+    /**
+     * 下级用户ID集合
+     */
+    private List<String> lowerIds;
+
+    /**
+     * 用户ID
+     */
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public List<String> getLowerIds() {
+        return lowerIds;
+    }
+
+    public void setLowerIds(List<String> lowerIds) {
+        this.lowerIds = lowerIds;
+    }
 
     public String getCreateUser() {
         return createUser;

@@ -111,6 +111,18 @@ public class ContractTo {
      * 创建人
      */
     private String createUser;
+    /**
+     * 创建人名称
+     */
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getCreateUser() {
         return createUser;

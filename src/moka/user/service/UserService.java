@@ -75,6 +75,12 @@ public interface UserService extends BasicService {
     List<UserTo> findUseSelect(UserVo vo);
 
     /**
+     * 根据公司Id获取用户 作用于下拉
+     * @param companyId
+     */
+    List<UserTo>  findSelectByCompanyId(String companyId);
+
+    /**
      * 用户关联直接上级领导
      * userId
      * leaderId

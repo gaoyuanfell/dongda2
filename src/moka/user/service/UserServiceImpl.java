@@ -6,12 +6,10 @@ import moka.basic.util.Util;
 import moka.company.bo.Company;
 import moka.company.dao.CompanyDao;
 import moka.company.enums.CompanyEnum;
-import moka.company.vo.DepartmentVo;
 import moka.menu.dao.MenuDao;
 import moka.menu.to.MenuTo;
 import moka.role.enums.RoleEnum;
 import moka.role.service.RoleService;
-import moka.role.to.RoleTo;
 import moka.role.to.RoleUserCompanyTo;
 import moka.role.vo.RoleUserCompanyVo;
 import moka.role.vo.RoleVo;
@@ -62,18 +60,9 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         company.setCompanyType(CompanyEnum.ordinaryType.getValue());
         companyDao.insert(company);
         
-        //关联部门
-        DepartmentVo department = new DepartmentVo();
-        department.setName("管理部");
-        department.setCreateDate(new Date());
-        department.setId(Util.Md516());
-        department.setCompanyId(company.getId());
-        companyDao.insertDepartment(department);
-
         user.setApplicationId(uuid);
         user.setName(UserEnum.adminName.getValue());
         user.setEmployeeNo("1");
-        user.setDepartmentId(department.getId());
         user.setCreateDate(new Date());
         user.setReadOnly(UserEnum.watchOnly.getValue());
         user.setPassword(Util.getMd5String(user.getPassword().concat(DATA_PASSWORD_SALT)));
@@ -176,7 +165,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
             }
             roles.setCompanyId(companyId);
             if(roles.getRoleId() == null){
-                roles.setRoleId(new ArrayList<String>());
+                roles.setRoleId(new ArrayList<>());
             }
             roles.getRoleId().add(userCompanyTo.getRoleId());
             roles.setCompanyName(userCompanyTo.getCompanyName());
@@ -233,15 +222,14 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserTo> findSelectByCompanyId(String companyId) {
+        return userDao.findSelectByCompanyId(companyId);
+    }
+
+    @Override
     public int insertLeaderRelation(UserVo vo) {
-        //userDao.deleteLeaderRelation(vo);
-        //return userDao.insertLeaderRelation(vo);
-        DepartmentVo department = new DepartmentVo();
-        department.setId(vo.getDepartmentId());
-        department.setParentId(vo.getLeaderId());
-        department.setCompanyId(vo.getCompanyId());
-        department.setUpdateDate(vo.getUpdateDate());
-        return userDao.updateDepartment(department);
+        userDao.deleteLeaderRelation(vo);
+        return userDao.insertLeaderRelation(vo);
     }
 
     @Override
