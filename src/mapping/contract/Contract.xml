@@ -4,9 +4,9 @@
 
     <insert id="insert" parameterType="moka.contract.bo.Contract" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_contract (
-          id,createDate, updateDate, state, contractNo, versionNo, companyIdA, companyContractIdA, companyIdB, companyContractIdB, companyIdC, companyContractIdC, signDate, startDate, endDate, itemName, item, amt, applicationId, contactType, contactState, remark, paymentNum
+          id,createDate, updateDate, state, contractNo, versionNo, companyIdA, companyContractIdA, companyIdB, companyContractIdB, companyIdC, companyContractIdC, signDate, startDate, endDate, itemName, item, amt, applicationId, contactType, contactState, remark, paymentNum,createUser
         ) VALUES (
-          #{id},#{createDate},#{updateDate},#{state},#{contractNo},#{versionNo},#{companyIdA},#{companyContractIdA},#{companyIdB},#{companyContractIdB},#{companyIdC},#{companyContractIdC},#{signDate},#{startDate},#{endDate},#{itemName},#{item},#{amt},#{applicationId},#{contactType},#{contactState},#{remark},#{paymentNum}
+          #{id},#{createDate},#{updateDate},#{state},#{contractNo},#{versionNo},#{companyIdA},#{companyContractIdA},#{companyIdB},#{companyContractIdB},#{companyIdC},#{companyContractIdC},#{signDate},#{startDate},#{endDate},#{itemName},#{item},#{amt},#{applicationId},#{contactType},#{contactState},#{remark},#{paymentNum},#{createUser}
         )
         <selectKey keyProperty="id" order="BEFORE" resultType="String">
             select $uuid()

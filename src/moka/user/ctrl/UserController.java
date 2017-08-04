@@ -285,7 +285,7 @@ public class UserController extends BasicController {
      * 作用于下拉 搜索条件 { companyId:'' }
      *
      */
-    @RequestMapping(value = "findSelectByCompanyId.htm")
+    @RequestMapping(value = "findSelectByCompanyId.htm",method = RequestMethod.GET)
     @ResponseBody
     public Object findSelectByCompanyId(String companyId) {
         List<UserTo> list = userService.findSelectByCompanyId(companyId);

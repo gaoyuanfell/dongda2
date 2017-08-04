@@ -4,9 +4,9 @@
 
     <insert id="insert" parameterType="moka.user.bo.User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_user (
-        id,createDate, updateDate, state, name, phoneNumber, mail, password, employeeNo, currAddress, homeAdress, birthday, idCardNo, applicationId, departmentId
+        id,createDate, updateDate, state, name, phoneNumber, mail, password, employeeNo, currAddress, homeAdress, birthday, idCardNo, applicationId, departmentId,readOnly
         ) VALUES (
-        #{id},#{createDate}, #{updateDate}, #{state}, #{name}, #{phoneNumber}, #{mail}, #{password}, #{employeeNo}, #{currAddress}, #{homeAdress}, #{birthday}, #{idCardNo}, #{applicationId}, #{departmentId}
+        #{id},#{createDate}, #{updateDate}, #{state}, #{name}, #{phoneNumber}, #{mail}, #{password}, #{employeeNo}, #{currAddress}, #{homeAdress}, #{birthday}, #{idCardNo}, #{applicationId}, #{departmentId}, #{readOnly}
         );
 
         <selectKey keyProperty="id" order="BEFORE" resultType="String">
@@ -91,7 +91,8 @@
 
     <!--作用于下拉-->
     <select id="findUseSelect" parameterType="moka.user.vo.UserVo" resultType="moka.user.to.UserTo">
-        SELECT c.id, c.name FROM t_user c WHERE 1=1
+        SELECT c.id, c.name FROM t_user c
+        WHERE 1=1
         AND c.applicationId = #{applicationId}
         AND c.state != 1
         AND c.readOnly != '3'
@@ -104,6 +105,8 @@
     <select id="findSelectByCompanyId" parameterType="String" resultType="moka.user.to.UserTo">
         SELECT u.id, u.name FROM r_role_user_company ruc LEFT JOIN t_user u ON u.id = ruc.userId
         WHERE 1=1
+        AND u.state != 1
+        AND u.readOnly != '3'
         AND ruc.companyId = #{companyId}
     </select>
 
