@@ -23,7 +23,7 @@ public class InvoiceVo {
     /**
      * 实际开票日期
      */
-    private Date factIncoiveDate;
+    private Date factInvoiceDate;
     /**
      * 预计付款日期
      */
@@ -35,23 +35,35 @@ public class InvoiceVo {
     /**
      * 购买方公司ID
      */
-    private int companyPayId;
+    private String companyPayId;
     /**
      * 销售方公司ID
      */
-    private int companySaleId;
+    private String companySaleId;
     /**
      * 收款人姓名
      */
     private String payeeName;
     /**
+     * 收款人ID
+     */
+    private String payeeId;
+    /**
      * 复核人姓名
      */
     private String checkName;
     /**
+     * 复核人ID
+     */
+    private String checkId;
+    /**
      * 开票人姓名
      */
     private String billingName;
+    /**
+     * 开票人ID
+     */
+    private String billingId;
     /**
      * 不含税金额
      */
@@ -59,7 +71,7 @@ public class InvoiceVo {
     /**
      * 税率
      */
-    private Double rate;
+    private BigDecimal rate;
     /**
      * 税额
      */
@@ -71,7 +83,7 @@ public class InvoiceVo {
     /**
      * 备注
      */
-    private String remaeks;
+    private String remarks;
 
     public String getId() {
         return id;
@@ -129,12 +141,12 @@ public class InvoiceVo {
         this.planInvoiceDate = planInvoiceDate;
     }
 
-    public Date getFactIncoiveDate() {
-        return factIncoiveDate;
+    public Date getFactInvoiceDate() {
+        return factInvoiceDate;
     }
 
-    public void setFactIncoiveDate(Date factIncoiveDate) {
-        this.factIncoiveDate = factIncoiveDate;
+    public void setFactInvoiceDate(Date factInvoiceDate) {
+        this.factInvoiceDate = factInvoiceDate;
     }
 
     public Date getPlanPaymentDate() {
@@ -153,19 +165,19 @@ public class InvoiceVo {
         this.factPaymentDate = factPaymentDate;
     }
 
-    public int getCompanyPayId() {
+    public String getCompanyPayId() {
         return companyPayId;
     }
 
-    public void setCompanyPayId(int companyPayId) {
+    public void setCompanyPayId(String companyPayId) {
         this.companyPayId = companyPayId;
     }
 
-    public int getCompanySaleId() {
+    public String getCompanySaleId() {
         return companySaleId;
     }
 
-    public void setCompanySaleId(int companySaleId) {
+    public void setCompanySaleId(String companySaleId) {
         this.companySaleId = companySaleId;
     }
 
@@ -177,12 +189,28 @@ public class InvoiceVo {
         this.payeeName = payeeName;
     }
 
+    public String getPayeeId() {
+        return payeeId;
+    }
+
+    public void setPayeeId(String payeeId) {
+        this.payeeId = payeeId;
+    }
+
     public String getCheckName() {
         return checkName;
     }
 
     public void setCheckName(String checkName) {
         this.checkName = checkName;
+    }
+
+    public String getCheckId() {
+        return checkId;
+    }
+
+    public void setCheckId(String checkId) {
+        this.checkId = checkId;
     }
 
     public String getBillingName() {
@@ -193,6 +221,14 @@ public class InvoiceVo {
         this.billingName = billingName;
     }
 
+    public String getBillingId() {
+        return billingId;
+    }
+
+    public void setBillingId(String billingId) {
+        this.billingId = billingId;
+    }
+
     public BigDecimal getAmtWithoutTax() {
         return amtWithoutTax;
     }
@@ -201,11 +237,11 @@ public class InvoiceVo {
         this.amtWithoutTax = amtWithoutTax;
     }
 
-    public Double getRate() {
+    public BigDecimal getRate() {
         return rate;
     }
 
-    public void setRate(Double rate) {
+    public void setRate(BigDecimal rate) {
         this.rate = rate;
     }
 
@@ -225,11 +261,11 @@ public class InvoiceVo {
         this.amt = amt;
     }
 
-    public String getRemaeks() {
-        return remaeks;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setRemaeks(String remaeks) {
-        this.remaeks = remaeks;
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

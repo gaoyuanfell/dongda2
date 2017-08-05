@@ -3,6 +3,7 @@ package moka.role.vo;
 import moka.basic.page.Page;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 接收应用层的数据
@@ -31,6 +32,26 @@ public class RoleVo extends Page {
      * 1 可以修改 2不能删除和修改
      */
     private String readOnly;
+
+    private List<String> authIds;
+
+    private String authId;
+
+    public String getAuthId() {
+        return authId;
+    }
+
+    public void setAuthId(String authId) {
+        this.authId = authId;
+    }
+
+    public List<String> getAuthIds() {
+        return authIds;
+    }
+
+    public void setAuthIds(List<String> authIds) {
+        this.authIds = authIds;
+    }
 
     public String getCompanyId() {
         return companyId;

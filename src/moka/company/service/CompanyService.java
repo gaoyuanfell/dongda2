@@ -58,13 +58,6 @@ public interface CompanyService extends BasicService {
      * @return
      */
     List<CompanyTo> findComByRelationId(String relationId);
-
-    /**
-     * 有问题
-     * 根据公司名称获取公司id
-     */
-//    String findComIdByName(CompanyVo company);
-
     /**
      * moka
      * 查找和自己有关系的公司ID

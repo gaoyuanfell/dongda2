@@ -118,4 +118,23 @@ public class RoleServiceImpl extends BasicServiceImpl implements RoleService {
     public List<RoleTo> findUseSelect(RoleVo vo) {
         return roleDao.findUseSelect(vo);
     }
+
+    @Override
+    public int insertAuthOfRole(RoleVo vo) {
+        List<String> authIds = vo.getAuthIds();
+        String roleId = vo.getRoleId();
+        List<RoleVo> role = new ArrayList<>();
+        for (String a : authIds){
+            RoleVo r = new RoleVo();
+            r.setRoleId(roleId);
+            r.setAuthId(a);
+            role.add(r);
+        }
+        return roleDao.insertAuthOfRole(role);
+    }
+
+    @Override
+    public int deleteAuthOfRole(String roleId) {
+        return roleDao.deleteAuthOfRole(roleId);
+    }
 }

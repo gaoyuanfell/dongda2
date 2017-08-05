@@ -1,14 +1,17 @@
 package moka.contract.ctrl;
 
+import moka.basic.annotation.AuthSecurity;
 import moka.basic.annotation.IgnoreSecurity;
 import moka.basic.annotation.MetaDataSecurity;
 import moka.basic.aspect.MetaData;
 import moka.basic.ctrl.BasicController;
+import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
 import moka.contract.service.ContractService;
 import moka.contract.to.ContractTo;
 import moka.contract.vo.ContractVo;
 import moka.user.to.UserTo;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,7 @@ import java.util.List;
 public class ContractController extends BasicController {
     @Resource
     private ContractService contractService;
+    private Logger logger = LoggerService.getLogger(this.getClass());
 
     /**
      * 添加合同
@@ -103,6 +107,22 @@ public class ContractController extends BasicController {
         vo.setApplicationId(to.getApplicationId());
         List<ContractTo> list = contractService.findUseSelect(vo);
         return result(list);
+    }
+
+
+    /**
+     * 审核合同
+     * @param vo
+     * id
+     * contactState
+     * @return
+     */
+    @RequestMapping(value = "checkContract.htm")
+    @ResponseBody
+    @AuthSecurity(value = {"check_contract"})
+    public Object checkContract(@RequestBody ContractVo vo){
+        logger.info(vo);
+        return result();
     }
 
 }

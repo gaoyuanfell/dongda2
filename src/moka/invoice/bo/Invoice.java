@@ -32,7 +32,7 @@ public class Invoice extends IdEntity implements Serializable{
     /**
      * 实际开票日期
      */
-    private Date factIncoiveDate;
+    private Date factInvoiceDate;
     /**
      * 预计付款日期
      */
@@ -54,13 +54,25 @@ public class Invoice extends IdEntity implements Serializable{
      */
     private String payeeName;
     /**
+     * 收款人ID
+     */
+    private String payeeId;
+    /**
      * 复核人姓名
      */
     private String checkName;
     /**
+     * 复核人ID
+     */
+    private String checkId;
+    /**
      * 开票人姓名
      */
     private String billingName;
+    /**
+     * 开票人ID
+     */
+    private String billingId;
     /**
      * 不含税金额
      */
@@ -68,7 +80,7 @@ public class Invoice extends IdEntity implements Serializable{
     /**
      * 税率
      */
-    private Double rate;
+    private BigDecimal rate;
     /**
      * 税额
      */
@@ -80,7 +92,7 @@ public class Invoice extends IdEntity implements Serializable{
     /**
      * 备注
      */
-    private String remaeks;
+    private String remarks;
 
     public String getContractId() {
         return contractId;
@@ -106,12 +118,12 @@ public class Invoice extends IdEntity implements Serializable{
         this.planInvoiceDate = planInvoiceDate;
     }
 
-    public Date getFactIncoiveDate() {
-        return factIncoiveDate;
+    public Date getFactInvoiceDate() {
+        return factInvoiceDate;
     }
 
-    public void setFactIncoiveDate(Date factIncoiveDate) {
-        this.factIncoiveDate = factIncoiveDate;
+    public void setFactInvoiceDate(Date factInvoiceDate) {
+        this.factInvoiceDate = factInvoiceDate;
     }
 
     public Date getPlanPaymentDate() {
@@ -154,12 +166,28 @@ public class Invoice extends IdEntity implements Serializable{
         this.payeeName = payeeName;
     }
 
+    public String getPayeeId() {
+        return payeeId;
+    }
+
+    public void setPayeeId(String payeeId) {
+        this.payeeId = payeeId;
+    }
+
     public String getCheckName() {
         return checkName;
     }
 
     public void setCheckName(String checkName) {
         this.checkName = checkName;
+    }
+
+    public String getCheckId() {
+        return checkId;
+    }
+
+    public void setCheckId(String checkId) {
+        this.checkId = checkId;
     }
 
     public String getBillingName() {
@@ -170,6 +198,14 @@ public class Invoice extends IdEntity implements Serializable{
         this.billingName = billingName;
     }
 
+    public String getBillingId() {
+        return billingId;
+    }
+
+    public void setBillingId(String billingId) {
+        this.billingId = billingId;
+    }
+
     public BigDecimal getAmtWithoutTax() {
         return amtWithoutTax;
     }
@@ -178,11 +214,11 @@ public class Invoice extends IdEntity implements Serializable{
         this.amtWithoutTax = amtWithoutTax;
     }
 
-    public Double getRate() {
+    public BigDecimal getRate() {
         return rate;
     }
 
-    public void setRate(Double rate) {
+    public void setRate(BigDecimal rate) {
         this.rate = rate;
     }
 
@@ -202,11 +238,11 @@ public class Invoice extends IdEntity implements Serializable{
         this.amt = amt;
     }
 
-    public String getRemaeks() {
-        return remaeks;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setRemaeks(String remaeks) {
-        this.remaeks = remaeks;
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

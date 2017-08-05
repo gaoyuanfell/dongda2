@@ -1,5 +1,8 @@
 package moka.user.ctrl;
 
+import moka.auth.service.AuthService;
+import moka.auth.to.AuthTo;
+import moka.basic.annotation.AuthSecurity;
 import moka.basic.annotation.IgnoreSecurity;
 import moka.basic.bo.Token;
 import moka.basic.ctrl.BasicController;
@@ -46,6 +49,8 @@ public class UserController extends BasicController {
     private RoleService roleService;
     @Resource
     private CompanyService companyService;
+    @Resource
+    private AuthService authService;
     private Logger logger = LoggerService.getLogger(this.getClass());
 
     @Value("#{propertyConfigurer['data_token_name']}")
@@ -72,8 +77,9 @@ public class UserController extends BasicController {
                 return result(CODE_PROMPT, "账户信息有误，不能登陆！");
             }
             List<RoleTo> roles = roleService.findUserRoles(u.getId());// 角色
-
             List<String> lowerIds = userService.findUserLeader(u.getId());//获取直属下级id集合
+            List<AuthTo> authList = authService.findUserAuth(u.getId());//获取用户权限集合
+            u.setAuthList(authList);
             u.setLowerIds(lowerIds);
             u.setMenuTo(menuTo);
             u.setRoles(roles);

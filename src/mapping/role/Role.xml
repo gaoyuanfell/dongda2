@@ -83,4 +83,17 @@
         </if>
     </select>
 
+    <!--角色关联权限-->
+    <insert id="insertAuthOfRole" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO r_role_auth (roleId, authId,createDate) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.roleId},#{item.authId},NOW())
+        </foreach>
+    </insert>
+
+    <!--角色接触关联权限-->
+    <delete id="deleteAuthOfRole" parameterType="String">
+        DELETE FROM r_role_auth WHERE roleId = #{roleId}
+    </delete>
+
 </mapper>

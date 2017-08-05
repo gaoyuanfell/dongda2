@@ -38,6 +38,21 @@ public interface RoleService extends BasicService {
     int deleteMenuOfRole(String roleId);
 
     /**
+     * 角色关联权限
+     * authIds
+     * roleId
+     * @return
+     */
+    int insertAuthOfRole(RoleVo vo);
+
+    /**
+     * 删除角色关联权限
+     * @param roleId
+     * @return
+     */
+    int deleteAuthOfRole(String roleId);
+
+    /**
      * 删除用户下的角色
      * @param userId
      * @return

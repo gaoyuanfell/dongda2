@@ -1,5 +1,6 @@
 package moka.user.to;
 
+import moka.auth.to.AuthTo;
 import moka.company.to.CompanyTo;
 import moka.menu.to.MenuTo;
 import moka.role.vo.RoleUserCompanyVo;
@@ -109,6 +110,30 @@ public class UserTo implements Serializable {
      * 用户角色公司关联
      */
     private List<RoleUserCompanyVo> roleUserCompanies;
+    /**
+     * 用户权限
+     */
+    private List<AuthTo> authList;
+    /**
+     * 用户权限
+     */
+    private List<String> authSign;
+
+    public List<AuthTo> getAuthList() {
+        return authList;
+    }
+
+    public void setAuthList(List<AuthTo> authList) {
+        this.authList = authList;
+    }
+
+    public List<String> getAuthSign() {
+        return authSign;
+    }
+
+    public void setAuthSign(List<String> authSign) {
+        this.authSign = authSign;
+    }
 
     public List<String> getCompanyIds() {
         return companyIds;
