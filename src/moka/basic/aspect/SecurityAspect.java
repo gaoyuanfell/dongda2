@@ -1,9 +1,9 @@
 package moka.basic.aspect;
 
-import com.alibaba.fastjson.JSONObject;
 import moka.auth.to.AuthTo;
 import moka.basic.annotation.AuthSecurity;
 import moka.basic.annotation.IgnoreSecurity;
+import moka.basic.bo.Resources;
 import moka.basic.bo.Token;
 import moka.basic.service.RedisService;
 import moka.user.to.UserTo;
@@ -24,7 +24,7 @@ import java.util.List;
  * 主要用于登录拦截
  * Created by moka on 2017/3/29 0029.
  */
-public class SecurityAspect {
+public class SecurityAspect extends Resources {
 
     @Value("#{propertyConfigurer['data_token_name']}")
     private String DEFAULT_TOKEN_NAME;
@@ -58,52 +58,39 @@ public class SecurityAspect {
         UserTo user = redisService.getUserSession(t);
 
         //判断用户是否登陆
-        if(!StringUtils.isEmpty(token)){
+        if (!StringUtils.isEmpty(token)) {
             if (user == null || StringUtils.isEmpty(user.getId())) return result();
             redisService.flashLoginSession(t);
-            response.setHeader(tokenName,token);
-        }else{
-            return result();
+            response.setHeader(tokenName, token);
+        } else {
+            return result(CODE_NO_LOGIN,"用户没有登陆");
         }
 
         //判断用户权限 有注解就判断用户是否有这些权限
         boolean authSecurity_b = method.isAnnotationPresent(AuthSecurity.class);
-        if(authSecurity_b){
+        if (authSecurity_b) {
             List<AuthTo> authList = user.getAuthList();
             AuthSecurity authSecurity = method.getAnnotation(AuthSecurity.class);
             String[] va = authSecurity.value();
-            Boolean b = this.findAuth(authList,va);
-            if(!b){
-                return result(205,"暂无此权限");
+            Boolean b = this.findAuth(authList, va);
+            if (!b) {
+                return result(CODE_NOT_AUTH, "暂无此权限");
             }
         }
         return pjp.proceed();
     }
 
-    private Object result(){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("code", 201);
-        jsonObject.put("msg", "用户没有登录");
-        return jsonObject;
-    }
-
-    private Object result(int code,String msg){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("code", code);
-        jsonObject.put("msg", msg);
-        return jsonObject;
-    }
-
     /**
      * 判断用户是否有权限
+     *
      * @param authList
      * @param value
      * @return
      */
-    private Boolean findAuth(List<AuthTo> authList,String[] value){
-        if(authList != null && authList.size() > 0 && value != null && value.length > 0){
-            for(String sign : value){
-                if(!this.arrayMap(authList,sign)){
+    private Boolean findAuth(List<AuthTo> authList, String[] value) {
+        if (authList != null && authList.size() > 0 && value != null && value.length > 0) {
+            for (String sign : value) {
+                if (!this.arrayMap(authList, sign)) {
                     return false;
                 }
             }
@@ -111,9 +98,9 @@ public class SecurityAspect {
         return true;
     }
 
-    private Boolean arrayMap(List<AuthTo> authList,String sign){
-        for(AuthTo to : authList){
-            if(sign.equals(to.getSign())){
+    private Boolean arrayMap(List<AuthTo> authList, String sign) {
+        for (AuthTo to : authList) {
+            if (sign.equals(to.getSign())) {
                 return true;
             }
         }

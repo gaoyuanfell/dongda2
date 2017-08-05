@@ -1,6 +1,7 @@
 package moka.basic.ctrl;
 
 import com.alibaba.fastjson.JSONObject;
+import moka.basic.bo.Resources;
 import moka.basic.bo.Token;
 import moka.basic.service.RedisService;
 import moka.user.to.UserTo;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by moka on 2017/3/27 0027.
  */
-public class BasicController {
+public class BasicController extends Resources {
 
     @Resource
     private RedisService redisService;
@@ -23,42 +24,6 @@ public class BasicController {
 
     @Resource
     private HttpServletRequest request;
-
-    protected static final int CODE_SUCCESS = 200;//成功
-    protected static final int CODE_NO_LOGIN = 201;//未登录
-    protected static final int CODE_PROMPT = 202;//文字提示
-    protected static final int CODE_NOT_AUTH = 205;//文字提示
-//    protected static final int CODE_PROMPT_MASK = 203;//弹幕提示
-
-    protected static JSONObject result(Object obj) {
-        JSONObject json = new JSONObject();
-        json.put("msg", "success");
-        json.put("code", 200);
-        json.put("data", obj);
-        return json;
-    }
-
-    protected static JSONObject result(Object obj, int code, String msg) {
-        JSONObject json = new JSONObject();
-        json.put("msg", msg);
-        json.put("code", code);
-        json.put("data", obj);
-        return json;
-    }
-
-    protected static JSONObject result(int code, String msg) {
-        JSONObject json = new JSONObject();
-        json.put("msg", msg);
-        json.put("code", code);
-        return json;
-    }
-
-    protected static JSONObject result() {
-        JSONObject json = new JSONObject();
-        json.put("msg", "success");
-        json.put("code", 200);
-        return json;
-    }
 
     protected boolean addUserSession(Token t) {
         return redisService.addUserSession(t);
