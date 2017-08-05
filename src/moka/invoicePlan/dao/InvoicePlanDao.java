@@ -1,11 +1,10 @@
 package moka.invoicePlan.dao;
 
-import moka.invoicePlan.vo.InvoicePlanVo;
-import org.springframework.stereotype.Repository;
-
+import moka.basic.dao.BasicDao;
 import moka.invoicePlan.bo.InvoicePlan;
 import moka.invoicePlan.to.InvoicePlanTo;
-import moka.basic.dao.BasicDao;
+import moka.invoicePlan.vo.InvoicePlanVo;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

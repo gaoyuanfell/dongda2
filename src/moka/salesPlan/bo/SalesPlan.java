@@ -1,13 +1,12 @@
 package moka.salesPlan.bo;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
+import moka.basic.bo.IdEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import moka.basic.bo.IdEntity;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 销售计划实体

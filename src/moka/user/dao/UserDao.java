@@ -1,15 +1,13 @@
 package moka.user.dao;
 
 import moka.basic.dao.BasicDao;
-import moka.company.vo.DepartmentVo;
 import moka.role.to.RoleUserCompanyTo;
 import moka.user.bo.User;
 import moka.user.to.UserTo;
 import moka.user.vo.UserVo;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-import org.springframework.stereotype.Repository;
 
 /**
  * Created by moka on 2017/3/5 0005.

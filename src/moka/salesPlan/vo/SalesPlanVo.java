@@ -1,9 +1,9 @@
 package moka.salesPlan.vo;
 
+import moka.basic.page.Page;
+
 import java.math.BigDecimal;
 import java.util.Date;
-
-import moka.basic.page.Page;
 
 public class SalesPlanVo extends Page {
     private String id;

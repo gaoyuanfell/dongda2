@@ -1,11 +1,11 @@
 package moka.salesPlan.service;
 
 
-import java.util.List;
-
 import moka.basic.service.BasicService;
 import moka.salesPlan.to.SalesPlanTo;
 import moka.salesPlan.vo.SalesPlanVo;
+
+import java.util.List;
 
 public interface SalesPlanService extends BasicService {
 

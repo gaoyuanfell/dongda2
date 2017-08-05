@@ -1,6 +1,5 @@
 package moka.customer.ctrl;
 
-import moka.basic.annotation.IgnoreSecurity;
 import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;

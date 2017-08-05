@@ -8,11 +8,8 @@ import moka.company.enums.CompanyEnum;
 import moka.company.to.CompanyTo;
 import moka.company.vo.CompanyVo;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
