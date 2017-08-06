@@ -31,9 +31,13 @@
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.invoice.to.InvoiceTo">
-        SELECT * FROM t_invoice i
-        WHERE
-        i.applicationId = #{applicationId}
+        SELECT i.*,cp.companyName companyPayName,cs.companyName companySaleName,up.name payeeName,uc.name checkName,ub.name billingName FROM t_invoice i
+            LEFT JOIN t_company cp ON i.companyPayId = cp.id
+            LEFT JOIN t_company cs ON i.companySaleId = cs.id
+            LEFT JOIN t_user up ON i.payeeId = up.id
+            LEFT JOIN t_user uc ON i.payeeId = uc.id
+            LEFT JOIN t_user ub ON i.billingId = ub.id
+        WHERE i.applicationId = #{applicationId}
         AND i.state != 1
         LIMIT #{pageStart} , #{pageSize};
     </select>

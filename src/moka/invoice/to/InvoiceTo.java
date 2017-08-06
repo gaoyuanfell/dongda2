@@ -41,9 +41,17 @@ public class InvoiceTo {
      */
     private String companyPayId;
     /**
+     * 购买方公司名称
+     */
+    private String companyPayName;
+    /**
      * 销售方公司ID
      */
     private String companySaleId;
+    /**
+     * 销售方公司名称
+     */
+    private String companySaleName;
     /**
      * 收款人姓名
      */
@@ -96,6 +104,30 @@ public class InvoiceTo {
      * 资源ID
      */
     private String applicationId;
+
+    public String getCompanyPayName() {
+        return companyPayName;
+    }
+
+    public void setCompanyPayName(String companyPayName) {
+        this.companyPayName = companyPayName;
+    }
+
+    public String getCompanySaleName() {
+        return companySaleName;
+    }
+
+    public void setCompanySaleName(String companySaleName) {
+        this.companySaleName = companySaleName;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public String getApplicationId() {
         return applicationId;
