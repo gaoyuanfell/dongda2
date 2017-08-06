@@ -50,7 +50,7 @@
 
     <!--根据合同id获取开票计划-->
     <select id="findByContract" parameterType="String" resultType="moka.invoicePlan.to.InvoicePlanTo">
-        SELECT * FROM t_invoice_plan ip WHERE ip.contractId = #{contractId} AND ip.state != 1;
+        SELECT ip.*,concat(ip.paymentPlanFact,'-',ip.amt) as name FROM t_invoice_plan ip WHERE ip.contractId = #{contractId} AND ip.state != 1;
     </select>
 
 

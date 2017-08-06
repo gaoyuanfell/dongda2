@@ -21,9 +21,10 @@ public class Invoice extends IdEntity implements Serializable{
      */
     private String contractId;
     /**
-     * 实际开票批次
+     * 开票批次ID
      */
-    private int paymentPlanFact;
+    private String invoicePlanId;
+
     /**
      * 计划开票日期
      */
@@ -75,7 +76,7 @@ public class Invoice extends IdEntity implements Serializable{
     /**
      * 不含税金额
      */
-    private BigDecimal amtWithoutTax;
+    private BigDecimal amt;
     /**
      * 税率
      */
@@ -87,11 +88,44 @@ public class Invoice extends IdEntity implements Serializable{
     /**
      * 价税金额
      */
-    private BigDecimal amt;
+    private BigDecimal amtTax;
     /**
      * 备注
      */
-    private String remarks;
+    private String remark;
+    /**
+     * 发票状态
+     */
+    private String invoiceState;
+    /**
+     * 资源ID
+     */
+    private String applicationId;
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public String getInvoiceState() {
+        return invoiceState;
+    }
+
+    public void setInvoiceState(String invoiceState) {
+        this.invoiceState = invoiceState;
+    }
+
+    public String getRemark() {
+
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public String getContractId() {
         return contractId;
@@ -101,12 +135,12 @@ public class Invoice extends IdEntity implements Serializable{
         this.contractId = contractId;
     }
 
-    public int getPaymentPlanFact() {
-        return paymentPlanFact;
+    public String getInvoicePlanId() {
+        return invoicePlanId;
     }
 
-    public void setPaymentPlanFact(int paymentPlanFact) {
-        this.paymentPlanFact = paymentPlanFact;
+    public void setInvoicePlanId(String invoicePlanId) {
+        this.invoicePlanId = invoicePlanId;
     }
 
     public Date getPlanInvoiceDate() {
@@ -205,12 +239,12 @@ public class Invoice extends IdEntity implements Serializable{
         this.billingId = billingId;
     }
 
-    public BigDecimal getAmtWithoutTax() {
-        return amtWithoutTax;
+    public BigDecimal getAmt() {
+        return amt;
     }
 
-    public void setAmtWithoutTax(BigDecimal amtWithoutTax) {
-        this.amtWithoutTax = amtWithoutTax;
+    public void setAmt(BigDecimal amt) {
+        this.amt = amt;
     }
 
     public BigDecimal getRate() {
@@ -229,19 +263,11 @@ public class Invoice extends IdEntity implements Serializable{
         this.amtOfTax = amtOfTax;
     }
 
-    public BigDecimal getAmt() {
-        return amt;
+    public BigDecimal getAmtTax() {
+        return amtTax;
     }
 
-    public void setAmt(BigDecimal amt) {
-        this.amt = amt;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
+    public void setAmtTax(BigDecimal amtTax) {
+        this.amtTax = amtTax;
     }
 }

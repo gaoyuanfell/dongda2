@@ -1,9 +1,11 @@
 package moka.invoice.vo;
 
+import moka.basic.page.Page;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class InvoiceVo {
+public class InvoiceVo extends Page {
     private String id;
     private Date createDate;
     private Date updateDate;
@@ -12,6 +14,10 @@ public class InvoiceVo {
      * 合同编号
      */
     private String contractId;
+    /**
+     * 开票批次ID
+     */
+    private String invoicePlanId;
     /**
      * 实际开票批次
      */
@@ -67,7 +73,7 @@ public class InvoiceVo {
     /**
      * 不含税金额
      */
-    private BigDecimal amtWithoutTax;
+    private BigDecimal amt;
     /**
      * 税率
      */
@@ -79,12 +85,34 @@ public class InvoiceVo {
     /**
      * 价税金额
      */
-    private BigDecimal amt;
+    private BigDecimal amtTax;
     /**
      * 备注
      */
-    private String remarks;
+    private String remark;
+    /**
+     * 发票状态
+     */
+    private String invoiceState;
+    /**
+     * 资源ID
+     */
+    private String applicationId;
 
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+    public String getInvoiceState() {
+        return invoiceState;
+    }
+
+    public void setInvoiceState(String invoiceState) {
+        this.invoiceState = invoiceState;
+    }
     public String getId() {
         return id;
     }
@@ -123,6 +151,14 @@ public class InvoiceVo {
 
     public void setContractId(String contractId) {
         this.contractId = contractId;
+    }
+
+    public String getInvoicePlanId() {
+        return invoicePlanId;
+    }
+
+    public void setInvoicePlanId(String invoicePlanId) {
+        this.invoicePlanId = invoicePlanId;
     }
 
     public int getPaymentPlanFact() {
@@ -229,12 +265,12 @@ public class InvoiceVo {
         this.billingId = billingId;
     }
 
-    public BigDecimal getAmtWithoutTax() {
-        return amtWithoutTax;
+    public BigDecimal getAmt() {
+        return amt;
     }
 
-    public void setAmtWithoutTax(BigDecimal amtWithoutTax) {
-        this.amtWithoutTax = amtWithoutTax;
+    public void setAmt(BigDecimal amt) {
+        this.amt = amt;
     }
 
     public BigDecimal getRate() {
@@ -253,19 +289,11 @@ public class InvoiceVo {
         this.amtOfTax = amtOfTax;
     }
 
-    public BigDecimal getAmt() {
-        return amt;
+    public BigDecimal getAmtTax() {
+        return amtTax;
     }
 
-    public void setAmt(BigDecimal amt) {
-        this.amt = amt;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
+    public void setAmtTax(BigDecimal amtTax) {
+        this.amtTax = amtTax;
     }
 }

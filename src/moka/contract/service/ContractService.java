@@ -36,4 +36,11 @@ public interface ContractService extends BasicService {
      */
     List<ContractTo> findUseSelect(ContractVo vo);
 
+    /**
+     * 作用于下拉 获取合同全部字段
+     * @param vo
+     * @return
+     */
+    List<ContractTo> findContractByAllData(ContractVo vo);
+
 }

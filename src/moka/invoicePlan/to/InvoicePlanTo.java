@@ -44,6 +44,18 @@ public class InvoicePlanTo {
      * 资源ID
      */
     private String applicationId;
+    /**
+     * 默认名称
+     */
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getId() {
         return id;

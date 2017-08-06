@@ -10,6 +10,7 @@ import moka.user.to.UserTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -78,11 +79,11 @@ public class InvoicePlanController extends BasicController {
     /**
      * 根据合同id获取开票计划
      */
-    @RequestMapping(value = "findByContract.htm")
+    @RequestMapping(value = "findByContract.htm",method = RequestMethod.GET)
     @ResponseBody
     @IgnoreSecurity
-    public Object findByContract(String id){
-        List l = invoicePlanService.findByContract(id);
+    public Object findByContract(String contractId){
+        List l = invoicePlanService.findByContract(contractId);
         return result(l);
     }
 

@@ -154,4 +154,8 @@ public class ContractServiceImpl extends BasicServiceImpl implements ContractSer
         return null;
     }
 
+    @Override
+    public List<ContractTo> findContractByAllData(ContractVo vo) {
+        return contractDao.findContractByAllData(vo);
+    }
 }

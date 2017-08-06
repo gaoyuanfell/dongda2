@@ -109,6 +109,22 @@ public class ContractController extends BasicController {
         return result(list);
     }
 
+    /**
+     * 作用于下拉 获取全部数据 搜索条件
+     * {
+     *     contractNo:''
+     * }
+     *
+     */
+    @RequestMapping(value = "findContractByAllData.htm")
+    @ResponseBody
+    public Object findContractByAllData(@RequestBody ContractVo vo){
+        UserTo to = getUserSession();
+        vo.setApplicationId(to.getApplicationId());
+        List<ContractTo> list = contractService.findContractByAllData(vo);
+        return result(list);
+    }
+
 
     /**
      * 审核合同

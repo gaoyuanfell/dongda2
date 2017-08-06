@@ -66,6 +66,21 @@
         </if>
     </select>
 
+    <!--作用于下拉 -->
+    <select id="findContractByAllData" parameterType="moka.contract.vo.ContractVo" resultType="moka.contract.to.ContractTo">
+        SELECT c.*,coa.companyName companyIdaName,cob.companyName companyIdbName,cu.name companyContractIdaName,u.name companyContractIdbName FROM t_contract c
+        LEFT JOIN t_company coa ON c.companyIdA = coa.id
+        LEFT JOIN t_company cob ON c.companyIdB = cob.id
+        LEFT JOIN t_customer cu ON c.companyContractIdA = cu.id
+        LEFT JOIN t_user u ON c.companyContractIdB = u.id
+        WHERE c.applicationId = #{applicationId}
+        AND c.state != 1
+        <if test="contractNo != null and contractNo != ''">
+            AND c.contractNo LIKE
+            CONCAT('%',#{contractNo},'%')
+        </if>
+    </select>
+
     <select id="findRepeatContract" parameterType="moka.contract.vo.ContractVo" resultType="moka.contract.to.ContractTo">
         SELECT * FROM  t_contract c WHERE c.contractNo = #{contractNo}
     </select>
