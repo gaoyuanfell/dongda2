@@ -22,22 +22,30 @@ public class Contract extends IdEntity implements Serializable {
      * 版本号
      */
     private int versionNo;
+
+
+    private String companyIdA;
+    private String companyContractIdA;
+    private String companyIdB;
+    private String companyContractIdB;
+
+
     /**
      * 甲方公司ID
      */
-    private String companyIdA;
+    private String companyPayId;
     /**
      * 甲方联系人ID
      */
-    private String companyContractIdA;
+    private String companyPayCustomerId;
     /**
      * 乙方公司ID
      */
-    private String companyIdB;
+    private String companySaleId;
     /**
      * 乙方联系人ID 销售
      */
-    private String companyContractIdB;
+    private String companySaleUserId;
     /**
      * 丙方公司ID
      */
@@ -95,6 +103,38 @@ public class Contract extends IdEntity implements Serializable {
      * 创建人
      */
     private String createUser;
+
+    public String getCompanyPayId() {
+        return companyPayId;
+    }
+
+    public void setCompanyPayId(String companyPayId) {
+        this.companyPayId = companyPayId;
+    }
+
+    public String getCompanyPayCustomerId() {
+        return companyPayCustomerId;
+    }
+
+    public void setCompanyPayCustomerId(String companyPayCustomerId) {
+        this.companyPayCustomerId = companyPayCustomerId;
+    }
+
+    public String getCompanySaleId() {
+        return companySaleId;
+    }
+
+    public void setCompanySaleId(String companySaleId) {
+        this.companySaleId = companySaleId;
+    }
+
+    public String getCompanySaleUserId() {
+        return companySaleUserId;
+    }
+
+    public void setCompanySaleUserId(String companySaleUserId) {
+        this.companySaleUserId = companySaleUserId;
+    }
 
     public String getCreateUser() {
         return createUser;

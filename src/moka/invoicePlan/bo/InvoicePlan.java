@@ -29,7 +29,7 @@ public class InvoicePlan extends IdEntity implements Serializable {
     /**
      * 开票金额
      */
-    private BigDecimal amt = new BigDecimal("0");
+    private BigDecimal planAmt = new BigDecimal("0");
     /**
      * 计划开票日期
      */
@@ -91,12 +91,12 @@ public class InvoicePlan extends IdEntity implements Serializable {
         this.versionNo = versionNo;
     }
 
-    public BigDecimal getAmt() {
-        return amt;
+    public BigDecimal getPlanAmt() {
+        return planAmt;
     }
 
-    public void setAmt(BigDecimal amt) {
-        this.amt = amt;
+    public void setPlanAmt(BigDecimal planAmt) {
+        this.planAmt = planAmt;
     }
 
     public Date getPlanDate() {

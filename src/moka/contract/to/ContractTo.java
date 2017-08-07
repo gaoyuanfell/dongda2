@@ -18,22 +18,32 @@ public class ContractTo {
      * 版本号
      */
     private int versionNo;
+
+
+    private String companyIdA;
+
+    private String companyContractIdA;
+
+    private String companyIdB;
+
+    private String companyContractIdB;
+
     /**
      * 甲方公司ID
      */
-    private String companyIdA;
+    private String companyPayId;
     /**
      * 甲方联系人ID
      */
-    private String companyContractIdA;
+    private String companyPayCustomerId;
     /**
      * 乙方公司ID
      */
-    private String companyIdB;
+    private String companySaleId;
     /**
-     * 乙方联系人ID
+     * 乙方联系人ID 销售
      */
-    private String companyContractIdB;
+    private String companySaleUserId;
     /**
      * 丙方公司ID
      */
@@ -91,22 +101,31 @@ public class ContractTo {
      * 开票计划
      */
     private List invoicePlans;
+
+
+    private String companyIdaName;
+    private String companyIdbName;
+    private String companyContractIdaName;
+    private String companyContractIdbName;
+
+
     /**
      * 甲公司名称
      */
-    private String companyIdaName;
+    private String companyPayName;
     /**
      * 乙公司名称
      */
-    private String companyIdbName;
+    private String companySaleName;
     /**
      * 甲公司客户
      */
-    private String companyContractIdaName;
+    private String companyPayCustomerName;
     /**
      * 销售
      */
-    private String companyContractIdbName;
+    private String companySaleUserName;
+
     /**
      * 创建人
      */
@@ -115,6 +134,70 @@ public class ContractTo {
      * 创建人名称
      */
     private String userName;
+
+    public String getCompanyPayName() {
+        return companyPayName;
+    }
+
+    public void setCompanyPayName(String companyPayName) {
+        this.companyPayName = companyPayName;
+    }
+
+    public String getCompanySaleName() {
+        return companySaleName;
+    }
+
+    public void setCompanySaleName(String companySaleName) {
+        this.companySaleName = companySaleName;
+    }
+
+    public String getCompanyPayCustomerName() {
+        return companyPayCustomerName;
+    }
+
+    public void setCompanyPayCustomerName(String companyPayCustomerName) {
+        this.companyPayCustomerName = companyPayCustomerName;
+    }
+
+    public String getCompanySaleUserName() {
+        return companySaleUserName;
+    }
+
+    public void setCompanySaleUserName(String companySaleUserName) {
+        this.companySaleUserName = companySaleUserName;
+    }
+
+    public String getCompanyPayId() {
+        return companyPayId;
+    }
+
+    public void setCompanyPayId(String companyPayId) {
+        this.companyPayId = companyPayId;
+    }
+
+    public String getCompanyPayCustomerId() {
+        return companyPayCustomerId;
+    }
+
+    public void setCompanyPayCustomerId(String companyPayCustomerId) {
+        this.companyPayCustomerId = companyPayCustomerId;
+    }
+
+    public String getCompanySaleId() {
+        return companySaleId;
+    }
+
+    public void setCompanySaleId(String companySaleId) {
+        this.companySaleId = companySaleId;
+    }
+
+    public String getCompanySaleUserId() {
+        return companySaleUserId;
+    }
+
+    public void setCompanySaleUserId(String companySaleUserId) {
+        this.companySaleUserId = companySaleUserId;
+    }
 
     public String getUserName() {
         return userName;

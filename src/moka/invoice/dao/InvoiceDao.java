@@ -14,4 +14,6 @@ public interface InvoiceDao extends BasicDao<Invoice,InvoiceTo>{
     int methodReceivedState(Invoice vo);
 
     int methodCreditedState(Invoice vo);
+
+    int methodPaymentState(Invoice vo);
 }

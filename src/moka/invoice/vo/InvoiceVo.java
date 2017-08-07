@@ -42,10 +42,6 @@ public class InvoiceVo extends Page {
      * 购买方公司ID
      */
     private String companyPayId;
-
-    private String companyPayName;
-
-    private String companySaleName;
     /**
      * 销售方公司ID
      */
@@ -102,22 +98,6 @@ public class InvoiceVo extends Page {
      * 资源ID
      */
     private String applicationId;
-
-    public String getCompanyPayName() {
-        return companyPayName;
-    }
-
-    public void setCompanyPayName(String companyPayName) {
-        this.companyPayName = companyPayName;
-    }
-
-    public String getCompanySaleName() {
-        return companySaleName;
-    }
-
-    public void setCompanySaleName(String companySaleName) {
-        this.companySaleName = companySaleName;
-    }
 
     public String getRemark() {
         return remark;

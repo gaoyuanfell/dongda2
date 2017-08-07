@@ -7,6 +7,7 @@ import moka.invoice.vo.InvoiceVo;
 
 public interface InvoiceService extends BasicService{
 
+
     String insert(InvoiceVo vo);
 
     int delete(String id);
@@ -17,6 +18,8 @@ public interface InvoiceService extends BasicService{
 
     InvoiceTo findOne(String id);
 
+    InvoiceTo findOneAll(String id);
+
     //已开票
     int methodInvoicedState(InvoiceVo vo);
 
@@ -26,6 +29,9 @@ public interface InvoiceService extends BasicService{
     //已收到
     int methodReceivedState(InvoiceVo vo);
 
-    //已入账
+    //已入账 （发票审核阶段）
     int methodCreditedState(InvoiceVo vo);
+
+    //已收账
+    int methodPaymentState(InvoiceVo vo);
 }

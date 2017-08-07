@@ -65,6 +65,18 @@ public class InvoiceController extends BasicController{
     }
 
     /**
+     * 根据id查找
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "findOneAll.htm")
+    @ResponseBody
+    public Object findOneAll(String id) {
+        InvoiceTo to = invoiceService.findOneAll(id);
+        return result(to);
+    }
+
+    /**
      * 开票
      * @param vo
      * @return
@@ -103,7 +115,7 @@ public class InvoiceController extends BasicController{
     }
 
     /**
-     * 已入账
+     * 已入账 审核入账
      * @param vo
      * @return
      */
@@ -113,4 +125,18 @@ public class InvoiceController extends BasicController{
         int i = invoiceService.methodCreditedState(vo);
         return result(i);
     }
+
+    /**
+     * 发票确认收款
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "methodPaymentState.htm")
+    @ResponseBody
+    public Object methodPaymentState(@RequestBody InvoiceVo vo){
+        int i = invoiceService.methodPaymentState(vo);
+        return result(i);
+    }
+
+
 }

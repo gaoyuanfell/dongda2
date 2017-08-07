@@ -4,9 +4,9 @@
 
     <insert id="insert" parameterType="moka.contract.bo.Contract" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_contract (
-          id,createDate, updateDate, state, contractNo, versionNo, companyIdA, companyContractIdA, companyIdB, companyContractIdB, companyIdC, companyContractIdC, signDate, startDate, endDate, itemName, item, amt, applicationId, contactType, contactState, remark, paymentNum,createUser
+          id,createDate, updateDate, state, contractNo, versionNo, companyPayId, companyPayCustomerId, companySaleId, companySaleUserId, companyIdC, companyContractIdC, signDate, startDate, endDate, itemName, item, amt, applicationId, contactType, contactState, remark, paymentNum,createUser
         ) VALUES (
-          #{id},#{createDate},#{updateDate},#{state},#{contractNo},#{versionNo},#{companyIdA},#{companyContractIdA},#{companyIdB},#{companyContractIdB},#{companyIdC},#{companyContractIdC},#{signDate},#{startDate},#{endDate},#{itemName},#{item},#{amt},#{applicationId},#{contactType},#{contactState},#{remark},#{paymentNum},#{createUser}
+          #{id},#{createDate},#{updateDate},#{state},#{contractNo},#{versionNo},#{companyPayId},#{companyPayCustomerId},#{companySaleId},#{companySaleUserId},#{companyIdC},#{companyContractIdC},#{signDate},#{startDate},#{endDate},#{itemName},#{item},#{amt},#{applicationId},#{contactType},#{contactState},#{remark},#{paymentNum},#{createUser}
         )
         <selectKey keyProperty="id" order="BEFORE" resultType="String">
             select $uuid()
@@ -14,23 +14,23 @@
     </insert>
 
     <select id="findOne" parameterType="String" resultType="moka.contract.to.ContractTo">
-        SELECT c.*,coa.companyName companyIdaName,cob.companyName companyIdbName,cu.name companyContractIdaName,u.name companyContractIdbName FROM t_contract c
-        LEFT JOIN t_company coa ON c.companyIdA = coa.id
-        LEFT JOIN t_company cob ON c.companyIdB = cob.id
-        LEFT JOIN t_customer cu ON c.companyContractIdA = cu.id
-        LEFT JOIN t_user u ON c.companyContractIdB = u.id
+        SELECT c.*,coa.companyName companyPayName,cob.companyName companySaleName,cu.name companyPayCustomerName,u.name companySaleUserName FROM t_contract c
+        LEFT JOIN t_company coa ON c.companyPayId = coa.id
+        LEFT JOIN t_company cob ON c.companySaleId = cob.id
+        LEFT JOIN t_customer cu ON c.companyPayCustomerId = cu.id
+        LEFT JOIN t_user u ON c.companySaleUserId = u.id
         WHERE c.id = #{id} AND c.state != 1;
     </select>
 
     <select id="findCount" resultType="Integer">
         SELECT COUNT(id) FROM t_contract c
         WHERE 1=1
-        AND (c.createUser = #{userId} OR c.companyContractIdB IN
+        AND (c.createUser = #{userId} OR c.companySaleUserId IN
         <foreach collection="lowerIds" item="item" index="index" open="(" close=")" separator=",">
             #{item}
         </foreach>
         )
-        AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companyIdB = ca.companyId))
+        AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companySaleId = ca.companyId))
         AND c.state != 1
         <if test="contractNo != null and contractNo != ''">
             AND c.contractNo LIKE CONCAT('%',#{contractNo},'%')
@@ -38,16 +38,16 @@
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.contract.to.ContractTo">
-        SELECT c.*,uc.name as userName,ucb.name as companyContractIdbName FROM t_contract c
+        SELECT c.*,uc.name as userName,ucb.name as companySaleUserName FROM t_contract c
         LEFT JOIN t_user uc ON uc.id = c.createUser
-        LEFT JOIN t_user ucb ON ucb.id = c.companyContractIdB
+        LEFT JOIN t_user ucb ON ucb.id = c.companySaleUserId
         WHERE 1=1
-        AND (c.createUser = #{userId} OR c.companyContractIdB IN
+        AND (c.createUser = #{userId} OR c.companySaleUserId IN
           <foreach collection="lowerIds" item="item" index="index" open="(" close=")" separator=",">
               #{item}
           </foreach>
         )
-        AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companyIdB = ca.companyId))
+        AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companySaleId = ca.companyId))
         AND c.state != 1
         <if test="contractNo != null and contractNo != ''">
             AND c.contractNo LIKE CONCAT('%',#{contractNo},'%')
@@ -68,11 +68,11 @@
 
     <!--作用于下拉 -->
     <select id="findContractByAllData" parameterType="moka.contract.vo.ContractVo" resultType="moka.contract.to.ContractTo">
-        SELECT c.*,coa.companyName companyIdaName,cob.companyName companyIdbName,cu.name companyContractIdaName,u.name companyContractIdbName FROM t_contract c
-        LEFT JOIN t_company coa ON c.companyIdA = coa.id
-        LEFT JOIN t_company cob ON c.companyIdB = cob.id
-        LEFT JOIN t_customer cu ON c.companyContractIdA = cu.id
-        LEFT JOIN t_user u ON c.companyContractIdB = u.id
+        SELECT c.*,coa.companyName companyPayName,cob.companyName companySaleName,cu.name companyPayCustomerName,u.name companySaleUserName FROM t_contract c
+        LEFT JOIN t_company coa ON c.companyPayId = coa.id
+        LEFT JOIN t_company cob ON c.companySaleId = cob.id
+        LEFT JOIN t_customer cu ON c.companyPayCustomerId = cu.id
+        LEFT JOIN t_user u ON c.companySaleUserId = u.id
         WHERE c.applicationId = #{applicationId}
         AND c.state != 1
         <if test="contractNo != null and contractNo != ''">
@@ -88,10 +88,10 @@
     <!--批量添加合同-->
     <!--<insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_contract (
-          createDate, updateDate, state, contractNo, versionNo, companyIdA, companyContractIdA, companyIdB, companyContarctIdB, companyIdC, companyContractIdC, signDate, startDate, endDate, itemName, item, amt, applicationId, contactType, contactState, remark, paymentNum
+          createDate, updateDate, state, contractNo, versionNo, companyPayId, companyPayCustomerId, companySaleId, companyContarctIdB, companyIdC, companyContractIdC, signDate, startDate, endDate, itemName, item, amt, applicationId, contactType, contactState, remark, paymentNum
         ) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.createDate},#{item.updateDate},#{item.state},#{item.contractNo},#{item.versionNo},#{item.companyIdA},#{item.companyContractIdA},#{item.companyIdB},#{item.companyContarctIdB},#{item.companyIdC},#{item.companyContractIdC},#{item.signDate},#{item.startDate},#{item.endDate},#{item.itemName},#{item.item},#{item.amt},#{item.applicationId},#{item.contactType},#{item.contactState},#{item.remark},#{item.paymentNum})
+            (#{item.createDate},#{item.updateDate},#{item.state},#{item.contractNo},#{item.versionNo},#{item.companyPayId},#{item.companyPayCustomerId},#{item.companySaleId},#{item.companyContarctIdB},#{item.companyIdC},#{item.companyContractIdC},#{item.signDate},#{item.startDate},#{item.endDate},#{item.itemName},#{item.item},#{item.amt},#{item.applicationId},#{item.contactType},#{item.contactState},#{item.remark},#{item.paymentNum})
         </foreach>
     </insert>-->
 

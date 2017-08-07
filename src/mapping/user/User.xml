@@ -103,9 +103,8 @@
 
     <!--根据公司Id获取用户 作用于下拉-->
     <select id="findSelectByCompanyId" parameterType="String" resultType="moka.user.to.UserTo">
-        SELECT u.id, u.name FROM r_role_user_company ruc LEFT JOIN t_user u ON u.id = ruc.userId
-        WHERE 1=1
-        AND u.state != 1
+        SELECT DISTINCT(u.id), u.name FROM r_role_user_company ruc LEFT JOIN t_user u ON u.id = ruc.userId
+        WHERE u.state != 1
         AND u.readOnly != '3'
         AND ruc.companyId = #{companyId}
     </select>

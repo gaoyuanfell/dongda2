@@ -20,7 +20,15 @@
     </insert>
 
     <select id="findOne" parameterType="String" resultType="moka.invoice.to.InvoiceTo">
-        SELECT * FROM t_invoice WHERE id = #{id} AND AND state != 1
+        SELECT * FROM t_invoice WHERE id = #{id} AND state != 1
+    </select>
+
+    <select id="findOneAll" parameterType="String" resultType="moka.invoice.to.InvoiceTo">
+        SELECT i.*,cp.companyName companyPayName,cs.companyName companySaleName,ip.planAmt planAmt FROM t_invoice i
+        LEFT JOIN t_company cp ON i.companyPayId = cp.id
+        LEFT JOIN t_company cs ON i.companySaleId = cs.id
+        LEFT JOIN t_invoice_plan ip ON ip.id = i.invoicePlanId
+        WHERE i.id = #{id} AND i.state != 1
     </select>
 
     <select id="findCount" parameterType="moka.basic.page.Page" resultType="Integer">
@@ -75,8 +83,19 @@
         WHERE id = #{id}
     </update>
 
-    <!--已入账-->
+    <!--已入账 发票审核-->
     <update id="methodCreditedState" parameterType="moka.invoice.bo.Invoice">
+        UPDATE t_invoice
+        <trim prefix="SET" suffixOverrides=",">
+
+            <if test="invoiceState != null and invoiceState != ''"> invoiceState = #{invoiceState}, </if>
+            <if test="updateDate != null"> updateDate = #{updateDate}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <!--已入账 发票审核-->
+    <update id="methodPaymentState" parameterType="moka.invoice.bo.Invoice">
         UPDATE t_invoice
         <trim prefix="SET" suffixOverrides=",">
             <if test="factPaymentDate != null and factPaymentDate != ''"> factPaymentDate = #{factPaymentDate}, </if>

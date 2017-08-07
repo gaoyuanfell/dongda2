@@ -53,6 +53,11 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
     }
 
     @Override
+    public InvoiceTo findOneAll(String id) {
+        return invoiceDao.findOneAll(id);
+    }
+
+    @Override
     public int methodInvoicedState(InvoiceVo vo) {
         Invoice invoice = this.convertBusinessValue(vo,Invoice.class);
         invoice.setFactInvoiceDate(new Date());//开票时间
@@ -80,9 +85,17 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
     @Override
     public int methodCreditedState(InvoiceVo vo) {
         Invoice invoice = this.convertBusinessValue(vo,Invoice.class);
-        invoice.setInvoiceState(InvoiceEnum.credited.getValue());
-        invoice.setFactPaymentDate(new Date());//入账时间
+        invoice.setInvoiceState(InvoiceEnum.recorded.getValue());
         invoice.setUpdateDate(new Date());
         return invoiceDao.methodCreditedState(invoice);
+    }
+
+    @Override
+    public int methodPaymentState(InvoiceVo vo) {
+        Invoice invoice = this.convertBusinessValue(vo,Invoice.class);
+        invoice.setInvoiceState(InvoiceEnum.payment.getValue());
+        invoice.setFactPaymentDate(new Date());//收款时间
+        invoice.setUpdateDate(new Date());
+        return invoiceDao.methodPaymentState(invoice);
     }
 }

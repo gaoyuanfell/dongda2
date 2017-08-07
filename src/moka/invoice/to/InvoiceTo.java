@@ -109,6 +109,18 @@ public class InvoiceTo {
      * 开票人姓名
      */
     private String billingName;
+    /**
+     * 批次金额
+     */
+    private BigDecimal planAmt;
+
+    public BigDecimal getPlanAmt() {
+        return planAmt;
+    }
+
+    public void setPlanAmt(BigDecimal planAmt) {
+        this.planAmt = planAmt;
+    }
 
     public String getContractNo() {
         return contractNo;

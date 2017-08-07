@@ -23,7 +23,7 @@ public class InvoicePlanTo {
     /**
      * 开票金额
      */
-    private BigDecimal amt;
+    private BigDecimal planAmt = new BigDecimal("0");
     /**
      * 计划开票日期
      */
@@ -113,12 +113,12 @@ public class InvoicePlanTo {
         this.versionNo = versionNo;
     }
 
-    public BigDecimal getAmt() {
-        return amt;
+    public BigDecimal getPlanAmt() {
+        return planAmt;
     }
 
-    public void setAmt(BigDecimal amt) {
-        this.amt = amt;
+    public void setPlanAmt(BigDecimal planAmt) {
+        this.planAmt = planAmt;
     }
 
     public Date getPlanDate() {
