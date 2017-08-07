@@ -6,6 +6,8 @@ import moka.basic.util.Util;
 import moka.company.bo.Company;
 import moka.company.dao.CompanyDao;
 import moka.company.enums.CompanyEnum;
+import moka.company.service.CompanyService;
+import moka.company.vo.CompanyVo;
 import moka.department.bo.Department;
 import moka.department.dao.DepartmentDao;
 import moka.menu.dao.MenuDao;
@@ -39,9 +41,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
     @Resource
-    private CompanyDao companyDao;
-    @Resource
-    private DepartmentDao departmentDao;
+    private CompanyService companyService;
     @Resource
     private RoleService roleService;
     @Resource
@@ -58,12 +58,12 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
 
         //初始化公司
         String uuid = Util.Md516();
-        Company company = new Company();
-        company.setApplicationId(uuid);
-        company.setCompanyBelong(CompanyEnum.inside.getValue());
-        company.setCompanyType(CompanyEnum.ordinaryType.getValue());
-        companyDao.insert(company);
-        
+        CompanyVo companyVo = new CompanyVo();
+        companyVo.setApplicationId(uuid);
+        companyVo.setCompanyBelong(CompanyEnum.inside.getValue());
+        companyVo.setCompanyType(CompanyEnum.ordinaryType.getValue());
+        String companyId = companyService.insert(companyVo);
+
         user.setApplicationId(uuid);
         user.setName(UserEnum.adminName.getValue());
         user.setEmployeeNo("1");
@@ -96,7 +96,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         vo.setRoles(roles);
         List<RoleUserCompanyVo> userCompanies = new ArrayList<>();
         RoleUserCompanyVo userCompany = new RoleUserCompanyVo();
-        userCompany.setCompanyId(company.getId());
+        userCompany.setCompanyId(companyId);
         userCompany.setRoleId(roles);
         userCompanies.add(userCompany);
         roleService.insertRoleOfUser(user.getId(),userCompanies);
