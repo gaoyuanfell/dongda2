@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -61,5 +62,55 @@ public class InvoiceController extends BasicController{
     public Object findOne(String id) {
         InvoiceTo to = invoiceService.findOne(id);
         return result(to);
+    }
+
+    /**
+     * 开票
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "methodInvoicedState.htm")
+    @ResponseBody
+    public Object methodInvoicedState(@RequestBody InvoiceVo vo){
+        UserTo userTo = getUserSession();
+        vo.setBillingId(userTo.getId());//开票人
+        int i = invoiceService.methodInvoicedState(vo);
+        return result(i);
+    }
+
+    /**
+     * 已寄送 需要提供寄送地址
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "methodMailedState.htm")
+    @ResponseBody
+    public Object methodMailedState(@RequestBody InvoiceVo vo){
+        int i = invoiceService.methodMailedState(vo);
+        return result(i);
+    }
+
+    /**
+     * 已收到
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "methodReceivedState.htm")
+    @ResponseBody
+    public Object methodReceivedState(@RequestBody InvoiceVo vo){
+        int i = invoiceService.methodReceivedState(vo);
+        return result(i);
+    }
+
+    /**
+     * 已入账
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "methodCreditedState.htm")
+    @ResponseBody
+    public Object methodCreditedState(@RequestBody InvoiceVo vo){
+        int i = invoiceService.methodCreditedState(vo);
+        return result(i);
     }
 }

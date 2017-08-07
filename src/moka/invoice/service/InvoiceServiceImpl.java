@@ -53,27 +53,36 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
     }
 
     @Override
-    public void methodAlreadyState() {
-
+    public int methodInvoicedState(InvoiceVo vo) {
+        Invoice invoice = this.convertBusinessValue(vo,Invoice.class);
+        invoice.setFactInvoiceDate(new Date());//开票时间
+        invoice.setInvoiceState(InvoiceEnum.invoiced.getValue());
+        invoice.setUpdateDate(new Date());
+        return invoiceDao.methodInvoicedState(invoice);
     }
 
     @Override
-    public void methodInvoicedState() {
-
+    public int methodMailedState(InvoiceVo vo) {
+        Invoice invoice = this.convertBusinessValue(vo,Invoice.class);
+        invoice.setInvoiceState(InvoiceEnum.mailed.getValue());
+        invoice.setUpdateDate(new Date());
+        return invoiceDao.methodMailedState(invoice);
     }
 
     @Override
-    public void methodMailedState() {
-
+    public int methodReceivedState(InvoiceVo vo) {
+        Invoice invoice = this.convertBusinessValue(vo,Invoice.class);
+        invoice.setInvoiceState(InvoiceEnum.received.getValue());
+        invoice.setUpdateDate(new Date());
+        return invoiceDao.methodReceivedState(invoice);
     }
 
     @Override
-    public void methodReceivedState() {
-
-    }
-
-    @Override
-    public void methodCreditedState() {
-
+    public int methodCreditedState(InvoiceVo vo) {
+        Invoice invoice = this.convertBusinessValue(vo,Invoice.class);
+        invoice.setInvoiceState(InvoiceEnum.credited.getValue());
+        invoice.setFactPaymentDate(new Date());//入账时间
+        invoice.setUpdateDate(new Date());
+        return invoiceDao.methodCreditedState(invoice);
     }
 }

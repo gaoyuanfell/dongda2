@@ -46,7 +46,7 @@
           <if test="employeeNo != null and employeeNo != ''"> employeeNo = #{employeeNo}, </if>
           <if test="updateDate != null"> updateDate = #{updateDate}, </if>
         </trim>
-        WHERE 1 = 1 AND id = #{id}
+        WHERE id = #{id}
     </update>
 
     <resultMap id="map" type="moka.user.to.UserTo">

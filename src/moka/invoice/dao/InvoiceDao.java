@@ -7,5 +7,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository("invoice")
 public interface InvoiceDao extends BasicDao<Invoice,InvoiceTo>{
+    int methodInvoicedState(Invoice vo);
 
+    int methodMailedState(Invoice vo);
+
+    int methodReceivedState(Invoice vo);
+
+    int methodCreditedState(Invoice vo);
 }

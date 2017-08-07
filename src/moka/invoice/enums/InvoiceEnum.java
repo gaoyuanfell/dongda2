@@ -4,11 +4,10 @@ import org.jetbrains.annotations.Contract;
 
 public enum InvoiceEnum {
     preparation("准备中","1"),
-    already("已开据","2"),
-    invoiced("已开票","3"),
-    mailed("已寄送","4"),
-    received("已收到","5"),
-    credited("已入账","6"),
+    invoiced("已开票","2"),
+    mailed("已寄送","3"),
+    received("已收到","4"),
+    credited("已入账","5"),
     ;
     private String name;
     private String value;

@@ -41,37 +41,17 @@ public class InvoiceTo {
      */
     private String companyPayId;
     /**
-     * 购买方公司名称
-     */
-    private String companyPayName;
-    /**
      * 销售方公司ID
      */
     private String companySaleId;
-    /**
-     * 销售方公司名称
-     */
-    private String companySaleName;
-    /**
-     * 收款人姓名
-     */
-    private String payeeName;
     /**
      * 收款人ID
      */
     private String payeeId;
     /**
-     * 复核人姓名
-     */
-    private String checkName;
-    /**
      * 复核人ID
      */
     private String checkId;
-    /**
-     * 开票人姓名
-     */
-    private String billingName;
     /**
      * 开票人ID
      */
@@ -104,6 +84,39 @@ public class InvoiceTo {
      * 资源ID
      */
     private String applicationId;
+
+    /**
+     * 合同编号
+     */
+    private String contractNo;
+    /**
+     * 购买方公司名称
+     */
+    private String companyPayName;
+    /**
+     * 销售方公司名称
+     */
+    private String companySaleName;
+    /**
+     * 收款人姓名
+     */
+    private String payeeName;
+    /**
+     * 复核人姓名
+     */
+    private String checkName;
+    /**
+     * 开票人姓名
+     */
+    private String billingName;
+
+    public String getContractNo() {
+        return contractNo;
+    }
+
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
+    }
 
     public String getCompanyPayName() {
         return companyPayName;

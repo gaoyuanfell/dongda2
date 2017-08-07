@@ -17,18 +17,15 @@ public interface InvoiceService extends BasicService{
 
     InvoiceTo findOne(String id);
 
-    //已开据
-    void methodAlreadyState();
-
     //已开票
-    void methodInvoicedState();
+    int methodInvoicedState(InvoiceVo vo);
 
     //已寄送
-    void methodMailedState();
+    int methodMailedState(InvoiceVo vo);
 
     //已收到
-    void methodReceivedState();
+    int methodReceivedState(InvoiceVo vo);
 
     //已入账
-    void methodCreditedState();
+    int methodCreditedState(InvoiceVo vo);
 }
