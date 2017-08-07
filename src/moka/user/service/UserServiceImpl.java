@@ -6,6 +6,8 @@ import moka.basic.util.Util;
 import moka.company.bo.Company;
 import moka.company.dao.CompanyDao;
 import moka.company.enums.CompanyEnum;
+import moka.department.bo.Department;
+import moka.department.dao.DepartmentDao;
 import moka.menu.dao.MenuDao;
 import moka.menu.to.MenuTo;
 import moka.role.enums.RoleEnum;
@@ -39,6 +41,8 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     @Resource
     private CompanyDao companyDao;
     @Resource
+    private DepartmentDao departmentDao;
+    @Resource
     private RoleService roleService;
     @Resource
     private MenuDao menuDao;
@@ -60,12 +64,21 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         company.setCompanyType(CompanyEnum.ordinaryType.getValue());
         companyDao.insert(company);
         
+        //插入部门
+        Department department = new Department();
+        department.setCompanyId(company.getId());
+        department.setName("管理部");
+        department.setPosition("超级管理员");
+        department.setCreateDate(new Date());
+        departmentDao.insert(department);
+        
         user.setApplicationId(uuid);
         user.setName(UserEnum.adminName.getValue());
         user.setEmployeeNo("1");
         user.setCreateDate(new Date());
         user.setReadOnly(UserEnum.watchOnly.getValue());
         user.setPassword(Util.getMd5String(user.getPassword().concat(DATA_PASSWORD_SALT)));
+        user.setDepartmentId(department.getId());
         userDao.insert(user);
 
         //插入默认管理员角色
@@ -165,7 +178,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
             }
             roles.setCompanyId(companyId);
             if(roles.getRoleId() == null){
-                roles.setRoleId(new ArrayList<>());
+                roles.setRoleId(new ArrayList<String>());
             }
             roles.getRoleId().add(userCompanyTo.getRoleId());
             roles.setCompanyName(userCompanyTo.getCompanyName());

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="moka.department.dao.DepartmentDao">
+
+    <insert id="insert" parameterType="moka.department.bo.Department"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_department (
+        id,name,companyId,position,state,createDate,updateDate
+        ) VALUES (
+        #{id},#{name},#{companyId},#{position},
+        #{state},#{createDate},#{updateDate}
+        )
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
+    </insert>
+
+
+</mapper>
