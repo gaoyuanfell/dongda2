@@ -3,7 +3,7 @@ package moka.invoice.enums;
 import org.jetbrains.annotations.Contract;
 
 public enum InvoiceEnum {
-    preparation("准备中","1"),
+    preparation("待开票","1"),
     invoiced("已开票","2"),
 
     mailed("已寄送发票","5"),

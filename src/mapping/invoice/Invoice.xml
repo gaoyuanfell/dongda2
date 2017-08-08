@@ -36,6 +36,9 @@
         WHERE
         i.applicationId = #{applicationId}
         AND i.state != 1
+
+        <if test="invoiceState != '' and invoiceState != null">AND i.invoiceState = #{invoiceState}</if>
+
     </select>
 
     <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.invoice.to.InvoiceTo">
@@ -43,11 +46,73 @@
             LEFT JOIN t_company cp ON i.companyPayId = cp.id
             LEFT JOIN t_company cs ON i.companySaleId = cs.id
             LEFT JOIN t_user up ON i.payeeId = up.id
-            LEFT JOIN t_user uc ON i.payeeId = uc.id
+            LEFT JOIN t_user uc ON i.checkId = uc.id
             LEFT JOIN t_user ub ON i.billingId = ub.id
             LEFT JOIN t_contract ct ON i.contractId = ct.id
         WHERE i.applicationId = #{applicationId}
         AND i.state != 1
+
+        <if test="invoiceState != '' and invoiceState != null">AND i.invoiceState = #{invoiceState}</if>
+
+        LIMIT #{pageStart} , #{pageSize};
+    </select>
+
+    <!--财务 开票 统计-->
+    <select id="findBillingCount" parameterType="moka.basic.page.Page" resultType="Integer">
+        SELECT COUNT(id) FROM t_invoice i
+        WHERE
+        i.applicationId = #{applicationId}
+        AND i.state != 1
+        AND i.invoiceState IN ('1','2')
+
+        <if test="invoiceState != '' and invoiceState != null">AND i.invoiceState = #{invoiceState}</if>
+
+    </select>
+
+    <!--财务 开票 分页-->
+    <select id="findBillingPage" parameterType="moka.basic.page.Page" resultType="moka.invoice.to.InvoiceTo">
+        SELECT i.*,cp.companyName companyPayName,cs.companyName companySaleName,up.name payeeName,uc.name checkName,ub.name billingName,ct.contractNo contractNo FROM t_invoice i
+        LEFT JOIN t_company cp ON i.companyPayId = cp.id
+        LEFT JOIN t_company cs ON i.companySaleId = cs.id
+        LEFT JOIN t_user up ON i.payeeId = up.id
+        LEFT JOIN t_user uc ON i.checkId = uc.id
+        LEFT JOIN t_user ub ON i.billingId = ub.id
+        LEFT JOIN t_contract ct ON i.contractId = ct.id
+        WHERE i.applicationId = #{applicationId}
+        AND i.state != 1
+        AND i.invoiceState IN ('1','2')
+
+        <if test="invoiceState != '' and invoiceState != null">AND i.invoiceState = #{invoiceState}</if>
+
+        LIMIT #{pageStart} , #{pageSize};
+    </select>
+
+    <!--财务 应收账款 统计-->
+    <select id="findAccountCount" parameterType="moka.basic.page.Page" resultType="Integer">
+        SELECT COUNT(id) FROM t_invoice i
+        WHERE
+        i.applicationId = #{applicationId}
+        AND i.state != 1
+        AND i.invoiceState IN ('8','9')
+
+        <if test="invoiceState != '' and invoiceState != null">AND i.invoiceState = #{invoiceState}</if>
+
+    </select>
+    <!--财务 应收账款 分页-->
+    <select id="findAccountPage" parameterType="moka.basic.page.Page" resultType="moka.invoice.to.InvoiceTo">
+        SELECT i.*,cp.companyName companyPayName,cs.companyName companySaleName,up.name payeeName,uc.name checkName,ub.name billingName,ct.contractNo contractNo FROM t_invoice i
+        LEFT JOIN t_company cp ON i.companyPayId = cp.id
+        LEFT JOIN t_company cs ON i.companySaleId = cs.id
+        LEFT JOIN t_user up ON i.payeeId = up.id
+        LEFT JOIN t_user uc ON i.checkId = uc.id
+        LEFT JOIN t_user ub ON i.billingId = ub.id
+        LEFT JOIN t_contract ct ON i.contractId = ct.id
+        WHERE i.applicationId = #{applicationId}
+        AND i.state != 1
+        AND i.invoiceState IN ('8','9')
+
+        <if test="invoiceState != '' and invoiceState != null">AND i.invoiceState = #{invoiceState}</if>
+
         LIMIT #{pageStart} , #{pageSize};
     </select>
 
@@ -87,18 +152,17 @@
     <update id="methodCreditedState" parameterType="moka.invoice.bo.Invoice">
         UPDATE t_invoice
         <trim prefix="SET" suffixOverrides=",">
-
             <if test="invoiceState != null and invoiceState != ''"> invoiceState = #{invoiceState}, </if>
             <if test="updateDate != null"> updateDate = #{updateDate}, </if>
         </trim>
         WHERE id = #{id}
     </update>
 
-    <!--已入账 发票审核-->
+    <!--已入账-->
     <update id="methodPaymentState" parameterType="moka.invoice.bo.Invoice">
         UPDATE t_invoice
         <trim prefix="SET" suffixOverrides=",">
-            <if test="factPaymentDate != null and factPaymentDate != ''"> factPaymentDate = #{factPaymentDate}, </if>
+            <if test="factPaymentDate != null"> factPaymentDate = #{factPaymentDate}, </if>
             <if test="invoiceState != null and invoiceState != ''"> invoiceState = #{invoiceState}, </if>
             <if test="updateDate != null"> updateDate = #{updateDate}, </if>
         </trim>

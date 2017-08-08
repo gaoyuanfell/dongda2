@@ -77,6 +77,36 @@ public class InvoiceController extends BasicController{
     }
 
     /**
+     * 分页查询 开票
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "findBillingPage.htm")
+    @ResponseBody
+    public Object findBillingPage(@RequestBody InvoiceVo vo) {
+        UserTo userTo = getUserSession();
+        vo.setApplicationId(userTo.getApplicationId());
+        Page page = invoiceService.findBillingPage(vo);
+        return result(page);
+    }
+
+    /**
+     * 分页查询 应收账款
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "findAccountPage.htm")
+    @ResponseBody
+    public Object findAccountPage(@RequestBody InvoiceVo vo) {
+        UserTo userTo = getUserSession();
+        vo.setApplicationId(userTo.getApplicationId());
+        Page page = invoiceService.findAccountPage(vo);
+        return result(page);
+    }
+
+
+
+    /**
      * 开票
      * @param vo
      * @return

@@ -46,9 +46,21 @@
     </insert>
 
     <!--根据合同id获取开票计划-->
-    <select id="findByContract" parameterType="String" resultType="moka.invoicePlan.to.InvoicePlanTo">
-        SELECT ip.*,concat(ip.paymentPlanFact,'-',ip.planAmt) as name FROM t_invoice_plan ip WHERE ip.contractId = #{contractId} AND ip.state != 1;
+    <select id="findByContract" parameterType="moka.invoicePlan.vo.InvoicePlanVo" resultType="moka.invoicePlan.to.InvoicePlanTo">
+        SELECT ip.*,concat(ip.paymentPlanFact,'-',ip.planAmt) as name FROM t_invoice_plan ip
+        WHERE ip.contractId = #{contractId}
+        <if test="planState != null and planState != ''">AND ip.planState = #{planState}</if>
+        AND ip.state != 1
     </select>
 
+    <!--开票后的计划开票状态改变-->
+    <update id="methodInvoicedState" parameterType="moka.invoicePlan.bo.InvoicePlan">
+        UPDATE t_invoice_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="planState != null and planState != ''"> planState = #{planState}, </if>
+            <if test="updateDate != null"> updateDate = #{updateDate}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
 
 </mapper>

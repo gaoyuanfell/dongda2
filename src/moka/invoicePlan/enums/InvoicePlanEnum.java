@@ -4,6 +4,7 @@ import org.jetbrains.annotations.Contract;
 
 public enum InvoicePlanEnum {
     initial("初始状态","1"),
+    invoiced("已开票","2"),
     ;
     private String name;
     private String value;

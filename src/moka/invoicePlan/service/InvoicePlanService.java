@@ -30,5 +30,18 @@ public interface InvoicePlanService extends BasicService {
      * @return
      */
     List<InvoicePlanTo> findByContract(String contractId);
+    /**
+     * 根据合同id获取开票计划
+     * @param vo
+     * @return
+     */
+    List<InvoicePlanTo> findByContract(InvoicePlanVo vo);
+
+    /**
+     * 开票后的计划开票状态改变
+     * @param id
+     * @return
+     */
+    int methodInvoicedState(String id);
 
 }

@@ -7,6 +7,7 @@ import moka.invoice.dao.InvoiceDao;
 import moka.invoice.enums.InvoiceEnum;
 import moka.invoice.to.InvoiceTo;
 import moka.invoice.vo.InvoiceVo;
+import moka.invoicePlan.service.InvoicePlanService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,6 +18,8 @@ import java.util.List;
 public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceService{
     @Resource
     private InvoiceDao invoiceDao;
+    @Resource
+    private InvoicePlanService invoicePlanService;
     
     @Override
     public String insert(InvoiceVo vo){
@@ -25,6 +28,8 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
         invoice.setCreateDate(new Date());
         invoice.setInvoiceState(InvoiceEnum.preparation.getValue());
         invoiceDao.insert(invoice);
+        //改变此开票计划状态
+        invoicePlanService.methodInvoicedState(vo.getInvoicePlanId());
         return invoice.getId();
     }
 
@@ -44,6 +49,20 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
     public Page findPage(InvoiceVo vo) {
         List list = invoiceDao.findPage(vo);
         int count = invoiceDao.findCount(vo);
+        return new Page(vo.getPageIndex(),vo.getPageSize(),count, list);
+    }
+
+    @Override
+    public Page findBillingPage(InvoiceVo vo) {
+        List list = invoiceDao.findBillingPage(vo);
+        int count = invoiceDao.findBillingCount(vo);
+        return new Page(vo.getPageIndex(),vo.getPageSize(),count, list);
+    }
+
+    @Override
+    public Page findAccountPage(InvoiceVo vo) {
+        List list = invoiceDao.findAccountPage(vo);
+        int count = invoiceDao.findAccountCount(vo);
         return new Page(vo.getPageIndex(),vo.getPageSize(),count, list);
     }
 

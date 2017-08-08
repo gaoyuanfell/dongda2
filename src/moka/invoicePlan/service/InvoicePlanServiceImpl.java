@@ -4,6 +4,7 @@ import moka.basic.page.Page;
 import moka.basic.service.BasicServiceImpl;
 import moka.invoicePlan.bo.InvoicePlan;
 import moka.invoicePlan.dao.InvoicePlanDao;
+import moka.invoicePlan.enums.InvoicePlanEnum;
 import moka.invoicePlan.to.InvoicePlanTo;
 import moka.invoicePlan.vo.InvoicePlanVo;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,22 @@ public class InvoicePlanServiceImpl extends BasicServiceImpl implements InvoiceP
 
     @Override
     public List<InvoicePlanTo> findByContract(String contractId) {
-        return invoicePlanDao.findByContract(contractId);
+        InvoicePlanVo vo  = new InvoicePlanVo();
+        vo.setContractId(contractId);
+        return invoicePlanDao.findByContract(vo);
+    }
+
+    @Override
+    public List<InvoicePlanTo> findByContract(InvoicePlanVo vo) {
+        return invoicePlanDao.findByContract(vo);
+    }
+
+    @Override
+    public int methodInvoicedState(String id) {
+        InvoicePlan vo = new InvoicePlan();
+        vo.setId(id);
+        vo.setPlanState(InvoicePlanEnum.invoiced.getValue());
+        vo.setUpdateDate(new Date());
+        return invoicePlanDao.methodInvoicedState(vo);
     }
 }

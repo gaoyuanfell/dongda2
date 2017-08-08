@@ -24,14 +24,14 @@
 
     <select id="findCount" resultType="Integer">
         SELECT COUNT(id) FROM t_contract c
-        WHERE 1=1
+        WHERE c.state != 1
         AND (c.createUser = #{userId} OR c.companySaleUserId IN
         <foreach collection="lowerIds" item="item" index="index" open="(" close=")" separator=",">
             #{item}
         </foreach>
         )
+
         AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companySaleId = ca.companyId))
-        AND c.state != 1
         <if test="contractNo != null and contractNo != ''">
             AND c.contractNo LIKE CONCAT('%',#{contractNo},'%')
         </if>
@@ -41,14 +41,14 @@
         SELECT c.*,uc.name as userName,ucb.name as companySaleUserName FROM t_contract c
         LEFT JOIN t_user uc ON uc.id = c.createUser
         LEFT JOIN t_user ucb ON ucb.id = c.companySaleUserId
-        WHERE 1=1
-        AND (c.createUser = #{userId} OR c.gi IN
+        WHERE c.state != 1
+        AND (c.createUser = #{userId} OR c.companySaleUserId IN
           <foreach collection="lowerIds" item="item" index="index" open="(" close=")" separator=",">
               #{item}
           </foreach>
         )
+
         AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companySaleId = ca.companyId))
-        AND c.state != 1
         <if test="contractNo != null and contractNo != ''">
             AND c.contractNo LIKE CONCAT('%',#{contractNo},'%')
         </if>
@@ -73,8 +73,9 @@
         LEFT JOIN t_company cob ON c.companySaleId = cob.id
         LEFT JOIN t_customer cu ON c.companyPayCustomerId = cu.id
         LEFT JOIN t_user u ON c.companySaleUserId = u.id
-        WHERE c.applicationId = #{applicationId}
-        AND c.state != 1
+        WHERE c.applicationId = #{applicationId} AND c.state != 1
+
+        AND (SELECT COUNT(tip.id) FROM t_invoice_plan tip WHERE tip.planState = '1' AND tip.contractId = c.id) > 0
         <if test="contractNo != null and contractNo != ''">
             AND c.contractNo LIKE
             CONCAT('%',#{contractNo},'%')

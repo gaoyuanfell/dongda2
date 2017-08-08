@@ -23,14 +23,6 @@ public class ContractVo extends Page {
      * 版本号
      */
     private int versionNo;
-
-
-    private String companyIdA;
-    private String companyContractIdA;
-    private String companyIdB;
-    private String companyContractIdB;
-
-
     /**
      * 甲方公司ID
      */
@@ -215,38 +207,6 @@ public class ContractVo extends Page {
 
     public void setVersionNo(int versionNo) {
         this.versionNo = versionNo;
-    }
-
-    public String getCompanyIdA() {
-        return companyIdA;
-    }
-
-    public void setCompanyIdA(String companyIdA) {
-        this.companyIdA = companyIdA;
-    }
-
-    public String getCompanyContractIdA() {
-        return companyContractIdA;
-    }
-
-    public void setCompanyContractIdA(String companyContractIdA) {
-        this.companyContractIdA = companyContractIdA;
-    }
-
-    public String getCompanyIdB() {
-        return companyIdB;
-    }
-
-    public void setCompanyIdB(String companyIdB) {
-        this.companyIdB = companyIdB;
-    }
-
-    public String getCompanyContractIdB() {
-        return companyContractIdB;
-    }
-
-    public void setCompanyContractIdB(String companyContractIdB) {
-        this.companyContractIdB = companyContractIdB;
     }
 
     public String getCompanyIdC() {

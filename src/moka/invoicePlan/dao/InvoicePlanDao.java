@@ -13,5 +13,7 @@ public interface InvoicePlanDao extends BasicDao<InvoicePlan, InvoicePlanTo> {
 
     int insertBatch(List<InvoicePlanVo> invoicePlans);
 
-    List<InvoicePlanTo> findByContract(String contractId);
+    List<InvoicePlanTo> findByContract(InvoicePlanVo vo);
+
+    int methodInvoicedState(InvoicePlan vo);
 }

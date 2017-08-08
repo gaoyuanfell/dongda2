@@ -16,6 +16,10 @@ public interface InvoiceService extends BasicService{
 
     Page findPage(InvoiceVo vo);
 
+    Page findBillingPage(InvoiceVo vo);
+
+    Page findAccountPage(InvoiceVo vo);
+
     InvoiceTo findOne(String id);
 
     InvoiceTo findOneAll(String id);

@@ -78,12 +78,16 @@ public class InvoicePlanController extends BasicController {
 
     /**
      * 根据合同id获取开票计划
+     * contractId
+     * planState
      */
-    @RequestMapping(value = "findByContract.htm",method = RequestMethod.GET)
+    @RequestMapping(value = "findByContract.htm")
     @ResponseBody
     @IgnoreSecurity
-    public Object findByContract(String contractId){
-        List l = invoicePlanService.findByContract(contractId);
+    public Object findByContract(InvoicePlanVo vo){
+        UserTo to = getUserSession();
+        vo.setApplicationId(to.getApplicationId());
+        List l = invoicePlanService.findByContract(vo);
         return result(l);
     }
 
