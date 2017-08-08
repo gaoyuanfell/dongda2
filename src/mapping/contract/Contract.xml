@@ -42,7 +42,7 @@
         LEFT JOIN t_user uc ON uc.id = c.createUser
         LEFT JOIN t_user ucb ON ucb.id = c.companySaleUserId
         WHERE 1=1
-        AND (c.createUser = #{userId} OR c.companySaleUserId IN
+        AND (c.createUser = #{userId} OR c.gi IN
           <foreach collection="lowerIds" item="item" index="index" open="(" close=")" separator=",">
               #{item}
           </foreach>
