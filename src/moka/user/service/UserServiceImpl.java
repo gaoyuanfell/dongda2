@@ -69,11 +69,11 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         
         //初始化部门
         Department department =new Department();
-        department.setId(Util.Md516());
         department.setApplicationId(uuid);
         department.setPosition("管理员");
         department.setName(companyVo.getCompanyName());
         department.setCompanyId(companyId);
+        department.setCreateDate(new Date());
         departmentService.insert(department);
         
         user.setApplicationId(uuid);
