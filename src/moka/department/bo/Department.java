@@ -25,6 +25,14 @@ public class Department extends IdEntity implements Serializable {
      * 职位
      */
     private String position;
+    /**
+     * 上司ID
+     */
+    private String parentId;
+    /**
+     * 资源id
+     */
+    private String applicationId;
 
     public String getName() {
         return name;
@@ -48,5 +56,21 @@ public class Department extends IdEntity implements Serializable {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
     }
 }

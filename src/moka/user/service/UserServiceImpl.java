@@ -10,6 +10,7 @@ import moka.company.service.CompanyService;
 import moka.company.vo.CompanyVo;
 import moka.department.bo.Department;
 import moka.department.dao.DepartmentDao;
+import moka.department.service.DepartmentService;
 import moka.menu.dao.MenuDao;
 import moka.menu.to.MenuTo;
 import moka.role.enums.RoleEnum;
@@ -43,6 +44,8 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
     @Resource
     private CompanyService companyService;
     @Resource
+    private DepartmentService departmentService;
+    @Resource
     private RoleService roleService;
     @Resource
     private MenuDao menuDao;
@@ -63,7 +66,16 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         companyVo.setCompanyBelong(CompanyEnum.inside.getValue());
         companyVo.setCompanyType(CompanyEnum.ordinaryType.getValue());
         String companyId = companyService.insert(companyVo);
-
+        
+        //初始化部门
+        Department department =new Department();
+        department.setId(Util.Md516());
+        department.setApplicationId(uuid);
+        department.setPosition("管理员");
+        department.setName(companyVo.getCompanyName());
+        department.setCompanyId(companyId);
+        departmentService.insert(department);
+        
         user.setApplicationId(uuid);
         user.setName(UserEnum.adminName.getValue());
         user.setEmployeeNo("1");

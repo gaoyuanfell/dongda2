@@ -5,16 +5,44 @@
     <insert id="insert" parameterType="moka.department.bo.Department"
         useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_department (
-        id,name,companyId,position,state,createDate,updateDate
+        id,name,companyId,position,state,createDate,updateDate,parentId,applicationId
         ) VALUES (
         #{id},#{name},#{companyId},#{position},
-        #{state},#{createDate},#{updateDate}
-        )
+        #{state},#{createDate},#{updateDate},#{parentId},#{applicationId}
+        );
 
         <selectKey keyProperty="id" order="BEFORE" resultType="String">
             select $uuid()
         </selectKey>
     </insert>
+
+    <select id="findOne" parameterType="String"
+        resultType="moka.department.to.DepartmentTo">
+        SELECT * FROM t_department WHERE id = #{id};
+    </select>
+
+    <update id="update" parameterType="moka.department.bo.Department">
+        UPDATE t_department
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="updateDate != null">updateDate = #{updateDate},</if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <!--删除角色 -->
+    <delete id="delete" parameterType="String">
+        DELETE FROM t_department
+        WHERE id = #{id}
+    </delete>
+
+    <!--查询子集 -->
+    <select id="findNextChild" parameterType="moka.department.vo.DepartmentVo"
+        resultType="moka.department.to.DepartmentTo" useCache="true">
+        SELECT *
+        FROM t_department
+        WHERE parentId = #{id};
+    </select>
 
 
 </mapper>
