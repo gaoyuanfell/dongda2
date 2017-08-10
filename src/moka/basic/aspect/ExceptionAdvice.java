@@ -50,6 +50,7 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public Object handleHttpMediaTypeNotSupportedException(Exception e) {
+        logger.info(e);
         logger.error("415",e);
         e.printStackTrace();
         return result(415,e);

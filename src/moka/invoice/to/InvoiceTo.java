@@ -57,10 +57,6 @@ public class InvoiceTo {
      */
     private String billingId;
     /**
-     * 不含税金额
-     */
-    private BigDecimal amt;
-    /**
      * 税率
      */
     private BigDecimal rate;
@@ -110,7 +106,7 @@ public class InvoiceTo {
      */
     private String billingName;
     /**
-     * 批次金额
+     * 不含税金额
      */
     private BigDecimal planAmt;
 
@@ -318,14 +314,6 @@ public class InvoiceTo {
 
     public void setBillingId(String billingId) {
         this.billingId = billingId;
-    }
-
-    public BigDecimal getAmt() {
-        return amt;
-    }
-
-    public void setAmt(BigDecimal amt) {
-        this.amt = amt;
     }
 
     public BigDecimal getRate() {

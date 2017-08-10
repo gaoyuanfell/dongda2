@@ -23,27 +23,12 @@
        http://www.springframework.org/schema/task
        http://www.springframework.org/schema/task/spring-task.xsd">
 
-<!-- 事务通知属性 -->
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <!-- 事务传播属性 -->
-        <tx:attributes>
-            <tx:method name="save*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="insert*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="del*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="modify*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="edit*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="method*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="*" propagation="NOT_SUPPORTED" read-only="true"/>
-        </tx:attributes>
-    </tx:advice>
+    <bean id="taskJob" class="moka.basic.task.TaskJob"/>
 
-    <!--　事务切面 -->
-    <aop:config>
-        <aop:pointcut id="serviceOperation" expression="execution(* moka..service.*.*(..))"/>
-        <aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice"/>
-    </aop:config>
+    <task:scheduler id="taskScheduler" pool-size="100"/>
+
+    <!--<task:scheduled-tasks>-->
+        <!--<task:scheduled ref="taskJob" method="autoInvoiceByPlan" cron="0 * * * * ?"/>-->
+    <!--</task:scheduled-tasks>-->
 
 </beans>

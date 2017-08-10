@@ -71,10 +71,6 @@ public class InvoiceVo extends Page {
      */
     private String billingId;
     /**
-     * 不含税金额
-     */
-    private BigDecimal amt;
-    /**
      * 税率
      */
     private BigDecimal rate;
@@ -98,6 +94,18 @@ public class InvoiceVo extends Page {
      * 资源ID
      */
     private String applicationId;
+    /**
+     * 不含税金额
+     */
+    private BigDecimal planAmt;
+
+    public BigDecimal getPlanAmt() {
+        return planAmt;
+    }
+
+    public void setPlanAmt(BigDecimal planAmt) {
+        this.planAmt = planAmt;
+    }
 
     public String getRemark() {
         return remark;
@@ -271,14 +279,6 @@ public class InvoiceVo extends Page {
 
     public void setBillingId(String billingId) {
         this.billingId = billingId;
-    }
-
-    public BigDecimal getAmt() {
-        return amt;
-    }
-
-    public void setAmt(BigDecimal amt) {
-        this.amt = amt;
     }
 
     public BigDecimal getRate() {

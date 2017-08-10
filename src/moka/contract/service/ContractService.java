@@ -13,6 +13,8 @@ public interface ContractService extends BasicService {
 
     ContractTo findOne(String id);
 
+    ContractTo findOneAll(String id);
+
     Page findPage(ContractVo vo);
 
     /**

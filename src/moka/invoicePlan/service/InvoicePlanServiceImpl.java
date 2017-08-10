@@ -33,6 +33,16 @@ public class InvoicePlanServiceImpl extends BasicServiceImpl implements InvoiceP
     }
 
     @Override
+    public int updateBatchById(List<String> ids) {
+        return invoicePlanDao.updateBatchById(ids);
+    }
+
+    @Override
+    public List<InvoicePlanTo> findList(InvoicePlanVo vo) {
+        return invoicePlanDao.findList(vo);
+    }
+
+    @Override
     public InvoicePlanTo findOne(String id) {
         return invoicePlanDao.findOne(id);
     }

@@ -76,7 +76,7 @@ public class Invoice extends IdEntity implements Serializable{
     /**
      * 不含税金额
      */
-    private BigDecimal amt;
+    private BigDecimal planAmt;
     /**
      * 税率
      */
@@ -239,12 +239,12 @@ public class Invoice extends IdEntity implements Serializable{
         this.billingId = billingId;
     }
 
-    public BigDecimal getAmt() {
-        return amt;
+    public BigDecimal getPlanAmt() {
+        return planAmt;
     }
 
-    public void setAmt(BigDecimal amt) {
-        this.amt = amt;
+    public void setPlanAmt(BigDecimal planAmt) {
+        this.planAmt = planAmt;
     }
 
     public BigDecimal getRate() {

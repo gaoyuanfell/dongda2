@@ -75,7 +75,8 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         department.setCompanyId(companyId);
         department.setCreateDate(new Date());
         departmentService.insert(department);
-        
+
+
         user.setApplicationId(uuid);
         user.setName(UserEnum.adminName.getValue());
         user.setEmployeeNo("1");

@@ -47,6 +47,19 @@ public class InvoicePlanVo extends Page{
      */
     private String applicationId;
 
+    /**
+     * 计划天数 用于系统自动创建发票 例子 3 计划开票日期在3天之内的。
+     */
+    private int planDay;
+
+    public int getPlanDay() {
+        return planDay;
+    }
+
+    public void setPlanDay(int planDay) {
+        this.planDay = planDay;
+    }
+
     public String getId() {
         return id;
     }

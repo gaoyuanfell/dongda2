@@ -2,13 +2,18 @@ package moka.invoice.service;
 
 import moka.basic.page.Page;
 import moka.basic.service.BasicService;
+import moka.invoice.bo.Invoice;
 import moka.invoice.to.InvoiceTo;
 import moka.invoice.vo.InvoiceVo;
+
+import java.util.List;
 
 public interface InvoiceService extends BasicService{
 
 
     String insert(InvoiceVo vo);
+
+    int insertBatch(List<Invoice> invoices);
 
     int delete(String id);
 
@@ -38,4 +43,7 @@ public interface InvoiceService extends BasicService{
 
     //已收账
     int methodPaymentState(InvoiceVo vo);
+
+    //根据开票计划生成发票
+    int methodInvoiceByPlan(int planDay);
 }

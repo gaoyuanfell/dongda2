@@ -69,6 +69,14 @@ public class ContractController extends BasicController {
         return result(to);
     }
 
+    @RequestMapping(value = "findOneAll.htm")
+    @ResponseBody
+    @IgnoreSecurity
+    public Object findOneAll(String id){
+        ContractTo to = contractService.findOneAll(id);
+        return result(to);
+    }
+
     /**
      * 批量添加合同
      */

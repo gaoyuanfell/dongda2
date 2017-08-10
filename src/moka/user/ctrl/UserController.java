@@ -10,6 +10,7 @@ import moka.basic.page.Page;
 import moka.basic.util.Util;
 import moka.company.service.CompanyService;
 import moka.company.to.CompanyTo;
+import moka.invoice.service.InvoiceService;
 import moka.menu.service.MenuService;
 import moka.menu.to.MenuTo;
 import moka.role.service.RoleService;
@@ -36,6 +37,8 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController extends BasicController {
+    @Resource
+    private InvoiceService invoiceService;
 
     @Resource
     private UserService userService;

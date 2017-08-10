@@ -11,6 +11,8 @@ import java.util.List;
 @Repository("invoice")
 public interface InvoiceDao extends BasicDao<Invoice,InvoiceTo>{
 
+    int insertBatch(List<Invoice> invoice);
+
     List<InvoiceTo> findBillingPage(Page page);
 
     int findBillingCount(Page page);

@@ -40,6 +40,11 @@ public class ContractServiceImpl extends BasicServiceImpl implements ContractSer
 
     @Override
     public ContractTo findOne(String id) {
+        return contractDao.findOne(id);
+    }
+
+    @Override
+    public ContractTo findOneAll(String id) {
         ContractTo to = contractDao.findOne(id);
         if(to != null){
             List l = invoicePlanService.findByContract(id);

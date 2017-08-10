@@ -13,6 +13,15 @@ public interface InvoicePlanService extends BasicService {
 
     int update(InvoicePlanVo vo);
 
+    /**
+     * 根据id集合批量更改状态
+     * @param ids
+     * @return
+     */
+    int updateBatchById(List<String> ids);
+
+    List<InvoicePlanTo> findList(InvoicePlanVo vo);
+
     Page findPage(InvoicePlanVo vo);
 
     InvoicePlanTo findOne(String id);

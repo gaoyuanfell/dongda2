@@ -2,15 +2,21 @@ package moka.invoice.service;
 
 import moka.basic.page.Page;
 import moka.basic.service.BasicServiceImpl;
+import moka.contract.service.ContractService;
+import moka.contract.to.ContractTo;
 import moka.invoice.bo.Invoice;
 import moka.invoice.dao.InvoiceDao;
 import moka.invoice.enums.InvoiceEnum;
 import moka.invoice.to.InvoiceTo;
 import moka.invoice.vo.InvoiceVo;
+import moka.invoicePlan.dao.InvoicePlanDao;
 import moka.invoicePlan.service.InvoicePlanService;
+import moka.invoicePlan.to.InvoicePlanTo;
+import moka.invoicePlan.vo.InvoicePlanVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,17 +26,25 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
     private InvoiceDao invoiceDao;
     @Resource
     private InvoicePlanService invoicePlanService;
+    @Resource
+    private InvoicePlanDao invoicePlanDao;
+    @Resource
+    private ContractService contractService;
     
     @Override
     public String insert(InvoiceVo vo){
         Invoice invoice = this.convertBusinessValue(vo,Invoice.class);
-        invoice.setFactInvoiceDate(new Date());
         invoice.setCreateDate(new Date());
         invoice.setInvoiceState(InvoiceEnum.preparation.getValue());
         invoiceDao.insert(invoice);
         //改变此开票计划状态
         invoicePlanService.methodInvoicedState(vo.getInvoicePlanId());
         return invoice.getId();
+    }
+
+    @Override
+    public int insertBatch(List<Invoice> invoices) {
+        return invoiceDao.insertBatch(invoices);
     }
 
     @Override
@@ -116,5 +130,39 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
         invoice.setFactPaymentDate(new Date());//收款时间
         invoice.setUpdateDate(new Date());
         return invoiceDao.methodPaymentState(invoice);
+    }
+
+    @Override
+    public int methodInvoiceByPlan(int planDay) {
+        if(planDay > 0){
+            InvoicePlanVo vo = new InvoicePlanVo();
+            vo.setPlanDay(planDay);
+            List<InvoicePlanTo> planToList = invoicePlanService.findList(vo);
+            List<String> planIds = new ArrayList<>();
+            List<Invoice> invoiceList = new ArrayList<>();
+            for (InvoicePlanTo to: planToList){
+                ContractTo contractTo = contractService.findOne(to.getContractId());
+                if(contractTo != null){
+                    Invoice invoice = new Invoice();
+                    invoice.setContractId(contractTo.getId());
+                    invoice.setCompanyPayId(contractTo.getCompanyPayId());
+                    invoice.setCompanySaleId(contractTo.getCompanySaleId());
+                    invoice.setInvoicePlanId(to.getId());
+                    invoice.setInvoiceState(InvoiceEnum.preparation.getValue());
+                    invoice.setCreateDate(new Date());
+                    invoice.setPlanAmt(to.getPlanAmt());
+                    invoice.setPlanInvoiceDate(to.getPlanDate());
+                    invoice.setApplicationId(contractTo.getApplicationId());
+                    invoiceList.add(invoice);
+                    planIds.add(to.getId());
+                }
+            }
+
+            if(planIds.size() > 0 && invoiceList.size() > 0){
+                invoicePlanService.updateBatchById(planIds);
+                return this.insertBatch(invoiceList);
+            }
+        }
+        return 0;
     }
 }

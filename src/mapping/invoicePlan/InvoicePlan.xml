@@ -34,6 +34,12 @@
         SELECT * FROM t_invoice_plan i WHERE i.applicationId = #{applicationId} AND i.state != 1 LIMIT #{pageStart} , #{pageSize};
     </select>
 
+    <select id="findList" parameterType="moka.invoicePlan.vo.InvoicePlanVo" resultType="moka.invoicePlan.to.InvoicePlanTo">
+        SELECT * FROM t_invoice_plan ip WHERE ip.planState = '1'
+        AND ip.state != 1
+        <if test="planDay != 0"> AND (TO_DAYS(ip.planDate) - TO_DAYS(now())) BETWEEN 0 AND #{planDay} </if>
+    </select>
+
     <!--批量添加-->
     <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_invoice_plan(
@@ -44,6 +50,14 @@
             ($uuid(),#{item.contractId},#{item.paymentPlanFact},#{item.versionNo},#{item.planAmt},#{item.planDate},#{item.planReceiveDate},#{item.receiveAmt},#{item.state},#{item.createDate},#{item.updateDate},#{item.planState})
         </foreach>
     </insert>
+
+    <update id="updateBatchById" parameterType="java.util.List">
+        UPDATE t_invoice_plan SET planState = '2',updateDate = now()
+        WHERE id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
 
     <!--根据合同id获取开票计划-->
     <select id="findByContract" parameterType="moka.invoicePlan.vo.InvoicePlanVo" resultType="moka.invoicePlan.to.InvoicePlanTo">

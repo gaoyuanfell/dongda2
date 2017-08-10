@@ -5,18 +5,31 @@
     <insert id="insert" parameterType="moka.invoice.bo.Invoice" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_invoice(
         id, contractId, invoicePlanId, planInvoiceDate, factInvoiceDate, planPaymentDate, factPaymentDate,
-        companyPayId, companySaleId, payeeId, checkId, billingId, amt, rate,
+        companyPayId, companySaleId, payeeId, checkId, billingId, planAmt, rate,
         amtOfTax, amtTax, remark,invoiceState, state, createDate, updateDate,applicationId
         )
         VALUES (
         #{id},#{contractId},#{invoicePlanId},#{planInvoiceDate},#{factInvoiceDate},#{planPaymentDate},#{factPaymentDate},
-        #{companyPayId},#{companySaleId},#{payeeId},#{checkId},#{billingId},#{amt},#{rate},
+        #{companyPayId},#{companySaleId},#{payeeId},#{checkId},#{billingId},#{planAmt},#{rate},
         #{amtOfTax},#{amtTax},#{remark},#{invoiceState},#{state},#{createDate},#{updateDate},#{applicationId}
         )
 
         <selectKey keyProperty="id" order="BEFORE" resultType="String">
             select $uuid()
         </selectKey>
+    </insert>
+
+    <!--批量添加发票-->
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_invoice(
+        id, contractId, invoicePlanId, planInvoiceDate, factInvoiceDate, planPaymentDate, factPaymentDate, companyPayId, companySaleId, payeeId, checkId, billingId, planAmt, rate, amtOfTax, amtTax, remark, state, createDate, updateDate, invoiceState, applicationId
+        ) VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            ($uuid(),#{item.contractId},#{item.invoicePlanId},#{item.planInvoiceDate},#{item.factInvoiceDate},#{item.planPaymentDate},
+            #{item.factPaymentDate},#{item.companyPayId},#{item.companySaleId},#{item.payeeId},#{item.checkId},#{item.billingId},
+            #{item.planAmt},#{item.rate},#{item.amtOfTax},#{item.amtTax},#{item.remark},#{item.state},#{item.createDate},#{item.updateDate},
+            #{item.invoiceState},#{item.applicationId})
+        </foreach>
     </insert>
 
     <select id="findOne" parameterType="String" resultType="moka.invoice.to.InvoiceTo">
