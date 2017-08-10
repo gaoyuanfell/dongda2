@@ -27,8 +27,9 @@
 
     <task:scheduler id="taskScheduler" pool-size="100"/>
 
-    <!--<task:scheduled-tasks>-->
-        <!--<task:scheduled ref="taskJob" method="autoInvoiceByPlan" cron="0 * * * * ?"/>-->
-    <!--</task:scheduled-tasks>-->
+    <task:scheduled-tasks>
+        <!--每天晚上2点启动定时任务-->
+        <task:scheduled ref="taskJob" method="autoInvoiceByPlan" cron="0 0 2 * * ?"/>
+    </task:scheduled-tasks>
 
 </beans>
