@@ -1,10 +1,12 @@
 package moka.invoice.ctrl;
 
 import moka.basic.annotation.IgnoreSecurity;
+import moka.basic.annotation.MetaDataSecurity;
+import moka.basic.aspect.MetaData;
 import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
-import moka.customer.to.CustomerTo;
+import moka.invoice.enums.InvoiceEnum;
 import moka.invoice.service.InvoiceService;
 import moka.invoice.to.InvoiceTo;
 import moka.invoice.vo.InvoiceVo;
@@ -13,7 +15,6 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -34,6 +35,7 @@ public class InvoiceController extends BasicController{
     public Object insert(@RequestBody InvoiceVo vo){
         UserTo userTo = getUserSession();
         vo.setApplicationId(userTo.getApplicationId());
+        vo.setCreateUser(userTo.getId());
         String i = invoiceService.insert(vo);
         return result(i);
     }
@@ -45,11 +47,35 @@ public class InvoiceController extends BasicController{
      */
     @RequestMapping(value = "findPage.htm")
     @ResponseBody
-    public Object findPage(@RequestBody InvoiceVo vo) {
+    public Object findPage(@RequestBody InvoiceVo vo,@MetaDataSecurity(value = {"lowerIds"}) MetaData metaData) {
+        if(metaData == null){
+            return result(CODE_PROMPT,"参数错误");
+        }
         UserTo userTo = getUserSession();
         vo.setApplicationId(userTo.getApplicationId());
+        vo.setLowerIds(metaData.getLowerIds());
         Page page = invoiceService.findPage(vo);
         return result(page);
+    }
+
+    /**
+     * 修改
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "update.htm")
+    @ResponseBody
+    public Object update(@RequestBody InvoiceVo vo) {
+        InvoiceTo to = invoiceService.findOne(vo.getId());
+        Boolean b1 = InvoiceEnum.ready.getValue().equals(to.getInvoiceState());
+        Boolean b2 = InvoiceEnum.preparation.getValue().equals(to.getInvoiceState());
+        if(b1 ||  b2){
+            int i = invoiceService.update(vo);
+            return result(i);
+        }else{
+            return result(CODE_PROMPT,"不能修改！");
+        }
+
     }
 
     /**
@@ -103,8 +129,6 @@ public class InvoiceController extends BasicController{
         Page page = invoiceService.findAccountPage(vo);
         return result(page);
     }
-
-
 
     /**
      * 开票
@@ -167,6 +191,5 @@ public class InvoiceController extends BasicController{
         int i = invoiceService.methodPaymentState(vo);
         return result(i);
     }
-
 
 }

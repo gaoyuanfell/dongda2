@@ -2,10 +2,9 @@ package moka.auth.vo;
 
 import moka.basic.page.Page;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class AuthVo extends Page implements Serializable {
+public class AuthVo extends Page  {
     private String id;
     private Date createDate;
     private Date updateDate;

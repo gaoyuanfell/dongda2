@@ -22,6 +22,7 @@
         WHERE c.id = #{id} AND c.state != 1;
     </select>
 
+    <!--AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companySaleId = ca.companyId))-->
     <select id="findCount" resultType="Integer">
         SELECT COUNT(id) FROM t_contract c
         WHERE c.state != 1
@@ -30,13 +31,12 @@
             #{item}
         </foreach>
         )
-
-        AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companySaleId = ca.companyId))
         <if test="contractNo != null and contractNo != ''">
             AND c.contractNo LIKE CONCAT('%',#{contractNo},'%')
         </if>
     </select>
 
+    <!--AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companySaleId = ca.companyId))-->
     <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.contract.to.ContractTo">
         SELECT c.*,uc.name as userName,ucb.name as companySaleUserName FROM t_contract c
         LEFT JOIN t_user uc ON uc.id = c.createUser
@@ -47,8 +47,6 @@
               #{item}
           </foreach>
         )
-
-        AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companySaleId = ca.companyId))
         <if test="contractNo != null and contractNo != ''">
             AND c.contractNo LIKE CONCAT('%',#{contractNo},'%')
         </if>
@@ -75,6 +73,11 @@
         LEFT JOIN t_user u ON c.companySaleUserId = u.id
         WHERE c.applicationId = #{applicationId} AND c.state != 1
 
+        AND (c.createUser = #{userId} OR c.companySaleUserId IN
+        <foreach collection="lowerIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        )
         AND (SELECT COUNT(tip.id) FROM t_invoice_plan tip WHERE tip.planState = '1' AND tip.contractId = c.id) > 0
         <if test="contractNo != null and contractNo != ''">
             AND c.contractNo LIKE
@@ -82,6 +85,7 @@
         </if>
     </select>
 
+    <!--查找重复合同-->
     <select id="findRepeatContract" parameterType="moka.contract.vo.ContractVo" resultType="moka.contract.to.ContractTo">
         SELECT * FROM  t_contract c WHERE c.contractNo = #{contractNo}
     </select>

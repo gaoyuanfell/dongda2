@@ -1,6 +1,5 @@
 package moka.basic.ctrl;
 
-import com.alibaba.fastjson.JSONObject;
 import moka.basic.bo.Resources;
 import moka.basic.bo.Token;
 import moka.basic.service.RedisService;

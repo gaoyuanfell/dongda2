@@ -1,8 +1,8 @@
 package moka.department.vo;
 
-import java.util.Date;
-
 import moka.basic.page.Page;
+
+import java.util.Date;
 
 public class DepartmentVo extends Page {
     private String id;

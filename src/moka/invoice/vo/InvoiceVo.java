@@ -4,6 +4,7 @@ import moka.basic.page.Page;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class InvoiceVo extends Page {
     private String id;
@@ -95,9 +96,33 @@ public class InvoiceVo extends Page {
      */
     private String applicationId;
     /**
+     * 创建人
+     */
+    private String createUser;
+    /**
      * 不含税金额
      */
     private BigDecimal planAmt;
+    /**
+     * 下级用户ID集合
+     */
+    private List<String> lowerIds;
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public List<String> getLowerIds() {
+        return lowerIds;
+    }
+
+    public void setLowerIds(List<String> lowerIds) {
+        this.lowerIds = lowerIds;
+    }
 
     public BigDecimal getPlanAmt() {
         return planAmt;

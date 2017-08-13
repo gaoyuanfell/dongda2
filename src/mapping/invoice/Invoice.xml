@@ -6,12 +6,12 @@
         INSERT INTO t_invoice(
         id, contractId, invoicePlanId, planInvoiceDate, factInvoiceDate, planPaymentDate, factPaymentDate,
         companyPayId, companySaleId, payeeId, checkId, billingId, planAmt, rate,
-        amtOfTax, amtTax, remark,invoiceState, state, createDate, updateDate,applicationId
+        amtOfTax, amtTax, remark,invoiceState, state, createDate, updateDate,applicationId,createUser
         )
         VALUES (
         #{id},#{contractId},#{invoicePlanId},#{planInvoiceDate},#{factInvoiceDate},#{planPaymentDate},#{factPaymentDate},
         #{companyPayId},#{companySaleId},#{payeeId},#{checkId},#{billingId},#{planAmt},#{rate},
-        #{amtOfTax},#{amtTax},#{remark},#{invoiceState},#{state},#{createDate},#{updateDate},#{applicationId}
+        #{amtOfTax},#{amtTax},#{remark},#{invoiceState},#{state},#{createDate},#{updateDate},#{applicationId},#{createUser}
         )
 
         <selectKey keyProperty="id" order="BEFORE" resultType="String">
@@ -22,13 +22,13 @@
     <!--批量添加发票-->
     <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_invoice(
-        id, contractId, invoicePlanId, planInvoiceDate, factInvoiceDate, planPaymentDate, factPaymentDate, companyPayId, companySaleId, payeeId, checkId, billingId, planAmt, rate, amtOfTax, amtTax, remark, state, createDate, updateDate, invoiceState, applicationId
+        id, contractId, invoicePlanId, planInvoiceDate, factInvoiceDate, planPaymentDate, factPaymentDate, companyPayId, companySaleId, payeeId, checkId, billingId, planAmt, rate, amtOfTax, amtTax, remark, state, createDate, updateDate, invoiceState, applicationId, createUser
         ) VALUES
         <foreach collection="list" index="index" item="item" separator=",">
             ($uuid(),#{item.contractId},#{item.invoicePlanId},#{item.planInvoiceDate},#{item.factInvoiceDate},#{item.planPaymentDate},
             #{item.factPaymentDate},#{item.companyPayId},#{item.companySaleId},#{item.payeeId},#{item.checkId},#{item.billingId},
             #{item.planAmt},#{item.rate},#{item.amtOfTax},#{item.amtTax},#{item.remark},#{item.state},#{item.createDate},#{item.updateDate},
-            #{item.invoiceState},#{item.applicationId})
+            #{item.invoiceState},#{item.applicationId},#{createUser})
         </foreach>
     </insert>
 
@@ -50,6 +50,10 @@
         i.applicationId = #{applicationId}
         AND i.state != 1
 
+        AND i.createUser IN
+        <foreach collection="lowerIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
         <if test="invoiceState != '' and invoiceState != null">AND i.invoiceState = #{invoiceState}</if>
 
     </select>
@@ -65,6 +69,10 @@
         WHERE i.applicationId = #{applicationId}
         AND i.state != 1
 
+        AND i.createUser IN
+        <foreach collection="lowerIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
         <if test="invoiceState != '' and invoiceState != null">AND i.invoiceState = #{invoiceState}</if>
 
         LIMIT #{pageStart} , #{pageSize};

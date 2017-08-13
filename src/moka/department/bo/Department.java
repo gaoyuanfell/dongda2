@@ -1,11 +1,10 @@
 package moka.department.bo;
 
-import java.io.Serializable;
+import moka.basic.bo.IdEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import moka.basic.bo.IdEntity;
+import java.io.Serializable;
 
 /**
  * 部门实体

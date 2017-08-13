@@ -2,13 +2,14 @@ package moka.basic.page;
 
 import moka.basic.bo.Basic;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 分页
  * Created by moka on 2017/3/11.
  */
-public class Page<T> extends Basic {
+public class Page<T> extends Basic implements Serializable {
     private int pageIndex = 1;
     private int pageStart;
     private int pageSize = 5;

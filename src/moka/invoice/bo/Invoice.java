@@ -101,6 +101,18 @@ public class Invoice extends IdEntity implements Serializable{
      * 资源ID
      */
     private String applicationId;
+    /**
+     * 创建人
+     */
+    private String createUser;
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
 
     public String getApplicationId() {
         return applicationId;

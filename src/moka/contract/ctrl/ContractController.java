@@ -126,9 +126,14 @@ public class ContractController extends BasicController {
      */
     @RequestMapping(value = "findContractByAllData.htm")
     @ResponseBody
-    public Object findContractByAllData(@RequestBody ContractVo vo){
+    public Object findContractByAllData(@RequestBody ContractVo vo,@MetaDataSecurity(value = {"lowerIds"}) MetaData metaData){
+        if(metaData == null){
+            return result(CODE_PROMPT,"参数错误");
+        }
         UserTo to = getUserSession();
+        vo.setUserId(to.getId());
         vo.setApplicationId(to.getApplicationId());
+        vo.setLowerIds(metaData.getLowerIds());
         List<ContractTo> list = contractService.findContractByAllData(vo);
         return result(list);
     }

@@ -7,7 +7,7 @@ public class Resources {
     protected static final int CODE_NO_LOGIN = 201;//未登录
     protected static final int CODE_PROMPT = 202;//文字提示
     protected static final int CODE_PROMPT_MASK = 203;//弹幕提示
-    protected static final int CODE_NOT_AUTH = 205;//文字提示
+    protected static final int CODE_NOT_AUTH = 205;//没有权限
 
 
     protected static JSONObject result(Object obj) {

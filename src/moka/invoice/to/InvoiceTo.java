@@ -80,7 +80,10 @@ public class InvoiceTo {
      * 资源ID
      */
     private String applicationId;
-
+    /**
+     * 创建人
+     */
+    private String createUser;
     /**
      * 合同编号
      */
@@ -109,6 +112,14 @@ public class InvoiceTo {
      * 不含税金额
      */
     private BigDecimal planAmt;
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
 
     public BigDecimal getPlanAmt() {
         return planAmt;

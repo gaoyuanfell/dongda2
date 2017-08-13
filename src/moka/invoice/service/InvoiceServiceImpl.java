@@ -9,7 +9,6 @@ import moka.invoice.dao.InvoiceDao;
 import moka.invoice.enums.InvoiceEnum;
 import moka.invoice.to.InvoiceTo;
 import moka.invoice.vo.InvoiceVo;
-import moka.invoicePlan.dao.InvoicePlanDao;
 import moka.invoicePlan.service.InvoicePlanService;
 import moka.invoicePlan.to.InvoicePlanTo;
 import moka.invoicePlan.vo.InvoicePlanVo;
@@ -26,8 +25,6 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
     private InvoiceDao invoiceDao;
     @Resource
     private InvoicePlanService invoicePlanService;
-    @Resource
-    private InvoicePlanDao invoicePlanDao;
     @Resource
     private ContractService contractService;
     
@@ -56,6 +53,7 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
     public int update(InvoiceVo vo) {
         Invoice invoice = this.convertBusinessValue(vo,Invoice.class);
         invoice.setUpdateDate(new Date());
+        invoice.setInvoiceState(InvoiceEnum.preparation.getValue());
         return invoiceDao.update(invoice);
     }
 
@@ -148,11 +146,12 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
                     invoice.setCompanyPayId(contractTo.getCompanyPayId());
                     invoice.setCompanySaleId(contractTo.getCompanySaleId());
                     invoice.setInvoicePlanId(to.getId());
-                    invoice.setInvoiceState(InvoiceEnum.preparation.getValue());
+                    invoice.setInvoiceState(InvoiceEnum.ready.getValue());
                     invoice.setCreateDate(new Date());
                     invoice.setPlanAmt(to.getPlanAmt());
                     invoice.setPlanInvoiceDate(to.getPlanDate());
                     invoice.setApplicationId(contractTo.getApplicationId());
+                    invoice.setCreateUser(contractTo.getCompanySaleUserId());
                     invoiceList.add(invoice);
                     planIds.add(to.getId());
                 }
