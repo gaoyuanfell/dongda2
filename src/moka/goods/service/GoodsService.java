@@ -15,4 +15,6 @@ public interface GoodsService extends BasicService {
     Page findPage(GoodsVo vo);
 
     GoodsTo findOne(String id);
+
+    int insertBatch(List<GoodsVo> list);
 }

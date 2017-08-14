@@ -23,7 +23,7 @@ public class InvoicePlanTo {
     /**
      * 开票金额
      */
-    private BigDecimal planAmt = new BigDecimal("0");
+    private BigDecimal planAmt;
     /**
      * 计划开票日期
      */

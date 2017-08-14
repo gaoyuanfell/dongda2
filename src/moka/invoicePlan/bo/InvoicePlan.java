@@ -29,7 +29,7 @@ public class InvoicePlan extends IdEntity implements Serializable {
     /**
      * 开票金额
      */
-    private BigDecimal planAmt = new BigDecimal("0");
+    private BigDecimal planAmt;
     /**
      * 计划开票日期
      */
@@ -41,7 +41,7 @@ public class InvoicePlan extends IdEntity implements Serializable {
     /**
      * 已入账金额
      */
-    private BigDecimal receiveAmt = new BigDecimal("0");
+    private BigDecimal receiveAmt;
     /**
      * 状态
      */

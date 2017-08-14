@@ -118,7 +118,7 @@ public class ContractServiceImpl extends BasicServiceImpl implements ContractSer
                 planVo.setPaymentPlanFact(index);
                 planVo.setPlanAmt(bs.get(index - 1));
                 planVo.setApplicationId(contracts.getApplicationId());
-                planVo.setPlanState(InvoicePlanEnum.initial.getValue());
+                planVo.setPlanState(InvoicePlanEnum.undone.getValue());
                 vos.add(planVo);
             }
             return vos;

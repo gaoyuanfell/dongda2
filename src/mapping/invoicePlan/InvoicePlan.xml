@@ -47,7 +47,7 @@
         )
         VALUES
         <foreach collection="list" index="index" item="item" separator=",">
-            ($uuid(),#{item.contractId},#{item.paymentPlanFact},#{item.versionNo},#{item.planAmt},#{item.planDate},#{item.planReceiveDate},#{item.receiveAmt},#{item.state},#{item.createDate},#{item.updateDate},#{item.planState})
+            ($uuid(),#{item.contractId},#{item.paymentPlanFact},#{item.versionNo},#{item.planAmt},#{item.planDate},#{item.planReceiveDate},#{item.receiveAmt},#{item.state},NOW(),#{item.updateDate},#{item.planState})
         </foreach>
     </insert>
 

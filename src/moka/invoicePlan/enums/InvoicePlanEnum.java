@@ -3,8 +3,9 @@ package moka.invoicePlan.enums;
 import org.jetbrains.annotations.Contract;
 
 public enum InvoicePlanEnum {
-    initial("初始状态","1"),
-    invoiced("已开票","2"),
+    undone("未完成","1"),
+    completed("已完成","2"),
+    invoiced("已开票","3"),
     ;
     private String name;
     private String value;

@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/auth")
+@RequestMapping(value = "/goods")
 public class GoodsController extends BasicController {
 
     @Resource
@@ -24,7 +24,7 @@ public class GoodsController extends BasicController {
     private Logger logger = LoggerService.getLogger(this.getClass());
 
     /**
-     * 新增公司 内部
+     * 新增物品
      */
     @RequestMapping(value = "insert.htm")
     @ResponseBody
@@ -34,18 +34,7 @@ public class GoodsController extends BasicController {
     }
 
     /**
-     * 查 分页
-     */
-    @RequestMapping(value = "findPage.htm")
-    @ResponseBody
-    public Object findPage(@RequestBody GoodsVo vo) {
-        Page list = goodsService.findPage(vo);
-        return result(list);
-    }
-
-    /**
      * 查
-     *
      * @param id
      * @return
      */

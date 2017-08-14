@@ -75,7 +75,7 @@ public class InvoicePlanServiceImpl extends BasicServiceImpl implements InvoiceP
     public int methodInvoicedState(String id) {
         InvoicePlan vo = new InvoicePlan();
         vo.setId(id);
-        vo.setPlanState(InvoicePlanEnum.invoiced.getValue());
+        vo.setPlanState(InvoicePlanEnum.completed.getValue());
         vo.setUpdateDate(new Date());
         return invoicePlanDao.methodInvoicedState(vo);
     }

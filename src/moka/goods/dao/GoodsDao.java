@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("authDao")
+@Repository("goodsDao")
 public interface GoodsDao extends BasicDao<Goods, GoodsTo> {
-
+    int insertBatch(List<GoodsVo> list);
 }

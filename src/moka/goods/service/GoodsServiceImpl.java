@@ -20,17 +20,17 @@ public class GoodsServiceImpl extends BasicServiceImpl implements GoodsService {
 
     @Override
     public String insert(GoodsVo vo) {
-        Goods auth = this.convertBusinessValue(Goods.class,vo);
-        auth.setCreateDate(new Date());
-        goodsDao.insert(auth);
-        return auth.getId();
+        Goods goods = this.convertBusinessValue(Goods.class,vo);
+        goods.setCreateDate(new Date());
+        goodsDao.insert(goods);
+        return goods.getId();
     }
 
     @Override
     public int update(GoodsVo vo) {
-        Goods auth = this.convertBusinessValue(Goods.class,vo);
-        auth.setUpdateDate(new Date());
-        return goodsDao.update(auth);
+        Goods goods = this.convertBusinessValue(Goods.class,vo);
+        goods.setUpdateDate(new Date());
+        return goodsDao.update(goods);
     }
 
     @Override
@@ -43,5 +43,10 @@ public class GoodsServiceImpl extends BasicServiceImpl implements GoodsService {
     @Override
     public GoodsTo findOne(String id) {
         return goodsDao.findOne(id);
+    }
+
+    @Override
+    public int insertBatch(List<GoodsVo> list) {
+        return goodsDao.insertBatch(list);
     }
 }

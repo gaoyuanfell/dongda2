@@ -25,7 +25,7 @@ public class InvoicePlanVo extends Page{
     /**
      * 开票金额
      */
-    private BigDecimal planAmt = new BigDecimal("0");
+    private BigDecimal planAmt;
     /**
      * 计划开票日期
      */
@@ -37,7 +37,7 @@ public class InvoicePlanVo extends Page{
     /**
      * 已入账金额
      */
-    private BigDecimal receiveAmt = new BigDecimal("0");
+    private BigDecimal receiveAmt;
     /**
      * 状态
      */
