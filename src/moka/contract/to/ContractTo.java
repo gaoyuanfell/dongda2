@@ -1,5 +1,7 @@
 package moka.contract.to;
 
+import moka.goods.to.GoodsTo;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -97,6 +99,7 @@ public class ContractTo {
      */
     private int paymentNum;
 
+
     /**
      * 开票计划
      */
@@ -117,7 +120,6 @@ public class ContractTo {
      * 销售
      */
     private String companySaleUserName;
-
     /**
      * 创建人
      */
@@ -126,6 +128,18 @@ public class ContractTo {
      * 创建人名称
      */
     private String userName;
+    /**
+     * 物品集合
+     */
+    private List<GoodsTo> goodsList;
+
+    public List<GoodsTo> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<GoodsTo> goodsList) {
+        this.goodsList = goodsList;
+    }
 
     public String getCompanyPayName() {
         return companyPayName;

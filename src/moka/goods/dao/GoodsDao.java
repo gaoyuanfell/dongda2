@@ -11,4 +11,6 @@ import java.util.List;
 @Repository("goodsDao")
 public interface GoodsDao extends BasicDao<Goods, GoodsTo> {
     int insertBatch(List<GoodsVo> list);
+
+    List<GoodsTo> findByContractId(String contractId);
 }

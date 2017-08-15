@@ -20,7 +20,7 @@ public class GoodsServiceImpl extends BasicServiceImpl implements GoodsService {
 
     @Override
     public String insert(GoodsVo vo) {
-        Goods goods = this.convertBusinessValue(Goods.class,vo);
+        Goods goods = this.convertBusinessValue(vo,Goods.class);
         goods.setCreateDate(new Date());
         goodsDao.insert(goods);
         return goods.getId();
@@ -28,7 +28,7 @@ public class GoodsServiceImpl extends BasicServiceImpl implements GoodsService {
 
     @Override
     public int update(GoodsVo vo) {
-        Goods goods = this.convertBusinessValue(Goods.class,vo);
+        Goods goods = this.convertBusinessValue(vo,Goods.class);
         goods.setUpdateDate(new Date());
         return goodsDao.update(goods);
     }
@@ -48,5 +48,10 @@ public class GoodsServiceImpl extends BasicServiceImpl implements GoodsService {
     @Override
     public int insertBatch(List<GoodsVo> list) {
         return goodsDao.insertBatch(list);
+    }
+
+    @Override
+    public List<GoodsTo> findByContractId(String contractId) {
+        return goodsDao.findByContractId(contractId);
     }
 }

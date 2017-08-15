@@ -16,5 +16,17 @@ public interface GoodsService extends BasicService {
 
     GoodsTo findOne(String id);
 
+    /**
+     * 批量增加
+     * @param list
+     * @return
+     */
     int insertBatch(List<GoodsVo> list);
+
+    /**
+     * 根据合同ID查找商品
+     * @param contractId
+     * @return
+     */
+    List<GoodsTo> findByContractId(String contractId);
 }

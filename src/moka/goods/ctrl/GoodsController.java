@@ -2,7 +2,6 @@ package moka.goods.ctrl;
 
 import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
-import moka.basic.page.Page;
 import moka.goods.service.GoodsService;
 import moka.goods.to.GoodsTo;
 import moka.goods.vo.GoodsVo;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/goods")
@@ -28,10 +26,21 @@ public class GoodsController extends BasicController {
      */
     @RequestMapping(value = "insert.htm")
     @ResponseBody
-    private Object insert(@RequestBody GoodsVo vo){
+    public Object insert(@RequestBody GoodsVo vo){
         String i = goodsService.insert(vo);
         return result(i);
     }
+
+    /**
+     * 修改物品
+     */
+    @RequestMapping(value = "update.htm")
+    @ResponseBody
+    public Object update(@RequestBody GoodsVo vo){
+        int i = goodsService.update(vo);
+        return result(i);
+    }
+
 
     /**
      * 查

@@ -64,4 +64,10 @@
         </if>
         LIMIT #{pageStart} , #{pageSize};
     </select>
+
+    <select id="findByContractId" parameterType="String" resultType="moka.goods.to.GoodsTo">
+        SELECT * FROM t_goods g WHERE
+        g.state != 1
+        AND g.contractId = #{contractId}
+    </select>
 </mapper>

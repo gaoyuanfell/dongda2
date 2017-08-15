@@ -8,6 +8,8 @@ import moka.contract.dao.ContractDao;
 import moka.contract.enums.ContractEnum;
 import moka.contract.to.ContractTo;
 import moka.contract.vo.ContractVo;
+import moka.goods.service.GoodsService;
+import moka.goods.to.GoodsTo;
 import moka.invoicePlan.enums.InvoicePlanEnum;
 import moka.invoicePlan.service.InvoicePlanService;
 import moka.invoicePlan.vo.InvoicePlanVo;
@@ -27,6 +29,8 @@ public class ContractServiceImpl extends BasicServiceImpl implements ContractSer
     private ContractDao contractDao;
     @Resource
     private InvoicePlanService invoicePlanService;
+    @Resource
+    private GoodsService goodsService;
 
     @Override
     public String insert(ContractVo con) {
@@ -48,7 +52,9 @@ public class ContractServiceImpl extends BasicServiceImpl implements ContractSer
         ContractTo to = contractDao.findOne(id);
         if(to != null){
             List l = invoicePlanService.findByContract(id);
+            List<GoodsTo> goods = goodsService.findByContractId(to.getId());
             to.setInvoicePlans(l);
+            to.setGoodsList(goods);
             return to;
         }
         return null;
