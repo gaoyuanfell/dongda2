@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="moka.address.dao.AddressDao">
+
+    <insert id="insert" parameterType="moka.address.bo.Address" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_address (
+        id, userId, nickname, phone, province, city, county, address, createDate, updateDate, state, label
+        ) VALUES (
+        #{id},#{userId},#{nickname},#{phone},#{province},#{city},#{county},#{address},#{createDate},#{updateDate},#{state},#{label}
+        )
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="moka.address.bo.Address">
+        UPDATE t_address
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="nickname != null and nickname != ''">nickname = #{nickname},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="province != null and province != ''">province = #{province},</if>
+            <if test="city != null and city != ''">city = #{city},</if>
+            <if test="county != null and county != ''">county = #{county},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="updateDate != null">updateDate = #{updateDate},</if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <select id="findOne" parameterType="String" resultType="moka.address.to.AddressTo">
+        SELECT * FROM t_address WHERE id = #{id};
+    </select>
+
+    <!--地域 查找父级区域-->
+    <select id="findDistrictRoot" resultType="moka.address.to.DistrictTo">
+        SELECT * FROM t_district d WHERE d.parentId = '0' ORDER BY d.order ASC;
+    </select>
+
+    <!--地域 根据父ID查询子集-->
+    <select id="findDistrictByParentId" parameterType="String" resultType="moka.address.to.DistrictTo">
+        SELECT * FROM t_district d WHERE d.parentId = #{parentId} ORDER BY d.order ASC;
+    </select>
+
+</mapper>

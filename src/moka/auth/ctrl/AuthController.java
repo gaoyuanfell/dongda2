@@ -24,11 +24,11 @@ public class AuthController extends BasicController {
     private Logger logger = LoggerService.getLogger(this.getClass());
 
     /**
-     * 新增公司 内部
+     * 新增权限
      */
     @RequestMapping(value = "insert.htm")
     @ResponseBody
-    private Object insert(@RequestBody AuthVo vo){
+    public Object insert(@RequestBody AuthVo vo){
         String i = authService.insert(vo);
         return result(i);
     }

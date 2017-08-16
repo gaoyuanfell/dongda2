@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name="Invoice")
+@Table(name="t_auth")
 public class Auth extends IdEntity implements Serializable {
     /**
      * 权限标志
