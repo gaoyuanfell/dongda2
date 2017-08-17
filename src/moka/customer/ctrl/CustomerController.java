@@ -93,13 +93,14 @@ public class CustomerController extends BasicController {
     }
 
     /**
-     * 根据客户id获取公司信息
+     * 根据id查找 ALL
+     * @param id
      * @return
      */
-    @RequestMapping(value = "findComByCusId.htm")
+    @RequestMapping(value = "findOneAll.htm")
     @ResponseBody
-    public Object findComByCusId(String id){
-        CompanyTo to = customerService.findComByCusId(id);
+    public Object findOneAll(String id) {
+        CustomerTo to = customerService.findOneAll(id);
         return result(to);
     }
 

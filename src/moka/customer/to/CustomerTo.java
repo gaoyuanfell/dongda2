@@ -1,7 +1,11 @@
 package moka.customer.to;
 
+import moka.address.to.AddressTo;
+import moka.company.to.CompanyTo;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 返回数据
@@ -49,6 +53,31 @@ public class CustomerTo implements Serializable {
      * 资源ID
      */
     private String applicationId;
+
+    /**
+     * 公司信息
+     */
+    private CompanyTo company;
+    /**
+     * 收货地址集合
+     */
+    private List<AddressTo> addressList;
+
+    public CompanyTo getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyTo company) {
+        this.company = company;
+    }
+
+    public List<AddressTo> getAddressList() {
+        return addressList;
+    }
+
+    public void setAddressList(List<AddressTo> addressList) {
+        this.addressList = addressList;
+    }
 
     public String getId() {
         return id;

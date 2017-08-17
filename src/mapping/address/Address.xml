@@ -32,6 +32,11 @@
         SELECT * FROM t_address WHERE id = #{id};
     </select>
 
+    <!--获取客户所有收货地址-->
+    <select id="findByUserId" parameterType="String" resultType="moka.address.to.AddressTo">
+        SELECT * FROM t_address WHERE userId = #{userId};
+    </select>
+
     <!--地域 查找父级区域-->
     <select id="findDistrictRoot" resultType="moka.address.to.DistrictTo">
         SELECT * FROM t_district d WHERE d.parentId = '0' ORDER BY d.order ASC;

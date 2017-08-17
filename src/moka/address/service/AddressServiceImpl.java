@@ -40,6 +40,11 @@ public class AddressServiceImpl extends BasicServiceImpl implements AddressServi
     }
 
     @Override
+    public List<AddressTo> findByUserId(String userId) {
+        return addressDao.findByUserId(userId);
+    }
+
+    @Override
     public List<DistrictTo> findDistrictRoot() {
         return addressDao.findDistrictRoot();
     }

@@ -12,6 +12,8 @@ import java.util.List;
 @Repository("addressDao")
 public interface AddressDao extends BasicDao<Address, AddressTo> {
 
+    List<AddressTo> findByUserId(String userId);
+
     List<DistrictTo> findDistrictRoot();
 
     List<DistrictTo> findDistrictByParentId(String parentId);

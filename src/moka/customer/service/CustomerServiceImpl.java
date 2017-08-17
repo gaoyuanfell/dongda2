@@ -1,8 +1,11 @@
 package moka.customer.service;
 
+import moka.address.service.AddressService;
+import moka.address.to.AddressTo;
 import moka.basic.page.Page;
 import moka.basic.service.BasicServiceImpl;
 import moka.company.dao.CompanyDao;
+import moka.company.service.CompanyService;
 import moka.company.to.CompanyTo;
 import moka.customer.bo.Customer;
 import moka.customer.dao.CustomerDao;
@@ -23,7 +26,9 @@ public class CustomerServiceImpl extends BasicServiceImpl implements CustomerSer
     @Resource
     private CustomerDao customerDao;
     @Resource
-    private CompanyDao companyDao;
+    private CompanyService companyService;
+    @Resource
+    private AddressService addressService;
 
     @Override
     public String insert(CustomerVo vo) {
@@ -58,13 +63,15 @@ public class CustomerServiceImpl extends BasicServiceImpl implements CustomerSer
     }
 
     @Override
-    public CompanyTo findComByCusId(String id) {
+    public CustomerTo findOneAll(String id) {
         CustomerTo to = customerDao.findOne(id);
         if(to != null){
-            CompanyTo companyTo = companyDao.findOne(to.getCompanyId());
-            return companyTo;
+            CompanyTo company = companyService.findOne(to.getCompanyId());
+            to.setCompany(company);
+            List<AddressTo> addressList = addressService.findByUserId(id);
+            to.setAddressList(addressList);
         }
-        return null;
+        return to;
     }
 
     @Override

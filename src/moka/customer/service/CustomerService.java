@@ -22,13 +22,7 @@ public interface CustomerService extends BasicService {
 
     CustomerTo findOne(String id);
 
-    /**
-     * 根据客户id获取公司信息
-     * @param id
-     * @return
-     */
-    CompanyTo findComByCusId(String id);
-
+    CustomerTo findOneAll(String id);
     /**
      * 作用于下拉
      * @param vo companyId name

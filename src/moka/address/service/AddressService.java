@@ -1,5 +1,6 @@
 package moka.address.service;
 
+import moka.address.bo.Address;
 import moka.address.to.AddressTo;
 import moka.address.to.DistrictTo;
 import moka.address.vo.AddressVo;
@@ -15,6 +16,12 @@ public interface AddressService extends BasicService {
 
     AddressTo findOne(String id);
 
+    /**
+     * 获取客户所有收货地址
+     * @param userId
+     * @return
+     */
+    List<AddressTo> findByUserId(String userId);
 
     /**
      * 地域 查找父级区域
