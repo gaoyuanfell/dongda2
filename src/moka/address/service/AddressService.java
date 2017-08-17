@@ -17,6 +17,13 @@ public interface AddressService extends BasicService {
     AddressTo findOne(String id);
 
     /**
+     * 批量增加
+     * @param list
+     * @return
+     */
+    int insertBatch(List<AddressVo> list);
+
+    /**
      * 获取客户所有收货地址
      * @param userId
      * @return

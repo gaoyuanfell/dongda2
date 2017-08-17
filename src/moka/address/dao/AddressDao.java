@@ -4,6 +4,7 @@ import moka.address.bo.Address;
 import moka.address.bo.District;
 import moka.address.to.AddressTo;
 import moka.address.to.DistrictTo;
+import moka.address.vo.AddressVo;
 import moka.basic.dao.BasicDao;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +18,6 @@ public interface AddressDao extends BasicDao<Address, AddressTo> {
     List<DistrictTo> findDistrictRoot();
 
     List<DistrictTo> findDistrictByParentId(String parentId);
+
+    int insertBatch(List<AddressVo> list);
 }

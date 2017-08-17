@@ -10,6 +10,7 @@ import moka.contract.to.ContractTo;
 import moka.contract.vo.ContractVo;
 import moka.goods.service.GoodsService;
 import moka.goods.to.GoodsTo;
+import moka.goods.vo.GoodsVo;
 import moka.invoicePlan.enums.InvoicePlanEnum;
 import moka.invoicePlan.service.InvoicePlanService;
 import moka.invoicePlan.vo.InvoicePlanVo;
@@ -38,8 +39,16 @@ public class ContractServiceImpl extends BasicServiceImpl implements ContractSer
         contract.setCreateDate(new Date());
         contract.setContactState(ContractEnum.initial.getValue());
         contractDao.insert(contract);
+        String id = contract.getId();
+        String applicationId = contract.getApplicationId();
         invoicePlanService.insertBatch(this.getPlanByContract(contract));
-        return contract.getId();
+        List<GoodsVo> goodsList = con.getGoodsList();
+        for (GoodsVo goodsVo:goodsList){
+            goodsVo.setApplicationId(applicationId);
+            goodsVo.setContractId(id);
+        }
+        goodsService.insertBatch(goodsList);
+        return id;
     }
 
     @Override

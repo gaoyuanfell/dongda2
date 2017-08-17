@@ -1,8 +1,11 @@
 package moka.customer.vo;
 
+import moka.address.to.AddressTo;
+import moka.address.vo.AddressVo;
 import moka.basic.page.Page;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 接收应用层的数据
@@ -50,6 +53,18 @@ public class CustomerVo extends Page {
      * 资源ID
      */
     private String applicationId;
+    /**
+     * 收货地址集合
+     */
+    private List<AddressVo> addressList;
+
+    public List<AddressVo> getAddressList() {
+        return addressList;
+    }
+
+    public void setAddressList(List<AddressVo> addressList) {
+        this.addressList = addressList;
+    }
 
     public String getId() {
         return id;

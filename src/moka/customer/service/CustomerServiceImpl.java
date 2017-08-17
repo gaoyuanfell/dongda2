@@ -2,6 +2,7 @@ package moka.customer.service;
 
 import moka.address.service.AddressService;
 import moka.address.to.AddressTo;
+import moka.address.vo.AddressVo;
 import moka.basic.page.Page;
 import moka.basic.service.BasicServiceImpl;
 import moka.company.dao.CompanyDao;
@@ -35,7 +36,15 @@ public class CustomerServiceImpl extends BasicServiceImpl implements CustomerSer
         Customer customer = this.convertBusinessValue(vo,Customer.class);
         customer.setCreateDate(new Date());
         customerDao.insert(customer);
-        return customer.getId();
+        String id = customer.getId();
+        String applicationId = customer.getApplicationId();
+        List<AddressVo> addressList = vo.getAddressList();
+        for (AddressVo addressVo : addressList){
+            addressVo.setApplicationId(applicationId);
+            addressVo.setUserId(id);
+        }
+        addressService.insertBatch(addressList);
+        return id;
     }
 
     @Override

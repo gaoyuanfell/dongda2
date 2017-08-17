@@ -20,7 +20,7 @@ public class AuthServiceImpl extends BasicServiceImpl implements AuthService {
 
     @Override
     public String insert(AuthVo vo) {
-        Auth auth = this.convertBusinessValue(Auth.class,vo);
+        Auth auth = this.convertBusinessValue(vo,Auth.class);
         auth.setCreateDate(new Date());
         authDao.insert(auth);
         return auth.getId();
@@ -28,7 +28,7 @@ public class AuthServiceImpl extends BasicServiceImpl implements AuthService {
 
     @Override
     public int update(AuthVo vo) {
-        Auth auth = this.convertBusinessValue(Auth.class,vo);
+        Auth auth = this.convertBusinessValue(vo,Auth.class);
         auth.setUpdateDate(new Date());
         return authDao.update(auth);
     }

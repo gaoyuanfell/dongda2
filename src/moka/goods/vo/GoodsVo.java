@@ -60,7 +60,18 @@ public class GoodsVo extends Page {
      * 备注
      */
     private String remark;
+    /**
+     * 资源ID
+     */
+    private String applicationId;
 
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
     public String getContractId() {
         return contractId;
     }

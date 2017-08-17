@@ -21,7 +21,7 @@ public class AddressServiceImpl extends BasicServiceImpl implements AddressServi
 
     @Override
     public String insert(AddressVo vo) {
-        Address auth = this.convertBusinessValue(Address.class,vo);
+        Address auth = this.convertBusinessValue(vo,Address.class);
         auth.setCreateDate(new Date());
         addressDao.insert(auth);
         return auth.getId();
@@ -29,7 +29,7 @@ public class AddressServiceImpl extends BasicServiceImpl implements AddressServi
 
     @Override
     public int update(AddressVo vo) {
-        Address auth = this.convertBusinessValue(Address.class,vo);
+        Address auth = this.convertBusinessValue(vo,Address.class);
         auth.setUpdateDate(new Date());
         return addressDao.update(auth);
     }
@@ -37,6 +37,11 @@ public class AddressServiceImpl extends BasicServiceImpl implements AddressServi
     @Override
     public AddressTo findOne(String id) {
         return addressDao.findOne(id);
+    }
+
+    @Override
+    public int insertBatch(List<AddressVo> list) {
+        return addressDao.insertBatch(list);
     }
 
     @Override

@@ -42,7 +42,18 @@ public class AddressVo extends Page {
      * 标签
      */
     private String label;
+    /**
+     * 资源ID
+     */
+    private String applicationId;
 
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
     public String getLabel() {
         return label;
     }

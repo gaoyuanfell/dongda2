@@ -4,14 +4,23 @@
 
     <insert id="insert" parameterType="moka.address.bo.Address" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_address (
-        id, userId, nickname, phone, province, city, county, address, createDate, updateDate, state, label
+        id, userId, nickname, phone, province, city, county, address, createDate, updateDate, state, label,applicationId
         ) VALUES (
-        #{id},#{userId},#{nickname},#{phone},#{province},#{city},#{county},#{address},#{createDate},#{updateDate},#{state},#{label}
+        #{id},#{userId},#{nickname},#{phone},#{province},#{city},#{county},#{address},#{createDate},#{updateDate},#{state},#{label},#{applicationId}
         )
 
         <selectKey keyProperty="id" order="BEFORE" resultType="String">
             select $uuid()
         </selectKey>
+    </insert>
+
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_address (
+        id, userId, nickname, phone, province, city, county, address, createDate, updateDate, state, label,applicationId
+        ) VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            ($uuid(),#{item.userId},#{item.nickname},#{item.phone},#{item.province},#{item.city},#{item.county},#{item.address},#{item.createDate},#{item.updateDate},#{item.state},#{item.label},#{item.applicationId})
+        </foreach>
     </insert>
 
     <update id="update" parameterType="moka.address.bo.Address">

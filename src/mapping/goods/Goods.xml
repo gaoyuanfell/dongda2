@@ -3,9 +3,9 @@
 <mapper namespace="moka.goods.dao.GoodsDao">
     <insert id="insert" parameterType="moka.goods.bo.Goods" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_goods(
-        id, contractId, invoiceId, createDate, updateDate, name, specification, unit, quantity, price, amt, rate, amtOfTax, amtTax, remark, state
+        id, contractId, invoiceId, createDate, updateDate, name, specification, unit, quantity, price, amt, rate, amtOfTax, amtTax, remark, state,applicationId
         ) VALUES (
-        #{id},#{contractId},#{invoiceId},#{createDate},#{updateDate},#{name},#{specification},#{unit},#{quantity},#{price},#{amt},#{rate},#{amtOfTax},#{amtTax},#{remark},#{state}
+        #{id},#{contractId},#{invoiceId},#{createDate},#{updateDate},#{name},#{specification},#{unit},#{quantity},#{price},#{amt},#{rate},#{amtOfTax},#{amtTax},#{remark},#{state},#{applicationId}
         )
         <selectKey keyProperty="id" order="BEFORE" resultType="String">
             select $uuid()
@@ -18,7 +18,7 @@
         id, contractId, invoiceId, createDate, updateDate, name, specification, unit, quantity, price, amt, rate, amtOfTax, amtTax, remark, state
         ) VALUES
         <foreach collection="list" index="index" item="item" separator=",">
-            ($uuid(),#{item.contractId},#{item.invoiceId},NOW(),#{item.updateDate},#{item.name},#{item.specification},#{item.unit},#{item.quantity},#{item.price},#{item.amt},#{item.rate},#{item.amtOfTax},#{item.amtTax},#{item.remark},#{item.state})
+            ($uuid(),#{item.contractId},#{item.invoiceId},NOW(),#{item.updateDate},#{item.name},#{item.specification},#{item.unit},#{item.quantity},#{item.price},#{item.amt},#{item.rate},#{item.amtOfTax},#{item.amtTax},#{item.remark},#{item.state},#{item.applicationId})
         </foreach>
     </insert>
 

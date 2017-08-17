@@ -1,6 +1,7 @@
 package moka.contract.vo;
 
 import moka.basic.page.Page;
+import moka.goods.vo.GoodsVo;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -105,6 +106,19 @@ public class ContractVo extends Page {
      * 用户ID
      */
     private String userId;
+
+    /**
+     * 物品集合
+     */
+    private List<GoodsVo> goodsList;
+
+    public List<GoodsVo> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<GoodsVo> goodsList) {
+        this.goodsList = goodsList;
+    }
 
     public String getCompanyPayId() {
         return companyPayId;
