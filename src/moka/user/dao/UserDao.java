@@ -28,7 +28,7 @@ public interface UserDao extends BasicDao<User, UserTo> {
 
     int insertLeaderRelation(UserVo vo);
 
-    int deleteLeaderRelation(UserVo vo);
+    int deleteLeaderRelation(String userId);
 
     List<String> findUserLeader(String userId);
 

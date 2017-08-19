@@ -242,13 +242,13 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
 
     @Override
     public int insertLeaderRelation(UserVo vo) {
-        userDao.deleteLeaderRelation(vo);
+        userDao.deleteLeaderRelation(vo.getId());
         return userDao.insertLeaderRelation(vo);
     }
 
     @Override
-    public int deleteLeaderRelation(UserVo vo) {
-        return userDao.deleteLeaderRelation(vo);
+    public int deleteLeaderRelation(String userId) {
+        return userDao.deleteLeaderRelation(userId);
     }
 
     @Override

@@ -28,8 +28,8 @@
     </insert>
 
     <!--用户解除直接上级领导-->
-    <delete id="deleteLeaderRelation" parameterType="moka.user.vo.UserVo">
-        DELETE FROM r_user_leader WHERE userId = #{id} AND leaderId = #{leaderId}
+    <delete id="deleteLeaderRelation" parameterType="String">
+        DELETE FROM r_user_leader WHERE userId = #{userId}
     </delete>
 
     <!--获取用户下所有下属ID-->

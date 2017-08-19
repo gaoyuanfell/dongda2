@@ -132,7 +132,7 @@ public class InvoiceController extends BasicController{
 
     /**
      * 开票
-     * @param vo
+     * @param vo {invoiceNo,id}
      * @return
      */
     @RequestMapping(value = "methodInvoicedState.htm")
@@ -146,12 +146,14 @@ public class InvoiceController extends BasicController{
 
     /**
      * 已寄送 需要提供寄送地址
-     * @param vo
+     * @param vo id
      * @return
      */
     @RequestMapping(value = "methodMailedState.htm")
     @ResponseBody
     public Object methodMailedState(@RequestBody InvoiceVo vo){
+        UserTo userTo = getUserSession();
+        vo.setApplicationId(userTo.getApplicationId());
         int i = invoiceService.methodMailedState(vo);
         return result(i);
     }

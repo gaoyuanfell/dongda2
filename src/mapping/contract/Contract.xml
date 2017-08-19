@@ -64,7 +64,7 @@
         </if>
     </select>
 
-    <!--作用于下拉 -->
+    <!--作用于下拉 查找自己及下属合同-->
     <select id="findContractByAllData" parameterType="moka.contract.vo.ContractVo" resultType="moka.contract.to.ContractTo">
         SELECT c.*,coa.companyName companyPayName,cob.companyName companySaleName,cu.name companyPayCustomerName,u.name companySaleUserName FROM t_contract c
         LEFT JOIN t_company coa ON c.companyPayId = coa.id

@@ -56,4 +56,17 @@
         SELECT * FROM t_district d WHERE d.parentId = #{parentId} ORDER BY d.order ASC;
     </select>
 
+    <!--新增快递-->
+    <insert id="insertMailed" parameterType="moka.address.bo.Mailed" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_mailed (
+        id, state, createDate, updateDate, applicationId, invoiceId, address, phone, nickname, mailedNo
+        ) VALUES (
+        #{id},#{state},#{createDate},#{updateDate},#{applicationId},#{invoiceId},#{address},#{phone},#{nickname},#{mailedNo}
+        )
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select $uuid()
+        </selectKey>
+    </insert>
+
 </mapper>

@@ -1,5 +1,6 @@
 package moka.invoice.vo;
 
+import moka.address.vo.MailedVo;
 import moka.basic.page.Page;
 
 import java.math.BigDecimal;
@@ -11,6 +12,10 @@ public class InvoiceVo extends Page {
     private Date createDate;
     private Date updateDate;
     private int state;
+    /**
+     * 发票编号
+     */
+    private String invoiceNo;
     /**
      * 合同编号
      */
@@ -107,6 +112,27 @@ public class InvoiceVo extends Page {
      * 下级用户ID集合
      */
     private List<String> lowerIds;
+
+    /**
+     * 快递信息
+     */
+    private MailedVo mailed;
+
+    public MailedVo getMailed() {
+        return mailed;
+    }
+
+    public void setMailed(MailedVo mailed) {
+        this.mailed = mailed;
+    }
+
+    public String getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
+    }
 
     public String getCreateUser() {
         return createUser;

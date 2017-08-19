@@ -60,6 +60,11 @@ public class CompanyServiceImpl extends BasicServiceImpl implements CompanyServi
     }
 
     @Override
+    public List<CompanyTo> findUseSelectByUser(CompanyVo vo) {
+        return companyDao.findUseSelectByUser(vo);
+    }
+
+    @Override
     public int relationCompany(CompanyVo vo) {
         vo.setCreateDate(new Date());
         vo.setRelationState(CompanyEnum.adminInside.getValue());

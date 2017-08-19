@@ -73,6 +73,19 @@
         </if>
     </select>
 
+    <!--作用于下拉 查找自己公司-->
+    <select id="findUseSelectByUser" parameterType="moka.company.vo.CompanyVo" resultType="moka.company.to.CompanyTo">
+        SELECT DISTINCT(ruc.companyId) id,c.companyName FROM r_role_user_company ruc
+        LEFT JOIN t_company c ON c.id = ruc.companyId
+        WHERE ruc.userId = #{userId}
+        AND LENGTH(c.companyName) > 0
+        AND c.state != 1
+        <if test="companyName != null and companyName != ''">
+            AND c.companyName LIKE
+            CONCAT('%',#{companyName},'%')
+        </if>
+    </select>
+
     <!--作用于下拉 全部有效数据 普通公司获取财务公司 AND c.applicationId != #{applicationId}-->
     <select id="findUseAllSelect" parameterType="moka.company.vo.CompanyVo" resultType="moka.company.to.CompanyTo">
         SELECT c.id, c.companyName FROM t_company c WHERE
@@ -107,11 +120,11 @@
 
     <!-- 查找所有和自己有关联的公司ID -->
     <select id="findCompanyIdByUser" parameterType="String" resultType="String">
-        SELECT companyId FROM r_role_user_company WHERE userId = #{userId}
+        SELECT DISTINCT(companyId) companyId FROM r_role_user_company WHERE userId = #{userId}
     </select>
 
     <!-- 查找所有和自己有关联的公司详情 -->
     <select id="findCompanyByUser" parameterType="String" resultType="moka.company.to.CompanyTo">
-        SELECT c.* FROM r_role_user_company ruc LEFT JOIN t_company c ON c.id = ruc.companyId WHERE userId = #{userId}
+        SELECT DISTINCT(ruc.companyId) companyId,c.* FROM r_role_user_company ruc LEFT JOIN t_company c ON c.id = ruc.companyId WHERE ruc.userId = #{userId}
     </select>
 </mapper>

@@ -17,6 +17,10 @@ import java.util.Date;
 @Table(name="Invoice")
 public class Invoice extends IdEntity implements Serializable{
     /**
+     * 发票编号
+     */
+    private String invoiceNo;
+    /**
      * 合同编号
      */
     private String contractId;
@@ -105,6 +109,14 @@ public class Invoice extends IdEntity implements Serializable{
      * 创建人
      */
     private String createUser;
+
+    public String getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
+    }
 
     public String getCreateUser() {
         return createUser;

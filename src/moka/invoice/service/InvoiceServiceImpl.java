@@ -1,5 +1,7 @@
 package moka.invoice.service;
 
+import moka.address.service.AddressService;
+import moka.address.vo.MailedVo;
 import moka.basic.page.Page;
 import moka.basic.service.BasicServiceImpl;
 import moka.contract.service.ContractService;
@@ -27,6 +29,8 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
     private InvoicePlanService invoicePlanService;
     @Resource
     private ContractService contractService;
+    @Resource
+    private AddressService addressService;
     
     @Override
     public String insert(InvoiceVo vo){
@@ -102,6 +106,10 @@ public class InvoiceServiceImpl extends BasicServiceImpl implements InvoiceServi
         Invoice invoice = this.convertBusinessValue(vo,Invoice.class);
         invoice.setInvoiceState(InvoiceEnum.mailed.getValue());
         invoice.setUpdateDate(new Date());
+        //快递信息
+        MailedVo mailedVo = vo.getMailed();
+        mailedVo.setApplicationId(vo.getApplicationId());
+        addressService.insertMailed(mailedVo);
         return invoiceDao.methodMailedState(invoice);
     }
 

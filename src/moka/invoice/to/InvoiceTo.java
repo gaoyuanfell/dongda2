@@ -9,6 +9,10 @@ public class InvoiceTo {
     private Date updateDate;
     private int state;
     /**
+     * 发票编号
+     */
+    private String invoiceNo;
+    /**
      * 合同编号
      */
     private String contractId;
@@ -112,6 +116,26 @@ public class InvoiceTo {
      * 不含税金额
      */
     private BigDecimal planAmt;
+    /**
+     * 甲方客户联系人
+     */
+    private String companyPayCustomerId;
+
+    public String getCompanyPayCustomerId() {
+        return companyPayCustomerId;
+    }
+
+    public void setCompanyPayCustomerId(String companyPayCustomerId) {
+        this.companyPayCustomerId = companyPayCustomerId;
+    }
+
+    public String getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
+    }
 
     public String getCreateUser() {
         return createUser;

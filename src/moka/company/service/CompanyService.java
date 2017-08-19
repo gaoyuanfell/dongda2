@@ -36,6 +36,12 @@ public interface CompanyService extends BasicService {
     List<CompanyTo> findUseAllSelect(CompanyVo vo);
 
     /**
+     * 作用于下拉 自己所在的公司
+     * @param vo
+     * @return
+     */
+    List<CompanyTo> findUseSelectByUser(CompanyVo vo);
+    /**
      * moka
      * 财务公司关联被管理公司
      * @param vo
@@ -66,7 +72,7 @@ public interface CompanyService extends BasicService {
 
     /**
      * moka
-     * 查找和自己有关系的公司ID
+     * 查找和自己有关系的公司
      */
     List<CompanyTo> findCompanyByUser(String userId);
 

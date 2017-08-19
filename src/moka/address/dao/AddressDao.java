@@ -2,6 +2,7 @@ package moka.address.dao;
 
 import moka.address.bo.Address;
 import moka.address.bo.District;
+import moka.address.bo.Mailed;
 import moka.address.to.AddressTo;
 import moka.address.to.DistrictTo;
 import moka.address.vo.AddressVo;
@@ -20,4 +21,6 @@ public interface AddressDao extends BasicDao<Address, AddressTo> {
     List<DistrictTo> findDistrictByParentId(String parentId);
 
     int insertBatch(List<AddressVo> list);
+
+    int insertMailed(Mailed mailed);
 }

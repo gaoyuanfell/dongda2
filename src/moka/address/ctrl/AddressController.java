@@ -57,6 +57,19 @@ public class AddressController extends BasicController {
     }
 
     /**
+     * 查
+     *
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "findByUserId.htm",method = RequestMethod.GET)
+    @ResponseBody
+    public Object findByUserId(String userId) {
+        List<AddressTo> list = addressService.findByUserId(userId);
+        return result(list);
+    }
+
+    /**
      * 地域 查找父级区域
      * @return
      */

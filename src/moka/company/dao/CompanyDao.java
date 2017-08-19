@@ -17,6 +17,8 @@ public interface CompanyDao extends BasicDao<Company, CompanyTo> {
 
     List<CompanyTo> findUseAllSelect(CompanyVo vo);
 
+    List<CompanyTo> findUseSelectByUser(CompanyVo vo);
+
     int relationCompany(CompanyVo vo);
 
     CompanyTo findRelationByComId(String companyId);

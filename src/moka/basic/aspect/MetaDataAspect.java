@@ -5,6 +5,7 @@ import moka.basic.bo.Token;
 import moka.basic.log4j.LoggerService;
 import moka.basic.service.RedisService;
 import moka.company.service.CompanyService;
+import moka.user.service.UserService;
 import moka.user.to.UserTo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,8 @@ public class MetaDataAspect implements HandlerMethodArgumentResolver {
     private CompanyService companyService;
     @Resource
     private RedisService redisService;
+    @Resource
+    private UserService userService;
     @Resource
     private HttpServletRequest request;
     @Value("#{propertyConfigurer['data_token_name']}")
@@ -66,7 +69,8 @@ public class MetaDataAspect implements HandlerMethodArgumentResolver {
                     metaData.setCompanyIds(companyIds);
                     break;
                 case "lowerIds":
-                    metaData.setLowerIds(userTo.getLowerIds());
+                    List<String> lowerIds = userService.findUserLeader(userTo.getId());//获取直属下级id集合
+                    metaData.setLowerIds(lowerIds);
                     break;
             }
         }

@@ -55,7 +55,6 @@ public class CompanyController extends BasicController {
     }
 
 
-
     /**
      * 查 分页 内部
      */
@@ -108,10 +107,9 @@ public class CompanyController extends BasicController {
     /**
      * 作用于下拉 搜索条件
      * {
-     *      companyName:'',
-     *      companyBelong:'' 1 内部 2 外部
+     * companyName:'',
+     * companyBelong:'' 1 内部 2 外部
      * }
-     *
      */
     @RequestMapping(value = "findUseSelect.htm")
     @ResponseBody
@@ -125,11 +123,10 @@ public class CompanyController extends BasicController {
     /**
      * 作用于下拉 全部有效数据 搜索条件
      * {
-     *      companyName:'',
-     *      companyBelong:'' 1 内部 2 外部,
-     *
+     * companyName:'',
+     * companyBelong:'' 1 内部 2 外部,
+     * <p>
      * }
-     *
      */
     @RequestMapping(value = "findUseAllSelect.htm")
     @ResponseBody
@@ -140,9 +137,24 @@ public class CompanyController extends BasicController {
         return result(list);
     }
 
+    /**
+     * 作用于下拉 自己所在的公司
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "findUseSelectByUser.htm")
+    @ResponseBody
+    public Object findUseSelectByUser(@RequestBody CompanyVo vo) {
+        UserTo to = getUserSession();
+        vo.setUserId(to.getId());
+        List<CompanyTo> list = companyService.findUseSelectByUser(vo);
+        return result(list);
+    }
+
 
     /**
      * 业务公司关联财务公司
+     *
      * @param vo
      * @return
      */
@@ -150,37 +162,38 @@ public class CompanyController extends BasicController {
     @ResponseBody
     public Object relationCompany(@RequestBody CompanyVo vo) {
         CompanyTo companyTo = companyService.findOne(vo.getCompanyId());
-        if(companyTo != null){
+        if (companyTo != null) {
             vo.setApplicationId(companyTo.getApplicationId());
             int i = companyService.relationCompany(vo);
             return result(i);
         }
-        return result(CODE_PROMPT,"关联失败");
+        return result(CODE_PROMPT, "关联失败");
     }
 
     /**
      * 根据公司id获取关联的财务公司
+     *
      * @param companyId
      * @return
      */
     @RequestMapping(value = "findRelationByComId.htm")
     @ResponseBody
-    public Object findRelationByComId(int companyId){
+    public Object findRelationByComId(int companyId) {
         return null;
     }
 
 
     /**
      * 根据财务公司ID获取被管理的业务公司集合
+     *
      * @param relationId
      * @return
      */
     @RequestMapping(value = "findComByRelationId.htm")
     @ResponseBody
-    public Object findComByRelationId(int relationId){
+    public Object findComByRelationId(int relationId) {
         return null;
     }
-
 
 
 }

@@ -1,10 +1,12 @@
 package moka.address.service;
 
 import moka.address.bo.Address;
+import moka.address.bo.Mailed;
 import moka.address.dao.AddressDao;
 import moka.address.to.AddressTo;
 import moka.address.to.DistrictTo;
 import moka.address.vo.AddressVo;
+import moka.address.vo.MailedVo;
 import moka.basic.page.Page;
 import moka.basic.service.BasicServiceImpl;
 import org.springframework.stereotype.Service;
@@ -57,5 +59,12 @@ public class AddressServiceImpl extends BasicServiceImpl implements AddressServi
     @Override
     public List<DistrictTo> findDistrictByParentId(String parentId) {
         return addressDao.findDistrictByParentId(parentId);
+    }
+
+    @Override
+    public int insertMailed(MailedVo vo) {
+        Mailed mailed = this.convertBusinessValue(vo,Mailed.class);
+        mailed.setCreateDate(new Date());
+        return addressDao.insertMailed(mailed);
     }
 }
