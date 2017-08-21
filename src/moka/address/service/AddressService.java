@@ -1,12 +1,9 @@
 package moka.address.service;
 
-import moka.address.bo.Address;
-import moka.address.bo.Mailed;
 import moka.address.to.AddressTo;
 import moka.address.to.DistrictTo;
 import moka.address.vo.AddressVo;
 import moka.address.vo.MailedVo;
-import moka.basic.page.Page;
 import moka.basic.service.BasicService;
 
 import java.util.List;
@@ -46,8 +43,8 @@ public interface AddressService extends BasicService {
     List<DistrictTo> findDistrictByParentId(String parentId);
 
     /**
-     * 新增快递信息
-     * @param mailed
+     * 新增快递单信息
+     * @param vo
      * @return
      */
     int insertMailed(MailedVo vo);

@@ -10,11 +10,9 @@ import java.util.Date;
 
 /**
  * 发票实体
- * @author wry
- *
  */
 @Entity
-@Table(name="Invoice")
+@Table(name="t_invoice")
 public class Invoice extends IdEntity implements Serializable{
     /**
      * 发票编号

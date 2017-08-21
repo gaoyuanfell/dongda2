@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+/**
+ * 快递单
+ */
 @Entity
 @Table(name="t_mailed")
 public class Mailed extends IdEntity implements Serializable {

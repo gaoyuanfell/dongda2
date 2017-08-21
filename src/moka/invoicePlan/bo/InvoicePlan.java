@@ -12,7 +12,7 @@ import java.util.Date;
  * 开票计划实体
  */
 @Entity
-@Table(name = "InvoicePlan")
+@Table(name = "t_invoice_plan")
 public class InvoicePlan extends IdEntity implements Serializable {
     /**
      * 合同ID

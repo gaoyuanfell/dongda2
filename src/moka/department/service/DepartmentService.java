@@ -6,6 +6,5 @@ import moka.department.bo.Department;
 public interface DepartmentService extends BasicService{
 
     String insert(Department department);
-    
 
 }

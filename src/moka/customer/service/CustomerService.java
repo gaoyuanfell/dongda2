@@ -2,7 +2,6 @@ package moka.customer.service;
 
 import moka.basic.page.Page;
 import moka.basic.service.BasicService;
-import moka.company.to.CompanyTo;
 import moka.customer.to.CustomerTo;
 import moka.customer.vo.CustomerVo;
 

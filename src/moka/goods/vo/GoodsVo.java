@@ -1,7 +1,6 @@
 package moka.goods.vo;
 
 import moka.basic.page.Page;
-import moka.goods.bo.Goods;
 
 import java.math.BigDecimal;
 import java.util.Date;

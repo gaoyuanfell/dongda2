@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 部门实体
  */
 @Entity
-@Table(name = "department")
+@Table(name = "t_department")
 public class Department extends IdEntity implements Serializable {
     /**
      * 部门名称

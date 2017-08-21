@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+/**
+ * 区域表
+ */
 @Entity
 @Table(name="t_district")
 public class District extends IdEntity implements Serializable {

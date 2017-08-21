@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+/**
+ * 联系人地址
+ */
 @Entity
 @Table(name="t_address")
 public class Address extends IdEntity implements Serializable {

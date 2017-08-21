@@ -12,7 +12,7 @@ import java.util.Date;
  * 销售计划实体
  */
 @Entity
-@Table(name = "SalesPlan")
+@Table(name = "t_sales_plan")
 public class SalesPlan extends IdEntity implements Serializable {
     /**
      * 买方公司ID

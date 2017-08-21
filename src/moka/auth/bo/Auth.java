@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+/**
+ * 权限
+ */
 @Entity
 @Table(name="t_auth")
 public class Auth extends IdEntity implements Serializable {

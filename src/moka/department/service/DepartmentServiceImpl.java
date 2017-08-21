@@ -22,5 +22,4 @@ public class DepartmentServiceImpl extends BasicServiceImpl implements Departmen
         return department.getId();
     }
 
-
 }

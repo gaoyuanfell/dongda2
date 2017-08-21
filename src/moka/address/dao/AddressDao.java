@@ -1,7 +1,6 @@
 package moka.address.dao;
 
 import moka.address.bo.Address;
-import moka.address.bo.District;
 import moka.address.bo.Mailed;
 import moka.address.to.AddressTo;
 import moka.address.to.DistrictTo;

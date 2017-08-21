@@ -3,7 +3,6 @@ package moka.customer.ctrl;
 import moka.basic.ctrl.BasicController;
 import moka.basic.log4j.LoggerService;
 import moka.basic.page.Page;
-import moka.company.to.CompanyTo;
 import moka.customer.service.CustomerService;
 import moka.customer.to.CustomerTo;
 import moka.customer.vo.CustomerVo;

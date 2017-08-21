@@ -1,6 +1,5 @@
 package moka.customer.vo;
 
-import moka.address.to.AddressTo;
 import moka.address.vo.AddressVo;
 import moka.basic.page.Page;
 

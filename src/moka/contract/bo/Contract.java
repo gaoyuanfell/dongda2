@@ -12,7 +12,7 @@ import java.util.Date;
  * 合同实体
  */
 @Entity
-@Table(name = "Contract")
+@Table(name = "t_contract")
 public class Contract extends IdEntity implements Serializable {
     /**
      * 合同编号

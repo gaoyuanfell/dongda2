@@ -6,11 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**菜单实体
+/**
+ * 菜单实体
  * Created by moka on 2017/3/5 0005.
  */
 @Entity
-@Table(name = "menu")
+@Table(name = "t_menu")
 public class Menu extends IdEntity implements Serializable {
     /**
      * 菜单名称
