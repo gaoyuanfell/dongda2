@@ -58,8 +58,7 @@ public class SecurityAspect extends Resources {
         UserTo user = redisService.getUserSession(t);
 
         //判断用户是否登陆
-        if (!StringUtils.isEmpty(token)) {
-            if (user == null || StringUtils.isEmpty(user.getId())) return result();
+        if (!StringUtils.isEmpty(token) && user != null) {
             redisService.flashLoginSession(t);
             response.setHeader(tokenName, token);
         } else {
