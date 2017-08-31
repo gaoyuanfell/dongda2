@@ -133,6 +133,43 @@ public class ContractTo {
      */
     private List<GoodsTo> goodsList;
 
+    /**
+     * 已付款期数
+     */
+    private int hasPaymentNum;
+    /**
+     * 已收款总金额 税后
+     */
+    private BigDecimal amtTaxTotal;
+    /**
+     * 已收款总金额 税前
+     */
+    private BigDecimal planAmtTotal;
+
+    public int getHasPaymentNum() {
+        return hasPaymentNum;
+    }
+
+    public void setHasPaymentNum(int hasPaymentNum) {
+        this.hasPaymentNum = hasPaymentNum;
+    }
+
+    public BigDecimal getAmtTaxTotal() {
+        return amtTaxTotal;
+    }
+
+    public void setAmtTaxTotal(BigDecimal amtTaxTotal) {
+        this.amtTaxTotal = amtTaxTotal;
+    }
+
+    public BigDecimal getPlanAmtTotal() {
+        return planAmtTotal;
+    }
+
+    public void setPlanAmtTotal(BigDecimal planAmtTotal) {
+        this.planAmtTotal = planAmtTotal;
+    }
+
     public List<GoodsTo> getGoodsList() {
         return goodsList;
     }

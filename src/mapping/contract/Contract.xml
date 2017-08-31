@@ -38,9 +38,10 @@
 
     <!--AND (c.applicationId = #{applicationId} or c.applicationId in (SELECT ca.applicationId FROM r_company_admin ca WHERE c.companySaleId = ca.companyId))-->
     <select id="findPage" parameterType="moka.basic.page.Page" resultType="moka.contract.to.ContractTo">
-        SELECT c.*,uc.name as userName,ucb.name as companySaleUserName FROM t_contract c
+        SELECT c.*,uc.name as userName,ucb.name as companySaleUserName,count(i.id) hasPaymentNum,sum(i.amtTax) amtTaxTotal,sum(i.planAmt) planAmtTotal FROM t_contract c
         LEFT JOIN t_user uc ON uc.id = c.createUser
         LEFT JOIN t_user ucb ON ucb.id = c.companySaleUserId
+        LEFT JOIN t_invoice i ON (c.id = i.contractId AND i.invoiceState = '9')
         WHERE c.state != 1
         AND (c.createUser = #{userId} OR c.companySaleUserId IN
           <foreach collection="lowerIds" item="item" index="index" open="(" close=")" separator=",">
@@ -50,6 +51,7 @@
         <if test="contractNo != null and contractNo != ''">
             AND c.contractNo LIKE CONCAT('%',#{contractNo},'%')
         </if>
+        GROUP BY c.id
         LIMIT #{pageStart} , #{pageSize};
     </select>
 
