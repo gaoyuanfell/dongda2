@@ -105,6 +105,7 @@ public class UserServiceImpl extends BasicServiceImpl implements UserService {
         User user = this.convertBusinessValue(vo, User.class);
         user.setCreateDate(new Date());
         user.setPassword(Util.getMd5String(Util.getMd5String(DATA_PASSWORD_DEFAULT).concat(DATA_PASSWORD_SALT)));
+        user.setReadOnly(UserEnum.defaultValue.getValue());
         userDao.insert(user);
         String userId = user.getId();
         if(!StringUtils.isEmpty(userId)){
